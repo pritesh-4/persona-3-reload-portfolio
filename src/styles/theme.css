@@ -1,0 +1,160 @@
+/* ================================================================
+   PERSONA 3 RELOAD — GLOBAL THEME TOKENS & RESET
+   ================================================================ */
+
+/* Google Fonts are preconnected and loaded asynchronously in index.html to avoid render-blocking waterfalls */
+
+:root {
+  /* P3R Core Palette */
+  --p3r-ink: #030814;
+  --p3r-deep: #061321;
+  --p3r-navy: #0a1e38;
+  --p3r-slate: #132d52;
+  --p3r-blue: #1a4b8a;
+  --p3r-royal: #2563eb;
+  --p3r-cyan: #00d4ff;
+  --p3r-ice: #7dd3fc;
+  --p3r-white: #f0f6ff;
+  --p3r-snow: #ffffff;
+  
+  /* Accent System */
+  --p3r-red: #e11d48;
+  --p3r-magenta: #f43f7a;
+  --p3r-rose: #ff6b9d;
+  --p3r-crimson: #dc143c;
+  --p3r-amber: #f59e0b;
+  
+  /* Surfaces */
+  --p3r-panel: rgba(6, 19, 33, 0.92);
+  --p3r-panel-light: rgba(10, 30, 56, 0.85);
+  --p3r-panel-border: rgba(20, 56, 100, 0.6);
+  --p3r-glass: rgba(0, 212, 255, 0.08);
+  
+  /* Typography Scale */
+  --font-display: 'Anton', 'Impact', sans-serif;
+  --font-ui: 'Bebas Neue', 'Impact', sans-serif;
+  --font-body: 'Montserrat', -apple-system, sans-serif;
+  
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  
+  /* Animation */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 600ms;
+  --duration-cinematic: 1200ms;
+  
+  /* Layout */
+  --safe-area-top: env(safe-area-inset-top, 0px);
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-left: env(safe-area-inset-left, 0px);
+  --safe-area-right: env(safe-area-inset-right, 0px);
+}
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow: hidden;
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--p3r-ink);
+  color: var(--p3r-white);
+  overflow: hidden;
+  height: 100%;
+  line-height: 1.5;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Custom In-Game Reduced Motion Preference */
+.reduced-motion-active *,
+.reduced-motion-active *::before,
+.reduced-motion-active *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* Selection */
+::selection {
+  background: var(--p3r-red);
+  color: var(--p3r-snow);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--p3r-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--p3r-slate);
+  border-radius: 2px;
+}
+
+/* Focus Ring */
+:focus-visible {
+  outline: 2px solid var(--p3r-cyan);
+  outline-offset: 2px;
+}
+
+/* Utility Classes */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

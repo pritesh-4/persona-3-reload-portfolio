@@ -1,0 +1,23 @@
+{
+  "short_name": "P3R Portfolio",
+  "name": "Pritesh Jena — Persona 3 Reload Developer Portfolio",
+  "description": "Interactive developer portfolio inspired by the visual design and soundscape of Persona 3 Reload.",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./assets/persona3/characters/thumbnails/makoto-yuki-thumb.webp",
+      "type": "image/webp",
+      "sizes": "240x320"
+    }
+  ],
+  "start_url": "./",
+  "background_color": "#030814",
+  "theme_color": "#030814",
+  "display": "standalone",
+  "orientation": "any"
+}

@@ -1,0 +1,186 @@
+{
+  "source": "Official SEGA / ATLUS Persona 3 Reload website",
+  "sourcePage": "https://asia.sega.com/p3r/en/",
+  "usageNote": "Official artwork/wallpaper source URLs are reference material only. ATLUS/SEGA own the underlying IP. The official wallpaper distribution page describes personal PC/mobile wallpaper use; it does not grant portfolio website hosting rights. Obtain written permission for public web display, local hosting, cropping and any commercial/professional portfolio use.",
+  "characters": [
+    {
+      "name": "Protagonist / Makoto Yuki",
+      "file": "protagonist.webp",
+      "url": "https://asia.sega.com/p3r/en/resources/img/top/character1_badbd990dcbabe1f25c22de113f772a0.webp"
+    },
+    {
+      "name": "Yukari Takeba",
+      "file": "yukari.webp",
+      "url": "https://asia.sega.com/p3r/en/resources/img/top/character2_35a3dc87ea1a02e2e3d6397d46e1cbf9.webp"
+    },
+    {
+      "name": "Junpei Iori",
+      "file": "junpei.webp",
+      "url": "https://asia.sega.com/p3r/en/resources/img/top/character4_b11ad41cb7a01fef1d40aeb65d002471.webp"
+    },
+    {
+      "name": "Akihiko Sanada",
+      "file": "akihiko.webp",
+      "url": "https://asia.sega.com/p3r/en/resources/img/top/character5_fa07d2d06f3925eea4af9a91937506ba.webp"
+    },
+    {
+      "name": "Mitsuru Kirijo",
+      "file": "mitsuru.webp",
+      "url": "https://asia.sega.com/p3r/en/resources/img/top/character6_0e3115e9f6076da20973ac40ef045866.webp"
+    },
+    {
+      "name": "Fuuka Yamagishi",
+      "file": "fuuka.webp",
+      "url": "https://asia.sega.com/p3r/en/resources/img/top/character7_532c5a12d64704763e5cac354fb3874c.webp"
+    },
+    {
+      "name": "Koromaru",
+      "file": "koromaru.webp",
+      "url": "https://asia.sega.com/p3r/en/resources/img/top/character8_790cb89b62931cfe93f16d61c746464d.webp"
+    },
+    {
+      "name": "Aigis",
+      "file": "aigis.webp",
+      "url": "https://asia.sega.com/p3r/en/resources/img/top/character9_a298bc6fd82a5d83fd4c04fa9c031f4f.webp"
+    },
+    {
+      "name": "Ken Amada",
+      "file": "ken.webp",
+      "url": "https://asia.sega.com/p3r/en/resources/img/top/character10_a301f968f599f0c8c5556d55da608f2d.webp"
+    },
+    {
+      "name": "Shinjiro Aragaki",
+      "file": "shinjiro.webp",
+      "url": "https://asia.sega.com/p3r/en/resources/img/top/character12_f2b86e413b00e552aeca9b0960ca96d6.webp"
+    }
+  ],
+  "visualReferences": [
+    {
+      "label": "Official Persona 3 Reload website",
+      "url": "https://asia.sega.com/p3r/en/"
+    },
+    {
+      "label": "Official Atlus Persona 3 Reload page",
+      "url": "https://persona.atlus.com/p3r/index.html?lang=enbuy"
+    },
+    {
+      "label": "Official trailer / media hub",
+      "url": "https://p3re.jp/en/"
+    },
+    {
+      "label": "Reload art direction interview",
+      "url": "https://personacentral.com/p3r-art-design-direction-interview/"
+    },
+    {
+      "label": "GameFontLibrary – Persona 3 Reload font credits and references",
+      "url": "https://www.gamefontlibrary.com/games/persona-3-reload"
+    },
+    {
+      "label": "Official character group artwork / key art reference",
+      "url": "https://www.tomshw.it/storage/media/2024/01/11370/pERSONA-3.jpg"
+    },
+    {
+      "label": "SEGA current streaming / image-use guideline (updated 2026-05-22)",
+      "url": "https://www.sega.co.jp/en/streaming_guideline/index.html"
+    },
+    {
+      "label": "Famitsu / developer interview on Persona 3 Reload UI design (English summary)",
+      "url": "https://personacentral.com/p3r-interview-menu-ui/"
+    },
+    {
+      "label": "AUTOMATON WEST UI design analysis",
+      "url": "https://automaton-media.com/en/news/20240207-26873/"
+    }
+  ],
+  "soundtrack": {
+    "status": "not-cleared-for-site-background-use",
+    "note": "An OST purchase or streaming subscription does not grant a website background-music/synchronisation licence. Do not rip or bundle the recordings. For a custom site-wide BGM player, obtain direct permission for the master recording and composition, online public playback, synchronisation, territory, duration, hosting/caching and looping.",
+    "officialGameSite": "https://asia.sega.com/p3r/en/",
+    "atlusStreamingGuidelines": "https://atlus.com/persona-3-reload-official-streaming-guidelines/",
+    "spotifyEmbedDocumentation": "https://developer.spotify.com/documentation/embeds",
+    "spotifyWidgetTerms": "https://developer.spotify.com/documentation/embeds/terms",
+    "officialSpotifyAlbum": "https://open.spotify.com/embed/album/0ou89XjahTvTUm8mJu8go6",
+    "officialAppleMusicAlbum": "https://music.apple.com/us/album/persona-3-reload-original-soundtrack/1733407068",
+    "officialSteamSoundtrack": "https://store.steampowered.com/app/2517310/Persona_3_Reload_Digital_Soundtrack/"
+  },
+  "artworkRights": {
+    "status": "permission-not-confirmed",
+    "note": "These URLs are hosted on the official SEGA/ATLUS Persona 3 Reload site. Hosting does not grant a right to re-host, crop, modify or publicly display the images. Obtain written permission or another applicable licence before bundling the files in a public portfolio.",
+    "reviewPage": "https://asia.sega.com/p3r/en/license/"
+  },
+  "wallpapers": [
+    {
+      "name": "Persona 3 Reload main key art (wide 1920x1080)",
+      "file": "p3r-main-key-art.webp",
+      "url": "https://cdn.uc.assets.prezly.com/d4f21110-01df-4792-90ee-ca3870107bba/-/format/auto/Persona%203%20Reload%20Key%20Art_1920x1080.png",
+      "sourcePage": "https://sega.prezly.com/persona-3-reload-its-going-down-now-official-music-video-out-today-feat-lotus-juice-and-azumi-takahashi",
+      "intendedUse": "home hero / visual anchor, only after written website-use permission",
+      "rightsStatus": "permission-required",
+      "notes": "Promotional key art, not a gameplay still. Keep the composition intact where possible; do not duplicate the same protagonist cutout on top."
+    },
+    {
+      "name": "Official Persona Channel wallpaper collection",
+      "file": null,
+      "url": "https://p-ch.jp/news/15777/",
+      "sourcePage": "https://p-ch.jp/news/15777/",
+      "intendedUse": "source hub for main-visual, all-out-attack and title wallpapers; manual selection for design review",
+      "rightsStatus": "personal-wallpaper-distribution-only-unless-otherwise-cleared",
+      "notes": "ATLUS says these wallpapers are for use on personal PCs and smartphones. This does not grant portfolio website background/re-hosting rights."
+    }
+  ],
+  "uiReferenceImages": [
+    {
+      "name": "Persona 3 Reload title screen / Press Any Button",
+      "url": "https://image.idntimes.com/post/20240130/screenshot-persona-3-reload-5614e0149002573431ccdd542282c77d.jpg",
+      "sourcePage": "https://duniaku.idntimes.com/game/konsol-pc/review-persona-3-reload-00-rgfzd-p8b391",
+      "intendedUse": "UI composition reference only — title prompt, moonlit window, empty negative space and logo placement",
+      "rightsStatus": "reference-only",
+      "notes": "Third-party editorial screenshot of the game title screen. Do not use as a production background or hotlink."
+    },
+    {
+      "name": "Title menu / New Game, Load Game, Config",
+      "url": "https://miro.medium.com/v2/resize:fit:2000/1*cMH-4sG6Z9FGcZGpX-iyPg.jpeg",
+      "sourcePage": "https://medium.com/illumination-gaming/a-love-letter-to-persona-3-reloads-ui-3eae29554134",
+      "intendedUse": "menu hierarchy and typography reference only",
+      "rightsStatus": "reference-only",
+      "notes": "Article credits Game UI Database. Use to study layout and silhouette balance; do not bundle or present as a portfolio backdrop."
+    }
+  ],
+  "uiReferenceCollections": [
+    {
+      "name": "Persona 3 Reload screenshot and UI gallery",
+      "url": "https://megatenwiki.com/wiki/Gallery:Persona_3_Reload",
+      "intendedUse": "find title screen, post-clear title screen, Social Stats, Fusion menu, map and Theurgy screen references; UI study only",
+      "rightsStatus": "reference-only"
+    },
+    {
+      "name": "SEGA official game page — permitted material scope",
+      "url": "https://www.sega.jp/game/detail/p3re/",
+      "intendedUse": "official character art, game visuals and published guideline scope",
+      "rightsStatus": "gameplay-video/live-stream/thumbnail scope only as stated on page; not blanket website-background permission"
+    },
+    {
+      "name": "ATLUS / Persona Channel official wallpaper announcement",
+      "url": "https://p-ch.jp/news/15777/",
+      "intendedUse": "main visual wallpaper, all-out-attack wallpapers and title wallpapers",
+      "rightsStatus": "personal PC/mobile wallpaper download as described on page; portfolio website rights not confirmed"
+    }
+  ],
+  "backgroundPolicy": {
+    "mustUse": [
+      "official promotional key art",
+      "officially distributed PC/mobile wallpaper compositions",
+      "title/start-screen-inspired presentation art",
+      "character wallpaper artwork"
+    ],
+    "mustNotUse": [
+      "gameplay environment screenshots",
+      "random Tartarus/classroom/Velvet Room gameplay captures",
+      "dialogue scenes with unexplained HUD baked in",
+      "generic CSS gradient as the primary backdrop"
+    ],
+    "uiScreenshots": "Use title/menu/loading/save/social-stat/fusion screenshots as design references, not as the page background. Recreate the interaction with original portfolio content.",
+    "loadingScreens": "Use only verified official P3R loading/presentation art if found and cleared. Do not assume an image called loading screen is a separate official wallpaper; record the exact source and permission before adding it.",
+    "rights": "Every source URL remains reference-only until public web display, local hosting and permitted crop/transform operations are explicitly covered."
+  }
+}

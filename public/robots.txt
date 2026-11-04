@@ -1,0 +1,9 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Disallow internal audio binaries and zip artifacts from crawler indexing
+Disallow: /assets/persona3/audio/
+Disallow: /*.zip$
+
+Sitemap: https://pritesh-4.github.io/Person-3-Reload-Portfolio/sitemap.xml

@@ -1,0 +1,267 @@
+/* ================================================================
+   PERSONA 3 RELOAD — SYSTEM SCREEN (CONFIGURATION MENU)
+   ================================================================ */
+
+.p3r-system-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1040px;
+  width: 100%;
+  animation: p3r-fade-slide 400ms var(--ease-out-expo);
+}
+
+/* System Grid: 2 columns (Settings Controls + Keybindings & About) */
+.p3r-system-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 24px;
+}
+
+/* Settings Column */
+.p3r-settings-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.p3r-settings-group {
+  background: rgba(6, 19, 33, 0.92);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  border-left: 6px solid var(--p3r-cyan);
+  padding: 22px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.p3r-settings-group-title {
+  font-family: var(--font-ui);
+  font-size: 1.15rem;
+  letter-spacing: 0.15em;
+  color: var(--p3r-cyan);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+  padding-bottom: 8px;
+}
+
+/* Setting Row */
+.p3r-setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.p3r-setting-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.p3r-setting-name {
+  font-family: var(--font-ui);
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  color: var(--p3r-snow);
+}
+
+.p3r-setting-desc {
+  font-size: 0.76rem;
+  color: rgba(240, 246, 255, 0.6);
+}
+
+/* Custom Persona Slanted Switch */
+.p3r-setting-switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.p3r-toggle-btn {
+  padding: 6px 16px;
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  transform: skewX(-12deg);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+
+.p3r-toggle-btn > * {
+  transform: skewX(12deg);
+}
+
+.p3r-toggle-btn.on {
+  background: var(--p3r-royal);
+  color: var(--p3r-snow);
+  border-color: var(--p3r-cyan);
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.5);
+}
+
+.p3r-toggle-btn.off {
+  background: rgba(10, 30, 56, 0.6);
+  color: rgba(240, 246, 255, 0.4);
+}
+
+/* Custom Range Slider */
+.p3r-slider-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 180px;
+}
+
+.p3r-range-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  background: rgba(10, 30, 56, 0.9);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  border-radius: 2px;
+  outline: none;
+}
+
+.p3r-range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--p3r-cyan);
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--p3r-cyan);
+  transform: rotate(45deg);
+}
+
+.p3r-range-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: var(--p3r-cyan);
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--p3r-cyan);
+  transform: rotate(45deg);
+}
+
+.p3r-slider-val {
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  color: var(--p3r-cyan);
+  min-width: 44px;
+  text-align: right;
+}
+
+/* Info & Keys Column */
+.p3r-info-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Keybindings Guide */
+.p3r-keys-guide-card {
+  background: rgba(6, 19, 33, 0.92);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  border-top: 5px solid var(--p3r-red);
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.p3r-keys-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.p3r-key-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+}
+
+.p3r-key-badge {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  color: var(--p3r-cyan);
+  background: rgba(10, 30, 56, 0.8);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  padding: 2px 10px;
+  border-radius: 2px;
+}
+
+.p3r-key-purpose {
+  font-size: 0.82rem;
+  color: rgba(240, 246, 255, 0.85);
+}
+
+/* System Details & Legal Card */
+.p3r-sys-about-card {
+  background: rgba(6, 19, 33, 0.92);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.p3r-sys-item-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+}
+
+.p3r-sys-item-lbl {
+  color: rgba(240, 246, 255, 0.6);
+}
+
+.p3r-sys-item-val {
+  color: var(--p3r-snow);
+  font-weight: 600;
+}
+
+.p3r-sys-legal-notice {
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: rgba(240, 246, 255, 0.55);
+  border-top: 1px solid rgba(0, 212, 255, 0.15);
+  padding-top: 10px;
+  margin-top: 6px;
+}
+
+/* Reset Button */
+.p3r-reset-defaults-btn {
+  padding: 10px 20px;
+  background: var(--p3r-slate);
+  border: 1px solid var(--p3r-red);
+  color: var(--p3r-snow);
+  font-family: var(--font-ui);
+  font-size: 1.05rem;
+  letter-spacing: 0.1em;
+  transform: skewX(-12deg);
+  cursor: pointer;
+  transition: all 180ms ease;
+  align-self: flex-start;
+}
+
+.p3r-reset-defaults-btn > * {
+  transform: skewX(12deg);
+}
+
+.p3r-reset-defaults-btn:hover {
+  background: var(--p3r-red);
+  box-shadow: 0 0 16px rgba(225, 29, 72, 0.6);
+}
+
+/* ----------------------------------------------------------------
+   RESPONSIVE DESIGN
+   ---------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .p3r-system-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

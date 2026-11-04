@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Persona 3 Reload — Asset Library & Media Showcase</title>
+  <style>
+    :root {
+      --bg: #040914;
+      --card-bg: #0a1529;
+      --card-border: #133358;
+      --p3r-blue: #00d2ff;
+      --p3r-deep: #0044aa;
+      --p3r-accent: #00f0ff;
+      --text: #eaf6ff;
+      --text-muted: #84a2c6;
+      --danger: #ff2a5f;
+      --warning: #ffb703;
+      --success: #00e676;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      padding: 32px 24px;
+      line-height: 1.5;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(0, 100, 255, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(0, 210, 255, 0.08) 0%, transparent 40%);
+      background-attachment: fixed;
+    }
+    header {
+      max-width: 1400px;
+      margin: 0 auto 36px;
+      border-bottom: 2px solid var(--p3r-deep);
+      padding-bottom: 24px;
+    }
+    .badge-bar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+      background: rgba(0, 210, 255, 0.1);
+      color: var(--p3r-blue);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+    }
+    .badge.success { background: rgba(0, 230, 118, 0.1); color: var(--success); border-color: rgba(0, 230, 118, 0.3); }
+    .badge.warning { background: rgba(255, 183, 3, 0.1); color: var(--warning); border-color: rgba(255, 183, 3, 0.3); }
+    .badge.danger { background: rgba(255, 42, 95, 0.1); color: var(--danger); border-color: rgba(255, 42, 95, 0.3); }
+    h1 {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 900;
+      font-style: italic;
+      color: #fff;
+      text-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+      letter-spacing: -0.02em;
+    }
+    p.lead {
+      color: var(--text-muted);
+      font-size: 16px;
+      margin-top: 8px;
+      max-width: 900px;
+    }
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+    section h2 {
+      font-size: 22px;
+      font-weight: 800;
+      font-style: italic;
+      text-transform: uppercase;
+      color: var(--p3r-blue);
+      border-left: 4px solid var(--p3r-blue);
+      padding-left: 12px;
+      margin-bottom: 20px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--p3r-blue);
+      box-shadow: 0 8px 24px rgba(0, 210, 255, 0.15);
+    }
+    .card-img-wrap {
+      width: 100%;
+      height: 260px;
+      background: linear-gradient(180deg, #07152b 0%, #030814 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-img-wrap img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s;
+    }
+    .card:hover .card-img-wrap img {
+      transform: scale(1.05);
+    }
+    .card-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .card-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .card-meta span b { color: var(--text); }
+    .wide-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+      gap: 24px;
+    }
+    .wide-card .card-img-wrap {
+      height: 240px;
+      background: #02060f;
+    }
+    .wide-card .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    /* Audio section styling */
+    .audio-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 16px;
+    }
+    .audio-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .audio-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .audio-title {
+      font-weight: 700;
+      font-size: 15px;
+      color: #fff;
+    }
+    audio {
+      width: 100%;
+      height: 36px;
+      outline: none;
+      filter: invert(0.9) hue-rotate(180deg);
+    }
+    .rights-banner {
+      background: rgba(19, 51, 88, 0.4);
+      border: 1px solid var(--p3r-deep);
+      border-left: 4px solid var(--warning);
+      padding: 16px 20px;
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+    .rights-banner b { color: var(--warning); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="badge-bar">
+      <span class="badge success">10/10 Characters Acquired</span>
+      <span class="badge success">Key Art Acquired (1920x1080)</span>
+      <span class="badge success">Audio Engine Online</span>
+      <span class="badge">Vite 8 Compatible</span>
+    </div>
+    <h1>PERSONA 3 RELOAD / ASSET PREVIEW GALLERY</h1>
+    <p class="lead">Interactive media browser displaying physical assets installed in this project repository. Every asset below exists locally in <code>public/assets/persona3/</code>.</p>
+  </header>
+
+  <div class="container">
+    <div class="rights-banner">
+      <b>Licensing & Compliance Notice:</b> Official character WebP artwork and promotional visuals are SEGA/ATLUS copyrighted property and stored for local evaluation & reference. All audio cues and the ambient BGM bed are original procedural synthesis assets cleared for web testing.
+    </div>
+
+    <!-- CHARACTERS SECTION -->
+    <section>
+      <h2>Official Character Renders (10 Members)</h2>
+      <div class="grid">
+        <article class="card">
+          <div class="card-img-wrap">
+            <img src="/assets/persona3/characters/makoto-yuki.webp" alt="Makoto Yuki" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-title">Makoto Yuki</div>
+            <div class="card-meta">
+              <span><b>Role:</b> Protagonist / S.E.E.S. Leader</span>
+              <span><b>Arcana:</b> Fool / Death</span>
+              <span><b>Resolution:</b> 570x760</span>
+              <span><b>Size:</b> 31.5 KB (WebP)</span>
+            </div>
+            <span class="badge warning">REFERENCE ONLY (SEGA / ATLUS Copyright)</span>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-img-wrap">
+            <img src="/assets/persona3/characters/yukari-takeba.webp" alt="Yukari Takeba" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-title">Yukari Takeba</div>
+            <div class="card-meta">
+              <span><b>Role:</b> S.E.E.S. Member / Archer</span>
+              <span><b>Arcana:</b> Lovers</span>
+              <span><b>Resolution:</b> 570x760</span>
+              <span><b>Size:</b> 36.8 KB (WebP)</span>
+            </div>
+            <span class="badge warning">REFERENCE ONLY (SEGA / ATLUS Copyright)</span>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-img-wrap">
+            <img src="/assets/persona3/characters/junpei-iori.webp" alt="Junpei Iori" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-title">Junpei Iori</div>
+            <div class="card-meta">
+              <span><b>Role:</b> S.E.E.S. Member / Two-Handed Sword</span>
+              <span><b>Arcana:</b> Magician</span>
+              <span><b>Resolution:</b> 630x840</span>
+              <span><b>Size:</b> 41.4 KB (WebP)</span>
+            </div>
+            <span class="badge warning">REFERENCE ONLY (SEGA / ATLUS Copyright)</span>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-img-wrap">
+            <img src="/assets/persona3/characters/akihiko-sanada.webp" alt="Akihiko Sanada" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-title">Akihiko Sanada</div>
+            <div class="card-meta">
+              <span><b>Role:</b> S.E.E.S. Senior / Boxer</span>
+              <span><b>Arcana:</b> Emperor</span>
+              <span><b>Resolution:</b> 630x840</span>
+              <span><b>Size:</b> 34.7 KB (WebP)</span>
+            </div>
+            <span class="badge warning">REFERENCE ONLY (SEGA / ATLUS Copyright)</span>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-img-wrap">
+            <img src="/assets/persona3/characters/mitsuru-kirijo.webp" alt="Mitsuru Kirijo" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-title">Mitsuru Kirijo</div>
+            <div class="card-meta">
+              <span><b>Role:</b> S.E.E.S. Founder / Fencer</span>
+              <span><b>Arcana:</b> Empress</span>
+              <span><b>Resolution:</b> 630x840</span>
+              <span><b>Size:</b> 36.7 KB (WebP)</span>
+            </div>
+            <span class="badge warning">REFERENCE ONLY (SEGA / ATLUS Copyright)</span>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-img-wrap">
+            <img src="/assets/persona3/characters/fuuka-yamagishi.webp" alt="Fuuka Yamagishi" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-title">Fuuka Yamagishi</div>
+            <div class="card-meta">
+              <span><b>Role:</b> S.E.E.S. Navigator / Support</span>
+              <span><b>Arcana:</b> Priestess</span>
+              <span><b>Resolution:</b> 630x840</span>
+              <span><b>Size:</b> 37.0 KB (WebP)</span>
+            </div>
+            <span class="badge warning">REFERENCE ONLY (SEGA / ATLUS Copyright)</span>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-img-wrap">
+            <img src="/assets/persona3/characters/koromaru.webp" alt="Koromaru" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-title">Koromaru</div>
+            <div class="card-meta">
+              <span><b>Role:</b> S.E.E.S. Canine Member / Dagger & Persona</span>
+              <span><b>Arcana:</b> Strength</span>
+              <span><b>Resolution:</b> 630x840</span>
+              <span><b>Size:</b> 39.8 KB (WebP)</span>
+            </div>
+            <span class="badge warning">REFERENCE ONLY (SEGA / ATLUS Copyright)</span>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-img-wrap">
+            <img src="/assets/persona3/characters/aigis.webp" alt="Aigis" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-title">Aigis</div>
+            <div class="card-meta">
+              <span><b>Role:</b> Anti-Shadow Suppression Weapon</span>
+              <span><b>Arcana:</b> Chariot / Aeon</span>
+              <span><b>Resolution:</b> 630x840</span>
+              <span><b>Size:</b> 34.8 KB (WebP)</span>
+            </div>
+            <span class="badge warning">REFERENCE ONLY (SEGA / ATLUS Copyright)</span>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-img-wrap">
+            <img src="/assets/persona3/characters/ken-amada.webp" alt="Ken Amada" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-title">Ken Amada</div>
+            <div class="card-meta">
+              <span><b>Role:</b> S.E.E.S. Member / Spear</span>
+              <span><b>Arcana:</b> Justice</span>
+              <span><b>Resolution:</b> 630x840</span>
+              <span><b>Size:</b> 31.0 KB (WebP)</span>
+            </div>
+            <span class="badge warning">REFERENCE ONLY (SEGA / ATLUS Copyright)</span>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-img-wrap">
+            <img src="/assets/persona3/characters/shinjiro-aragaki.webp" alt="Shinjiro Aragaki" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-title">Shinjiro Aragaki</div>
+            <div class="card-meta">
+              <span><b>Role:</b> Former S.E.E.S. Member / Heavy Axe</span>
+              <span><b>Arcana:</b> Hierophant</span>
+              <span><b>Resolution:</b> 630x840</span>
+              <span><b>Size:</b> 41.5 KB (WebP)</span>
+            </div>
+            <span class="badge warning">REFERENCE ONLY (SEGA / ATLUS Copyright)</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- BACKGROUNDS & KEY ART SECTION -->
+    <section>
+      <h2>Backgrounds & Presentation Artwork</h2>
+      <div class="wide-grid">
+        <article class="card wide-card">
+          <div class="card-img-wrap">
+            <img src="/assets/persona3/backgrounds/official-wallpapers/p3r-main-key-art.png" alt="Persona 3 Reload Official Promotional Key Art" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-title">Persona 3 Reload Official Promotional Key Art</div>
+            <div class="card-meta">
+              <span><b>Category:</b> Official Wallpaper / Key Art</span>
+              <span><b>Resolution:</b> 1920x1080</span>
+              <span><b>Size:</b> 457.1 KB (PNG)</span>
+              <span><b>Role:</b> Home hero presentation visual anchor</span>
+            </div>
+            <span class="badge warning">PERMISSION REQUIRED (SEGA Press Kit)</span>
+          </div>
+        </article>
+        <article class="card wide-card">
+          <div class="card-img-wrap">
+            <img src="/assets/persona3/backgrounds/main-visuals/p3r-main-visual.png" alt="Persona 3 Reload Main Visual Desktop Wallpaper" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-title">Persona 3 Reload Main Visual Desktop Wallpaper</div>
+            <div class="card-meta">
+              <span><b>Category:</b> Main Visual</span>
+              <span><b>Resolution:</b> 1920x1080</span>
+              <span><b>Size:</b> 457.1 KB (PNG)</span>
+              <span><b>Role:</b> Desktop backdrop presentation art</span>
+            </div>
+            <span class="badge warning">PERMISSION REQUIRED (SEGA Press Kit)</span>
+          </div>
+        </article>
+        <article class="card wide-card">
+          <div class="card-img-wrap">
+            <img src="/assets/persona3/backgrounds/promotional-art/persona3-reload-promo-group.jpg" alt="Persona 3 Reload Cast Group Promotional Art" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-title">Persona 3 Reload Cast Group Promotional Art</div>
+            <div class="card-meta">
+              <span><b>Category:</b> Promotional Art</span>
+              <span><b>Resolution:</b> 2000x1417</span>
+              <span><b>Size:</b> 510.0 KB (JPEG)</span>
+              <span><b>Role:</b> Group composition reference / about screen backdrop</span>
+            </div>
+            <span class="badge warning">REFERENCE ONLY (Editorial Promotional Still)</span>
+          </div>
+        </article>
+        <article class="card wide-card">
+          <div class="card-img-wrap">
+            <img src="/assets/persona3/backgrounds/title/title-screen-composition.jpg" alt="Persona 3 Reload Title Screen Composition" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-title">Persona 3 Reload Title Screen Composition</div>
+            <div class="card-meta">
+              <span><b>Category:</b> Title Screen Reference</span>
+              <span><b>Resolution:</b> 800x450</span>
+              <span><b>Size:</b> 38.4 KB (JPEG)</span>
+              <span><b>Role:</b> Title prompt, negative space, and moonlight lighting reference</span>
+            </div>
+            <span class="badge warning">REFERENCE ONLY (In-Game Screen Capture Reference)</span>
+          </div>
+        </article>
+        <article class="card wide-card">
+          <div class="card-img-wrap">
+            <img src="/assets/persona3/backgrounds/menu-references/title-menu-hierarchy.jpeg" alt="Persona 3 Reload Title Menu & Typography Reference" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-title">Persona 3 Reload Title Menu & Typography Reference</div>
+            <div class="card-meta">
+              <span><b>Category:</b> Menu Reference</span>
+              <span><b>Resolution:</b> 1920x1080</span>
+              <span><b>Size:</b> 208.0 KB (JPEG)</span>
+              <span><b>Role:</b> Menu typographic hierarchy and diagonal angle reference</span>
+            </div>
+            <span class="badge warning">REFERENCE ONLY (Game UI Database / Editorial)</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- UI REFERENCES SECTION -->
+    <section>
+      <h2>Interface & Navigation References</h2>
+      <div class="wide-grid">
+        <article class="card wide-card">
+          <div class="card-img-wrap">
+            <img src="/assets/persona3/references/curved-menu-reference.png" alt="Persona 3 Reload Curved Arc-Style Menu Navigation" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-title">Persona 3 Reload Curved Arc-Style Menu Navigation</div>
+            <div class="card-meta">
+              <span><b>Category:</b> UI Design Blueprint</span>
+              <span><b>Resolution:</b> 1095x862</span>
+              <span><b>Size:</b> 687.1 KB (PNG)</span>
+              <span><b>Blueprint:</b> Curved arc navigation layout blueprint</span>
+            </div>
+            <span class="badge success">USER-PROVIDED / REFERENCE ONLY</span>
+          </div>
+        </article>
+        <article class="card wide-card">
+          <div class="card-img-wrap">
+            <img src="/assets/persona3/references/interface-references/title-screen-reference.jpg" alt="Interface Reference: Title Screen" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-title">Interface Reference: Title Screen</div>
+            <div class="card-meta">
+              <span><b>Category:</b> Interface Reference</span>
+              <span><b>Resolution:</b> 800x450</span>
+              <span><b>Size:</b> 38.4 KB (JPEG)</span>
+              <span><b>Blueprint:</b> Interface lighting & text alignment reference</span>
+            </div>
+            <span class="badge success">REFERENCE ONLY</span>
+          </div>
+        </article>
+        <article class="card wide-card">
+          <div class="card-img-wrap">
+            <img src="/assets/persona3/references/interface-references/title-menu-reference.jpeg" alt="Interface Reference: Title Menu" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-title">Interface Reference: Title Menu</div>
+            <div class="card-meta">
+              <span><b>Category:</b> Interface Reference</span>
+              <span><b>Resolution:</b> 1920x1080</span>
+              <span><b>Size:</b> 208.0 KB (JPEG)</span>
+              <span><b>Blueprint:</b> Menu typography and list layout reference</span>
+            </div>
+            <span class="badge success">REFERENCE ONLY</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- AUDIO ENGINE SECTION -->
+    <section>
+      <h2>Audio Cues & Ambient Loops</h2>
+      <div class="audio-list">
+        <div class="audio-card">
+          <div class="audio-header">
+            <div>
+              <div class="audio-title">Ambient Test Loop (Original Synthesized Bed)</div>
+              <div class="card-meta">
+                <span><b>Duration:</b> 24.0s | <b>Sample Rate:</b> 22050 Hz</span>
+                <span><b>Format:</b> PCM 16-bit Mono WAV</span>
+              </div>
+            </div>
+            <span class="badge success">Local File</span>
+          </div>
+          <audio controls preload="none">
+            <source src="/assets/persona3/audio/bgm/bgm-ambient-test.wav" type="audio/wav">
+            Your browser does not support audio playback.
+          </audio>
+          <div class="card-meta">
+            <span><b>Use Case:</b> Background music player testing & loop evaluation</span>
+          </div>
+        </div>
+        <div class="audio-card">
+          <div class="audio-header">
+            <div>
+              <div class="audio-title">Ambient Test Loop (Explicit Non-OST Name)</div>
+              <div class="card-meta">
+                <span><b>Duration:</b> 24.0s | <b>Sample Rate:</b> 22050 Hz</span>
+                <span><b>Format:</b> PCM 16-bit Mono WAV</span>
+              </div>
+            </div>
+            <span class="badge success">Local File</span>
+          </div>
+          <audio controls preload="none">
+            <source src="/assets/persona3/audio/bgm/bgm-placeholder-original-not-persona3.wav" type="audio/wav">
+            Your browser does not support audio playback.
+          </audio>
+          <div class="card-meta">
+            <span><b>Use Case:</b> Explicitly labeled development placeholder file</span>
+          </div>
+        </div>
+        <div class="audio-card">
+          <div class="audio-header">
+            <div>
+              <div class="audio-title">UI Select Tone</div>
+              <div class="card-meta">
+                <span><b>Duration:</b> 0.11s | <b>Sample Rate:</b> 22050 Hz</span>
+                <span><b>Format:</b> PCM 16-bit Mono WAV</span>
+              </div>
+            </div>
+            <span class="badge success">Local File</span>
+          </div>
+          <audio controls preload="none">
+            <source src="/assets/persona3/audio/ui/ui-select.wav" type="audio/wav">
+            Your browser does not support audio playback.
+          </audio>
+          <div class="card-meta">
+            <span><b>Use Case:</b> Button hover & item focus sound effect</span>
+          </div>
+        </div>
+        <div class="audio-card">
+          <div class="audio-header">
+            <div>
+              <div class="audio-title">UI Hover Tone</div>
+              <div class="card-meta">
+                <span><b>Duration:</b> 0.11s | <b>Sample Rate:</b> 22050 Hz</span>
+                <span><b>Format:</b> PCM 16-bit Mono WAV</span>
+              </div>
+            </div>
+            <span class="badge success">Local File</span>
+          </div>
+          <audio controls preload="none">
+            <source src="/assets/persona3/audio/ui/ui-hover.wav" type="audio/wav">
+            Your browser does not support audio playback.
+          </audio>
+          <div class="card-meta">
+            <span><b>Use Case:</b> Arc menu navigation item hover sound</span>
+          </div>
+        </div>
+        <div class="audio-card">
+          <div class="audio-header">
+            <div>
+              <div class="audio-title">UI Confirm Tone</div>
+              <div class="card-meta">
+                <span><b>Duration:</b> 0.3s | <b>Sample Rate:</b> 22050 Hz</span>
+                <span><b>Format:</b> PCM 16-bit Mono WAV</span>
+              </div>
+            </div>
+            <span class="badge success">Local File</span>
+          </div>
+          <audio controls preload="none">
+            <source src="/assets/persona3/audio/ui/ui-confirm.wav" type="audio/wav">
+            Your browser does not support audio playback.
+          </audio>
+          <div class="card-meta">
+            <span><b>Use Case:</b> Modal confirm, menu click, and submission cue</span>
+          </div>
+        </div>
+        <div class="audio-card">
+          <div class="audio-header">
+            <div>
+              <div class="audio-title">UI Back / Cancel Tone</div>
+              <div class="card-meta">
+                <span><b>Duration:</b> 0.19s | <b>Sample Rate:</b> 22050 Hz</span>
+                <span><b>Format:</b> PCM 16-bit Mono WAV</span>
+              </div>
+            </div>
+            <span class="badge success">Local File</span>
+          </div>
+          <audio controls preload="none">
+            <source src="/assets/persona3/audio/ui/ui-back.wav" type="audio/wav">
+            Your browser does not support audio playback.
+          </audio>
+          <div class="card-meta">
+            <span><b>Use Case:</b> Drawer close, back navigation, and cancel cue</span>
+          </div>
+        </div>
+        <div class="audio-card">
+          <div class="audio-header">
+            <div>
+              <div class="audio-title">UI Scene Transition Sweep</div>
+              <div class="card-meta">
+                <span><b>Duration:</b> 0.48s | <b>Sample Rate:</b> 22050 Hz</span>
+                <span><b>Format:</b> PCM 16-bit Mono WAV</span>
+              </div>
+            </div>
+            <span class="badge success">Local File</span>
+          </div>
+          <audio controls preload="none">
+            <source src="/assets/persona3/audio/ui/ui-transition.wav" type="audio/wav">
+            Your browser does not support audio playback.
+          </audio>
+          <div class="card-meta">
+            <span><b>Use Case:</b> Full-screen page transition and arc slide audio cue</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

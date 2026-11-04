@@ -1,0 +1,292 @@
+/* ================================================================
+   PERSONA 3 RELOAD — PERSONA SCREEN (CHARACTER PROFILE DOSSIER)
+   ================================================================ */
+
+.p3r-persona-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1000px;
+  width: 100%;
+  animation: p3r-fade-slide 400ms var(--ease-out-expo);
+}
+
+@keyframes p3r-fade-slide {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Dossier Header Block */
+.p3r-dossier-hero {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    rgba(6, 19, 33, 0.94) 0%,
+    rgba(10, 30, 56, 0.88) 100%
+  );
+  border: 1px solid rgba(0, 212, 255, 0.4);
+  border-left: 6px solid var(--p3r-cyan);
+  padding: 24px 32px;
+  transform: skewX(-4deg);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 212, 255, 0.08);
+}
+
+.p3r-dossier-hero > * {
+  transform: skewX(4deg);
+}
+
+.p3r-dossier-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.p3r-dossier-tag {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  color: var(--p3r-cyan);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.p3r-dossier-badge {
+  background: var(--p3r-red);
+  color: var(--p3r-snow);
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  padding: 2px 10px;
+  border-radius: 2px;
+}
+
+.p3r-dossier-name {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  letter-spacing: 0.04em;
+  line-height: 0.95;
+  font-style: italic;
+  color: var(--p3r-snow);
+  text-shadow: 0 4px 16px rgba(0, 212, 255, 0.4);
+}
+
+.p3r-dossier-role {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--p3r-ice);
+  margin-top: 6px;
+  letter-spacing: 0.05em;
+}
+
+/* Status Stats Strip */
+.p3r-dossier-stats-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(0, 212, 255, 0.15);
+}
+
+.p3r-dossier-stat-chip {
+  display: flex;
+  flex-direction: column;
+  background: rgba(3, 8, 20, 0.6);
+  padding: 6px 14px;
+  border-left: 3px solid var(--p3r-cyan);
+}
+
+.p3r-stat-chip-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: rgba(240, 246, 255, 0.6);
+  text-transform: uppercase;
+}
+
+.p3r-stat-chip-value {
+  font-family: var(--font-ui);
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
+  color: var(--p3r-snow);
+}
+
+/* Two-Column Grid */
+.p3r-persona-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 24px;
+}
+
+/* Dossier Bio Box */
+.p3r-dossier-bio-card {
+  background: rgba(6, 19, 33, 0.88);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  backdrop-filter: blur(8px);
+}
+
+.p3r-card-heading {
+  font-family: var(--font-ui);
+  font-size: 1.25rem;
+  letter-spacing: 0.15em;
+  color: var(--p3r-cyan);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+  padding-bottom: 8px;
+}
+
+.p3r-bio-lead {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--p3r-snow);
+  font-weight: 500;
+  border-left: 3px solid var(--p3r-red);
+  padding-left: 14px;
+}
+
+.p3r-bio-paragraphs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.p3r-bio-p {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: rgba(240, 246, 255, 0.85);
+}
+
+/* Tactical Directives / Philosophy */
+.p3r-directives-card {
+  background: rgba(6, 19, 33, 0.88);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.p3r-directive-item {
+  background: rgba(10, 30, 56, 0.6);
+  border-left: 4px solid var(--p3r-cyan);
+  padding: 12px 16px;
+  transition: all 180ms ease;
+}
+
+.p3r-directive-item:hover {
+  background: rgba(0, 212, 255, 0.1);
+  border-left-color: var(--p3r-red);
+  transform: translateX(4px);
+}
+
+.p3r-directive-title {
+  font-family: var(--font-ui);
+  font-size: 1.05rem;
+  letter-spacing: 0.1em;
+  color: var(--p3r-snow);
+  margin-bottom: 4px;
+}
+
+.p3r-directive-desc {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: rgba(240, 246, 255, 0.75);
+}
+
+/* Attribute Matrix Table */
+.p3r-attributes-card {
+  grid-column: 1 / -1;
+  background: rgba(6, 19, 33, 0.88);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  padding: 20px 28px;
+}
+
+.p3r-attrs-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.p3r-attr-slot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: rgba(10, 30, 56, 0.5);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  transition: border-color 160ms ease;
+}
+
+.p3r-attr-slot:hover {
+  border-color: var(--p3r-cyan);
+  background: rgba(0, 212, 255, 0.08);
+}
+
+.p3r-attr-label-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.p3r-attr-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: rgba(240, 246, 255, 0.55);
+}
+
+.p3r-attr-val {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--p3r-snow);
+}
+
+.p3r-attr-rating {
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  color: var(--p3r-cyan);
+  background: rgba(0, 212, 255, 0.15);
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+
+/* ----------------------------------------------------------------
+   RESPONSIVE DESIGN
+   ---------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .p3r-persona-grid {
+    grid-template-columns: 1fr;
+  }
+  .p3r-dossier-name {
+    font-size: 2.6rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .p3r-dossier-name {
+    font-size: 2.1rem;
+  }
+  .p3r-dossier-hero {
+    padding: 16px 20px;
+  }
+  .p3r-dossier-bio-card,
+  .p3r-directives-card,
+  .p3r-attributes-card {
+    padding: 16px;
+  }
+}
+

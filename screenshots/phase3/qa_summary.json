@@ -1,0 +1,76 @@
+{
+  "testResults": [
+    {
+      "test": "Desktop Arc Menu Render",
+      "status": "PASS",
+      "details": "8 items rendered along arc"
+    },
+    {
+      "test": "Mobile (390px) Curved Arc Preservation",
+      "status": "PASS",
+      "details": "5 items rendered along responsive curved arc"
+    },
+    {
+      "test": "Small Mobile (360px) Arc Menu Layout",
+      "status": "PASS",
+      "details": "Zero horizontal scroll overflow on 360px"
+    },
+    {
+      "test": "Viewport desktop-1920x1080 Persona Page Layout",
+      "status": "PASS",
+      "details": "clientWidth=1920, scrollWidth=1920"
+    },
+    {
+      "test": "Viewport desktop-1440x900 Persona Page Layout",
+      "status": "PASS",
+      "details": "clientWidth=1440, scrollWidth=1440"
+    },
+    {
+      "test": "Viewport desktop-1366x768 Persona Page Layout",
+      "status": "PASS",
+      "details": "clientWidth=1366, scrollWidth=1366"
+    },
+    {
+      "test": "Viewport tablet-1024x768 Persona Page Layout",
+      "status": "PASS",
+      "details": "clientWidth=1024, scrollWidth=1024"
+    },
+    {
+      "test": "Viewport tablet-768x1024 Persona Page Layout",
+      "status": "PASS",
+      "details": "clientWidth=768, scrollWidth=768"
+    },
+    {
+      "test": "Viewport mobile-430x932 Persona Page Layout",
+      "status": "PASS",
+      "details": "clientWidth=430, scrollWidth=430"
+    },
+    {
+      "test": "Viewport mobile-390x844 Persona Page Layout",
+      "status": "PASS",
+      "details": "clientWidth=390, scrollWidth=390"
+    },
+    {
+      "test": "Viewport mobile-375x812 Persona Page Layout",
+      "status": "PASS",
+      "details": "clientWidth=375, scrollWidth=375"
+    },
+    {
+      "test": "Viewport mobile-360x800 Persona Page Layout",
+      "status": "PASS",
+      "details": "clientWidth=360, scrollWidth=360"
+    },
+    {
+      "test": "Reduced Motion In-Game Setting",
+      "status": "PASS",
+      "details": "body.reduced-motion-active class toggled properly"
+    },
+    {
+      "test": "Independent SFX & BGM Audio Controls",
+      "status": "PASS",
+      "details": "SFX state decoupled from global BGM mute"
+    }
+  ],
+  "consoleErrors": [],
+  "timestamp": "2026-11-03T13:44:23.330Z"
+}

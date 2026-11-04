@@ -1,0 +1,296 @@
+/* ================================================================
+   PERSONA 3 RELOAD — SKILL SCREEN (ABILITY & STATUS INTERFACE)
+   ================================================================ */
+
+.p3r-skill-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1040px;
+  width: 100%;
+  animation: p3r-fade-slide 400ms var(--ease-out-expo);
+}
+
+/* Category Filter Tabs Bar */
+.p3r-skill-tabs-strip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.p3r-skill-tab-btn {
+  padding: 8px 18px;
+  background: rgba(6, 19, 33, 0.9);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  color: rgba(240, 246, 255, 0.7);
+  transform: skewX(-12deg);
+  transition: all 180ms ease;
+  white-space: nowrap;
+}
+
+.p3r-skill-tab-btn > * {
+  transform: skewX(12deg);
+  display: inline-block;
+}
+
+.p3r-skill-tab-btn:hover {
+  background: rgba(0, 212, 255, 0.15);
+  color: var(--p3r-snow);
+  border-color: var(--p3r-cyan);
+}
+
+.p3r-skill-tab-btn.active {
+  background: var(--p3r-red);
+  color: var(--p3r-snow);
+  border-color: var(--p3r-magenta);
+  box-shadow: 0 0 16px rgba(225, 29, 72, 0.5);
+}
+
+/* Skill Workspace Grid */
+.p3r-skill-stage-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 24px;
+}
+
+/* Skill Ability List */
+.p3r-skill-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 520px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.p3r-skill-card-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: rgba(6, 19, 33, 0.88);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-left: 5px solid var(--p3r-cyan);
+  cursor: pointer;
+  transition: all 180ms var(--ease-out-expo);
+}
+
+.p3r-skill-card-row:hover {
+  background: rgba(10, 30, 56, 0.95);
+  border-color: var(--p3r-cyan);
+  transform: translateX(4px);
+}
+
+.p3r-skill-card-row.selected {
+  background: linear-gradient(90deg, rgba(37, 99, 235, 0.35) 0%, rgba(6, 19, 33, 0.9) 100%);
+  border-color: var(--p3r-cyan);
+  border-left: 6px solid var(--p3r-red);
+  box-shadow: 0 4px 18px rgba(0, 212, 255, 0.25);
+}
+
+.p3r-skill-info-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.p3r-skill-elem-badge {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  padding: 3px 8px;
+  border-radius: 2px;
+  font-weight: 700;
+  text-align: center;
+  min-width: 54px;
+}
+
+.p3r-elem-ELEC { background: #0284c7; color: #fff; }
+.p3r-elem-FIRE { background: #b91c1c; color: #fff; }
+.p3r-elem-ICE { background: #0891b2; color: #fff; }
+.p3r-elem-WIND { background: #059669; color: #fff; }
+.p3r-elem-SLASH { background: #4f46e5; color: #fff; }
+.p3r-elem-STRIKE { background: #7c3aed; color: #fff; }
+.p3r-elem-PIERCE { background: #c026d3; color: #fff; }
+.p3r-elem-ALMIGHTY { background: #db2777; color: #fff; }
+
+.p3r-skill-name-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.p3r-skill-name {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  letter-spacing: 0.04em;
+  color: var(--p3r-snow);
+}
+
+.p3r-skill-cat-sub {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: rgba(240, 246, 255, 0.6);
+}
+
+.p3r-skill-metrics-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.p3r-skill-cost-badge {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  color: var(--p3r-cyan);
+  background: rgba(0, 212, 255, 0.1);
+  padding: 2px 8px;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+.p3r-skill-tier-badge {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  color: var(--p3r-ice);
+}
+
+/* Detail Inspection Box */
+.p3r-skill-detail-panel {
+  background: linear-gradient(
+    180deg,
+    rgba(6, 19, 33, 0.95) 0%,
+    rgba(10, 30, 56, 0.92) 100%
+  );
+  border: 1px solid rgba(0, 212, 255, 0.35);
+  border-top: 5px solid var(--p3r-red);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.p3r-detail-header-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+  padding-bottom: 12px;
+}
+
+.p3r-detail-title {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-style: italic;
+  color: var(--p3r-snow);
+  text-shadow: 0 2px 12px rgba(0, 212, 255, 0.4);
+}
+
+.p3r-detail-rank-pill {
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  color: var(--p3r-snow);
+  background: var(--p3r-red);
+  padding: 3px 12px;
+  transform: skewX(-12deg);
+}
+
+.p3r-detail-rank-pill > * {
+  transform: skewX(12deg);
+}
+
+.p3r-detail-attr-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  background: rgba(3, 8, 20, 0.6);
+  padding: 12px;
+  border: 1px solid rgba(0, 212, 255, 0.15);
+}
+
+.p3r-detail-attr-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.p3r-detail-attr-lbl {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: rgba(240, 246, 255, 0.55);
+}
+
+.p3r-detail-attr-val {
+  font-family: var(--font-ui);
+  font-size: 1.1rem;
+  color: var(--p3r-cyan);
+}
+
+.p3r-detail-desc-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.p3r-detail-desc-heading {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  color: var(--p3r-cyan);
+}
+
+.p3r-detail-desc-text {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: rgba(240, 246, 255, 0.85);
+}
+
+.p3r-detail-context-box {
+  background: rgba(0, 212, 255, 0.06);
+  border-left: 3px solid var(--p3r-cyan);
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.p3r-detail-context-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--p3r-cyan);
+}
+
+.p3r-detail-context-p {
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: var(--p3r-snow);
+}
+
+/* ----------------------------------------------------------------
+   RESPONSIVE DESIGN
+   ---------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .p3r-skill-stage-grid {
+    grid-template-columns: 1fr;
+  }
+  .p3r-skill-list-container {
+    max-height: none;
+    overflow-y: visible;
+  }
+}
+
+@media (max-width: 600px) {
+  .p3r-detail-title {
+    font-size: 1.8rem;
+  }
+  .p3r-skill-card-row {
+    padding: 10px 12px;
+  }
+}
+

@@ -1,0 +1,11 @@
+/* Persona 3 Reload — Application Viewport Layout */
+
+.p3r-root-viewport {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--p3r-ink);
+  color: var(--p3r-white);
+  font-family: var(--font-body);
+}

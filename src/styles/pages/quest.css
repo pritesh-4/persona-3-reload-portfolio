@@ -1,0 +1,289 @@
+/* ================================================================
+   PERSONA 3 RELOAD — QUEST SCREEN (MISSION ARCHIVE)
+   ================================================================ */
+
+.p3r-quest-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1040px;
+  width: 100%;
+  animation: p3r-fade-slide 400ms var(--ease-out-expo);
+}
+
+/* Category Filter Tabs */
+.p3r-quest-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+}
+
+.p3r-quest-tab-btn {
+  padding: 8px 18px;
+  background: rgba(6, 19, 33, 0.9);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  color: rgba(240, 246, 255, 0.7);
+  transform: skewX(-12deg);
+  transition: all 180ms ease;
+  white-space: nowrap;
+}
+
+.p3r-quest-tab-btn > * {
+  transform: skewX(12deg);
+  display: inline-block;
+}
+
+.p3r-quest-tab-btn:hover {
+  background: rgba(0, 212, 255, 0.15);
+  color: var(--p3r-snow);
+  border-color: var(--p3r-cyan);
+}
+
+.p3r-quest-tab-btn.active {
+  background: var(--p3r-red);
+  color: var(--p3r-snow);
+  border-color: var(--p3r-magenta);
+  box-shadow: 0 0 16px rgba(225, 29, 72, 0.5);
+}
+
+/* Quest Layout: Two Columns (Missions List + Mission Dossier) */
+.p3r-quest-stage-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 24px;
+}
+
+/* Mission List */
+.p3r-mission-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 540px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.p3r-mission-card {
+  background: rgba(6, 19, 33, 0.9);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  border-left: 6px solid var(--p3r-cyan);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 180ms var(--ease-out-expo);
+}
+
+.p3r-mission-card:hover {
+  background: rgba(10, 30, 56, 0.95);
+  border-color: var(--p3r-cyan);
+  transform: translateX(4px);
+}
+
+.p3r-mission-card.selected {
+  background: linear-gradient(90deg, rgba(37, 99, 235, 0.3) 0%, rgba(6, 19, 33, 0.95) 100%);
+  border-color: var(--p3r-cyan);
+  border-left: 6px solid var(--p3r-red);
+  box-shadow: 0 4px 18px rgba(0, 212, 255, 0.25);
+}
+
+.p3r-mission-head-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.p3r-mission-code {
+  font-family: var(--font-ui);
+  font-size: 1.15rem;
+  letter-spacing: 0.12em;
+  color: var(--p3r-cyan);
+}
+
+.p3r-mission-status-badge {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+
+.p3r-mstatus-COMPLETED { background: #059669; color: #fff; }
+.p3r-mstatus-ACTIVE { background: #e11d48; color: #fff; }
+.p3r-mstatus-ARCHIVED { background: #4b5563; color: #fff; }
+
+.p3r-mission-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--p3r-snow);
+  letter-spacing: 0.04em;
+}
+
+.p3r-mission-summary {
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: rgba(240, 246, 255, 0.8);
+}
+
+.p3r-mission-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.p3r-mission-tag {
+  font-size: 0.72rem;
+  background: rgba(10, 30, 56, 0.8);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  color: var(--p3r-cyan);
+  padding: 2px 6px;
+}
+
+/* Mission Dossier Detail Panel */
+.p3r-mission-dossier-panel {
+  background: linear-gradient(
+    180deg,
+    rgba(6, 19, 33, 0.96) 0%,
+    rgba(10, 30, 56, 0.92) 100%
+  );
+  border: 1px solid rgba(0, 212, 255, 0.35);
+  border-top: 6px solid var(--p3r-red);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.6);
+  max-height: 540px;
+  overflow-y: auto;
+}
+
+.p3r-dossier-header-block {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+  padding-bottom: 12px;
+}
+
+.p3r-dossier-code-tag {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  letter-spacing: 0.15em;
+  color: var(--p3r-red);
+}
+
+.p3r-dossier-title {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-style: italic;
+  color: var(--p3r-snow);
+}
+
+.p3r-dossier-codename {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--p3r-cyan);
+}
+
+.p3r-dossier-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.p3r-dossier-heading {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  color: var(--p3r-cyan);
+}
+
+.p3r-dossier-text {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: rgba(240, 246, 255, 0.85);
+}
+
+.p3r-dossier-bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.p3r-dossier-bullet-item {
+  font-size: 0.82rem;
+  color: rgba(240, 246, 255, 0.8);
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.p3r-dossier-bullet-item::before {
+  content: '▸';
+  color: var(--p3r-red);
+}
+
+.p3r-dossier-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.p3r-quest-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--p3r-royal);
+  border: 1px solid var(--p3r-cyan);
+  color: var(--p3r-snow);
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  transform: skewX(-12deg);
+  text-decoration: none;
+  transition: all 180ms ease;
+}
+
+.p3r-quest-action-btn > * {
+  transform: skewX(12deg);
+}
+
+.p3r-quest-action-btn:hover {
+  background: var(--p3r-red);
+  border-color: var(--p3r-magenta);
+  transform: skewX(-12deg) scale(1.04);
+}
+
+/* ----------------------------------------------------------------
+   RESPONSIVE DESIGN
+   ---------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .p3r-quest-stage-grid {
+    grid-template-columns: 1fr;
+  }
+  .p3r-mission-list-container,
+  .p3r-mission-dossier-panel {
+    max-height: none;
+    overflow-y: visible;
+  }
+}
+
+@media (max-width: 600px) {
+  .p3r-mission-title {
+    font-size: 1.3rem;
+  }
+  .p3r-dossier-title {
+    font-size: 1.8rem;
+  }
+}
+

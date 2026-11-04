@@ -1,0 +1,258 @@
+/* ================================================================
+   PERSONA 3 RELOAD — ITEM SCREEN (DEVELOPER INVENTORY)
+   ================================================================ */
+
+.p3r-item-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1040px;
+  width: 100%;
+  animation: p3r-fade-slide 400ms var(--ease-out-expo);
+}
+
+/* Category Filter Bar */
+.p3r-item-tabs-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+}
+
+.p3r-item-tab-btn {
+  padding: 8px 18px;
+  background: rgba(6, 19, 33, 0.9);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  color: rgba(240, 246, 255, 0.7);
+  transform: skewX(-12deg);
+  transition: all 180ms ease;
+  white-space: nowrap;
+}
+
+.p3r-item-tab-btn > * {
+  transform: skewX(12deg);
+  display: inline-block;
+}
+
+.p3r-item-tab-btn:hover {
+  background: rgba(0, 212, 255, 0.15);
+  color: var(--p3r-snow);
+  border-color: var(--p3r-cyan);
+}
+
+.p3r-item-tab-btn.active {
+  background: var(--p3r-red);
+  color: var(--p3r-snow);
+  border-color: var(--p3r-magenta);
+  box-shadow: 0 0 16px rgba(225, 29, 72, 0.5);
+}
+
+/* Inventory Grid + Inspection Panel */
+.p3r-item-stage-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 24px;
+}
+
+/* Grid of Inventory Slots */
+.p3r-inventory-slot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 12px;
+  max-height: 520px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.p3r-inv-slot {
+  background: rgba(6, 19, 33, 0.9);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  border-top: 3px solid var(--p3r-cyan);
+  padding: 14px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  position: relative;
+  transition: all 180ms var(--ease-out-expo);
+  text-align: center;
+}
+
+.p3r-inv-slot:hover {
+  background: rgba(10, 30, 56, 0.95);
+  border-color: var(--p3r-cyan);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.p3r-inv-slot.selected {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.4) 0%, rgba(6, 19, 33, 0.95) 100%);
+  border-color: var(--p3r-cyan);
+  border-top-color: var(--p3r-red);
+  box-shadow: 0 0 18px rgba(0, 212, 255, 0.4);
+}
+
+.p3r-inv-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.p3r-inv-slot-name {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  color: var(--p3r-snow);
+  margin-top: 4px;
+  word-break: break-word;
+}
+
+.p3r-inv-quantity {
+  position: absolute;
+  bottom: 4px;
+  right: 6px;
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: var(--p3r-cyan);
+}
+
+/* Item Detail Panel */
+.p3r-item-inspection-panel {
+  background: linear-gradient(
+    180deg,
+    rgba(6, 19, 33, 0.96) 0%,
+    rgba(10, 30, 56, 0.92) 100%
+  );
+  border: 1px solid rgba(0, 212, 255, 0.35);
+  border-top: 6px solid var(--p3r-red);
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.6);
+}
+
+.p3r-item-head-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+  padding-bottom: 14px;
+}
+
+.p3r-item-huge-icon {
+  font-size: 3rem;
+  line-height: 1;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  padding: 10px 14px;
+  border-radius: 4px;
+}
+
+.p3r-item-head-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.p3r-item-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-style: italic;
+  color: var(--p3r-snow);
+}
+
+.p3r-item-cat-sub {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--p3r-cyan);
+  font-weight: 700;
+}
+
+.p3r-item-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.p3r-item-sec-heading {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  color: var(--p3r-cyan);
+}
+
+.p3r-item-effect-text {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--p3r-snow);
+}
+
+.p3r-item-flavor-text {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: rgba(240, 246, 255, 0.7);
+  font-style: italic;
+  border-left: 2px solid var(--p3r-slate);
+  padding-left: 10px;
+}
+
+.p3r-item-proj-box {
+  background: rgba(0, 212, 255, 0.08);
+  border-left: 4px solid var(--p3r-red);
+  padding: 10px 14px;
+}
+
+.p3r-item-proj-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--p3r-cyan);
+}
+
+.p3r-item-proj-val {
+  font-size: 0.86rem;
+  color: var(--p3r-snow);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* ----------------------------------------------------------------
+   RESPONSIVE DESIGN
+   ---------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .p3r-item-stage-grid {
+    grid-template-columns: 1fr;
+  }
+  .p3r-inventory-slot-grid {
+    max-height: none;
+    overflow-y: visible;
+  }
+}
+
+@media (max-width: 600px) {
+  .p3r-inventory-slot-grid {
+    grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+    gap: 8px;
+  }
+
+  .p3r-inv-slot {
+    padding: 10px 6px;
+  }
+
+  .p3r-inv-icon {
+    font-size: 1.6rem;
+  }
+
+  .p3r-inv-slot-name {
+    font-size: 0.85rem;
+  }
+
+  .p3r-item-title {
+    font-size: 1.6rem;
+  }
+}
+

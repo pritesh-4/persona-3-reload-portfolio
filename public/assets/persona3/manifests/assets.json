@@ -1,0 +1,571 @@
+{
+  "version": "2.0.0",
+  "projectName": "Persona 3 Reload Portfolio Asset Library",
+  "baseAssetPath": "/assets/persona3",
+  "summary": {
+    "totalCharacters": 10,
+    "totalBackgrounds": 5,
+    "totalAudioTracks": 7,
+    "totalReferences": 3,
+    "physicalFilesPresent": 25
+  },
+  "characters": {
+    "makoto": {
+      "id": "makoto",
+      "name": "Makoto Yuki",
+      "role": "Protagonist / S.E.E.S. Leader",
+      "arcana": "Fool / Death",
+      "filename": "makoto-yuki.webp",
+      "subpath": "characters/makoto-yuki.webp",
+      "thumb": "characters/thumbnails/makoto-yuki-thumb.webp",
+      "source": "https://asia.sega.com/p3r/en/resources/img/top/character1_badbd990dcbabe1f25c22de113f772a0.webp",
+      "permission": "REFERENCE ONLY (SEGA / ATLUS Copyright)",
+      "permissionCategory": "reference-only",
+      "intendedUse": "Character showcase, dialogue overlay, hero presentation",
+      "objectPosition": "center top",
+      "dimensions": {
+        "width": 570,
+        "height": 760
+      },
+      "size": 32258,
+      "format": "WEBP",
+      "status": "downloaded",
+      "path": "/assets/persona3/characters/makoto-yuki.webp",
+      "thumbnailPath": "/assets/persona3/characters/thumbnails/makoto-yuki-thumb.webp"
+    },
+    "yukari": {
+      "id": "yukari",
+      "name": "Yukari Takeba",
+      "role": "S.E.E.S. Member / Archer",
+      "arcana": "Lovers",
+      "filename": "yukari-takeba.webp",
+      "subpath": "characters/yukari-takeba.webp",
+      "thumb": "characters/thumbnails/yukari-takeba-thumb.webp",
+      "source": "https://asia.sega.com/p3r/en/resources/img/top/character2_35a3dc87ea1a02e2e3d6397d46e1cbf9.webp",
+      "permission": "REFERENCE ONLY (SEGA / ATLUS Copyright)",
+      "permissionCategory": "reference-only",
+      "intendedUse": "Character profile, skill gallery",
+      "objectPosition": "center top",
+      "dimensions": {
+        "width": 570,
+        "height": 760
+      },
+      "size": 37694,
+      "format": "WEBP",
+      "status": "downloaded",
+      "path": "/assets/persona3/characters/yukari-takeba.webp",
+      "thumbnailPath": "/assets/persona3/characters/thumbnails/yukari-takeba-thumb.webp"
+    },
+    "junpei": {
+      "id": "junpei",
+      "name": "Junpei Iori",
+      "role": "S.E.E.S. Member / Two-Handed Sword",
+      "arcana": "Magician",
+      "filename": "junpei-iori.webp",
+      "subpath": "characters/junpei-iori.webp",
+      "thumb": "characters/thumbnails/junpei-iori-thumb.webp",
+      "source": "https://asia.sega.com/p3r/en/resources/img/top/character4_b11ad41cb7a01fef1d40aeb65d002471.webp",
+      "permission": "REFERENCE ONLY (SEGA / ATLUS Copyright)",
+      "permissionCategory": "reference-only",
+      "intendedUse": "Character profile, team lineup",
+      "objectPosition": "center top",
+      "dimensions": {
+        "width": 630,
+        "height": 840
+      },
+      "size": 42358,
+      "format": "WEBP",
+      "status": "downloaded",
+      "path": "/assets/persona3/characters/junpei-iori.webp",
+      "thumbnailPath": "/assets/persona3/characters/thumbnails/junpei-iori-thumb.webp"
+    },
+    "akihiko": {
+      "id": "akihiko",
+      "name": "Akihiko Sanada",
+      "role": "S.E.E.S. Senior / Boxer",
+      "arcana": "Emperor",
+      "filename": "akihiko-sanada.webp",
+      "subpath": "characters/akihiko-sanada.webp",
+      "thumb": "characters/thumbnails/akihiko-sanada-thumb.webp",
+      "source": "https://asia.sega.com/p3r/en/resources/img/top/character5_fa07d2d06f3925eea4af9a91937506ba.webp",
+      "permission": "REFERENCE ONLY (SEGA / ATLUS Copyright)",
+      "permissionCategory": "reference-only",
+      "intendedUse": "Character profile, stats panel",
+      "objectPosition": "center top",
+      "dimensions": {
+        "width": 630,
+        "height": 840
+      },
+      "size": 35572,
+      "format": "WEBP",
+      "status": "downloaded",
+      "path": "/assets/persona3/characters/akihiko-sanada.webp",
+      "thumbnailPath": "/assets/persona3/characters/thumbnails/akihiko-sanada-thumb.webp"
+    },
+    "mitsuru": {
+      "id": "mitsuru",
+      "name": "Mitsuru Kirijo",
+      "role": "S.E.E.S. Founder / Fencer",
+      "arcana": "Empress",
+      "filename": "mitsuru-kirijo.webp",
+      "subpath": "characters/mitsuru-kirijo.webp",
+      "thumb": "characters/thumbnails/mitsuru-kirijo-thumb.webp",
+      "source": "https://asia.sega.com/p3r/en/resources/img/top/character6_0e3115e9f6076da20973ac40ef045866.webp",
+      "permission": "REFERENCE ONLY (SEGA / ATLUS Copyright)",
+      "permissionCategory": "reference-only",
+      "intendedUse": "Character profile, leadership view",
+      "objectPosition": "center top",
+      "dimensions": {
+        "width": 630,
+        "height": 840
+      },
+      "size": 37542,
+      "format": "WEBP",
+      "status": "downloaded",
+      "path": "/assets/persona3/characters/mitsuru-kirijo.webp",
+      "thumbnailPath": "/assets/persona3/characters/thumbnails/mitsuru-kirijo-thumb.webp"
+    },
+    "fuuka": {
+      "id": "fuuka",
+      "name": "Fuuka Yamagishi",
+      "role": "S.E.E.S. Navigator / Support",
+      "arcana": "Priestess",
+      "filename": "fuuka-yamagishi.webp",
+      "subpath": "characters/fuuka-yamagishi.webp",
+      "thumb": "characters/thumbnails/fuuka-yamagishi-thumb.webp",
+      "source": "https://asia.sega.com/p3r/en/resources/img/top/character7_532c5a12d64704763e5cac354fb3874c.webp",
+      "permission": "REFERENCE ONLY (SEGA / ATLUS Copyright)",
+      "permissionCategory": "reference-only",
+      "intendedUse": "Navigation HUD, analysis prompt",
+      "objectPosition": "center top",
+      "dimensions": {
+        "width": 630,
+        "height": 840
+      },
+      "size": 37900,
+      "format": "WEBP",
+      "status": "downloaded",
+      "path": "/assets/persona3/characters/fuuka-yamagishi.webp",
+      "thumbnailPath": "/assets/persona3/characters/thumbnails/fuuka-yamagishi-thumb.webp"
+    },
+    "koromaru": {
+      "id": "koromaru",
+      "name": "Koromaru",
+      "role": "S.E.E.S. Canine Member / Dagger & Persona",
+      "arcana": "Strength",
+      "filename": "koromaru.webp",
+      "subpath": "characters/koromaru.webp",
+      "thumb": "characters/thumbnails/koromaru-thumb.webp",
+      "source": "https://asia.sega.com/p3r/en/resources/img/top/character8_790cb89b62931cfe93f16d61c746464d.webp",
+      "permission": "REFERENCE ONLY (SEGA / ATLUS Copyright)",
+      "permissionCategory": "reference-only",
+      "intendedUse": "Character profile, companion card",
+      "objectPosition": "center top",
+      "dimensions": {
+        "width": 630,
+        "height": 840
+      },
+      "size": 40756,
+      "format": "WEBP",
+      "status": "downloaded",
+      "path": "/assets/persona3/characters/koromaru.webp",
+      "thumbnailPath": "/assets/persona3/characters/thumbnails/koromaru-thumb.webp"
+    },
+    "aigis": {
+      "id": "aigis",
+      "name": "Aigis",
+      "role": "Anti-Shadow Suppression Weapon",
+      "arcana": "Chariot / Aeon",
+      "filename": "aigis.webp",
+      "subpath": "characters/aigis.webp",
+      "thumb": "characters/thumbnails/aigis-thumb.webp",
+      "source": "https://asia.sega.com/p3r/en/resources/img/top/character9_a298bc6fd82a5d83fd4c04fa9c031f4f.webp",
+      "permission": "REFERENCE ONLY (SEGA / ATLUS Copyright)",
+      "permissionCategory": "reference-only",
+      "intendedUse": "Character profile, featured protagonist alternate",
+      "objectPosition": "center top",
+      "dimensions": {
+        "width": 630,
+        "height": 840
+      },
+      "size": 35644,
+      "format": "WEBP",
+      "status": "downloaded",
+      "path": "/assets/persona3/characters/aigis.webp",
+      "thumbnailPath": "/assets/persona3/characters/thumbnails/aigis-thumb.webp"
+    },
+    "ken": {
+      "id": "ken",
+      "name": "Ken Amada",
+      "role": "S.E.E.S. Member / Spear",
+      "arcana": "Justice",
+      "filename": "ken-amada.webp",
+      "subpath": "characters/ken-amada.webp",
+      "thumb": "characters/thumbnails/ken-amada-thumb.webp",
+      "source": "https://asia.sega.com/p3r/en/resources/img/top/character10_a301f968f599f0c8c5556d55da608f2d.webp",
+      "permission": "REFERENCE ONLY (SEGA / ATLUS Copyright)",
+      "permissionCategory": "reference-only",
+      "intendedUse": "Character profile, junior member card",
+      "objectPosition": "center top",
+      "dimensions": {
+        "width": 630,
+        "height": 840
+      },
+      "size": 31730,
+      "format": "WEBP",
+      "status": "downloaded",
+      "path": "/assets/persona3/characters/ken-amada.webp",
+      "thumbnailPath": "/assets/persona3/characters/thumbnails/ken-amada-thumb.webp"
+    },
+    "shinjiro": {
+      "id": "shinjiro",
+      "name": "Shinjiro Aragaki",
+      "role": "Former S.E.E.S. Member / Heavy Axe",
+      "arcana": "Hierophant",
+      "filename": "shinjiro-aragaki.webp",
+      "subpath": "characters/shinjiro-aragaki.webp",
+      "thumb": "characters/thumbnails/shinjiro-aragaki-thumb.webp",
+      "source": "https://asia.sega.com/p3r/en/resources/img/top/character12_f2b86e413b00e552aeca9b0960ca96d6.webp",
+      "permission": "REFERENCE ONLY (SEGA / ATLUS Copyright)",
+      "permissionCategory": "reference-only",
+      "intendedUse": "Character profile, heavy combat card",
+      "objectPosition": "center top",
+      "dimensions": {
+        "width": 630,
+        "height": 840
+      },
+      "size": 42476,
+      "format": "WEBP",
+      "status": "downloaded",
+      "path": "/assets/persona3/characters/shinjiro-aragaki.webp",
+      "thumbnailPath": "/assets/persona3/characters/thumbnails/shinjiro-aragaki-thumb.webp"
+    }
+  },
+  "backgrounds": {
+    "p3r-key-art": {
+      "id": "p3r-key-art",
+      "name": "Persona 3 Reload Official Promotional Key Art",
+      "subpath": "backgrounds/official-wallpapers/p3r-main-key-art.png",
+      "filename": "p3r-main-key-art.png",
+      "source": "https://cdn.uc.assets.prezly.com/d4f21110-01df-4792-90ee-ca3870107bba/Persona%203%20Reload%20Key%20Art_1920x1080.png",
+      "permission": "PERMISSION REQUIRED (SEGA Press Kit)",
+      "permissionCategory": "permission-required",
+      "intendedUse": "Home hero presentation visual anchor",
+      "category": "Official Wallpaper / Key Art",
+      "dimensions": {
+        "width": 1920,
+        "height": 1080
+      },
+      "size": 468038,
+      "format": "PNG",
+      "status": "downloaded",
+      "path": "/assets/persona3/backgrounds/official-wallpapers/p3r-main-key-art.png"
+    },
+    "p3r-main-visual": {
+      "id": "p3r-main-visual",
+      "name": "Persona 3 Reload Main Visual Desktop Wallpaper",
+      "subpath": "backgrounds/main-visuals/p3r-main-visual.png",
+      "filename": "p3r-main-visual.png",
+      "source": "https://cdn.uc.assets.prezly.com/d4f21110-01df-4792-90ee-ca3870107bba/Persona%203%20Reload%20Key%20Art_1920x1080.png",
+      "permission": "PERMISSION REQUIRED (SEGA Press Kit)",
+      "permissionCategory": "permission-required",
+      "intendedUse": "Desktop backdrop presentation art",
+      "category": "Main Visual",
+      "dimensions": {
+        "width": 1920,
+        "height": 1080
+      },
+      "size": 468038,
+      "format": "PNG",
+      "status": "downloaded",
+      "path": "/assets/persona3/backgrounds/main-visuals/p3r-main-visual.png"
+    },
+    "p3r-promo-group": {
+      "id": "p3r-promo-group",
+      "name": "Persona 3 Reload Cast Group Promotional Art",
+      "subpath": "backgrounds/promotional-art/persona3-reload-promo-group.jpg",
+      "filename": "persona3-reload-promo-group.jpg",
+      "source": "https://www.tomshw.it/storage/media/2024/01/11370/pERSONA-3.jpg",
+      "permission": "REFERENCE ONLY (Editorial Promotional Still)",
+      "permissionCategory": "reference-only",
+      "intendedUse": "Group composition reference / about screen backdrop",
+      "category": "Promotional Art",
+      "dimensions": {
+        "width": 2000,
+        "height": 1417
+      },
+      "size": 522238,
+      "format": "JPEG",
+      "status": "downloaded",
+      "path": "/assets/persona3/backgrounds/promotional-art/persona3-reload-promo-group.jpg"
+    },
+    "title-screen-comp": {
+      "id": "title-screen-comp",
+      "name": "Persona 3 Reload Title Screen Composition",
+      "subpath": "backgrounds/title/title-screen-composition.jpg",
+      "filename": "title-screen-composition.jpg",
+      "source": "https://image.idntimes.com/post/20240130/screenshot-persona-3-reload-5614e0149002573431ccdd542282c77d.jpg",
+      "permission": "REFERENCE ONLY (In-Game Screen Capture Reference)",
+      "permissionCategory": "reference-only",
+      "intendedUse": "Title prompt, negative space, and moonlight lighting reference",
+      "category": "Title Screen Reference",
+      "dimensions": {
+        "width": 800,
+        "height": 450
+      },
+      "size": 39296,
+      "format": "JPEG",
+      "status": "downloaded",
+      "path": "/assets/persona3/backgrounds/title/title-screen-composition.jpg"
+    },
+    "title-menu-hierarchy": {
+      "id": "title-menu-hierarchy",
+      "name": "Persona 3 Reload Title Menu & Typography Reference",
+      "subpath": "backgrounds/menu-references/title-menu-hierarchy.jpeg",
+      "filename": "title-menu-hierarchy.jpeg",
+      "source": "https://miro.medium.com/v2/resize:fit:2000/1*cMH-4sG6Z9FGcZGpX-iyPg.jpeg",
+      "permission": "REFERENCE ONLY (Game UI Database / Editorial)",
+      "permissionCategory": "reference-only",
+      "intendedUse": "Menu typographic hierarchy and diagonal angle reference",
+      "category": "Menu Reference",
+      "dimensions": {
+        "width": 1920,
+        "height": 1080
+      },
+      "size": 213014,
+      "format": "JPEG",
+      "status": "downloaded",
+      "path": "/assets/persona3/backgrounds/menu-references/title-menu-hierarchy.jpeg"
+    }
+  },
+  "references": {
+    "curved-menu": {
+      "id": "curved-menu",
+      "name": "Persona 3 Reload Curved Arc-Style Menu Navigation",
+      "subpath": "references/curved-menu-reference.png",
+      "filename": "curved-menu-reference.png",
+      "source": "User-supplied UI reference from conversation",
+      "permission": "USER-PROVIDED / REFERENCE ONLY",
+      "permissionCategory": "user-provided",
+      "intendedUse": "Curved arc navigation layout blueprint",
+      "category": "UI Design Blueprint",
+      "dimensions": {
+        "width": 1095,
+        "height": 862
+      },
+      "size": 703619,
+      "format": "PNG",
+      "status": "downloaded",
+      "path": "/assets/persona3/references/curved-menu-reference.png"
+    },
+    "title-screen-reference": {
+      "id": "title-screen-reference",
+      "name": "Interface Reference: Title Screen",
+      "subpath": "references/interface-references/title-screen-reference.jpg",
+      "filename": "title-screen-reference.jpg",
+      "source": "https://image.idntimes.com/post/20240130/screenshot-persona-3-reload-5614e0149002573431ccdd542282c77d.jpg",
+      "permission": "REFERENCE ONLY",
+      "permissionCategory": "reference-only",
+      "intendedUse": "Interface lighting & text alignment reference",
+      "category": "Interface Reference",
+      "dimensions": {
+        "width": 800,
+        "height": 450
+      },
+      "size": 39296,
+      "format": "JPEG",
+      "status": "downloaded",
+      "path": "/assets/persona3/references/interface-references/title-screen-reference.jpg"
+    },
+    "title-menu-reference": {
+      "id": "title-menu-reference",
+      "name": "Interface Reference: Title Menu",
+      "subpath": "references/interface-references/title-menu-reference.jpeg",
+      "filename": "title-menu-reference.jpeg",
+      "source": "https://miro.medium.com/v2/resize:fit:2000/1*cMH-4sG6Z9FGcZGpX-iyPg.jpeg",
+      "permission": "REFERENCE ONLY",
+      "permissionCategory": "reference-only",
+      "intendedUse": "Menu typography and list layout reference",
+      "category": "Interface Reference",
+      "dimensions": {
+        "width": 1920,
+        "height": 1080
+      },
+      "size": 213014,
+      "format": "JPEG",
+      "status": "downloaded",
+      "path": "/assets/persona3/references/interface-references/title-menu-reference.jpeg"
+    }
+  },
+  "audio": {
+    "bgm": {
+      "bgm-ambient-test": {
+        "id": "bgm-ambient-test",
+        "name": "Ambient Test Loop (Original Synthesized Bed)",
+        "subpath": "audio/bgm/bgm-ambient-test.wav",
+        "filename": "bgm-ambient-test.wav",
+        "source": "Synthesized original audio generator (tools/generate_placeholder_audio.py)",
+        "permission": "APPROVED FOR WEBSITE USE (Original Composition)",
+        "permissionCategory": "approved-original",
+        "intendedUse": "Background music player testing & loop evaluation",
+        "category": "Background Music (Development Placeholder)",
+        "loop": true,
+        "audioProps": {
+          "channels": 1,
+          "sampleRate": 22050,
+          "bitsPerSample": 16,
+          "durationSeconds": 24.0
+        },
+        "size": 1058444,
+        "format": "WAV (PCM 16-bit)",
+        "status": "downloaded",
+        "path": "/assets/persona3/audio/bgm/bgm-ambient-test.wav"
+      },
+      "bgm-original-filename": {
+        "id": "bgm-original-filename",
+        "name": "Ambient Test Loop (Explicit Non-OST Name)",
+        "subpath": "audio/bgm/bgm-placeholder-original-not-persona3.wav",
+        "filename": "bgm-placeholder-original-not-persona3.wav",
+        "source": "Synthesized original audio generator (tools/generate_placeholder_audio.py)",
+        "permission": "APPROVED FOR WEBSITE USE (Original Composition)",
+        "permissionCategory": "approved-original",
+        "intendedUse": "Explicitly labeled development placeholder file",
+        "category": "Background Music (Development Placeholder)",
+        "loop": true,
+        "audioProps": {
+          "channels": 1,
+          "sampleRate": 22050,
+          "bitsPerSample": 16,
+          "durationSeconds": 24.0
+        },
+        "size": 1058444,
+        "format": "WAV (PCM 16-bit)",
+        "status": "downloaded",
+        "path": "/assets/persona3/audio/bgm/bgm-placeholder-original-not-persona3.wav"
+      }
+    },
+    "ui": {
+      "ui-select": {
+        "id": "ui-select",
+        "name": "UI Select Tone",
+        "subpath": "audio/ui/ui-select.wav",
+        "filename": "ui-select.wav",
+        "source": "Synthesized original audio cue (880Hz + 1320Hz harmonics)",
+        "permission": "APPROVED FOR WEBSITE USE (Original Audio)",
+        "permissionCategory": "approved-original",
+        "intendedUse": "Button hover & item focus sound effect",
+        "category": "UI Sound Cue",
+        "loop": false,
+        "audioProps": {
+          "channels": 1,
+          "sampleRate": 22050,
+          "bitsPerSample": 16,
+          "durationSeconds": 0.11
+        },
+        "size": 5114,
+        "format": "WAV (PCM 16-bit)",
+        "status": "downloaded",
+        "path": "/assets/persona3/audio/ui/ui-select.wav"
+      },
+      "ui-hover": {
+        "id": "ui-hover",
+        "name": "UI Hover Tone",
+        "subpath": "audio/ui/ui-hover.wav",
+        "filename": "ui-hover.wav",
+        "source": "Synthesized original audio cue (880Hz + 1320Hz harmonics)",
+        "permission": "APPROVED FOR WEBSITE USE (Original Audio)",
+        "permissionCategory": "approved-original",
+        "intendedUse": "Arc menu navigation item hover sound",
+        "category": "UI Sound Cue",
+        "loop": false,
+        "audioProps": {
+          "channels": 1,
+          "sampleRate": 22050,
+          "bitsPerSample": 16,
+          "durationSeconds": 0.11
+        },
+        "size": 5114,
+        "format": "WAV (PCM 16-bit)",
+        "status": "downloaded",
+        "path": "/assets/persona3/audio/ui/ui-hover.wav"
+      },
+      "ui-confirm": {
+        "id": "ui-confirm",
+        "name": "UI Confirm Tone",
+        "subpath": "audio/ui/ui-confirm.wav",
+        "filename": "ui-confirm.wav",
+        "source": "Synthesized original audio cue (660Hz/990Hz/1320Hz chord)",
+        "permission": "APPROVED FOR WEBSITE USE (Original Audio)",
+        "permissionCategory": "approved-original",
+        "intendedUse": "Modal confirm, menu click, and submission cue",
+        "category": "UI Sound Cue",
+        "loop": false,
+        "audioProps": {
+          "channels": 1,
+          "sampleRate": 22050,
+          "bitsPerSample": 16,
+          "durationSeconds": 0.3
+        },
+        "size": 13274,
+        "format": "WAV (PCM 16-bit)",
+        "status": "downloaded",
+        "path": "/assets/persona3/audio/ui/ui-confirm.wav"
+      },
+      "ui-back": {
+        "id": "ui-back",
+        "name": "UI Back / Cancel Tone",
+        "subpath": "audio/ui/ui-back.wav",
+        "filename": "ui-back.wav",
+        "source": "Synthesized original audio cue (720Hz to 480Hz pitch drop)",
+        "permission": "APPROVED FOR WEBSITE USE (Original Audio)",
+        "permissionCategory": "approved-original",
+        "intendedUse": "Drawer close, back navigation, and cancel cue",
+        "category": "UI Sound Cue",
+        "loop": false,
+        "audioProps": {
+          "channels": 1,
+          "sampleRate": 22050,
+          "bitsPerSample": 16,
+          "durationSeconds": 0.19
+        },
+        "size": 8422,
+        "format": "WAV (PCM 16-bit)",
+        "status": "downloaded",
+        "path": "/assets/persona3/audio/ui/ui-back.wav"
+      },
+      "ui-transition": {
+        "id": "ui-transition",
+        "name": "UI Scene Transition Sweep",
+        "subpath": "audio/ui/ui-transition.wav",
+        "filename": "ui-transition.wav",
+        "source": "Synthesized original audio cue (white-noise + descending sine sweep)",
+        "permission": "APPROVED FOR WEBSITE USE (Original Audio)",
+        "permissionCategory": "approved-original",
+        "intendedUse": "Full-screen page transition and arc slide audio cue",
+        "category": "UI Sound Cue",
+        "loop": false,
+        "audioProps": {
+          "channels": 1,
+          "sampleRate": 22050,
+          "bitsPerSample": 16,
+          "durationSeconds": 0.48
+        },
+        "size": 21212,
+        "format": "WAV (PCM 16-bit)",
+        "status": "downloaded",
+        "path": "/assets/persona3/audio/ui/ui-transition.wav"
+      }
+    }
+  },
+  "soundtrackLicensing": {
+    "status": "PERMISSION REQUIRED",
+    "notes": "No copyrighted Persona 3 Reload OST recordings (such as 'Color Your Night', 'When the Moon's Reaching Out Stars', 'Mass Destruction', or 'Full Moon Full Life') are bundled. ATLUS/SEGA hold all exclusive master and sync rights. To use official OST in production, an explicit sync and web streaming license is required.",
+    "placeholderPolicy": "The included 24s ambient audio (bgm-ambient-test.wav) is an original synthesized bed, approved for development and testing only.",
+    "futureIntegration": {
+      "audioConfigPath": "/src/config/personaAssets.ts",
+      "supportsLoop": true,
+      "supportsVolume": true,
+      "autoplayCompliant": true
+    }
+  }
+}

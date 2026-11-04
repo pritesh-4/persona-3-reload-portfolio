@@ -1,0 +1,162 @@
+/* ================================================================
+   BOOT SEQUENCE & SCREEN TRANSITIONS STYLES
+   ================================================================ */
+
+.boot-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--p3r-ink);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.boot-screen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 30% 40%, rgba(0, 100, 255, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 60%, rgba(0, 212, 255, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.boot-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+.boot-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  z-index: 3;
+}
+
+.boot-system-label {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  letter-spacing: 0.35em;
+  color: var(--p3r-cyan);
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.boot-title-group {
+  text-align: center;
+}
+
+.boot-pre-title {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  letter-spacing: 0.25em;
+  color: var(--p3r-ice);
+  margin-bottom: 6px;
+  opacity: 0.85;
+}
+
+.boot-title {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 6vw, 76px);
+  font-style: italic;
+  color: var(--p3r-snow);
+  letter-spacing: 0.03em;
+  line-height: 1;
+  text-shadow: 0 0 40px rgba(0, 212, 255, 0.4);
+}
+
+.boot-progress-container {
+  width: min(340px, 75vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.boot-progress-bar {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.boot-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--p3r-cyan), var(--p3r-royal));
+  border-radius: 2px;
+  transition: width 220ms var(--ease-out-expo);
+  box-shadow: 0 0 14px rgba(0, 212, 255, 0.6);
+}
+
+.boot-status-text {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--p3r-ice);
+  opacity: 0.75;
+  text-transform: uppercase;
+}
+
+.boot-skip {
+  position: absolute;
+  bottom: 36px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.35);
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all var(--duration-fast);
+  padding: 8px 18px;
+  z-index: 5;
+}
+
+.boot-skip:hover {
+  color: var(--p3r-cyan);
+  border-color: var(--p3r-cyan);
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.25);
+}
+
+/* Screen transition slash */
+.screen-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.transition-slash-bar {
+  position: absolute;
+  inset: -20% -50%;
+  transform: skewX(-15deg);
+  background: linear-gradient(
+    135deg,
+    var(--p3r-red) 0%,
+    var(--p3r-magenta) 35%,
+    var(--p3r-snow) 50%,
+    var(--p3r-snow) 60%,
+    var(--p3r-blue) 100%
+  );
+  box-shadow: 0 0 50px rgba(0, 212, 255, 0.5);
+}
+

@@ -1,0 +1,10 @@
+{
+  "license_note": "Original synthesized placeholders made for this portfolio prototype. Not Persona 3 Reload OST, samples, remixes, or recreations.",
+  "files": [
+    {"file":"bgm-placeholder-original-not-persona3.wav","kind":"temporary_bgm_loop","duration_seconds":24,"replace_before_release":true},
+    {"file":"ui-select-original.wav","kind":"selection_sfx","duration_seconds":0.115,"replace_before_release":false},
+    {"file":"ui-confirm-original.wav","kind":"confirm_sfx","duration_seconds":0.30,"replace_before_release":false},
+    {"file":"ui-back-original.wav","kind":"back_sfx","duration_seconds":0.19,"replace_before_release":false},
+    {"file":"ui-transition-original.wav","kind":"transition_sfx","duration_seconds":0.48,"replace_before_release":false}
+  ]
+}

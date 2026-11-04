@@ -1,0 +1,300 @@
+/* ================================================================
+   PERSONA 3 RELOAD — INTERNAL PAGE FRAMEWORK STYLES
+   ================================================================ */
+
+.p3r-internal-page {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--p3r-ink);
+  color: var(--p3r-white);
+  user-select: none;
+}
+
+/* ----------------------------------------------------------------
+   TOP HEADER HUD
+   ---------------------------------------------------------------- */
+.p3r-internal-header {
+  position: relative;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 36px 14px 36px;
+  background: linear-gradient(
+    180deg,
+    rgba(3, 8, 20, 0.95) 0%,
+    rgba(6, 19, 33, 0.85) 75%,
+    transparent 100%
+  );
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+  gap: 16px;
+}
+
+.p3r-header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+/* Return to Menu Button */
+.p3r-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: var(--p3r-slate);
+  border: 1px solid rgba(0, 212, 255, 0.5);
+  color: var(--p3r-snow);
+  font-family: var(--font-ui);
+  font-size: 1.15rem;
+  letter-spacing: 0.1em;
+  transform: skewX(-12deg);
+  transition: all 180ms var(--ease-out-expo);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.p3r-back-btn > * {
+  transform: skewX(12deg);
+}
+
+.p3r-back-btn:hover {
+  background: var(--p3r-red);
+  border-color: var(--p3r-magenta);
+  transform: skewX(-12deg) scale(1.04);
+  box-shadow: 0 0 16px rgba(225, 29, 72, 0.6);
+}
+
+.p3r-back-key-tag {
+  font-size: 0.75rem;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 2px 6px;
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--p3r-cyan);
+}
+
+/* Header Title Banner */
+.p3r-header-title-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.p3r-header-sublabel {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: var(--p3r-cyan);
+  text-transform: uppercase;
+}
+
+.p3r-header-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.p3r-header-title {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  letter-spacing: 0.05em;
+  font-style: italic;
+  line-height: 1;
+  color: var(--p3r-snow);
+  text-shadow: 0 2px 10px rgba(0, 212, 255, 0.4);
+}
+
+.p3r-header-id-tag {
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  color: var(--p3r-red);
+  letter-spacing: 0.15em;
+}
+
+/* Section Quick Navigation Switcher */
+.p3r-header-nav-pills {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  max-width: 680px;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 0;
+}
+
+.p3r-header-nav-pills::-webkit-scrollbar {
+  display: none;
+}
+
+.p3r-nav-pill {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  color: rgba(240, 246, 255, 0.6);
+  background: rgba(10, 30, 56, 0.5);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  transform: skewX(-12deg);
+  transition: all 160ms ease;
+  white-space: nowrap;
+}
+
+.p3r-nav-pill > * {
+  transform: skewX(12deg);
+  display: inline-block;
+}
+
+.p3r-nav-pill:hover {
+  color: var(--p3r-snow);
+  background: rgba(0, 212, 255, 0.2);
+  border-color: var(--p3r-cyan);
+}
+
+.p3r-nav-pill.active {
+  color: var(--p3r-snow);
+  background: var(--p3r-royal);
+  border-color: var(--p3r-cyan);
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.5);
+}
+
+.p3r-header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+/* ----------------------------------------------------------------
+   MAIN CONTENT STAGE
+   ---------------------------------------------------------------- */
+.p3r-internal-stage {
+  position: relative;
+  z-index: 20;
+  flex: 1;
+  width: 100%;
+  height: calc(100vh - 120px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 16px 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ----------------------------------------------------------------
+   BOTTOM STATUS BAR HUD
+   ---------------------------------------------------------------- */
+.p3r-internal-footer {
+  position: relative;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 36px;
+  background: rgba(3, 8, 20, 0.92);
+  border-top: 1px solid rgba(0, 212, 255, 0.2);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: rgba(240, 246, 255, 0.7);
+}
+
+.p3r-footer-hints {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.p3r-hint-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.p3r-hint-key {
+  background: rgba(19, 45, 82, 0.8);
+  border: 1px solid rgba(0, 212, 255, 0.4);
+  color: var(--p3r-cyan);
+  padding: 2px 7px;
+  border-radius: 2px;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+}
+
+.p3r-footer-sys-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: rgba(0, 212, 255, 0.8);
+  font-weight: 600;
+}
+
+.p3r-sys-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--p3r-cyan);
+  box-shadow: 0 0 8px var(--p3r-cyan);
+  animation: p3r-pulse 2s infinite ease-in-out;
+}
+
+@keyframes p3r-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* ----------------------------------------------------------------
+   RESPONSIVE BREAKPOINTS
+   ---------------------------------------------------------------- */
+@media (max-width: 1200px) {
+  .p3r-header-nav-pills {
+    max-width: 440px;
+  }
+}
+
+@media (max-width: 900px) {
+  .p3r-internal-header {
+    padding: 12px 20px;
+    flex-wrap: wrap;
+  }
+  .p3r-header-nav-pills {
+    order: 3;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 8px;
+  }
+  .p3r-internal-stage {
+    padding: 12px 20px;
+  }
+  .p3r-internal-footer {
+    padding: 8px 20px;
+    font-size: 0.7rem;
+  }
+  .p3r-footer-sys-info {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .p3r-header-title {
+    font-size: 1.6rem;
+  }
+  .p3r-back-btn {
+    padding: 6px 12px;
+    font-size: 0.95rem;
+  }
+  .p3r-back-key-tag {
+    display: none;
+  }
+  .p3r-internal-stage {
+    padding: 10px 14px;
+  }
+}
+
