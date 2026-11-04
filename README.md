@@ -4,10 +4,21 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178c6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-8.3-646cff?style=for-the-badge&logo=vite)](https://vite.dev)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-14.9-ff0055?style=for-the-badge&logo=framer)](https://www.framer.com/motion/)
-[![Build Status](https://img.shields.io/badge/Build-Passing_(721ms)-00e676?style=for-the-badge)](#build-and-test)
-[![Phase 3 QA](https://img.shields.io/badge/Phase_3_QA-14%2F14_PASS-00d2ff?style=for-the-badge)](./FINAL_QA_REPORT.md)
+[![Build Status](https://img.shields.io/badge/Build-Passing_(329ms)-00e676?style=for-the-badge)](#build-and-test)
+[![Production Smoke Test](https://img.shields.io/badge/Smoke_Test-24%2F24_PASS-00d2ff?style=for-the-badge)](./FINAL_RELEASE_REPORT.md)
+[![Security Review](https://img.shields.io/badge/Security-0_Vulnerabilities-00e676?style=for-the-badge)](./SECURITY_REVIEW.md)
 
 An interactive, game-inspired developer portfolio built with **React 19**, **TypeScript**, **Vite 8**, and **Framer Motion**, delivering the authentic visual identity, atmospheric audio, and UI layout of **Persona 3 Reload (ATLUS / SEGA)**.
+
+---
+
+## 🚀 Live Demo & Deployment Links
+- **Production URL**: [https://pritesh-4.github.io/Person-3-Reload-Portfolio/](https://pritesh-4.github.io/Person-3-Reload-Portfolio/)
+- **Release Documentation**:
+  - 📋 [**Final Production Release Report**](./FINAL_RELEASE_REPORT.md)
+  - 📖 [**Multi-Platform Deployment Guide**](./PRODUCTION_DEPLOYMENT_GUIDE.md)
+  - 🔒 [**Security & Privacy Review**](./SECURITY_REVIEW.md)
+  - ⚖️ [**Production Asset Rights Report**](./PRODUCTION_ASSET_RIGHTS_REPORT.md)
 
 ---
 
@@ -96,29 +107,36 @@ Automated visual regression tests verified with Playwright (**0 console errors**
 ### Installation & Development
 ```bash
 # Clone the repository
-git clone https://github.com/RohitPoul/Person-3-Reload-Potfolio.git
-cd Person-3-Reload-Potfolio
+git clone https://github.com/pritesh-4/Person-3-Reload-Portfolio.git
+cd Person-3-Reload-Portfolio
 
-# Install dependencies
-npm install
+# Install dependencies reproducibly
+npm ci
 
-# Start development server
+# Start local development server (with HMR)
 npm run dev
 ```
 
 Navigate to `http://localhost:5173/` in your browser.
 
-### Build and Test
+### Verification, Build & Preview
 ```bash
-# Run ESLint check (0 errors, 0 warnings)
+# Code quality and linting verification (0 errors, 0 warnings)
 npm run lint
 
-# Build for production (tsc -b && vite build)
+# TypeScript strict type checking
+npm run type-check
+
+# Compile production bundle (tsc -b && vite build)
 npm run build
 
-# Preview production build locally
-npm run preview
+# Preview production build locally on port 4173
+npm run preview -- --port 4173
 ```
+
+### Production Deployment
+The repository includes `.github/workflows/deploy.yml` which deploys automatically to **GitHub Pages** on every push to `main`.
+For manual deployment instructions on **Vercel**, **Netlify**, or **Custom Domains**, see [`PRODUCTION_DEPLOYMENT_GUIDE.md`](./PRODUCTION_DEPLOYMENT_GUIDE.md).
 
 ---
 

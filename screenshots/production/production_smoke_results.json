@@ -1,0 +1,132 @@
+{
+  "testResults": [
+    {
+      "step": "1. Boot Sequence",
+      "status": "PASS",
+      "details": "Loaded in 1100ms"
+    },
+    {
+      "step": "2-3. Title Screen Initialized",
+      "status": "PASS",
+      "details": "Promotional key visual rendered"
+    },
+    {
+      "step": "4-5. Main Curved Arc Menu",
+      "status": "PASS",
+      "details": "8 menu items positioned on quadratic Bézier arc"
+    },
+    {
+      "step": "Section: PERSONA",
+      "status": "PASS",
+      "details": "Route /about rendered cleanly"
+    },
+    {
+      "step": "Section: SKILL",
+      "status": "PASS",
+      "details": "Route /skills rendered cleanly"
+    },
+    {
+      "step": "Section: EQUIP",
+      "status": "PASS",
+      "details": "Route /resume rendered cleanly"
+    },
+    {
+      "step": "Section: STATS",
+      "status": "PASS",
+      "details": "Route /stats rendered cleanly"
+    },
+    {
+      "step": "Section: QUEST",
+      "status": "PASS",
+      "details": "Route /projects rendered cleanly"
+    },
+    {
+      "step": "Section: ITEM",
+      "status": "PASS",
+      "details": "Route /tools rendered cleanly"
+    },
+    {
+      "step": "Section: SOCIAL LINK",
+      "status": "PASS",
+      "details": "Route /contact rendered cleanly"
+    },
+    {
+      "step": "Section: SYSTEM",
+      "status": "PASS",
+      "details": "Route /system rendered cleanly"
+    },
+    {
+      "step": "14. System Audio/Motion Controls",
+      "status": "PASS",
+      "details": "Settings state updated and persisted"
+    },
+    {
+      "step": "15. Return to Menu [ESC]",
+      "status": "PASS",
+      "details": "Current URL: http://localhost:4173/menu"
+    },
+    {
+      "step": "16. SPA Refresh on Deep Link",
+      "status": "PASS",
+      "details": "Direct refresh on /projects retained view without 404"
+    },
+    {
+      "step": "17. Browser History (Back/Forward)",
+      "status": "PASS",
+      "details": "Back: true, Forward: true"
+    },
+    {
+      "step": "18. Direct Cold Start Link (/about)",
+      "status": "PASS",
+      "details": "Bypassed boot sequence directly into Persona dossier"
+    },
+    {
+      "step": "19. Themed 404 Dark Hour Anomaly",
+      "status": "PASS",
+      "details": "Custom game-styled 404 screen displayed"
+    },
+    {
+      "step": "Static File: /favicon.svg",
+      "status": "PASS",
+      "details": "HTTP Status: 200"
+    },
+    {
+      "step": "Static File: /manifest.json",
+      "status": "PASS",
+      "details": "HTTP Status: 200"
+    },
+    {
+      "step": "Static File: /robots.txt",
+      "status": "PASS",
+      "details": "HTTP Status: 200"
+    },
+    {
+      "step": "Static File: /sitemap.xml",
+      "status": "PASS",
+      "details": "HTTP Status: 200"
+    },
+    {
+      "step": "Static File: /404.html",
+      "status": "PASS",
+      "details": "HTTP Status: 200"
+    },
+    {
+      "step": "Static File: /_redirects",
+      "status": "PASS",
+      "details": "HTTP Status: 200"
+    },
+    {
+      "step": "21. Mobile Curved Arc Preservation & Zero Overflow",
+      "status": "PASS",
+      "details": "Mobile Arc Present: true, scrollWidth: 390, clientWidth: 390"
+    }
+  ],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 403 ()"
+  ],
+  "network404s": [],
+  "timingMetrics": {
+    "rootLoadMs": 1100
+  },
+  "timestamp": "2026-11-04T18:43:29.365Z"
+}
