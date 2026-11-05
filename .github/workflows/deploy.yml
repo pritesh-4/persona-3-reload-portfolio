@@ -46,6 +46,9 @@ jobs:
       - name: TypeScript type checking
         run: npm run type-check
 
+      - name: Automated integrity testing
+        run: npm run test
+
       - name: Build production distribution
         env:
           VITE_BASE_PATH: './'

@@ -75,7 +75,7 @@ export const SkillPage: FC<SkillPageProps> = ({ onNavigate, onBackToMenu }) => {
         {/* Two-Column Grid: Selectable Ability List & Inspection Panel */}
         <div className="p3r-skill-stage-grid">
           {/* List of Skills */}
-          <div className="p3r-skill-list-container" role="listbox" aria-label="Skills List">
+          <div className="p3r-skill-list-container" role="listbox" aria-label="Skills List" aria-live="polite">
             {filteredSkills.map(skill => (
               <div
                 key={skill.id}

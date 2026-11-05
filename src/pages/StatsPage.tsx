@@ -278,7 +278,7 @@ export const StatsPage: FC<StatsPageProps> = ({ onNavigate, onBackToMenu }) => {
             TAB 1: CHARACTER STATUS SCREEN (EXPERIENCE 2)
             ============================================================== */}
         {activeTab === 'STATUS' && (
-          <div className="p3r-status-view-stage">
+          <div className="p3r-status-view-stage" role="tabpanel" aria-label="Character Status" aria-live="polite">
             {/* Profile Overview Card */}
             <div className="p3r-char-profile-card">
               <div className="p3r-char-profile-left">
@@ -453,7 +453,7 @@ export const StatsPage: FC<StatsPageProps> = ({ onNavigate, onBackToMenu }) => {
             TAB 2: CALENDAR & DEVELOPMENT TIMELINE (EXPERIENCE 3)
             ============================================================== */}
         {activeTab === 'CALENDAR' && (
-          <div className="p3r-calendar-view-stage">
+          <div className="p3r-calendar-view-stage" role="tabpanel" aria-label="Dark Hour Calendar" aria-live="polite">
             {/* Calendar Year Navigation */}
             <div className="p3r-calendar-year-bar">
               <span className="p3r-cal-filter-label">TIMELINE CYCLE:</span>
@@ -576,7 +576,7 @@ export const StatsPage: FC<StatsPageProps> = ({ onNavigate, onBackToMenu }) => {
             TAB 3: GITHUB SATELLITE RADAR & TELEMETRY
             ============================================================== */}
         {activeTab === 'RADAR' && (
-          <div className="p3r-radar-view-stage">
+          <div className="p3r-radar-view-stage" role="tabpanel" aria-label="GitHub Satellite Radar" aria-live="polite">
             {/* Telemetry Status Banner */}
             <div className="p3r-stats-telemetry-banner">
               <div className="p3r-telemetry-signal">

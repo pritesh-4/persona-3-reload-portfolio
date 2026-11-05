@@ -6,6 +6,7 @@ import {
   type SocialLinkCard,
 } from '../data/socialLinksData';
 import { useAudioContext } from '../hooks/useAudioContext';
+import { useFocusTrap } from '../hooks/useFocusTrap';
 import '../styles/pages/social.css';
 
 interface SocialLinkPageProps {
@@ -18,6 +19,7 @@ export const SocialLinkPage: FC<SocialLinkPageProps> = ({ onNavigate, onBackToMe
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
   const [activeCard, setActiveCard] = useState<SocialLinkCard | null>(null);
   const [copyFeedback, setCopyFeedback] = useState<string | null>(null);
+  const modalRef = useFocusTrap<HTMLDivElement>(Boolean(activeCard));
 
   const filteredLinks = useMemo(() => {
     if (selectedCategory === 'ALL') return SOCIAL_LINKS_DATA;
@@ -111,7 +113,7 @@ export const SocialLinkPage: FC<SocialLinkPageProps> = ({ onNavigate, onBackToMe
         </div>
 
         {/* Arcana Social Link Cards Grid */}
-        <div className="p3r-social-cards-grid" role="list">
+        <div className="p3r-social-cards-grid" role="list" aria-live="polite">
           {filteredLinks.map((link) => (
             <article
               key={link.id}
@@ -183,6 +185,7 @@ export const SocialLinkPage: FC<SocialLinkPageProps> = ({ onNavigate, onBackToMe
             aria-labelledby="social-modal-title"
           >
             <div
+              ref={modalRef}
               className="p3r-social-modal-box"
               onClick={(e) => e.stopPropagation()}
             >

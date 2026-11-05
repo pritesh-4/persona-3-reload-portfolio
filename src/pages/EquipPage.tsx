@@ -1,10 +1,11 @@
-import { useState, useCallback, type FC } from 'react';
+import { useState, useCallback, useEffect, type FC } from 'react';
 import { InternalPageLayout } from '../components/layout/InternalPageLayout';
 import {
   PROGRESSION_TIMELINE,
   EQUIPMENT_LOADOUT,
 } from '../data/experienceData';
 import { useAudioContext } from '../hooks/useAudioContext';
+import { useFocusTrap } from '../hooks/useFocusTrap';
 import '../styles/pages/equip.css';
 
 interface EquipPageProps {
@@ -16,6 +17,7 @@ export const EquipPage: FC<EquipPageProps> = ({ onNavigate, onBackToMenu }) => {
   const { playSfx } = useAudioContext();
   const [viewMode, setViewMode] = useState<'timeline' | 'loadout'>('timeline');
   const [showResumeModal, setShowResumeModal] = useState(false);
+  const modalRef = useFocusTrap<HTMLDivElement>(showResumeModal);
 
   const handleModeChange = useCallback(
     (mode: 'timeline' | 'loadout') => {
@@ -34,6 +36,19 @@ export const EquipPage: FC<EquipPageProps> = ({ onNavigate, onBackToMenu }) => {
     playSfx('back');
     setShowResumeModal(false);
   }, [playSfx]);
+
+  useEffect(() => {
+    if (!showResumeModal) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        e.stopPropagation();
+        handleCloseResume();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown, true);
+    return () => window.removeEventListener('keydown', handleKeyDown, true);
+  }, [showResumeModal, handleCloseResume]);
 
   return (
     <InternalPageLayout
@@ -159,12 +174,14 @@ export const EquipPage: FC<EquipPageProps> = ({ onNavigate, onBackToMenu }) => {
             onClick={handleCloseResume}
             role="dialog"
             aria-modal="true"
+            aria-labelledby="resume-modal-title"
           >
             <div
+              ref={modalRef}
               className="p3r-resume-modal-card"
               onClick={e => e.stopPropagation()}
             >
-              <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '2rem', fontStyle: 'italic', color: 'var(--p3r-snow)' }}>
+              <h3 id="resume-modal-title" style={{ fontFamily: 'var(--font-display)', fontSize: '2rem', fontStyle: 'italic', color: 'var(--p3r-snow)' }}>
                 PERSONNEL DOSSIER VERIFICATION
               </h3>
               <p style={{ fontSize: '0.9rem', color: 'rgba(240, 246, 255, 0.85)', lineHeight: 1.6 }}>

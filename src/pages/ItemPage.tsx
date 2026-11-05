@@ -77,7 +77,7 @@ export const ItemPage: FC<ItemPageProps> = ({ onNavigate, onBackToMenu }) => {
         {/* Two-Column Grid: Slot Grid + Item Inspection Panel */}
         <div className="p3r-item-stage-grid">
           {/* Collectible Slot Grid */}
-          <div className="p3r-inventory-slot-grid" role="listbox" aria-label="Inventory Slots">
+          <div className="p3r-inventory-slot-grid" role="listbox" aria-label="Inventory Slots" aria-live="polite">
             {filteredItems.map((item) => (
               <div
                 key={item.id}
