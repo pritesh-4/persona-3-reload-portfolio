@@ -59,11 +59,12 @@
 
 .p3r-profile-name {
   font-family: var(--font-display);
-  font-size: 16px;
+  font-size: 14px;
   font-style: italic;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   color: var(--p3r-snow);
   line-height: 1;
+  white-space: nowrap;
 }
 
 .p3r-profile-level {
@@ -263,7 +264,120 @@
 
 /* Music Control Panel (Bottom / Center-Right) */
 /* ================================================================
-   PERSONA 3 RELOAD — CD-STYLE BACKGROUND MUSIC (BGM) CONTROLLER
+   PERSONA 3 RELOAD — COMPACT BACKGROUND MUSIC (BGM) TOGGLE
+   ================================================================ */
+.p3r-music-toggle-wrap {
+  position: absolute;
+  top: clamp(16px, 3vh, 32px);
+  left: clamp(24px, 4vw, 56px);
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+}
+
+.p3r-music-toggle--title {
+  position: static;
+}
+
+.p3r-music-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 16px;
+  background: rgba(6, 19, 33, 0.92);
+  border: 1px solid rgba(0, 212, 255, 0.35);
+  border-left: 3px solid var(--p3r-cyan);
+  color: var(--p3r-snow);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  transform: skewX(-12deg);
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(10px);
+  transition: all 180ms ease;
+  user-select: none;
+}
+
+.p3r-music-toggle-btn > * {
+  transform: skewX(12deg);
+}
+
+.p3r-music-toggle-btn:hover {
+  background: rgba(10, 30, 56, 0.98);
+  border-color: var(--p3r-cyan);
+  box-shadow: 0 0 16px rgba(0, 212, 255, 0.4);
+  transform: skewX(-12deg) scale(1.03);
+}
+
+.p3r-music-toggle-btn.is-enabled {
+  border-color: var(--p3r-cyan);
+  border-left-color: var(--p3r-cyan);
+}
+
+.p3r-music-toggle-btn.is-enabled .p3r-music-toggle-icon {
+  color: var(--p3r-cyan);
+  text-shadow: 0 0 8px rgba(0, 212, 255, 0.85);
+}
+
+.p3r-music-toggle-btn.is-enabled .p3r-music-toggle-dot {
+  background: var(--p3r-cyan);
+  box-shadow: 0 0 8px var(--p3r-cyan);
+}
+
+.p3r-music-toggle-btn.is-enabled.is-playing .p3r-music-toggle-dot {
+  animation: p3rLedPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes p3rLedPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: skewX(12deg) scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: skewX(12deg) scale(0.8);
+  }
+}
+
+.p3r-music-toggle-btn.is-disabled {
+  border-color: rgba(255, 255, 255, 0.16);
+  border-left-color: rgba(255, 255, 255, 0.35);
+  color: rgba(240, 246, 255, 0.45);
+  background: rgba(3, 8, 20, 0.88);
+}
+
+.p3r-music-toggle-btn.is-disabled .p3r-music-toggle-icon {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.p3r-music-toggle-btn.is-disabled .p3r-music-toggle-dot {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: none;
+}
+
+.p3r-music-toggle-icon {
+  font-size: 15px;
+  line-height: 1;
+  display: inline-block;
+}
+
+.p3r-music-toggle-label {
+  display: inline-block;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.p3r-music-toggle-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* ================================================================
+   PERSONA 3 RELOAD — LEGACY CD CONTROLLER STYLES (RETAINED FOR COMPAT)
    ================================================================ */
 .p3r-hud-music {
   position: absolute;

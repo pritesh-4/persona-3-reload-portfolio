@@ -91,13 +91,13 @@ export const InternalPageLayout: FC<InternalPageLayoutProps> = ({
         handleBack();
       } else if (e.key === 'm' || e.key === 'M') {
         e.preventDefault();
-        toggleMute();
+        toggleBgm();
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleBack, toggleMute]);
+  }, [handleBack, toggleBgm]);
 
   return (
     <div className="p3r-internal-page" role="region" aria-label={`${title} Screen`}>
@@ -171,7 +171,7 @@ export const InternalPageLayout: FC<InternalPageLayoutProps> = ({
           </div>
           <div className="p3r-hint-item">
             <span className="p3r-hint-key">M</span>
-            <span>MUTE AUDIO</span>
+            <span>MUSIC ON/OFF</span>
           </div>
           {customHint && (
             <div className="p3r-hint-item">

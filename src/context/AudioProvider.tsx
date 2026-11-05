@@ -129,7 +129,7 @@ export const AudioProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
   // Direct user-gesture initiated playback
   const playBgm = useCallback(async (): Promise<boolean> => {
-    if (!bgmRef.current) return false;
+    if (!bgmRef.current || !settings.bgmEnabled) return false;
     wasPlayingRef.current = true;
     try {
       await bgmRef.current.play();
@@ -139,7 +139,7 @@ export const AudioProvider: FC<{ children: ReactNode }> = ({ children }) => {
       console.warn('[AudioProvider] Playback suspended by browser autoplay policy pending interaction', err);
       return false;
     }
-  }, []);
+  }, [settings.bgmEnabled]);
 
   const pauseBgm = useCallback(() => {
     if (!bgmRef.current) return;
@@ -148,24 +148,36 @@ export const AudioProvider: FC<{ children: ReactNode }> = ({ children }) => {
     setBgmPlaying(false);
   }, []);
 
+  // Canonical BGM ON/OFF toggle: updates persistent setting and pauses/plays immediately
   const toggleBgm = useCallback(() => {
-    if (!bgmRef.current) return;
-    if (bgmRef.current.paused) {
-      void playBgm();
-    } else {
-      pauseBgm();
-    }
-  }, [playBgm, pauseBgm]);
+    setSettings(prev => {
+      const nextEnabled = !prev.bgmEnabled;
+      if (!nextEnabled) {
+        if (bgmRef.current) {
+          bgmRef.current.pause();
+          setBgmPlaying(false);
+        }
+      } else {
+        if (bgmRef.current) {
+          bgmRef.current.volume = prev.bgmVolume;
+          bgmRef.current.play().then(() => setBgmPlaying(true)).catch((err) => {
+            console.warn('[AudioProvider] Playback suspended by browser autoplay policy pending interaction', err);
+          });
+        }
+      }
+      return { ...prev, bgmEnabled: nextEnabled };
+    });
+  }, []);
 
   const setBgmVolume = useCallback(
     (vol: number) => {
       const clamped = Math.max(0, Math.min(1, vol));
       setSettings(prev => ({ ...prev, bgmVolume: clamped }));
-      if (bgmRef.current && !muted && settings.bgmEnabled) {
+      if (bgmRef.current && settings.bgmEnabled) {
         bgmRef.current.volume = clamped;
       }
     },
-    [muted, settings.bgmEnabled]
+    [settings.bgmEnabled]
   );
 
   const setSfxVolume = useCallback((vol: number) => {
@@ -173,10 +185,10 @@ export const AudioProvider: FC<{ children: ReactNode }> = ({ children }) => {
     setSettings(prev => ({ ...prev, sfxVolume: clamped }));
   }, []);
 
-  // Toggle BGM mute independently of UI sound effects
+  // Keyboard 'M' / Master mute controls the canonical BGM setting
   const toggleMute = useCallback(() => {
-    setMuted(prev => !prev);
-  }, []);
+    toggleBgm();
+  }, [toggleBgm]);
 
   // Toggle UI sound effects independently of BGM
   const toggleSfx = useCallback(() => {
@@ -230,11 +242,12 @@ export const AudioProvider: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <AudioContext.Provider
       value={{
+        bgmEnabled: settings.bgmEnabled,
         bgmPlaying,
         bgmVolume: settings.bgmVolume,
         sfxEnabled: settings.sfxEnabled,
         sfxVolume: settings.sfxVolume,
-        muted,
+        muted: !settings.bgmEnabled,
         trackInfo,
         reducedMotion: settings.reducedMotion,
         artworkIntensity: settings.artworkIntensity,

@@ -74,7 +74,7 @@ export const TitleScreen: FC<TitleScreenProps> = ({ visible, onEnter }) => {
             PORTFOLIO ACTIVE
           </motion.div>
 
-          {/* Subtle CD Music Identity & Controls */}
+          {/* Subtle Persona 3 Music Toggle */}
           <motion.div
             className="title-music-container"
             initial={{ opacity: 0, y: 15 }}
@@ -87,15 +87,6 @@ export const TitleScreen: FC<TitleScreenProps> = ({ visible, onEnter }) => {
 
           {/* Main title typography & prompt */}
           <div className="title-content">
-            <motion.div
-              className="title-metadata"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-            >
-              PERSONNEL DATABASE &bull; S.E.E.S. ARCHIVE
-            </motion.div>
-
             <div className="title-main-text">
               <motion.h1
                 className="title-name"
@@ -103,7 +94,7 @@ export const TitleScreen: FC<TitleScreenProps> = ({ visible, onEnter }) => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               >
-                PRITESH JENA
+                PRITESH KUMAR JENA
               </motion.h1>
               <motion.p
                 className="title-subtitle"

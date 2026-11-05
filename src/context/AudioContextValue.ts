@@ -14,6 +14,7 @@ export interface AudioTrackInfo {
 
 export interface AudioContextType {
   // Audio state
+  bgmEnabled: boolean;
   bgmPlaying: boolean;
   bgmVolume: number;
   sfxEnabled: boolean;

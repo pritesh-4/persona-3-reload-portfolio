@@ -11,11 +11,10 @@ interface SystemPageProps {
 
 export const SystemPage: FC<SystemPageProps> = ({ onNavigate, onBackToMenu }) => {
   const {
-    bgmPlaying,
+    bgmEnabled,
     bgmVolume,
     sfxEnabled,
     sfxVolume,
-    muted,
     trackInfo,
     reducedMotion,
     artworkIntensity,
@@ -23,7 +22,6 @@ export const SystemPage: FC<SystemPageProps> = ({ onNavigate, onBackToMenu }) =>
     setBgmVolume,
     toggleSfx,
     setSfxVolume,
-    toggleMute,
     setReducedMotion,
     setArtworkIntensity,
     resetAllSettings,
@@ -75,39 +73,22 @@ export const SystemPage: FC<SystemPageProps> = ({ onNavigate, onBackToMenu }) =>
                 </div>
               </div>
 
-              {/* Master Mute */}
-              <div className="p3r-setting-row">
-                <div className="p3r-setting-meta">
-                  <span className="p3r-setting-name">MASTER AUDIO MUTE</span>
-                  <span className="p3r-setting-desc">Mutes all BGM and sound effect channels (Key: M)</span>
-                </div>
-                <button
-                  type="button"
-                  className={`p3r-toggle-btn ${muted ? 'on' : 'off'}`}
-                  onClick={() => {
-                    toggleMute();
-                    playSfx('select');
-                  }}
-                >
-                  <span>{muted ? 'MUTED' : 'UNMUTED'}</span>
-                </button>
-              </div>
-
-              {/* BGM Toggle */}
+              {/* Consolidated Canonical Background Music (BGM) Toggle */}
               <div className="p3r-setting-row">
                 <div className="p3r-setting-meta">
                   <span className="p3r-setting-name">BACKGROUND MUSIC (BGM)</span>
-                  <span className="p3r-setting-desc">Ambient soundtrack loop during portfolio exploration</span>
+                  <span className="p3r-setting-desc">Ambient soundtrack loop during exploration (Key: M)</span>
                 </div>
                 <button
                   type="button"
-                  className={`p3r-toggle-btn ${bgmPlaying ? 'on' : 'off'}`}
+                  className={`p3r-toggle-btn ${bgmEnabled ? 'on' : 'off'}`}
                   onClick={() => {
                     toggleBgm();
                     playSfx('select');
                   }}
+                  aria-label="Toggle Background Music"
                 >
-                  <span>{bgmPlaying ? 'ACTIVE' : 'PAUSED'}</span>
+                  <span>{bgmEnabled ? '♪ MUSIC ON' : '♪ MUSIC OFF'}</span>
                 </button>
               </div>
 
@@ -257,7 +238,7 @@ export const SystemPage: FC<SystemPageProps> = ({ onNavigate, onBackToMenu }) =>
                 </div>
                 <div className="p3r-key-row">
                   <span className="p3r-key-badge">M</span>
-                  <span className="p3r-key-purpose">Toggle Master Audio Mute</span>
+                  <span className="p3r-key-purpose">Toggle Background Music (ON / OFF)</span>
                 </div>
               </div>
             </div>

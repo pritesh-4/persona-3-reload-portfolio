@@ -24,9 +24,12 @@ export const CharacterBackdrop: FC<CharacterBackdropProps> = ({
   const char: PersonaCharacter =
     PERSONA_CHARACTERS[effectiveCharId] || PERSONA_CHARACTERS.makoto;
 
+  const charOpacityDesktop = config?.characterOpacityDesktop ?? 0.22;
+  const charOpacityMobile = config?.characterOpacityMobile ?? 0.20;
+
   return (
     <div className="p3r-character-backdrop" aria-hidden="true">
-      {/* Background Wallpaper Layer */}
+      {/* 1. Background Wallpaper Layer */}
       <div className="p3r-backdrop-wallpaper-wrap">
         <img
           src={effectiveBgPath}
@@ -34,27 +37,18 @@ export const CharacterBackdrop: FC<CharacterBackdropProps> = ({
           className="p3r-backdrop-wallpaper"
           loading="eager"
         />
-        <div
-          className="p3r-backdrop-gradient"
-          style={config?.gradientOverlay ? { background: config.gradientOverlay } : undefined}
-        />
-        <div className="p3r-backdrop-vignette" />
-        <div className="p3r-backdrop-grid-overlay" />
       </div>
 
-      {/* Featured Character Render Layer */}
+      {/* 2. Character Artwork Layer (Watermark positioned behind atmospheric overlays) */}
       <div
         className="p3r-backdrop-char-stage"
-        style={
-          config
-            ? {
-                right: config.characterRightDesktop,
-                bottom: config.characterBottomDesktop,
-              }
-            : undefined
-        }
+        style={{
+          right: config?.characterRightDesktop,
+          bottom: config?.characterBottomDesktop ?? '0',
+          '--p3r-char-opacity-desktop': String(charOpacityDesktop),
+          '--p3r-char-opacity-mobile': String(charOpacityMobile),
+        } as React.CSSProperties}
       >
-        <div className="p3r-char-glow" />
         <img
           key={char.id}
           src={char.path}
@@ -65,8 +59,18 @@ export const CharacterBackdrop: FC<CharacterBackdropProps> = ({
             transform: config ? `scale(${config.characterScaleDesktop})` : undefined,
           }}
         />
-        <div className="p3r-char-shadow" />
       </div>
+
+      {/* 3. Dark Tint & Atmospheric Gradient Overlays (Tints character into the scene) */}
+      <div
+        className="p3r-backdrop-gradient"
+        style={config?.gradientOverlay ? { background: config.gradientOverlay } : undefined}
+      />
+      <div className="p3r-backdrop-tint-overlay" />
+
+      {/* 4. Vignette and Subtle Grid Texture */}
+      <div className="p3r-backdrop-vignette" />
+      <div className="p3r-backdrop-grid-overlay" />
     </div>
   );
 };

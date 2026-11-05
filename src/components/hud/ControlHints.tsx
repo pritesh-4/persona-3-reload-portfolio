@@ -29,7 +29,7 @@ export const ControlHints: FC = () => {
         <span className="p3r-keycap">
           <span className="p3r-keycap-inner">M</span>
         </span>
-        <span className="p3r-hint-text">MUTE BGM</span>
+        <span className="p3r-hint-text">MUSIC ON/OFF</span>
       </div>
     </footer>
   );

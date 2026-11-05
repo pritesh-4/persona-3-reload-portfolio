@@ -3,7 +3,6 @@ import { MENU_ITEMS } from '../../data/menuConfig';
 import { useMenuNavigation } from '../../hooks/useMenuNavigation';
 import { ArcNavigation } from './ArcNavigation';
 import { ProfileStatus } from '../hud/ProfileStatus';
-import { ContextPanel } from '../hud/ContextPanel';
 import { ControlHints } from '../hud/ControlHints';
 import { ThemeIndicator } from '../hud/ThemeIndicator';
 import { MusicControl } from '../hud/MusicControl';
@@ -94,13 +93,10 @@ export const MainMenu: FC<MainMenuProps> = ({
 
       <ProfileStatus
         portraitPath="/assets/persona3/characters/thumbnails/makoto-yuki-thumb.webp"
-        name="PRITESH JENA"
+        name="PRITESH KUMAR JENA"
         level={99}
         role="FULL-STACK // AI BUILDER"
       />
-
-      {/* Center Left: Selected Command Context Info */}
-      <ContextPanel item={activeItem} />
 
       {/* Lower Center: Curved Arc Navigation */}
       <ArcNavigation

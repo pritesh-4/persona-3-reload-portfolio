@@ -10,7 +10,7 @@ interface ProfileStatusProps {
 
 export const ProfileStatus: FC<ProfileStatusProps> = ({
   portraitPath = '/assets/persona3/characters/thumbnails/makoto-yuki-thumb.webp',
-  name = 'PRITESH JENA',
+  name = 'PRITESH KUMAR JENA',
   level = 99,
   role = 'FULL-STACK // AI BUILDER',
 }) => {
