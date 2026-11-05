@@ -62,17 +62,17 @@ export const PersonaPage: FC<PersonaPageProps> = ({ onNavigate, onBackToMenu }) 
             </div>
           </div>
 
-          {/* Graphic Asymmetrical Accent Slabs */}
-          <div className="p3r-hero-accent-block" aria-hidden="true">
+          {/* Graphic Asymmetrical Accent Slabs — Verified Personnel Portrait */}
+          <div className="p3r-hero-accent-block">
             <div className="p3r-accent-slant-bg" />
             <div className="p3r-hero-art-window">
               <img
-                src="/assets/persona3/characters/makoto-yuki.webp"
-                alt=""
+                src="/assets/profile/pritesh-profile.webp"
+                alt="Pritesh Kumar Jena — Full-Stack Developer & Mining Engineering Student"
                 className="p3r-hero-art-img"
               />
             </div>
-            <div className="p3r-hero-stamp-tag">P3R // PROTAGONIST ARCHETYPE</div>
+            <div className="p3r-hero-stamp-tag">PRITESH JENA // PROTAGONIST</div>
           </div>
         </section>
 

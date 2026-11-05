@@ -136,21 +136,53 @@
   color: var(--abyss-white);
 }
 
-/* Graphic Accent Block on Right */
+/* Graphic Accent Block on Right — Personnel Identity Portrait */
 .p3r-hero-accent-block {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(180deg, rgba(21, 88, 214, 0.3) 0%, rgba(9, 38, 75, 0.7) 100%);
-  border-left: 1px solid rgba(55, 217, 242, 0.25);
+  background: linear-gradient(165deg, rgba(21, 88, 214, 0.28) 0%, rgba(3, 11, 25, 0.94) 75%);
+  border-left: 1px solid rgba(55, 217, 242, 0.35);
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
+  min-height: 280px;
+}
+
+.p3r-hero-accent-block::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 14px;
+  height: 14px;
+  border-top: 2px solid var(--abyss-cyan);
+  border-left: 2px solid var(--abyss-cyan);
+  z-index: 4;
+  pointer-events: none;
+}
+
+.p3r-hero-accent-block::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 14px;
+  height: 14px;
+  border-top: 2px solid var(--abyss-cyan);
+  border-right: 2px solid var(--abyss-cyan);
+  z-index: 4;
+  pointer-events: none;
 }
 
 .p3r-accent-slant-bg {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 60% 40%, rgba(55, 217, 242, 0.2) 0%, transparent 70%);
+  background:
+    radial-gradient(circle at 65% 35%, rgba(55, 217, 242, 0.22) 0%, transparent 60%),
+    linear-gradient(135deg, transparent 42%, rgba(21, 88, 214, 0.2) 42%, rgba(21, 88, 214, 0.2) 58%, transparent 58%),
+    radial-gradient(rgba(55, 217, 242, 0.15) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 16px 16px;
+  opacity: 0.85;
 }
 
 .p3r-hero-art-window {
@@ -159,27 +191,41 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  position: relative;
+  z-index: 2;
 }
 
 .p3r-hero-art-img {
-  max-height: 240px;
+  max-height: 290px;
+  width: auto;
   object-fit: contain;
-  opacity: 0.85;
-  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.6));
-  transform: scale(1.05);
+  opacity: 0.98;
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.75)) drop-shadow(0 0 16px rgba(55, 217, 242, 0.25));
+  transform: scale(1.02);
+  transition: transform 280ms var(--ease-out-expo), filter 280ms ease;
+}
+
+.p3r-persona-hero-plate:hover .p3r-hero-art-img {
+  transform: scale(1.06) translateY(-4px);
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 24px rgba(55, 217, 242, 0.45));
 }
 
 .p3r-hero-stamp-tag {
   position: absolute;
-  bottom: 8px;
+  bottom: 10px;
   right: 12px;
+  z-index: 3;
   font-family: var(--font-ui);
   font-size: 0.68rem;
-  letter-spacing: 0.18em;
-  color: var(--abyss-cyan);
-  background: rgba(3, 11, 25, 0.75);
-  padding: 2px 8px;
-  border: 1px solid rgba(55, 217, 242, 0.25);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--abyss-white);
+  background: rgba(3, 11, 25, 0.9);
+  padding: 3px 10px;
+  border: 1px solid var(--abyss-cyan);
+  border-left: 3px solid var(--abyss-pink);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  text-transform: uppercase;
 }
 
 /* ================================================================
@@ -407,19 +453,43 @@
    ================================================================ */
 @media (max-width: 1024px) {
   .p3r-persona-hero-plate {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 280px;
   }
   .p3r-hero-accent-block {
-    display: none;
+    display: flex;
+    min-height: 250px;
+  }
+  .p3r-hero-art-img {
+    max-height: 250px;
   }
   .p3r-persona-editorial-grid {
     grid-template-columns: 1fr;
   }
 }
 
+@media (max-width: 768px) {
+  .p3r-persona-hero-plate {
+    grid-template-columns: 1fr;
+  }
+  .p3r-hero-accent-block {
+    border-left: none;
+    border-top: 1px solid rgba(55, 217, 242, 0.25);
+    min-height: 240px;
+  }
+  .p3r-hero-art-img {
+    max-height: 230px;
+  }
+}
+
 @media (max-width: 600px) {
   .p3r-hero-content-col {
     padding: 20px 18px;
+  }
+  .p3r-hero-accent-block {
+    min-height: 220px;
+  }
+  .p3r-hero-art-img {
+    max-height: 210px;
   }
   .p3r-editorial-section {
     padding: 16px 16px;
