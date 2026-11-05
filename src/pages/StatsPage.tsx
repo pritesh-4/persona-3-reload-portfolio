@@ -11,6 +11,7 @@ interface GitHubRepo {
   language: string | null;
   stargazers_count: number;
   forks_count: number;
+  fork?: boolean;
   updated_at: string;
 }
 
@@ -27,67 +28,87 @@ interface StatsState {
 
 const FALLBACK_STATS: StatsState = {
   loading: false,
-  publicRepos: 14,
+  publicRepos: 19,
   followers: 8,
-  following: 12,
-  starsCount: 16,
+  following: 6,
+  starsCount: 9,
   isCached: true,
   repos: [
     {
       id: 1,
-      name: 'DevLore',
-      description: 'An advanced stateful quiz platform with custom React hooks and REST connectors.',
-      html_url: 'https://github.com/pritesh-4/DevLore',
-      language: 'JavaScript',
-      stargazers_count: 5,
-      forks_count: 1,
-      updated_at: '2026-03-12',
+      name: 'SIH-2026---SALVUS',
+      description: 'AI-powered disaster intelligence and rescue coordination platform for real-time incident detection and responder allocation.',
+      html_url: 'https://github.com/pritesh-4/SIH-2026---SALVUS',
+      language: 'Python',
+      stargazers_count: 0,
+      forks_count: 0,
+      updated_at: '2026-09-02',
     },
     {
       id: 2,
-      name: 'AI-Impact-Predictor',
-      description: 'Supervised predictive machine learning layer analyzing code alterations.',
-      html_url: 'https://github.com/pritesh-4/AI-Impact-Predictor',
-      language: 'Python',
+      name: 'Project_RouteMind',
+      description: 'Intelligent AI model routing platform analyzing query intent to dispatch requests across best-fit models.',
+      html_url: 'https://github.com/pritesh-4/Project_RouteMind',
+      language: 'JavaScript',
       stargazers_count: 4,
       forks_count: 0,
-      updated_at: '2026-03-05',
+      updated_at: '2026-07-22',
     },
     {
       id: 3,
-      name: 'Chronicles-of-Fate',
-      description: 'An interactive narrative developer portfolio inspired by Omniscient Reader.',
-      html_url: 'https://github.com/pritesh-4/Chronicles-of-Fate',
-      language: 'JavaScript',
-      stargazers_count: 6,
-      forks_count: 2,
-      updated_at: '2026-02-28',
+      name: 'Project_DevLore',
+      description: 'Interactive learning platform featuring customizable quizzes, performance tracking, and progress analytics.',
+      html_url: 'https://github.com/pritesh-4/Project_DevLore',
+      language: 'CSS',
+      stargazers_count: 3,
+      forks_count: 0,
+      updated_at: '2026-06-10',
     },
     {
       id: 4,
-      name: 'Elephant_detector',
-      description: 'Computer vision deep learning detection pipeline using YOLO and OpenCV.',
-      html_url: 'https://github.com/pritesh-4/Elephant_detector',
+      name: 'Project_Aethon',
+      description: 'AI-driven astronomical signal discovery using time-frequency analysis and unsupervised anomaly detection.',
+      html_url: 'https://github.com/pritesh-4/Project_Aethon',
       language: 'Python',
-      stargazers_count: 3,
+      stargazers_count: 0,
       forks_count: 0,
-      updated_at: '2026-01-15',
+      updated_at: '2026-10-12',
     },
     {
       id: 5,
-      name: 'Friday',
-      description: 'Personal voice assistant and workflow automation engine in Python.',
-      html_url: 'https://github.com/pritesh-4/Friday',
+      name: 'Project_Zogan',
+      description: 'AI-assisted wildlife monitoring prototype for elephant detection, ByteTrack tracking, and geofenced risk modeling.',
+      html_url: 'https://github.com/pritesh-4/Project_Zogan',
       language: 'Python',
-      stargazers_count: 2,
+      stargazers_count: 0,
       forks_count: 0,
-      updated_at: '2025-11-20',
+      updated_at: '2026-10-04',
+    },
+    {
+      id: 6,
+      name: 'Project-FRIDAY',
+      description: 'Personal virtual assistant exploring voice-first interaction, cognitive memory, and agent workflow orchestration.',
+      html_url: 'https://github.com/pritesh-4/Project-FRIDAY',
+      language: 'Python',
+      stargazers_count: 0,
+      forks_count: 0,
+      updated_at: '2026-08-20',
+    },
+    {
+      id: 7,
+      name: 'Project_Yumei',
+      description: 'The Last Chronicle — story-driven interactive developer portfolio inspired by Omniscient Reader\'s Viewpoint.',
+      html_url: 'https://github.com/pritesh-4/Project_Yumei',
+      language: 'CSS',
+      stargazers_count: 0,
+      forks_count: 0,
+      updated_at: '2026-06-23',
     },
   ],
   languages: [
-    { name: 'JavaScript / TypeScript', percentage: 48 },
-    { name: 'Python', percentage: 34 },
-    { name: 'CSS / Styling', percentage: 12 },
+    { name: 'Python', percentage: 42 },
+    { name: 'JavaScript / TypeScript', percentage: 36 },
+    { name: 'HTML / CSS', percentage: 16 },
     { name: 'C / C++', percentage: 6 },
   ],
 };
@@ -136,11 +157,14 @@ export const StatsPage: FC<StatsPageProps> = ({ onNavigate, onBackToMenu }) => {
 
         if (!isMounted) return;
 
-        // Calculate language counts and total stars
+        // Calculate language counts and total stars (filtering out forks)
+        const originalRepos = reposData.filter((repo) => !repo.fork);
+        const activeReposList = originalRepos.length > 0 ? originalRepos : reposData;
+
         const langMap: Record<string, number> = {};
         let totalStars = 0;
 
-        reposData.forEach((repo) => {
+        activeReposList.forEach((repo) => {
           totalStars += repo.stargazers_count;
           if (repo.language) {
             langMap[repo.language] = (langMap[repo.language] || 0) + 1;
@@ -155,11 +179,11 @@ export const StatsPage: FC<StatsPageProps> = ({ onNavigate, onBackToMenu }) => {
 
         setStats({
           loading: false,
-          publicRepos: userData.public_repos || reposData.length,
+          publicRepos: userData.public_repos || activeReposList.length,
           followers: userData.followers || 0,
           following: userData.following || 0,
           starsCount: totalStars,
-          repos: reposData,
+          repos: activeReposList,
           languages: languages.length > 0 ? languages : FALLBACK_STATS.languages,
           isCached: false,
         });

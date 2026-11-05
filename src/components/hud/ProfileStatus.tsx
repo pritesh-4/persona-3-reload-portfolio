@@ -12,7 +12,7 @@ export const ProfileStatus: FC<ProfileStatusProps> = ({
   portraitPath = '/assets/persona3/characters/thumbnails/makoto-yuki-thumb.webp',
   name = 'PRITESH JENA',
   level = 99,
-  role = 'FULL-STACK // AI/ML',
+  role = 'FULL-STACK // AI BUILDER',
 }) => {
   return (
     <aside className="p3r-hud-profile" aria-label="Developer Status">

@@ -66,3 +66,4 @@ These are creative, low-priority enhancements that can add flavor to future vers
   - Add an optional playlist toggle in `SystemPage` allowing visitors to switch between different ambient background music tracks.
 - [ ] **All-Out Attack Interactive Finisher**:
   - Trigger a stylized P3R "All-Out Attack" splash card animation upon completing the contact form or reaching the end of the project archive.
+

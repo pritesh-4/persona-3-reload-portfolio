@@ -131,7 +131,7 @@ export const INVENTORY_ITEMS: InventoryItem[] = [
     quantity: 'x8',
     effect: 'Encapsulates dependencies into reproducible container images, eliminating "works on my machine" anomalies.',
     flavorText: 'Multi-stage Docker builds orchestrating microservices, model weights, and web runtime environments in isolated cgroups.',
-    associatedProject: 'AI Impact Predictor & Friday Microservices'
+    associatedProject: 'SALVUS & Friday Microservices'
   },
   {
     id: 'ops-gh-actions',

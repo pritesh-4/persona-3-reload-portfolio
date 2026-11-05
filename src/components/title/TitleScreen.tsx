@@ -109,7 +109,7 @@ export const TitleScreen: FC<TitleScreenProps> = ({ visible, onEnter }) => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.55, duration: 0.6 }}
               >
-                FULL-STACK DEVELOPER &bull; AI / ML ENGINEER
+                FULL-STACK DEVELOPER &bull; AI BUILDER &bull; NIT ROURKELA
               </motion.p>
             </div>
 

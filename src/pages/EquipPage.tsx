@@ -172,7 +172,7 @@ export const EquipPage: FC<EquipPageProps> = ({ onNavigate, onBackToMenu }) => {
               </p>
               <div style={{ background: 'rgba(3, 8, 20, 0.7)', padding: '14px', borderLeft: '4px solid var(--p3r-cyan)', margin: '14px 0' }}>
                 <p style={{ fontSize: '0.85rem', color: 'var(--p3r-ice)', fontWeight: 600 }}>
-                  CURRENT STATUS: Active B.Tech Student & GSSoC 2026 Contributor
+                  CURRENT STATUS: Undergraduate Engineering Student at NIT Rourkela &bull; Lead Systems Architect (SALVUS)
                 </p>
                 <p style={{ fontSize: '0.85rem', color: 'rgba(240, 246, 255, 0.7)', marginTop: '4px' }}>
                   Direct PDF dossier can be requested directly via email: <strong>priteshjena16@gmail.com</strong>

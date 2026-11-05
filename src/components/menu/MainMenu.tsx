@@ -96,7 +96,7 @@ export const MainMenu: FC<MainMenuProps> = ({
         portraitPath="/assets/persona3/characters/thumbnails/makoto-yuki-thumb.webp"
         name="PRITESH JENA"
         level={99}
-        role="FULL-STACK // AI/ML"
+        role="FULL-STACK // AI BUILDER"
       />
 
       {/* Center Left: Selected Command Context Info */}

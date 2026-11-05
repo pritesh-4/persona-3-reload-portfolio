@@ -26,6 +26,11 @@ This repository is an interactive personal portfolio inspired by the visual desi
 Projects/Persona_port/
 ├── public/
 │   └── assets/
+│       ├── projects/                  # Real project screenshots & previews
+│       │   ├── chronicle.png          # The Last Chronicle / Project Yumei
+│       │   ├── devlore.png            # DevLore dynamic quiz platform
+│       │   ├── zogan_detect.jpg       # Project Zogan elephant detection box
+│       │   └── zogan_hud.jpg          # Project Zogan thermal tracking HUD
 │       └── persona3/                  # PRIMARY ASSET REPOSITORY
 │           ├── characters/            # 10 Official S.E.E.S. character WebPs
 │           │   └── thumbnails/        # Pre-generated 240x320 WebP thumbnails
@@ -232,4 +237,7 @@ node "C:\Users\HP\.gemini\antigravity\brain\f20eba93-f1e2-497c-98c0-96c3a21f687a
 3. **Respect Existing Assets**: Do not modify or overwrite files in `public/assets/persona3/` without explicit necessity.
 4. **Follow the Established Component Hierarchy**: Keep boot, title, menu, hud, and shared components separated in `src/components/`.
 5. **No AI-Generated Substitutes**: Official character artwork and promotional key visuals must remain genuine; do not substitute with generative AI artwork.
+6. **Zero Fabrication Policy**: The portfolio represents Pritesh Jena (`pritesh-4`), an undergraduate student at National Institute of Technology, Rourkela. Never invent professional employment, graduation dates, CGPAs, corporate internships, fake hackathon awards, or GSSoC contributions.
+7. **Technical Honesty & Real-World Boundaries**: Clearly distinguish implemented capabilities from research prototypes, simulations (e.g. simulated GPS/risk in Zogan), and target neural specs (e.g. AETHON). Never present upstream forked repos as original authored projects.
+8. **Reference Documentation**: Consult [`GITHUB_PERSONALISATION_REPORT.md`](./GITHUB_PERSONALISATION_REPORT.md) for full project provenance, repository mapping, and verification evidence.
 

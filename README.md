@@ -15,6 +15,7 @@ An interactive, game-inspired developer portfolio built with **React 19**, **Typ
 ## 🚀 Live Demo & Deployment Links
 - **Production URL**: [https://pritesh-4.github.io/Person-3-Reload-Portfolio/](https://pritesh-4.github.io/Person-3-Reload-Portfolio/)
 - **Release & Quality Documentation**:
+  - 👤 [**GitHub Personalisation & Real Project Dossier Report**](./GITHUB_PERSONALISATION_REPORT.md)
   - 🧹 [**Product Cleanup & Feature Consolidation Report (Phase 5)**](./PRODUCT_CLEANUP_REPORT.md)
   - ✅ [**Product Completeness Checklist (Phase 5)**](./PRODUCT_COMPLETENESS_CHECKLIST.md)
   - 📋 [**Final Production Release Report (Phase 4)**](./FINAL_RELEASE_REPORT.md)
@@ -45,7 +46,7 @@ An interactive, game-inspired developer portfolio built with **React 19**, **Typ
 Every section is built with its own distinctive Persona 3 Reload interface concept:
 1. **PERSONA (`/about`)**: Character Profile / Personnel Database File 001. Features Makoto Yuki artwork, S-rank combat/engineering attribute matrix, personal narrative bio, and core engineering directives.
 2. **SKILL (`/skills`)**: Ability Tree & Competency Matrix. Features Mitsuru Kirijo artwork, category filter tabs (Programming, Development, AI/ML, Engineering, Tools), SP costs, ability tiers, and interactive ability inspector panel.
-3. **EQUIP (`/resume`)**: Progression & Equipment. Features Akihiko Sanada artwork, dual-mode progression timeline (GSSoC 2026 Contributor, DevLore, AI Impact Predictor, B.Tech) vs. RPG equipment loadout view, and resume dispatch modal.
+3. **EQUIP (`/resume`)**: Progression & Equipment. Features Akihiko Sanada artwork, dual-mode progression timeline (SALVUS Lead Architect, AETHON Researcher, RouteMind Creator, Zogan ML, NIT Rourkela) vs. RPG equipment loadout view, and resume dispatch modal.
 4. **STATS (`/stats`)**: Developer Telemetry & GitHub Activity. Features Fuuka Yamagishi artwork, real-time GitHub API integration (`pritesh-4`), public repo metrics, language matrix distribution bars, and fallback caching.
 5. **QUEST (`/projects`)**: Mission Archive. Features Junpei Iori artwork, Tartarus request cards with difficulty ranks (Rank S, Rank A), mission status tags, and interactive detail panel with architecture breakdown, live demos, and repos.
 6. **ITEM (`/tools`)**: Developer Tooling & Inventory. Features Aigis artwork, grid slot layout with icons/quantities, rarity tiers, and item inspection panel with functional lore and project provenance.

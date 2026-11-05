@@ -37,7 +37,9 @@ export const PersonaPage: FC<PersonaPageProps> = ({ onNavigate, onBackToMenu }) 
           </div>
 
           <h1 className="p3r-dossier-name">{PROFILE_DATA.name}</h1>
-          <p className="p3r-dossier-role">{PROFILE_DATA.role}</p>
+          <p className="p3r-dossier-role">
+            {PROFILE_DATA.role} <span style={{ color: 'var(--p3r-cyan)', margin: '0 8px' }}>//</span> {PROFILE_DATA.headline}
+          </p>
 
           <div className="p3r-dossier-stats-strip">
             <div className="p3r-dossier-stat-chip">
