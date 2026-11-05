@@ -37,8 +37,9 @@ export const PersonaPage: FC<PersonaPageProps> = ({ onNavigate, onBackToMenu }) 
           </div>
 
           <h1 className="p3r-dossier-name">{PROFILE_DATA.name}</h1>
-          <p className="p3r-dossier-role">
-            {PROFILE_DATA.role} <span style={{ color: 'var(--p3r-cyan)', margin: '0 8px' }}>//</span> {PROFILE_DATA.headline}
+          <p className="p3r-dossier-role">{PROFILE_DATA.headline}</p>
+          <p className="p3r-dossier-subrole">
+            {PROFILE_DATA.role} <span style={{ color: 'var(--p3r-cyan)', margin: '0 8px' }}>//</span> {PROFILE_DATA.institution}
           </p>
 
           <div className="p3r-dossier-stats-strip">
@@ -51,17 +52,50 @@ export const PersonaPage: FC<PersonaPageProps> = ({ onNavigate, onBackToMenu }) 
               <span className="p3r-stat-chip-value">LV. {PROFILE_DATA.level}</span>
             </div>
             <div className="p3r-dossier-stat-chip">
-              <span className="p3r-stat-chip-label">AFFILIATION</span>
-              <span className="p3r-stat-chip-value">{PROFILE_DATA.affiliation}</span>
+              <span className="p3r-stat-chip-label">INSTITUTION</span>
+              <span className="p3r-stat-chip-value">NIT ROURKELA</span>
             </div>
             <div className="p3r-dossier-stat-chip">
               <span className="p3r-stat-chip-label">LOCATION</span>
-              <span className="p3r-stat-chip-value">{PROFILE_DATA.location}</span>
+              <span className="p3r-stat-chip-value">ROURKELA, ODISHA</span>
             </div>
             <div className="p3r-dossier-stat-chip">
               <span className="p3r-stat-chip-label">STATUS</span>
-              <span className="p3r-stat-chip-value">{PROFILE_DATA.status}</span>
+              <span className="p3r-stat-chip-value">2ND YEAR UNDERGRAD</span>
             </div>
+          </div>
+        </div>
+
+        {/* 5 Verified Profile Dossier Cards */}
+        <div className="p3r-dossier-cards-section">
+          <div className="p3r-dossier-section-header">
+            <span className="p3r-section-title">VERIFIED PROFILE DOSSIER</span>
+            <span className="p3r-section-line" />
+            <span className="p3r-section-tag">EDUCATION & TECHNICAL INTERESTS</span>
+          </div>
+
+          <div className="p3r-dossier-cards-grid">
+            {PROFILE_DATA.cards.map((card) => (
+              <div
+                key={card.id}
+                className={`p3r-dossier-card card-${card.id}`}
+                onMouseEnter={() => playSfx('hover')}
+              >
+                <div className="p3r-dossier-card-top">
+                  <span className="p3r-card-label">{card.label}</span>
+                  <span className="p3r-card-accent-pill">VERIFIED</span>
+                </div>
+                <h3 className="p3r-card-value">{card.primaryValue}</h3>
+                <ul className="p3r-card-info-list">
+                  {card.supportingInfo.map((info, idx) => (
+                    <li key={idx} className="p3r-card-info-item">
+                      <span className="p3r-info-bullet">✦</span>
+                      <span>{info}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
 

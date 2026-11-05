@@ -40,15 +40,15 @@ export interface CharacterProfileData {
 }
 
 export const CHARACTER_PROFILE: CharacterProfileData = {
-  name: 'PRITESH JENA',
+  name: 'PRITESH KUMAR JENA',
   codename: 'S.E.E.S. ARCHITECT',
   level: 99,
   personaArcana: 'FOOL / DEATH (ORPHEUS)',
-  role: 'Full-Stack Developer & AI Systems Builder',
+  role: 'Mining Engineering Undergraduate & Full-Stack Developer',
   affiliation: 'National Institute of Technology, Rourkela',
   location: 'Rourkela, Odisha, India',
   introduction:
-    'Undergraduate engineering student at NIT Rourkela focused on systems engineering, edge computer vision, and high-performance user interfaces. Blends algorithmic rigor with evocative game-inspired creative execution.',
+    'Second-year Mining Engineering undergraduate student at NIT Rourkela with a strong technical passion for AI systems, intelligent model routing, and production-grade full-stack architectures.',
   currentInterests: [
     'Edge Computer Vision & Multi-Object Tracking',
     'Multimodal LLM Dynamic Intent Routing',

@@ -96,7 +96,7 @@ export const MainMenu: FC<MainMenuProps> = ({
         portraitPath="/assets/persona3/characters/thumbnails/makoto-yuki-thumb.webp"
         name="PRITESH KUMAR JENA"
         level={99}
-        role="FULL-STACK // AI BUILDER"
+        role="MINING ENG. // FULL-STACK & AI"
       />
 
       {/* Lower Center: Curved Arc Navigation */}

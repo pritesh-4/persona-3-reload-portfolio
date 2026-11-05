@@ -192,15 +192,17 @@ export const PROGRESSION_TIMELINE: ProgressionMilestone[] = [
     id: 'edu-nitr',
     period: 'Active',
     category: 'EDUCATION',
-    title: 'Undergraduate Engineering Student',
+    title: 'Undergraduate Student — Mining Engineering',
     organization: 'National Institute of Technology, Rourkela (NIT Rourkela)',
-    role: 'Undergraduate Student',
+    role: 'Second-Year Undergraduate',
     location: 'Rourkela, Odisha, India',
-    summary: 'Pursuing undergraduate engineering curriculum at National Institute of Technology, Rourkela, focusing on core computer science fundamentals, algorithms, data structures, machine learning, and systems software.',
+    summary:
+      'Second-year undergraduate student pursuing Mining Engineering at NIT Rourkela, with strong independent technical interests in artificial intelligence, full-stack software engineering, and intelligent systems.',
     achievements: [
-      'Active focus on algorithm complexity, object-oriented systems design, and database architecture.',
-      'Hands-on engineering across hackathon initiatives (SALVUS Lead Architect, AETHON) and open-source systems.'
+      'Active independent project engineering across machine learning, system architecture, and full-stack software development.',
+      'Lead Systems Architect for SALVUS (Smart India Hackathon 2026), engineering emergency coordination platforms and 3-tier AI triage.',
+      'Independent research and development across Project AETHON (radio astronomy anomaly detection), RouteMind (intelligent LLM router), and Project Zogan (wildlife CV).'
     ],
-    skills: ['Data Structures & Algorithms', 'C/C++', 'Python', 'Systems Architecture', 'Web Technologies']
+    skills: ['Python', 'FastAPI', 'React 19', 'PyTorch', 'Data Structures', 'Scientific Computing']
   }
 ];
