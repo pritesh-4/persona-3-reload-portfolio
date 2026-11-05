@@ -9,9 +9,7 @@ import '../styles/pages/quest.css';
 
 const CATEGORIES = [
   { id: 'ALL', label: 'ALL MISSIONS' },
-  { id: 'FRONTEND', label: 'FRONTEND ARCHITECTURE' },
   { id: 'AI / ML', label: 'AI & HEURISTICS' },
-  { id: 'CREATIVE', label: 'CREATIVE & GAMING' },
   { id: 'SYSTEMS', label: 'SYSTEMS & AGENTS' },
 ];
 
@@ -31,11 +29,18 @@ export const QuestPage: FC<QuestPageProps> = ({ onNavigate, onBackToMenu }) => {
   }, [selectedCat]);
 
   const handleSelectMission = useCallback(
-    (mission: ProjectMission) => {
+    (mission: ProjectMission, isPreview = false) => {
+      if (isPreview) {
+        if (selectedMission.id !== mission.id) {
+          playSfx('hover');
+          setSelectedMission(mission);
+        }
+        return;
+      }
       playSfx('select');
       setSelectedMission(mission);
     },
-    [playSfx]
+    [selectedMission.id, playSfx]
   );
 
   const handleSelectCategory = useCallback(
@@ -61,15 +66,17 @@ export const QuestPage: FC<QuestPageProps> = ({ onNavigate, onBackToMenu }) => {
       currentRoute="/projects"
       onNavigate={onNavigate}
       onBackToMenu={onBackToMenu}
-      customHint="SELECT MISSION TO INSPECT ARCHITECTURAL DOSSIER"
+      customHint="HOVER OR SELECT MISSION TO INSPECT ARCHITECTURAL DOSSIER"
     >
       <div className="p3r-quest-screen">
         {/* Category Filters */}
-        <div className="p3r-quest-filter-bar">
+        <div className="p3r-quest-filter-bar" role="tablist" aria-label="Mission Categories">
           {CATEGORIES.map(cat => (
             <button
               key={cat.id}
               type="button"
+              role="tab"
+              aria-selected={selectedCat === cat.id}
               className={`p3r-quest-tab-btn ${selectedCat === cat.id ? 'active' : ''}`}
               onClick={() => handleSelectCategory(cat.id)}
               onMouseEnter={() => playSfx('hover')}
@@ -82,7 +89,7 @@ export const QuestPage: FC<QuestPageProps> = ({ onNavigate, onBackToMenu }) => {
         {/* Two-Column Grid: Mission List + Detailed Mission Dossier */}
         <div className="p3r-quest-stage-grid">
           {/* Mission Archive Cards */}
-          <div className="p3r-mission-list-container" role="listbox" aria-label="Missions Archive">
+          <div className="p3r-mission-list-container" role="listbox" aria-label="Missions Archive" aria-live="polite">
             {filteredMissions.map(m => (
               <div
                 key={m.id}
@@ -91,13 +98,22 @@ export const QuestPage: FC<QuestPageProps> = ({ onNavigate, onBackToMenu }) => {
                 tabIndex={0}
                 className={`p3r-mission-card ${selectedMission.id === m.id ? 'selected' : ''}`}
                 onClick={() => handleSelectMission(m)}
+                onMouseEnter={() => handleSelectMission(m, true)}
+                onFocus={() => handleSelectMission(m, true)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
                     handleSelectMission(m);
+                  } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    const next = e.currentTarget.nextElementSibling as HTMLElement | null;
+                    next?.focus();
+                  } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    const prev = e.currentTarget.previousElementSibling as HTMLElement | null;
+                    prev?.focus();
                   }
                 }}
-                onMouseEnter={() => playSfx('hover')}
               >
                 <div className="p3r-mission-head-row">
                   <span className="p3r-mission-code">{m.code}</span>

@@ -83,7 +83,7 @@ assert(`Primary OST soundtrack present & valid: bgm/colour-your-night.mp3 (${(fs
 console.log('\n[2/4] Verifying Data Model Contracts & Content Truth...');
 
 const projectsFile = fs.readFileSync(path.join(rootDir, 'src', 'data', 'projectsData.ts'), 'utf8');
-assert('Projects data defines 10 mission entries', (projectsFile.match(/id:\s*['"]quest-\d+['"]/g) || []).length === 10);
+assert('Projects data defines 7 mission entries', (projectsFile.match(/id:\s*['"]quest-\d+['"]/g) || []).length === 7);
 assert('SALVUS emergency project present with valid repo URL', projectsFile.includes('https://github.com/pritesh-4/SIH-2026---SALVUS'));
 assert('Project AETHON defined with valid repo URL', projectsFile.includes('https://github.com/pritesh-4/Project_Aethon'));
 assert('Project RouteMind defined with valid repo URL', projectsFile.includes('https://github.com/pritesh-4/Project_RouteMind'));

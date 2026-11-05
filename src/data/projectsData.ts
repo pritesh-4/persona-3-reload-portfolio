@@ -1,3 +1,5 @@
+export type ProjectCategory = 'AI / ML' | 'SYSTEMS';
+
 export interface ProjectMission {
   id: string;
   code: string;
@@ -5,7 +7,7 @@ export interface ProjectMission {
   subtitle: string;
   codename: string;
   role: string;
-  category: 'FRONTEND' | 'AI / ML' | 'SYSTEMS' | 'CREATIVE';
+  category: ProjectCategory;
   status: 'COMPLETED' | 'ACTIVE' | 'ARCHIVED';
   implementationStatus: 'VERIFIED IMPLEMENTED' | 'RESEARCH PROTOTYPE' | 'EXPERIMENTAL CONCEPT' | 'EARLY EXPERIMENT';
   difficulty: 'RANK S' | 'RANK A' | 'RANK B';
@@ -189,76 +191,10 @@ export const PROJECTS_DATA: ProjectMission[] = [
     targetArcana: 'THE EMPEROR'
   },
 
-  // PROJECT 006: THE LAST CHRONICLE
-  {
-    id: 'quest-06',
-    code: 'M-006',
-    title: 'THE LAST CHRONICLE',
-    subtitle: 'Interactive Narrative Portfolio (Project Yumei)',
-    codename: 'STAR STREAM ARCHIVE',
-    role: 'Creator & Creative Frontend Architect',
-    category: 'CREATIVE',
-    status: 'COMPLETED',
-    implementationStatus: 'VERIFIED IMPLEMENTED',
-    difficulty: 'RANK S',
-    summary: 'An immersive, narrative-driven developer portfolio inspired by Omniscient Reader\'s Viewpoint, transforming achievements into timelines, projects into scenarios, and skills into attributes.',
-    problem: 'Standard developer portfolios often feel sterile and repetitive, failing to communicate a builder\'s creative vision, storytelling instincts, and passion for UI craft.',
-    solution: 'Engineered an interactive narrative experience using React, Vite, Framer Motion spring physics, and bespoke CSS—inviting visitors to accept scenarios and explore hidden paths.',
-    features: [
-      'Scenario-based entry system with animated ORV system windows and atmospheric transitions',
-      'Constellation-style milestone achievement timeline revealing developer progression on scroll',
-      'Technical attributes matrix and dedicated project scenario records',
-      'Unlockable secret route (Hidden Scenario) detailing future architectural ambitions',
-      'Bespoke zero-dependency CSS engine delivering game-grade aesthetic fidelity'
-    ],
-    limitations: [
-      'Creative Frontend Focus: Built specifically as a story-driven portfolio and creative interaction experiment.',
-      'Active Canonical URL: Verified deployed and active at pritesh-jena-portfolio.vercel.app (superseding older chronicle-of-fate alias).'
-    ],
-    techStack: ['React', 'Vite', 'JavaScript', 'Vanilla CSS3', 'Framer Motion', 'Vercel Edge'],
-    repoUrl: 'https://github.com/pritesh-4/Project_Yumei',
-    demoUrl: 'https://pritesh-jena-portfolio.vercel.app/',
-    screenshot: '/assets/projects/chronicle.png',
-    targetArcana: 'THE STAR'
-  },
-
-  // PROJECT 007: DEVLORE
-  {
-    id: 'quest-07',
-    code: 'M-007',
-    title: 'DEVLORE',
-    subtitle: 'Dynamic Quiz Platform & Knowledge Analytics Hub',
-    codename: 'KNOWLEDGE COMPILATION PROTOCOL',
-    role: 'Creator & Frontend Engineer',
-    category: 'FRONTEND',
-    status: 'COMPLETED',
-    implementationStatus: 'VERIFIED IMPLEMENTED',
-    difficulty: 'RANK B',
-    summary: 'A dynamic, stateful quiz platform built with React, Vite, Axios, and Open Trivia DB API that enables users to test knowledge across categories, track performance, and review historical attempts.',
-    problem: 'Many learning and quiz web applications suffer from hardcoded questions, lose state upon page refresh, and offer no historical progress tracking.',
-    solution: 'Constructed a modular React application featuring dynamic REST API ingestion, custom hook state synchronization, randomized answer positions, and LocalStorage analytics.',
-    features: [
-      'Dynamic question generation across multiple categories and difficulty levels via Open Trivia DB API',
-      'Real-time countdown timer with score multiplier calculation and instant feedback loops',
-      'Accuracy percentage, completion time tracking, and detailed question-by-question review',
-      'Persistent dashboard analytics tracking total quizzes, highest score, and average performance',
-      'Robust LocalStorage persistence ensuring quiz state survives accidental browser reloads'
-    ],
-    limitations: [
-      'API Dependency: Relies on external Open Trivia DB endpoints; graceful local fallback handles rate limits or offline conditions.',
-      'Client-Side Persistence: Analytics currently stored in browser LocalStorage without cross-device cloud synchronization.'
-    ],
-    techStack: ['React', 'Vite', 'React Router DOM', 'Axios', 'Open Trivia DB API', 'LocalStorage', 'CSS3'],
-    repoUrl: 'https://github.com/pritesh-4/Project_DevLore',
-    demoUrl: 'https://devlore-ebon.vercel.app/',
-    screenshot: '/assets/projects/devlore.png',
-    targetArcana: 'THE WHEEL OF FORTUNE'
-  },
-
-  // PROJECT 008: HOLY TRIAL
+  // PROJECT 006: HOLY TRIAL
   {
     id: 'quest-08',
-    code: 'M-008',
+    code: 'M-006',
     title: 'HOLY TRIAL',
     subtitle: 'The Obsidian Tribunal Investigative Judicial Workspace',
     codename: 'EPISTEMIC SCRUTINY ENGINE',
@@ -286,10 +222,10 @@ export const PROJECTS_DATA: ProjectMission[] = [
     targetArcana: 'JUSTICE'
   },
 
-  // PROJECT 009: PROJECT ORBIT
+  // PROJECT 007: PROJECT ORBIT
   {
     id: 'quest-09',
-    code: 'M-009',
+    code: 'M-007',
     title: 'PROJECT ORBIT',
     subtitle: 'Personality-Driven AI Desk Companion Robot',
     codename: 'DESKTOP KINEMATIC COMPANION',
@@ -315,35 +251,5 @@ export const PROJECTS_DATA: ProjectMission[] = [
     techStack: ['ESP32-S3', 'C/C++', 'Robotics Kinematics', 'I2S Audio', 'HRI Design', 'CAD / 3D Print'],
     repoUrl: 'https://github.com/pritesh-4/Project_ORBIT',
     targetArcana: 'THE SUN'
-  },
-
-  // PROJECT 010: CODE GEASS FAN PAGE
-  {
-    id: 'quest-10',
-    code: 'M-010',
-    title: 'CODE GEASS FAN PAGE',
-    subtitle: 'Early Visual & Interactive CSS Fan Experience',
-    codename: 'FOUNDATIONAL DESIGN ARTIFACT',
-    role: 'Creator & Early Frontend Designer',
-    category: 'CREATIVE',
-    status: 'COMPLETED',
-    implementationStatus: 'EARLY EXPERIMENT',
-    difficulty: 'RANK B',
-    summary: 'An early HTML/CSS fan-page created as a college club induction exercise to explore visual design hierarchy, hover micro-interactions, anime typography, and keyframe animations.',
-    problem: 'Learning modern web development requires building foundational muscle memory in semantic HTML structure, responsive box models, and raw CSS animations before adopting frameworks.',
-    solution: 'Designed a multi-page thematic fan site centered on the anime series Code Geass, exploring high-contrast color schemes, hover states, and atmospheric styling.',
-    features: [
-      'Multi-page thematic navigation including Truth, Join, and Character spotlight views',
-      'Zero-framework implementation using raw semantic HTML5 and vanilla CSS3',
-      'Exploration of anime aesthetic palettes, diagonal visual tension, and button transitions',
-      'Historical milestone representing initial steps into deliberate user interface design'
-    ],
-    limitations: [
-      'Early Learning Exercise: Preserved as a historical baseline demonstrating the progression from early static styling to complex modern reactive applications.',
-      'Static Scope: Purely visual and informational without dynamic client-side state or backend services.'
-    ],
-    techStack: ['HTML5', 'CSS3', 'Keyframe Animations', 'Vanilla Web'],
-    repoUrl: 'https://github.com/pritesh-4/code-Geass-fan-page-',
-    targetArcana: 'THE FOOL'
   }
 ];
