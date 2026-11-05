@@ -10,9 +10,9 @@ interface ProfileStatusProps {
 
 export const ProfileStatus: FC<ProfileStatusProps> = ({
   portraitPath = '/assets/persona3/characters/thumbnails/makoto-yuki-thumb.webp',
-  name = 'YOU (DEV)',
+  name = 'PRITESH JENA',
   level = 99,
-  role = 'PORTFOLIO ACTIVE',
+  role = 'FULL-STACK // AI/ML',
 }) => {
   return (
     <aside className="p3r-hud-profile" aria-label="Developer Status">

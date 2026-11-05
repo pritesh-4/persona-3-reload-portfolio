@@ -1,8 +1,7 @@
-import { useState, useCallback, useEffect, type FC } from 'react';
-import { MENU_ITEMS, type MenuItemConfig } from '../../data/menuConfig';
+import { useCallback, useEffect, type FC } from 'react';
+import { MENU_ITEMS } from '../../data/menuConfig';
 import { useMenuNavigation } from '../../hooks/useMenuNavigation';
 import { ArcNavigation } from './ArcNavigation';
-import { SelectionModal } from './SelectionModal';
 import { ProfileStatus } from '../hud/ProfileStatus';
 import { ContextPanel } from '../hud/ContextPanel';
 import { ControlHints } from '../hud/ControlHints';
@@ -31,7 +30,6 @@ export const MainMenu: FC<MainMenuProps> = ({
   onToggleMute,
 }) => {
   const { activeIndex, activeItem, selectIndex } = useMenuNavigation();
-  const [modalItem, setModalItem] = useState<MenuItemConfig | null>(null);
 
   const handleHover = useCallback(() => {
     playSfx('hover');
@@ -51,21 +49,12 @@ export const MainMenu: FC<MainMenuProps> = ({
     playSfx('confirm');
     if (onNavigate) {
       onNavigate(activeItem.route);
-    } else {
-      setModalItem(activeItem);
     }
   }, [activeItem, onNavigate, playSfx]);
-
-  const handleCloseModal = useCallback(() => {
-    playSfx('back');
-    setModalItem(null);
-  }, [playSfx]);
 
   // Global keybindings
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (modalItem) return; // Modal manages its own keys
-
       if (e.key === 'Escape') {
         e.preventDefault();
         playSfx('back');
@@ -81,7 +70,7 @@ export const MainMenu: FC<MainMenuProps> = ({
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [modalItem, onBackToTitle, onToggleMute, handleConfirm, playSfx]);
+  }, [onBackToTitle, onToggleMute, handleConfirm, playSfx]);
 
   return (
     <div className="p3r-main-menu-container" role="main" aria-label="Main Portfolio Menu">
@@ -105,9 +94,9 @@ export const MainMenu: FC<MainMenuProps> = ({
 
       <ProfileStatus
         portraitPath="/assets/persona3/characters/thumbnails/makoto-yuki-thumb.webp"
-        name="YOU (DEV)"
+        name="PRITESH JENA"
         level={99}
-        role="PORTFOLIO ACTIVE"
+        role="FULL-STACK // AI/ML"
       />
 
       {/* Center Left: Selected Command Context Info */}
@@ -125,14 +114,6 @@ export const MainMenu: FC<MainMenuProps> = ({
       {/* Bottom HUD: Keyboard Hints & Theme Status */}
       <ControlHints />
       <ThemeIndicator />
-
-      {/* Selection Modal / Coming Soon Overview */}
-      <SelectionModal
-        item={modalItem}
-        isOpen={Boolean(modalItem)}
-        onClose={handleCloseModal}
-      />
     </div>
   );
 };
-

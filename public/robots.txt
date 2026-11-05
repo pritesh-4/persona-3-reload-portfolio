@@ -7,3 +7,4 @@ Disallow: /assets/persona3/audio/
 Disallow: /*.zip$
 
 Sitemap: https://pritesh-4.github.io/Person-3-Reload-Portfolio/sitemap.xml
+

@@ -63,6 +63,10 @@ export const AudioProvider: FC<{ children: ReactNode }> = ({ children }) => {
     } else {
       document.body.classList.remove('reduced-motion-active');
     }
+    document.documentElement.style.setProperty(
+      '--p3r-artwork-intensity',
+      String(settings.artworkIntensity)
+    );
   }, [settings]);
 
   const playBgm = useCallback(() => {

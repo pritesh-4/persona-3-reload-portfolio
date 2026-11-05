@@ -3,7 +3,6 @@ import { MENU_ITEMS } from '../data/menuConfig';
 
 export function useMenuNavigation() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isConfirmed, setIsConfirmed] = useState(false);
 
   const navigate = useCallback((direction: 'up' | 'down') => {
     setActiveIndex(prev => {
@@ -18,47 +17,47 @@ export function useMenuNavigation() {
     setActiveIndex(index);
   }, []);
 
-  const confirm = useCallback(() => {
-    setIsConfirmed(true);
-    // Reset after animation
-    setTimeout(() => setIsConfirmed(false), 800);
-  }, []);
-
-  // Keyboard navigation
+  // Keyboard navigation supporting both vertical (W/S, Up/Down) and horizontal curved arc (A/D, Left/Right)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Don't intercept if user is inside an input or textarea
+      if (
+        document.activeElement?.tagName === 'INPUT' ||
+        document.activeElement?.tagName === 'TEXTAREA'
+      ) {
+        return;
+      }
+
       switch (e.key) {
         case 'ArrowUp':
+        case 'ArrowLeft':
         case 'w':
         case 'W':
+        case 'a':
+        case 'A':
           e.preventDefault();
           navigate('up');
           break;
         case 'ArrowDown':
+        case 'ArrowRight':
         case 's':
         case 'S':
+        case 'd':
+        case 'D':
           e.preventDefault();
           navigate('down');
-          break;
-        case 'Enter':
-        case ' ':
-          e.preventDefault();
-          confirm();
           break;
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [navigate, confirm]);
+  }, [navigate]);
 
   return {
     activeIndex,
     activeItem: MENU_ITEMS[activeIndex],
-    isConfirmed,
     navigate,
     selectIndex,
-    confirm,
-    totalItems: MENU_ITEMS.length,
   };
 }

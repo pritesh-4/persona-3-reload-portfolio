@@ -180,6 +180,17 @@ export const EquipPage: FC<EquipPageProps> = ({ onNavigate, onBackToMenu }) => {
               </div>
 
               <div className="p3r-modal-actions">
+                <button
+                  type="button"
+                  className="p3r-resume-download-btn"
+                  onClick={() => {
+                    playSfx('select');
+                    window.print();
+                  }}
+                  style={{ display: 'inline-flex', cursor: 'pointer' }}
+                >
+                  <span>PRINT / SAVE PDF</span>
+                </button>
                 <a
                   href="https://www.linkedin.com/in/pritesh-jena-8980a6373"
                   target="_blank"

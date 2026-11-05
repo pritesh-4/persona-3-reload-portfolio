@@ -51,8 +51,7 @@ Projects/Persona_port/
 │   │   ├── menu/
 │   │   │   ├── MainMenu.tsx           # Menu orchestrator & global keybindings
 │   │   │   ├── ArcNavigation.tsx      # SVG Bézier curve math & item placement
-│   │   │   ├── MenuItem.tsx           # Slanted selection plates & active state
-│   │   │   └── SelectionModal.tsx     # Contextual category overview modal
+│   │   │   └── MenuItem.tsx           # Slanted selection plates & active state
 │   │   ├── hud/
 │   │   │   ├── ProfileStatus.tsx      # Upper-right LV.99 player status panel
 │   │   │   ├── ContextPanel.tsx       # Command description & purpose card
@@ -63,13 +62,33 @@ Projects/Persona_port/
 │   │       ├── CharacterBackdrop.tsx  # Multi-layer background & character stage
 │   │       └── ScreenTransition.tsx   # Cinematic diagonal slash wipe
 │   ├── config/
-│   │   └── personaAssets.ts           # Centralized typed asset registry
+│   │   ├── personaAssets.ts           # Centralized typed asset registry
+│   │   └── screenArtConfig.ts         # Screen-specific art & character scaling
+│   ├── context/
+│   │   ├── AudioProvider.tsx          # Single source of truth for Audio & System
+│   │   └── AudioContextValue.ts       # React Context contract
 │   ├── data/
-│   │   └── menuConfig.ts              # 8 P3R categories, labels, and metadata
+│   │   ├── experienceData.ts          # Career timeline & RPG equipment
+│   │   ├── inventoryData.ts           # Developer workbench gear & tools
+│   │   ├── menuConfig.ts              # 8 P3R categories, labels, and metadata
+│   │   ├── profileData.ts             # Developer bio, philosophy & attributes
+│   │   ├── projectsData.ts            # Featured missions & case studies
+│   │   ├── skillsData.ts              # Technical skills & ability tree
+│   │   ├── socialLinksData.ts         # Social link frequencies
+│   │   └── systemConfig.ts            # Persistent system settings & defaults
 │   ├── hooks/
-│   │   ├── useAudio.ts                # Audio singleton pool & BGM controller
-│   │   ├── useClickSound.ts           # Memoized sound effect triggers
-│   │   └── useMenuNavigation.ts       # Keyboard & pointer navigation state
+│   │   ├── useAudioContext.ts         # Hook consuming unified audio state
+│   │   └── useMenuNavigation.ts       # Keyboard (H & V) & pointer navigation
+│   ├── pages/                         # All 9 internal screens & 404
+│   │   ├── EquipPage.tsx              # Resume, timeline & print export
+│   │   ├── ItemPage.tsx               # Developer workbench & gear
+│   │   ├── NotFoundPage.tsx           # 404 anomaly screen
+│   │   ├── PersonaPage.tsx            # About & developer dossier
+│   │   ├── QuestPage.tsx              # Project archive & missions
+│   │   ├── SkillPage.tsx              # Technical skills & ability tree
+│   │   ├── SocialLinkPage.tsx         # Contact frequencies & dispatch
+│   │   ├── StatsPage.tsx              # GitHub metrics & radar stats
+│   │   └── SystemPage.tsx             # Audio, motion & artwork calibration
 │   ├── styles/
 │   │   ├── theme.css                  # Color tokens, fonts & resets
 │   │   ├── boot.css                   # Boot sequence & transition styles

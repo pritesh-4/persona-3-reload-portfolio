@@ -361,3 +361,94 @@
   }
 }
 
+/* ----------------------------------------------------------------
+   PRINT MEDIA STYLES (RESUME / DOSSIER EXPORT)
+   ---------------------------------------------------------------- */
+@media print {
+  body, html {
+    background: #ffffff !important;
+    color: #111827 !important;
+    font-size: 12pt;
+  }
+
+  .p3r-character-backdrop,
+  .p3r-internal-header,
+  .p3r-internal-footer,
+  .p3r-equip-toolbar,
+  .p3r-resume-modal-overlay,
+  .p3r-music-control,
+  .p3r-back-btn {
+    display: none !important;
+  }
+
+  .p3r-internal-page {
+    height: auto !important;
+    overflow: visible !important;
+    background: #ffffff !important;
+    color: #111827 !important;
+  }
+
+  .p3r-internal-content-container {
+    overflow: visible !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .p3r-equip-screen {
+    max-width: 100% !important;
+    color: #111827 !important;
+  }
+
+  .p3r-timeline-container {
+    padding-left: 0 !important;
+  }
+
+  .p3r-timeline-container::before {
+    display: none !important;
+  }
+
+  .p3r-timeline-entry {
+    margin-bottom: 24px !important;
+    page-break-inside: avoid;
+  }
+
+  .p3r-timeline-card {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #0f172a !important;
+    box-shadow: none !important;
+    padding: 16px !important;
+  }
+
+  .p3r-entry-role {
+    color: #0284c7 !important;
+    font-size: 14pt !important;
+  }
+
+  .p3r-entry-org {
+    color: #475569 !important;
+    font-weight: 600 !important;
+  }
+
+  .p3r-entry-period {
+    color: #64748b !important;
+    font-weight: 600 !important;
+  }
+
+  .p3r-entry-desc {
+    color: #334155 !important;
+  }
+
+  .p3r-highlight-item {
+    color: #1e293b !important;
+  }
+
+  .p3r-skill-pill {
+    background: #e2e8f0 !important;
+    color: #0f172a !important;
+    border: 1px solid #94a3b8 !important;
+    box-shadow: none !important;
+  }
+}
+
+

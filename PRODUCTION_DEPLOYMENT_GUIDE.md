@@ -177,3 +177,4 @@ After deploying to your live URL, run this quick smoke verification:
 - [ ] Internal route refresh: Navigate to `/projects`, press <kbd>F5</kbd> / Refresh, and confirm the page does not return a 404 error.
 - [ ] Mobile check: Open on a mobile device or responsive emulation (390&times;844); confirm the curved arc remains visible and there is zero horizontal scroll.
 - [ ] Static files: Verify `https://your-domain/favicon.svg` and `https://your-domain/robots.txt` return HTTP 200.
+

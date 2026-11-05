@@ -101,7 +101,7 @@ export const TitleScreen: FC<TitleScreenProps> = ({ visible, onEnter }) => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               >
-                ROHIT POUL
+                PRITESH JENA
               </motion.h1>
               <motion.p
                 className="title-subtitle"
@@ -109,7 +109,7 @@ export const TitleScreen: FC<TitleScreenProps> = ({ visible, onEnter }) => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.55, duration: 0.6 }}
               >
-                FULL-STACK DEVELOPER &bull; GAME UI SPECIALIST
+                FULL-STACK DEVELOPER &bull; AI / ML ENGINEER
               </motion.p>
             </div>
 

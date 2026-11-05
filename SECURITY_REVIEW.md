@@ -116,3 +116,4 @@ Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; 
 The application demonstrates strong security hygiene appropriate for a modern static Single Page Application. There are no high, medium, or low severity security vulnerabilities identified.
 
 **SIGN-OFF**: **APPROVED FOR PRODUCTION RELEASE**
+

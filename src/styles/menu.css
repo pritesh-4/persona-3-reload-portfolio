@@ -267,8 +267,10 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-  filter: brightness(0.62) contrast(1.08) saturate(1.1);
+  opacity: var(--p3r-artwork-intensity, 0.85);
+  filter: brightness(calc(0.4 + 0.35 * var(--p3r-artwork-intensity, 0.85))) contrast(1.08) saturate(1.1);
   transform: scale(1.02);
+  transition: opacity 250ms ease, filter 250ms ease;
 }
 
 .p3r-backdrop-gradient {
