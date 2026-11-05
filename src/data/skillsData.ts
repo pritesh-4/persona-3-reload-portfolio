@@ -68,7 +68,7 @@ export const SKILLS_DATA: SkillItem[] = [
     spCost: 22,
     proficiency: 'CORE ACADEMIC & DSA',
     description: 'Pointers, memory management, algorithmic complexity, data structures, and computational problem solving.',
-    usageContext: 'Undergraduate computer science foundations and competitive algorithmic problem solving at NIT Rourkela.'
+    usageContext: 'Undergraduate computing foundations and competitive algorithmic problem solving at NIT Rourkela.'
   },
   {
     id: 'html-css',

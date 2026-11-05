@@ -24,11 +24,18 @@ export const SkillPage: FC<SkillPageProps> = ({ onNavigate, onBackToMenu }) => {
   }, [selectedCategory]);
 
   const handleSelectSkill = useCallback(
-    (skill: SkillItem) => {
+    (skill: SkillItem, isHover = false) => {
+      if (isHover) {
+        if (selectedSkill.id !== skill.id) {
+          playSfx('hover');
+          setSelectedSkill(skill);
+        }
+        return;
+      }
       playSfx('select');
       setSelectedSkill(skill);
     },
-    [playSfx]
+    [selectedSkill.id, playSfx]
   );
 
   const handleSelectCategory = useCallback(
@@ -54,7 +61,7 @@ export const SkillPage: FC<SkillPageProps> = ({ onNavigate, onBackToMenu }) => {
       currentRoute="/skills"
       onNavigate={onNavigate}
       onBackToMenu={onBackToMenu}
-      customHint="SELECT ABILITY TO INSPECT OPERATIONAL PROFILE"
+      customHint="HOVER OR SELECT ABILITY TO INSPECT OPERATIONAL PROFILE"
     >
       <div className="p3r-skill-screen">
         {/* Category Filter Tabs */}
@@ -84,13 +91,30 @@ export const SkillPage: FC<SkillPageProps> = ({ onNavigate, onBackToMenu }) => {
                 tabIndex={0}
                 className={`p3r-skill-card-row ${selectedSkill.id === skill.id ? 'selected' : ''}`}
                 onClick={() => handleSelectSkill(skill)}
+                onMouseEnter={() => handleSelectSkill(skill, true)}
+                onFocus={() => handleSelectSkill(skill, true)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
                     handleSelectSkill(skill);
+                  } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    const next = e.currentTarget.nextElementSibling as HTMLElement | null;
+                    next?.focus();
+                  } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    const prev = e.currentTarget.previousElementSibling as HTMLElement | null;
+                    prev?.focus();
+                  } else if (e.key === 'Home') {
+                    e.preventDefault();
+                    const first = e.currentTarget.parentElement?.firstElementChild as HTMLElement | null;
+                    first?.focus();
+                  } else if (e.key === 'End') {
+                    e.preventDefault();
+                    const last = e.currentTarget.parentElement?.lastElementChild as HTMLElement | null;
+                    last?.focus();
                   }
                 }}
-                onMouseEnter={() => playSfx('hover')}
               >
                 <div className="p3r-skill-info-left">
                   <span className={`p3r-skill-elem-badge p3r-elem-${skill.element}`}>
