@@ -76,6 +76,7 @@ export const MainMenu: FC<MainMenuProps> = ({
       {/* Dynamic Persona 3 Presentation Artwork Backdrop */}
       <CharacterBackdrop
         characterId={activeItem.characterId}
+        screenId="menu"
         backgroundPath={
           activeItem.bgKey === 'promoGroup'
             ? '/assets/persona3/backgrounds/promotional-art/persona3-reload-promo-group.jpg'

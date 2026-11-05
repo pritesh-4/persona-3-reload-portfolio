@@ -24,8 +24,8 @@ export const CharacterBackdrop: FC<CharacterBackdropProps> = ({
   const char: PersonaCharacter =
     PERSONA_CHARACTERS[effectiveCharId] || PERSONA_CHARACTERS.makoto;
 
-  const charOpacityDesktop = config?.characterOpacityDesktop ?? 0.22;
-  const charOpacityMobile = config?.characterOpacityMobile ?? 0.20;
+  const charOpacityDesktop = config?.characterOpacityDesktop ?? 0.52;
+  const charOpacityMobile = config?.characterOpacityMobile ?? 0.45;
 
   return (
     <div className="p3r-character-backdrop" aria-hidden="true">
@@ -39,7 +39,16 @@ export const CharacterBackdrop: FC<CharacterBackdropProps> = ({
         />
       </div>
 
-      {/* 2. Character Artwork Layer (Watermark positioned behind atmospheric overlays) */}
+      {/* 2. Atmospheric Gradient Overlay (Darkens left and bottom for UI text) */}
+      <div
+        className="p3r-backdrop-gradient"
+        style={config?.gradientOverlay ? { background: config.gradientOverlay } : undefined}
+      />
+
+      {/* 3. Dark Tint Overlay (Deep P3R atmospheric tone) */}
+      <div className="p3r-backdrop-tint-overlay" />
+
+      {/* 4. Character Artwork Stage (Watermark multiplied onto composite background) */}
       <div
         className="p3r-backdrop-char-stage"
         style={{
@@ -61,15 +70,10 @@ export const CharacterBackdrop: FC<CharacterBackdropProps> = ({
         />
       </div>
 
-      {/* 3. Dark Tint & Atmospheric Gradient Overlays (Tints character into the scene) */}
-      <div
-        className="p3r-backdrop-gradient"
-        style={config?.gradientOverlay ? { background: config.gradientOverlay } : undefined}
-      />
-      <div className="p3r-backdrop-tint-overlay" />
-
-      {/* 4. Vignette and Subtle Grid Texture */}
+      {/* 5. Vignette Peripheral Shadow */}
       <div className="p3r-backdrop-vignette" />
+
+      {/* 6. Subtle P3R Cyan Micro-Grid Texture */}
       <div className="p3r-backdrop-grid-overlay" />
     </div>
   );

@@ -1,19 +1,28 @@
 import { useState, useCallback, useEffect } from 'react';
 import { MENU_ITEMS } from '../data/menuConfig';
 
+let lastMenuIndex = 0;
+
 export function useMenuNavigation() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(lastMenuIndex);
 
   const navigate = useCallback((direction: 'up' | 'down') => {
     setActiveIndex(prev => {
-      if (direction === 'up') {
-        return prev <= 0 ? MENU_ITEMS.length - 1 : prev - 1;
-      }
-      return prev >= MENU_ITEMS.length - 1 ? 0 : prev + 1;
+      const next =
+        direction === 'up'
+          ? prev <= 0
+            ? MENU_ITEMS.length - 1
+            : prev - 1
+          : prev >= MENU_ITEMS.length - 1
+          ? 0
+          : prev + 1;
+      lastMenuIndex = next;
+      return next;
     });
   }, []);
 
   const selectIndex = useCallback((index: number) => {
+    lastMenuIndex = index;
     setActiveIndex(index);
   }, []);
 
