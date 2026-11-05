@@ -87,27 +87,13 @@ Every section is built with its own distinctive Persona 3 Reload interface conce
 
 ---
 
-## 📸 Visual Previews & Test Artifacts
+## 📸 Visual Verification & Quality Assurance
 
-Automated visual regression tests verified with Playwright (**0 console errors**):
-
-| Screen | Viewport | Screenshot Link |
-|---|---|---|
-| **Boot Sequence** | 1920 &times; 1080 | [`screenshots/01-boot-sequence.png`](file:///c:/Users/HP/Documents/c_programm/Projects/Persona_port/screenshots/01-boot-sequence.png) |
-| **Title Screen** | 1920 &times; 1080 | [`screenshots/02-title-screen-1920x1080.png`](file:///c:/Users/HP/Documents/c_programm/Projects/Persona_port/screenshots/02-title-screen-1920x1080.png) |
-| **Main Menu (Arc Navigation)** | 1920 &times; 1080 | [`screenshots/03-main-menu-1920x1080.png`](file:///c:/Users/HP/Documents/c_programm/Projects/Persona_port/screenshots/03-main-menu-1920x1080.png) |
-| **PERSONA (Profile Dossier)** | 1920 &times; 1080 | [`screenshots/08-persona-desktop.png`](file:///c:/Users/HP/Documents/c_programm/Projects/Persona_port/screenshots/08-persona-desktop.png) |
-| **SKILL (Ability Matrix)** | 1920 &times; 1080 | [`screenshots/09-skill-desktop.png`](file:///c:/Users/HP/Documents/c_programm/Projects/Persona_port/screenshots/09-skill-desktop.png) |
-| **EQUIP (Progression Timeline)**| 1920 &times; 1080 | [`screenshots/10-equip-desktop.png`](file:///c:/Users/HP/Documents/c_programm/Projects/Persona_port/screenshots/10-equip-desktop.png) |
-| **EQUIP (Loadout Mode)** | 1920 &times; 1080 | [`screenshots/10b-equip-loadout.png`](file:///c:/Users/HP/Documents/c_programm/Projects/Persona_port/screenshots/10b-equip-loadout.png) |
-| **STATS (Telemetry & GitHub)** | 1920 &times; 1080 | [`screenshots/11-stats-desktop.png`](file:///c:/Users/HP/Documents/c_programm/Projects/Persona_port/screenshots/11-stats-desktop.png) |
-| **QUEST (Mission Archive)** | 1920 &times; 1080 | [`screenshots/12-quest-desktop.png`](file:///c:/Users/HP/Documents/c_programm/Projects/Persona_port/screenshots/12-quest-desktop.png) |
-| **ITEM (Inventory Gear)** | 1920 &times; 1080 | [`screenshots/13-item-desktop.png`](file:///c:/Users/HP/Documents/c_programm/Projects/Persona_port/screenshots/13-item-desktop.png) |
-| **SOCIAL LINK (Terminal)** | 1920 &times; 1080 | [`screenshots/14-social-desktop.png`](file:///c:/Users/HP/Documents/c_programm/Projects/Persona_port/screenshots/14-social-desktop.png) |
-| **SYSTEM (Configuration)** | 1920 &times; 1080 | [`screenshots/15-system-desktop.png`](file:///c:/Users/HP/Documents/c_programm/Projects/Persona_port/screenshots/15-system-desktop.png) |
-| **Mobile PERSONA** | 390 &times; 844 | [`screenshots/17-persona-mobile-390x844.png`](file:///c:/Users/HP/Documents/c_programm/Projects/Persona_port/screenshots/17-persona-mobile-390x844.png) |
-| **Mobile QUEST** | 390 &times; 844 | [`screenshots/21-quest-mobile-390x844.png`](file:///c:/Users/HP/Documents/c_programm/Projects/Persona_port/screenshots/21-quest-mobile-390x844.png) |
-| **404 Dark Hour Anomaly** | 1920 &times; 1080 | [`screenshots/25-404-fallback.png`](file:///c:/Users/HP/Documents/c_programm/Projects/Persona_port/screenshots/25-404-fallback.png) |
+All screens and navigation flows are verified via automated end-to-end tests across multiple viewport profiles with **0 console errors**:
+- **Desktop Ultra (1920 &times; 1080)**: Complete curved arc navigation, full-screen background watermark composition, and high-contrast typography.
+- **Laptop Standard (1440 &times; 900, 1366 &times; 768)**: Fluid clamp typography and unobstructed HUD layouts.
+- **Tablet Portrait (768 &times; 1024)**: Responsive column folding and touch-optimized navigation plates.
+- **Mobile Modern (390 &times; 844, 360 &times; 800)**: Single-column stack, touch gestures, and zero horizontal scroll overflow.
 
 ---
 

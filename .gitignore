@@ -33,5 +33,5 @@ dist-ssr
 *.tar.gz
 
 # Local test outputs & temporary captures
-screenshots/phase4-smoke/
+screenshots/
 

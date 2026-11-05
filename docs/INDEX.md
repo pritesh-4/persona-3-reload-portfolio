@@ -42,32 +42,10 @@ The [`Design/`](file:///c:/Users/HP/Documents/c_programm/Projects/Persona_port/D
 
 ---
 
-## 4. Visual Test Artifacts (`screenshots/`)
+## 4. Visual Verification & Automated Testing
 
-Automated visual regression tests captured across multiple viewports are saved in [`screenshots/`](file:///c:/Users/HP/Documents/c_programm/Projects/Persona_port/screenshots):
+All application screens and responsive states are validated with automated end-to-end regression tests across multiple viewport profiles (Desktop Ultra 1920×1080, Laptop 1440×900 and 1366×768, Tablet 768×1024, and Mobile 390×844 and 360×800).
 
-- `01-boot-sequence.png`: Preloader initialization sequence.
-- `02-title-screen-1920x1080.png`: Full-screen title screen at 1080p FHD.
-- `03-main-menu-1920x1080.png`: Main menu with curved arc navigation.
-- `04-main-menu-navigated.png`: Active navigation state with dynamic character update.
-- `05-selection-modal.png`: Category overview modal on item confirmation.
-- `06-main-menu-1440x900.png`: Laptop widescreen layout.
-- `06-main-menu-1366x768.png`: Standard laptop HD layout.
-- `06-main-menu-768x1024.png`: Tablet portrait layout.
-- `06-main-menu-390x844.png`: Mobile phone layout.
-- `07-return-to-title.png`: Escape back-navigation to Title Screen.
-- `08-persona-desktop.png`: Character Profile dossier (Makoto Yuki) at 1080p FHD.
-- `09-skill-desktop.png`: Ability tree and technical competencies (Mitsuru Kirijo) at 1080p FHD.
-- `09b-skill-interactive.png`: Category switching and skill inspection active state.
-- `10-equip-desktop.png`: Experience & education progression timeline (Akihiko Sanada) at 1080p FHD.
-- `10b-equip-loadout.png`: RPG equipment loadout view with weapon/armor/accessory stats.
-- `11-stats-desktop.png`: Real-time GitHub telemetry and language matrix (Fuuka Yamagishi) at 1080p FHD.
-- `12-quest-desktop.png`: Project mission archive with status badges (Junpei Iori) at 1080p FHD.
-- `12b-quest-selected.png`: Expandable mission architectural dossier and deployment links.
-- `13-item-desktop.png`: Developer tooling inventory and rarity slots (Aigis) at 1080p FHD.
-- `14-social-desktop.png`: Communication terminal with one-click clipboard copy (Yukari Takeba) at 1080p FHD.
-- `15-system-desktop.png`: Configuration menu with volume sliders and localStorage persistence (Koromaru).
-- `16-return-to-menu-esc.png`: Keyboard Escape return to Main Menu from internal screens.
-- `17-persona-mobile-390x844.png` to `24-system-mobile-390x844.png`: Full suite of mobile-responsive viewports.
-- `25-404-fallback.png`: Dark Hour anomaly route fallback screen.
+- **Route Coverage**: Boot sequence, Title screen, Main menu, Persona, Skill, Equip (Timeline & Loadout), Stats, Quest, Item, Social Link, System, and 404 Anomaly.
+- **Git Hygiene**: Local temporary test screenshots are gitignored under `screenshots/` to prevent repository bloat and ensure fast deployment.
 
