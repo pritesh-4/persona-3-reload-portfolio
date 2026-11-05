@@ -93,6 +93,15 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6), 0 0 12px rgba(0, 212, 255, 0.2);
 }
 
+.p3r-inv-slot:focus-visible {
+  outline: 2px solid var(--p3r-cyan);
+  outline-offset: 2px;
+  background: rgba(10, 30, 56, 0.98);
+  border-color: var(--p3r-cyan);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6), 0 0 16px rgba(0, 212, 255, 0.35);
+}
+
 .p3r-inv-slot.selected {
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.4) 0%, rgba(6, 19, 33, 0.98) 100%);
   border-color: var(--p3r-cyan);

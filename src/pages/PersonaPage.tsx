@@ -44,14 +44,6 @@ export const PersonaPage: FC<PersonaPageProps> = ({ onNavigate, onBackToMenu }) 
 
           <div className="p3r-dossier-stats-strip">
             <div className="p3r-dossier-stat-chip">
-              <span className="p3r-stat-chip-label">ARCANA</span>
-              <span className="p3r-stat-chip-value">{PROFILE_DATA.arcana}</span>
-            </div>
-            <div className="p3r-dossier-stat-chip">
-              <span className="p3r-stat-chip-label">LEVEL</span>
-              <span className="p3r-stat-chip-value">LV. {PROFILE_DATA.level}</span>
-            </div>
-            <div className="p3r-dossier-stat-chip">
               <span className="p3r-stat-chip-label">INSTITUTION</span>
               <span className="p3r-stat-chip-value">NIT ROURKELA</span>
             </div>

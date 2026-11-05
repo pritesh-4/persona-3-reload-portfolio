@@ -24,11 +24,18 @@ export const ItemPage: FC<ItemPageProps> = ({ onNavigate, onBackToMenu }) => {
   }, [selectedCat]);
 
   const handleSelectItem = useCallback(
-    (item: InventoryItem) => {
+    (item: InventoryItem, isPreview = false) => {
+      if (isPreview) {
+        if (selectedItem.id !== item.id) {
+          playSfx('hover');
+          setSelectedItem(item);
+        }
+        return;
+      }
       playSfx('select');
       setSelectedItem(item);
     },
-    [playSfx]
+    [selectedItem.id, playSfx]
   );
 
   const handleSelectCategory = useCallback(
@@ -46,19 +53,19 @@ export const ItemPage: FC<ItemPageProps> = ({ onNavigate, onBackToMenu }) => {
 
   return (
     <InternalPageLayout
-      title="ITEM"
-      sublabel="DEVELOPER INVENTORY & TOOLING ARSENAL"
-      sectionId="006"
+      title="SKILL"
+      sublabel="TECHNICAL TOOLKIT & COMPETENCIES"
+      sectionId="002"
       characterId="aigis"
       backgroundPath="/assets/persona3/backgrounds/main-visuals/p3r-main-visual.png"
       currentRoute="/tools"
       onNavigate={onNavigate}
       onBackToMenu={onBackToMenu}
-      customHint="SELECT ANY INVENTORY ITEM TO INSPECT PURPOSE, RELEVANT PROJECTS & DOCS"
+      customHint="HOVER OR SELECT ANY SKILL TO INSPECT PURPOSE, IMPLEMENTATION NOTES & DOCS"
     >
       <div className="p3r-item-screen">
         {/* Category Filter Tabs */}
-        <div className="p3r-item-tabs-bar" role="tablist" aria-label="Inventory Categories">
+        <div className="p3r-item-tabs-bar" role="tablist" aria-label="Skill Categories">
           {INVENTORY_CATEGORIES.map((cat) => (
             <button
               key={cat.id}
@@ -74,10 +81,10 @@ export const ItemPage: FC<ItemPageProps> = ({ onNavigate, onBackToMenu }) => {
           ))}
         </div>
 
-        {/* Two-Column Grid: Slot Grid + Item Inspection Panel */}
+        {/* Two-Column Grid: Slot Grid + Skill Inspection Panel */}
         <div className="p3r-item-stage-grid">
           {/* Collectible Slot Grid */}
-          <div className="p3r-inventory-slot-grid" role="listbox" aria-label="Inventory Slots" aria-live="polite">
+          <div className="p3r-inventory-slot-grid" role="listbox" aria-label="Skills Grid" aria-live="polite">
             {filteredItems.map((item) => (
               <div
                 key={item.id}
@@ -88,13 +95,22 @@ export const ItemPage: FC<ItemPageProps> = ({ onNavigate, onBackToMenu }) => {
                   selectedItem.id === item.id ? 'selected' : ''
                 }`}
                 onClick={() => handleSelectItem(item)}
+                onMouseEnter={() => handleSelectItem(item, true)}
+                onFocus={() => handleSelectItem(item, true)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
                     handleSelectItem(item);
+                  } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    const next = e.currentTarget.nextElementSibling as HTMLElement | null;
+                    next?.focus();
+                  } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    const prev = e.currentTarget.previousElementSibling as HTMLElement | null;
+                    prev?.focus();
                   }
                 }}
-                onMouseEnter={() => playSfx('hover')}
               >
                 <div className="p3r-inv-slot-top">
                   <span className="p3r-inv-icon">{item.icon}</span>
@@ -113,8 +129,8 @@ export const ItemPage: FC<ItemPageProps> = ({ onNavigate, onBackToMenu }) => {
             ))}
           </div>
 
-          {/* Item Inspection Panel */}
-          <aside className="p3r-item-inspection-panel" aria-live="polite">
+          {/* Skill Inspection Panel */}
+          <aside className="p3r-item-inspection-panel" aria-label="Skill Inspector" aria-live="polite">
             <div className="p3r-item-head-box">
               <span className="p3r-item-huge-icon" aria-hidden="true">{selectedItem.icon}</span>
               <div className="p3r-item-head-text">
@@ -134,9 +150,9 @@ export const ItemPage: FC<ItemPageProps> = ({ onNavigate, onBackToMenu }) => {
               <p className="p3r-item-effect-text">{selectedItem.whatItIsUsedFor}</p>
             </div>
 
-            {/* ARTIFACT LORE */}
+            {/* IMPLEMENTATION NOTES */}
             <div className="p3r-item-section">
-              <h3 className="p3r-item-sec-heading">TACTICAL LORE</h3>
+              <h3 className="p3r-item-sec-heading">IMPLEMENTATION NOTES</h3>
               <p className="p3r-item-flavor-text">&ldquo;{selectedItem.flavorText}&rdquo;</p>
             </div>
 

@@ -53,27 +53,6 @@ export const TitleScreen: FC<TitleScreenProps> = ({ visible, onEnter }) => {
             <div className="title-diagonal-slice" />
           </div>
 
-          {/* Corner metadata */}
-          <motion.div
-            className="title-corner title-corner--tl"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-          >
-            PERSONAL ARCHIVE<br />
-            <b>SYS.VER 3.0.1</b>
-          </motion.div>
-
-          <motion.div
-            className="title-corner title-corner--tr"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-          >
-            THEME: <b>P3R</b><br />
-            PORTFOLIO ACTIVE
-          </motion.div>
-
           {/* Subtle Persona 3 Music Toggle */}
           <motion.div
             className="title-music-container"

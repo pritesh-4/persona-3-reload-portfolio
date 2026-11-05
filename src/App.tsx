@@ -1,5 +1,5 @@
 import { useState, useCallback, lazy, Suspense, type FC } from 'react';
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { BootSequence } from './components/boot/BootSequence';
 import { TitleScreen } from './components/title/TitleScreen';
 import { MainMenu } from './components/menu/MainMenu';
@@ -12,9 +12,6 @@ import './App.css';
 // Lazy-loaded route chunks for optimized initial bundle performance
 const PersonaPage = lazy(() =>
   import('./pages/PersonaPage').then(m => ({ default: m.PersonaPage }))
-);
-const SkillPage = lazy(() =>
-  import('./pages/SkillPage').then(m => ({ default: m.SkillPage }))
 );
 const EquipPage = lazy(() =>
   import('./pages/EquipPage').then(m => ({ default: m.EquipPage }))
@@ -151,11 +148,17 @@ export const App: FC = () => {
             }
           />
 
-          {/* 2. SKILL: Technical Competencies & Ability Tree */}
+          {/* Legacy route compatibility: redirect /skills to /tools */}
           <Route
             path="/skills"
+            element={<Navigate to="/tools" replace />}
+          />
+
+          {/* 2. SKILL: Technical Toolkit & Competencies */}
+          <Route
+            path="/tools"
             element={
-              <SkillPage
+              <ItemPage
                 onNavigate={handleNavigateTo}
                 onBackToMenu={handleBackToMenu}
               />
@@ -189,17 +192,6 @@ export const App: FC = () => {
             path="/projects"
             element={
               <QuestPage
-                onNavigate={handleNavigateTo}
-                onBackToMenu={handleBackToMenu}
-              />
-            }
-          />
-
-          {/* 6. ITEM: Developer Inventory & Tools */}
-          <Route
-            path="/tools"
-            element={
-              <ItemPage
                 onNavigate={handleNavigateTo}
                 onBackToMenu={handleBackToMenu}
               />

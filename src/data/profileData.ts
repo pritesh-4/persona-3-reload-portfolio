@@ -11,10 +11,6 @@ export interface ProfileData {
   role: string;
   headline: string;
   institution: string;
-  level: number;
-  hp: number;
-  sp: number;
-  arcana: string;
   affiliation: string;
   location: string;
   status: string;
@@ -38,10 +34,6 @@ export const PROFILE_DATA: ProfileData = {
   role: 'Mining Engineering Undergraduate & Full-Stack Developer',
   headline: 'MINING ENGINEERING STUDENT • FULL-STACK DEVELOPER • AI BUILDER',
   institution: 'National Institute of Technology, Rourkela (NIT Rourkela)',
-  level: 99,
-  hp: 999,
-  sp: 999,
-  arcana: 'THE FOOL // 0',
   affiliation: 'NIT ROURKELA // MINING ENGINEERING',
   location: 'Rourkela, Odisha, India',
   status: '2ND YEAR UNDERGRADUATE // ACTIVE BUILDER',

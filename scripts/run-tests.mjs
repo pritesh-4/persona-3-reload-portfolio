@@ -97,17 +97,18 @@ assert('Social Links contain authentic LinkedIn URL', socialFile.includes('https
 assert('Social Links define 7 Persona 3 Arcana cards', (socialFile.match(/id:\s*['"][a-z0-9_-]+['"]/g) || []).length >= 7);
 
 const menuFile = fs.readFileSync(path.join(rootDir, 'src', 'data', 'menuConfig.ts'), 'utf8');
-const expectedRoutes = ['/about', '/skills', '/resume', '/stats', '/projects', '/tools', '/contact', '/system'];
-expectedRoutes.forEach((route) => {
+const canonicalMenuRoutes = ['/about', '/tools', '/resume', '/stats', '/projects', '/contact', '/system'];
+canonicalMenuRoutes.forEach((route) => {
   assert(`Menu config routes to ${route}`, menuFile.includes(`'${route}'`) || menuFile.includes(`"${route}"`));
 });
 
 // 3. Routing & Structural Component Integrity
 console.log('\n[3/4] Verifying Application Route Tree & Layout Contracts...');
 const appFile = fs.readFileSync(path.join(rootDir, 'src', 'App.tsx'), 'utf8');
-expectedRoutes.forEach((route) => {
+canonicalMenuRoutes.forEach((route) => {
   assert(`App.tsx defines route for ${route}`, appFile.includes(`path="${route}"`));
 });
+assert('App.tsx defines backward-compatible redirect for legacy /skills', appFile.includes('path="/skills"'));
 assert('App.tsx defines 404 anomaly fallback route', appFile.includes('path="*"'));
 assert('App.tsx implements lazy-loaded route chunking', appFile.includes('lazy('));
 assert('ScreenTransition diagonal slash mounted', appFile.includes('<ScreenTransition'));

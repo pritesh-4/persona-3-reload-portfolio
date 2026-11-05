@@ -37,7 +37,7 @@ export const SystemPage: FC<SystemPageProps> = ({ onNavigate, onBackToMenu }) =>
     <InternalPageLayout
       title="SYSTEM"
       sublabel="SYSTEM CONFIGURATION & OPERATIONAL PREFERENCES"
-      sectionId="008"
+      sectionId="007"
       characterId="koromaru"
       backgroundPath="/assets/persona3/backgrounds/title/persona3-reload-title.jpg"
       currentRoute="/system"

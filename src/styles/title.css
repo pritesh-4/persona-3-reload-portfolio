@@ -157,40 +157,6 @@
   background: linear-gradient(90deg, var(--p3r-cyan), transparent);
 }
 
-/* Corner decorations */
-.title-corner {
-  position: absolute;
-  z-index: 3;
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  color: rgba(255, 255, 255, 0.35);
-  text-transform: uppercase;
-}
-
-.title-corner b {
-  color: var(--p3r-cyan);
-  font-weight: 800;
-}
-
-.title-corner--tl {
-  top: clamp(20px, 3.5vh, 44px);
-  left: clamp(24px, 4vw, 48px);
-}
-
-.title-corner--tr {
-  top: clamp(20px, 3.5vh, 44px);
-  right: clamp(24px, 4vw, 48px);
-  text-align: right;
-}
-
-.title-corner--br {
-  bottom: clamp(20px, 3.5vh, 44px);
-  right: clamp(24px, 4vw, 48px);
-  text-align: right;
-}
-
 /* Subtle CD Music Identity on Title Screen */
 .title-music-container {
   position: absolute;
@@ -213,11 +179,6 @@
   }
 
   .title-prompt-line {
-    display: none;
-  }
-  
-  .title-corner--tr,
-  .title-corner--br {
     display: none;
   }
 

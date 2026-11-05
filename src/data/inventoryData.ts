@@ -21,7 +21,7 @@ export interface InventoryItem {
 }
 
 export const INVENTORY_CATEGORIES = [
-  { id: 'ALL', label: 'ALL GEAR' },
+  { id: 'ALL', label: 'ALL SKILLS' },
   { id: 'LANGUAGES', label: 'LANGUAGES' },
   { id: 'FRAMEWORKS', label: 'FRAMEWORKS & LIBS' },
   { id: 'AI_ML', label: 'AI & ML' },
@@ -84,6 +84,19 @@ export const INVENTORY_ITEMS: InventoryItem[] = [
     relevantProjects: ['NIT Rourkela Computational Core', 'Data Structures & Algorithms Lab'],
     docsUrl: 'https://en.cppreference.com/'
   },
+  {
+    id: 'lang-php',
+    name: 'PHP',
+    category: 'LANGUAGES',
+    categoryLabel: 'Programming Languages',
+    icon: '🐘',
+    rarity: 'UNCOMMON',
+    quantity: 'x1',
+    whatItIsUsedFor: 'Server-side request handling, session state management, and traditional backend rendering paradigms.',
+    flavorText: 'Scripting language explored during foundational backend web development and database scripting exercises.',
+    relevantProjects: ['Foundational Backend Experiments'],
+    docsUrl: 'https://www.php.net/'
+  },
 
   // 2. Frameworks & Libraries
   {
@@ -138,8 +151,34 @@ export const INVENTORY_ITEMS: InventoryItem[] = [
     relevantProjects: ['SALVUS Dashboard', 'RouteMind Interface'],
     docsUrl: 'https://tailwindcss.com/'
   },
+  {
+    id: 'fw-websockets',
+    name: 'WebSockets & Real-Time Streams',
+    category: 'FRAMEWORKS',
+    categoryLabel: 'Frameworks & Libraries',
+    icon: '📡',
+    rarity: 'EPIC',
+    quantity: 'x2',
+    whatItIsUsedFor: 'Full-duplex real-time communication channels, room-scoped event multiplexing, and live responder updates.',
+    flavorText: 'Bidirectional streaming protocol keeping authorities and responders continuously synchronized during critical incidents.',
+    relevantProjects: ['SALVUS Live Distress Dispatch', 'Project-FRIDAY'],
+    docsUrl: 'https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API'
+  },
 
   // 3. AI / Machine Learning
+  {
+    id: 'ai-opencv',
+    name: 'OpenCV & Edge Vision',
+    category: 'AI_ML',
+    categoryLabel: 'AI / Machine Learning',
+    icon: '👁️',
+    rarity: 'EPIC',
+    quantity: 'x2',
+    whatItIsUsedFor: 'Frame preprocessing, edge filtering, contour detection, and bipartite linear assignment matching.',
+    flavorText: 'Real-time computer vision toolkit processing raw video feeds for low-latency wildlife detection pipelines.',
+    relevantProjects: ['Project Zogan'],
+    docsUrl: 'https://opencv.org/'
+  },
   {
     id: 'ai-yolov8',
     name: 'Ultralytics YOLOv8',
@@ -259,8 +298,34 @@ export const INVENTORY_ITEMS: InventoryItem[] = [
     relevantProjects: ['Daily Systems & Full-Stack Development'],
     docsUrl: 'https://code.visualstudio.com/'
   },
+  {
+    id: 'tool-figma',
+    name: 'Figma UI Prototyping',
+    category: 'DEV_TOOLS',
+    categoryLabel: 'Developer Tools',
+    icon: '📐',
+    rarity: 'RARE',
+    quantity: 'x1',
+    whatItIsUsedFor: 'Interface wireframing, component design systems, typography hierarchy, and creative aesthetic experimentation.',
+    flavorText: 'Vector design platform for modeling angular layouts, high-contrast HUD components, and game UI themes.',
+    relevantProjects: ['SALVUS Interface Ideation', 'The Last Chronicle', 'Persona 3 Portfolio Theme Design'],
+    docsUrl: 'https://www.figma.com/'
+  },
 
   // 5. Databases & Infrastructure
+  {
+    id: 'infra-sqlite',
+    name: 'SQLite & SQLAlchemy 2.0',
+    category: 'INFRASTRUCTURE',
+    categoryLabel: 'Databases & Infrastructure',
+    icon: '🗄️',
+    rarity: 'EPIC',
+    quantity: 'x2',
+    whatItIsUsedFor: 'Write-Ahead Logging (WAL) concurrency, declarative ORM models, relational foreign keys, and atomic transactions.',
+    flavorText: 'High-speed embedded persistence powering emergency registries and session telemetry with zero runtime daemon overhead.',
+    relevantProjects: ['SALVUS Emergency Registry', 'RouteMind Session Store'],
+    docsUrl: 'https://www.sqlalchemy.org/'
+  },
   {
     id: 'infra-vercel',
     name: 'Vercel Edge Platform',

@@ -232,8 +232,8 @@
 
 /* Status Stats Strip */
 .p3r-dossier-stats-strip {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   margin-top: 16px;
   padding-top: 16px;
@@ -244,7 +244,7 @@
   display: flex;
   flex-direction: column;
   background: rgba(3, 8, 20, 0.6);
-  padding: 6px 14px;
+  padding: 8px 16px;
   border-left: 3px solid var(--p3r-cyan);
 }
 
@@ -423,6 +423,10 @@
 }
 
 @media (max-width: 600px) {
+  .p3r-dossier-stats-strip {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
   .p3r-dossier-name {
     font-size: 2.1rem;
   }
