@@ -13,7 +13,7 @@ import {
   DEFAULT_SYSTEM_SETTINGS,
   type SystemSettings,
 } from '../data/systemConfig';
-import { AudioContext } from './AudioContextValue';
+import { AudioContext, type AudioTrackInfo } from './AudioContextValue';
 
 // Audio pool for SFX with reusable elements
 const sfxPool: Record<string, HTMLAudioElement> = {};
@@ -31,17 +31,75 @@ export const AudioProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [settings, setSettings] = useState<SystemSettings>(() => loadStoredSettings());
   const [bgmPlaying, setBgmPlaying] = useState(false);
   const [muted, setMuted] = useState(false);
+  const [trackInfo, setTrackInfo] = useState<AudioTrackInfo>({
+    id: PERSONA_AUDIO.bgm.primary.id,
+    name: PERSONA_AUDIO.bgm.primary.name,
+    artist: PERSONA_AUDIO.bgm.primary.artist,
+    album: PERSONA_AUDIO.bgm.primary.album,
+    path: PERSONA_AUDIO.bgm.primary.path,
+    fallbackPath: PERSONA_AUDIO.bgm.primary.fallbackPath,
+    isFallback: false,
+    isMissing: false,
+  });
+
   const bgmRef = useRef<HTMLAudioElement | null>(null);
+  const wasPlayingRef = useRef(false);
   const lastSfxTimeRef = useRef<Record<string, number>>({});
 
-  // Initialize BGM audio element once
+  // Initialize single persistent BGM audio element once on mount
   useEffect(() => {
-    const audio = new Audio(PERSONA_AUDIO.bgm.testBed.path);
+    const audio = new Audio();
+    audio.preload = 'metadata'; // Use preload="metadata" to avoid unnecessary buffering
     audio.loop = true;
-    audio.preload = 'auto';
+    audio.src = PERSONA_AUDIO.bgm.primary.path;
     bgmRef.current = audio;
 
+    const handlePlay = () => setBgmPlaying(true);
+    const handlePause = () => setBgmPlaying(false);
+
+    const handleLoadedMetadata = () => {
+      if (audio.src.includes('colour-your-night.mp3')) {
+        setTrackInfo(prev => ({
+          ...prev,
+          isMissing: false,
+          isFallback: false,
+          errorMessage: undefined,
+        }));
+      }
+    };
+
+    const handleError = () => {
+      // If primary track (colour-your-night.mp3) is not present locally,
+      // gracefully failover to the procedural ambient test bed without crashing
+      if (audio.src.includes('colour-your-night.mp3')) {
+        console.info(
+          '[AudioProvider] Primary track "Colour Your Night" not found on local path. Engaging verified procedural ambient fallback.'
+        );
+        setTrackInfo(prev => ({
+          ...prev,
+          isMissing: true,
+          isFallback: true,
+          errorMessage:
+            'Local file public/assets/persona3/audio/bgm/colour-your-night.mp3 required; using ambient test bed.',
+        }));
+        audio.src = PERSONA_AUDIO.bgm.primary.fallbackPath;
+        audio.load();
+        if (wasPlayingRef.current) {
+          audio.play().catch(() => {});
+        }
+      }
+    };
+
+    audio.addEventListener('play', handlePlay);
+    audio.addEventListener('pause', handlePause);
+    audio.addEventListener('loadedmetadata', handleLoadedMetadata);
+    audio.addEventListener('error', handleError);
+
     return () => {
+      audio.removeEventListener('play', handlePlay);
+      audio.removeEventListener('pause', handlePause);
+      audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      audio.removeEventListener('error', handleError);
       audio.pause();
       audio.src = '';
       bgmRef.current = null;
@@ -69,17 +127,23 @@ export const AudioProvider: FC<{ children: ReactNode }> = ({ children }) => {
     );
   }, [settings]);
 
-  const playBgm = useCallback(() => {
-    if (!bgmRef.current) return;
-    bgmRef.current.play().then(() => {
+  // Direct user-gesture initiated playback
+  const playBgm = useCallback(async (): Promise<boolean> => {
+    if (!bgmRef.current) return false;
+    wasPlayingRef.current = true;
+    try {
+      await bgmRef.current.play();
       setBgmPlaying(true);
-    }).catch(() => {
-      // Browser autoplay policy prevents immediate playback until user interaction
-    });
+      return true;
+    } catch (err) {
+      console.warn('[AudioProvider] Playback suspended by browser autoplay policy pending interaction', err);
+      return false;
+    }
   }, []);
 
   const pauseBgm = useCallback(() => {
     if (!bgmRef.current) return;
+    wasPlayingRef.current = false;
     bgmRef.current.pause();
     setBgmPlaying(false);
   }, []);
@@ -87,16 +151,22 @@ export const AudioProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const toggleBgm = useCallback(() => {
     if (!bgmRef.current) return;
     if (bgmRef.current.paused) {
-      playBgm();
+      void playBgm();
     } else {
       pauseBgm();
     }
   }, [playBgm, pauseBgm]);
 
-  const setBgmVolume = useCallback((vol: number) => {
-    const clamped = Math.max(0, Math.min(1, vol));
-    setSettings(prev => ({ ...prev, bgmVolume: clamped }));
-  }, []);
+  const setBgmVolume = useCallback(
+    (vol: number) => {
+      const clamped = Math.max(0, Math.min(1, vol));
+      setSettings(prev => ({ ...prev, bgmVolume: clamped }));
+      if (bgmRef.current && !muted && settings.bgmEnabled) {
+        bgmRef.current.volume = clamped;
+      }
+    },
+    [muted, settings.bgmEnabled]
+  );
 
   const setSfxVolume = useCallback((vol: number) => {
     const clamped = Math.max(0, Math.min(1, vol));
@@ -165,6 +235,7 @@ export const AudioProvider: FC<{ children: ReactNode }> = ({ children }) => {
         sfxEnabled: settings.sfxEnabled,
         sfxVolume: settings.sfxVolume,
         muted,
+        trackInfo,
         reducedMotion: settings.reducedMotion,
         artworkIntensity: settings.artworkIntensity,
         playBgm,

@@ -172,6 +172,14 @@
   flex-shrink: 0;
 }
 
+.p3r-header-right .p3r-hud-music {
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: skewX(-8deg);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
 /* ----------------------------------------------------------------
    MAIN CONTENT STAGE
    ---------------------------------------------------------------- */

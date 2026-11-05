@@ -182,12 +182,21 @@
   text-align: right;
 }
 
+/* Subtle CD Music Identity on Title Screen */
+.title-music-container {
+  position: absolute;
+  bottom: clamp(20px, 3.5vh, 44px);
+  right: clamp(24px, 4vw, 48px);
+  z-index: 10;
+  max-width: 380px;
+}
+
 @media (max-width: 768px) {
   .title-content {
     justify-content: center;
     text-align: center;
     align-items: center;
-    padding-bottom: 90px;
+    padding-bottom: 110px;
   }
   
   .title-prompt {
@@ -201,6 +210,14 @@
   .title-corner--tr,
   .title-corner--br {
     display: none;
+  }
+
+  .title-music-container {
+    bottom: 16px;
+    right: 16px;
+    left: 16px;
+    display: flex;
+    justify-content: center;
   }
 }
 

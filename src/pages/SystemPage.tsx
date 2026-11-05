@@ -16,6 +16,7 @@ export const SystemPage: FC<SystemPageProps> = ({ onNavigate, onBackToMenu }) =>
     sfxEnabled,
     sfxVolume,
     muted,
+    trackInfo,
     reducedMotion,
     artworkIntensity,
     toggleBgm,
@@ -55,6 +56,24 @@ export const SystemPage: FC<SystemPageProps> = ({ onNavigate, onBackToMenu }) =>
               <h2 id="audio-settings-title" className="p3r-settings-group-title">
                 <span>🔊 AUDIO CALIBRATION</span>
               </h2>
+
+              {/* Primary Soundtrack Status Card */}
+              <div className="p3r-setting-row p3r-soundtrack-card">
+                <div className="p3r-setting-meta">
+                  <span className="p3r-setting-name">PRIMARY STARTUP SOUNDTRACK</span>
+                  <span className="p3r-setting-desc">
+                    <b>{trackInfo.name}</b> &bull; {trackInfo.artist}
+                  </span>
+                  <span className="p3r-setting-subdesc" style={{ fontSize: '0.75rem', color: 'var(--p3r-ice)', opacity: 0.85, marginTop: '2px', display: 'block' }}>
+                    Asset Path: <code>public/assets/persona3/audio/bgm/colour-your-night.mp3</code>
+                  </span>
+                </div>
+                <div className="p3r-soundtrack-badge-box">
+                  <span className={`p3r-track-status-pill ${trackInfo.isFallback ? 'fallback' : 'verified'}`}>
+                    {trackInfo.isFallback ? '⚠️ LOCAL FILE REQUIRED (PROCEDURAL FALLBACK)' : '🟢 ACTIVE LOCAL AUDIO'}
+                  </span>
+                </div>
+              </div>
 
               {/* Master Mute */}
               <div className="p3r-setting-row">

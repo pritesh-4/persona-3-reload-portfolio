@@ -1,5 +1,17 @@
 import { createContext } from 'react';
 
+export interface AudioTrackInfo {
+  id: string;
+  name: string;
+  artist: string;
+  album: string;
+  path: string;
+  fallbackPath: string;
+  isFallback: boolean;
+  isMissing: boolean;
+  errorMessage?: string;
+}
+
 export interface AudioContextType {
   // Audio state
   bgmPlaying: boolean;
@@ -7,11 +19,14 @@ export interface AudioContextType {
   sfxEnabled: boolean;
   sfxVolume: number;
   muted: boolean;
+  trackInfo: AudioTrackInfo;
+
   // System display state
   reducedMotion: boolean;
   artworkIntensity: number;
+
   // Controls
-  playBgm: () => void;
+  playBgm: () => Promise<boolean>;
   pauseBgm: () => void;
   toggleBgm: () => void;
   setBgmVolume: (vol: number) => void;
@@ -25,4 +40,3 @@ export interface AudioContextType {
 }
 
 export const AudioContext = createContext<AudioContextType | null>(null);
-

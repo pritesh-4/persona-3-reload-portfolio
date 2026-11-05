@@ -171,3 +171,4 @@ Network 404s: 0
 1. **Custom Domain**: Update `public/sitemap.xml` and DNS settings when mapping a custom domain.
 2. **Optional Social Handles**: X (`@PriteshJena02`) and Instagram (`@priteshjena02`) are linked in Social Links; remove or update if you prefer strictly professional communication channels.
 3. **GitHub API Token (Optional)**: If deployed to high-traffic environments, provide `VITE_GITHUB_TOKEN` in your hosting platform to avoid GitHub's 60 req/hr anonymous rate limit.
+

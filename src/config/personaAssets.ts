@@ -219,15 +219,45 @@ export const PERSONA_BACKGROUNDS: Record<string, PersonaBackground> = {
   }
 };
 
+export interface PersonaBgmTrack {
+  id: string;
+  name: string;
+  artist: string;
+  album: string;
+  path: string;
+  fallbackPath: string;
+  durationSeconds: number;
+  loop: boolean;
+  rightsStatus: string;
+  note: string;
+}
+
 export const PERSONA_AUDIO = {
   bgm: {
+    primary: {
+      id: 'colour-your-night',
+      name: 'Colour Your Night',
+      artist: 'Atlus Sound Team (feat. Azumi Takahashi & Lotus Juice)',
+      album: 'Persona 3 Reload Original Soundtrack',
+      path: '/assets/persona3/audio/bgm/colour-your-night.mp3',
+      fallbackPath: '/assets/persona3/audio/bgm/bgm-ambient-test.wav',
+      durationSeconds: 228,
+      loop: true,
+      rightsStatus: 'local-asset-required',
+      note: 'Primary startup soundtrack. Requires locally hosted authorized MP3 at public/assets/persona3/audio/bgm/colour-your-night.mp3'
+    } as PersonaBgmTrack,
     testBed: {
+      id: 'ambient-bed',
       name: 'Ambient Bed Test Loop (Original Synthesized)',
+      artist: 'Synthesized Procedural Audio',
+      album: 'Persona Portfolio Test Bed',
       path: '/assets/persona3/audio/bgm/bgm-ambient-test.wav',
+      fallbackPath: '',
       durationSeconds: 24.0,
       loop: true,
-      rightsStatus: 'approved-for-website-use'
-    }
+      rightsStatus: 'approved-for-website-use',
+      note: 'Procedural fallback loop approved for local automated testing'
+    } as PersonaBgmTrack
   },
   sfx: {
     select: {

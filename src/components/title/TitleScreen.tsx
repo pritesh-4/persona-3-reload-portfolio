@@ -1,5 +1,6 @@
 import { useEffect, useCallback, type FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { MusicControl } from '../hud/MusicControl';
 import '../../styles/title.css';
 
 interface TitleScreenProps {
@@ -73,14 +74,15 @@ export const TitleScreen: FC<TitleScreenProps> = ({ visible, onEnter }) => {
             PORTFOLIO ACTIVE
           </motion.div>
 
+          {/* Subtle CD Music Identity & Controls */}
           <motion.div
-            className="title-corner title-corner--br"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
+            className="title-music-container"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+            onClick={(e) => e.stopPropagation()}
           >
-            AUDIO: <b>SYNCHRONIZED</b><br />
-            REACT 19 / VITE 8
+            <MusicControl variant="title" />
           </motion.div>
 
           {/* Main title typography & prompt */}

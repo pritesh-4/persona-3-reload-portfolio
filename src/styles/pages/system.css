@@ -55,6 +55,42 @@
   gap: 16px;
 }
 
+.p3r-soundtrack-card {
+  background: rgba(0, 102, 255, 0.08);
+  border-left: 3px solid var(--p3r-cyan);
+  padding: 10px 14px;
+}
+
+.p3r-soundtrack-card code {
+  font-family: monospace;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 1px 4px;
+  border-radius: 2px;
+  color: var(--p3r-cyan);
+}
+
+.p3r-track-status-pill {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  padding: 4px 10px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+.p3r-track-status-pill.verified {
+  background: rgba(0, 230, 118, 0.15);
+  color: #00e676;
+  border: 1px solid rgba(0, 230, 118, 0.4);
+}
+
+.p3r-track-status-pill.fallback {
+  background: rgba(225, 29, 72, 0.15);
+  color: var(--p3r-magenta);
+  border: 1px solid rgba(225, 29, 72, 0.4);
+}
+
 .p3r-setting-meta {
   display: flex;
   flex-direction: column;
