@@ -151,10 +151,7 @@ export const QuestPage: FC<QuestPageProps> = ({ onNavigate, onBackToMenu }) => {
           {/* Mission Dossier Detail Panel */}
           <aside className="p3r-mission-dossier-panel" aria-live="polite">
             <div className="p3r-dossier-header-block">
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '6px' }}>
-                <span className="p3r-dossier-code-tag">
-                  {selectedMission.code} // {selectedMission.targetArcana}
-                </span>
+              <div className="p3r-dossier-badge-row">
                 <span className={`p3r-mission-status-badge ${
                   selectedMission.implementationStatus === 'VERIFIED IMPLEMENTED'
                     ? 'p3r-mstatus-implemented'

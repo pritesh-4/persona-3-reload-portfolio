@@ -260,11 +260,10 @@
   padding-bottom: 12px;
 }
 
-.p3r-dossier-code-tag {
-  font-family: var(--font-ui);
-  font-size: 0.95rem;
-  letter-spacing: 0.15em;
-  color: var(--p3r-red);
+.p3r-dossier-badge-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
 }
 
 .p3r-dossier-title {
@@ -272,6 +271,8 @@
   font-size: 2.2rem;
   font-style: italic;
   color: var(--p3r-snow);
+  margin: 0;
+  line-height: 1.1;
 }
 
 .p3r-dossier-codename {
