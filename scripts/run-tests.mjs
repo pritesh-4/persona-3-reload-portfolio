@@ -135,3 +135,4 @@ if (failedTests > 0) {
   console.log('All automated integrity tests passed successfully.\n');
   process.exit(0);
 }
+
