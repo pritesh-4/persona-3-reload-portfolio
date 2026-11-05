@@ -174,16 +174,11 @@ export const InternalPageLayout: FC<InternalPageLayoutProps> = ({
             <span>MUSIC ON/OFF</span>
           </div>
           {customHint && (
-            <div className="p3r-hint-item">
-              <span className="p3r-hint-key">INFO</span>
+            <div className="p3r-hint-item p3r-hint-custom">
+              <span className="p3r-hint-key">ACTION</span>
               <span>{customHint}</span>
             </div>
           )}
-        </div>
-
-        <div className="p3r-footer-sys-info">
-          <span className="p3r-sys-status-dot" />
-          <span>S.E.E.S. ARCHIVE PROTOCOL // OPERATIONAL</span>
         </div>
       </footer>
     </div>

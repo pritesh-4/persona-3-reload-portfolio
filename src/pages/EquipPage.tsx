@@ -1,9 +1,6 @@
 import { useState, useCallback, useEffect, type FC } from 'react';
 import { InternalPageLayout } from '../components/layout/InternalPageLayout';
-import {
-  PROGRESSION_TIMELINE,
-  EQUIPMENT_LOADOUT,
-} from '../data/experienceData';
+import { PROGRESSION_TIMELINE, type ProgressionMilestone } from '../data/experienceData';
 import { useAudioContext } from '../hooks/useAudioContext';
 import { useFocusTrap } from '../hooks/useFocusTrap';
 import '../styles/pages/equip.css';
@@ -15,16 +12,12 @@ interface EquipPageProps {
 
 export const EquipPage: FC<EquipPageProps> = ({ onNavigate, onBackToMenu }) => {
   const { playSfx } = useAudioContext();
-  const [viewMode, setViewMode] = useState<'timeline' | 'loadout'>('timeline');
   const [showResumeModal, setShowResumeModal] = useState(false);
   const modalRef = useFocusTrap<HTMLDivElement>(showResumeModal);
 
-  const handleModeChange = useCallback(
-    (mode: 'timeline' | 'loadout') => {
-      playSfx('select');
-      setViewMode(mode);
-    },
-    [playSfx]
+  // Filter project experiences for the timeline, placing education as the prominent top anchor
+  const projectMilestones: ProgressionMilestone[] = PROGRESSION_TIMELINE.filter(
+    (m) => m.category !== 'EDUCATION'
   );
 
   const handleOpenResume = useCallback(() => {
@@ -53,184 +46,209 @@ export const EquipPage: FC<EquipPageProps> = ({ onNavigate, onBackToMenu }) => {
   return (
     <InternalPageLayout
       title="EQUIP"
-      sublabel="DEVELOPER PROGRESSION, GEAR & CREDENTIALS"
+      sublabel="EDUCATION & DEVELOPMENT PROGRESSION"
       sectionId="003"
       characterId="akihiko"
       backgroundPath="/assets/persona3/backgrounds/main-visuals/p3r-main-visual.png"
       currentRoute="/resume"
       onNavigate={onNavigate}
       onBackToMenu={onBackToMenu}
+      customHint="EDUCATION & PROJECT ENGINEERING PROGRESSION TIMELINE"
     >
       <div className="p3r-equip-screen">
-        {/* Top Control Bar: Mode Toggle + Resume Dispatch */}
-        <div className="p3r-equip-toolbar">
-          <div className="p3r-equip-tabs" role="tablist">
-            <button
-              type="button"
-              role="tab"
-              aria-selected={viewMode === 'timeline'}
-              className={`p3r-equip-mode-btn ${viewMode === 'timeline' ? 'active' : ''}`}
-              onClick={() => handleModeChange('timeline')}
-            >
-              <span>EXPERIENCE TIMELINE</span>
-            </button>
-            <button
-              type="button"
-              role="tab"
-              aria-selected={viewMode === 'loadout'}
-              className={`p3r-equip-mode-btn ${viewMode === 'loadout' ? 'active' : ''}`}
-              onClick={() => handleModeChange('loadout')}
-            >
-              <span>EQUIPMENT LOADOUT</span>
-            </button>
-          </div>
-
-          <button
-            type="button"
-            className="p3r-resume-dispatch-btn"
-            onClick={handleOpenResume}
-          >
-            <span>DISPATCH DOSSIER [RESUME]</span>
-          </button>
-        </div>
-
-        {/* View Mode 1: Progression Timeline */}
-        {viewMode === 'timeline' && (
-          <div className="p3r-timeline-container" role="tabpanel">
-            <div className="p3r-timeline-track">
-              {PROGRESSION_TIMELINE.map((item, idx) => (
-                <div key={item.id} className="p3r-timeline-entry">
-                  <div className="p3r-timeline-marker">
-                    <div className="p3r-marker-dot" />
-                    <span className="p3r-marker-index">{String(idx + 1).padStart(2, '0')}</span>
-                  </div>
-
-                  <div className="p3r-timeline-card">
-                    <div className="p3r-entry-header">
-                      <div className="p3r-entry-title-wrap">
-                        <span className="p3r-entry-period">{item.period}</span>
-                        <h3 className="p3r-entry-role">{item.role || item.title}</h3>
-                        <span className="p3r-entry-org">{item.organization}</span>
-                      </div>
-                      <span className="p3r-entry-type-badge">{item.category}</span>
-                    </div>
-
-                    <p className="p3r-entry-desc">{item.summary}</p>
-
-                    <div className="p3r-entry-highlights">
-                      {item.achievements.map((ach, aIdx) => (
-                        <div key={aIdx} className="p3r-highlight-item">
-                          <span className="p3r-bullet">▸</span>
-                          <span>{ach}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="p3r-entry-tags">
-                      {item.skills.map(skill => (
-                        <span key={skill} className="p3r-skill-pill">
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
+        {/* ================================================================
+            PRIMARY SECTION: EDUCATION & CREDENTIALS HERO PLATE
+            ================================================================ */}
+        <section className="p3r-education-anchor-plate">
+          <div className="p3r-edu-content-col">
+            <div className="p3r-edu-tag-row">
+              <span className="p3r-edu-tag">ACADEMIC FOUNDATION // FORMAL DEGREE</span>
+              <span className="p3r-edu-status-badge">CURRENTLY ENROLLED</span>
             </div>
+
+            <div className="p3r-edu-title-row">
+              <h1 className="p3r-edu-degree">MINING ENGINEERING</h1>
+              <span className="p3r-edu-tier-pill">SECOND-YEAR UNDERGRADUATE</span>
+            </div>
+
+            <div className="p3r-edu-institution">
+              <span>National Institute of Technology, Rourkela (NIT Rourkela)</span>
+              <span className="p3r-edu-loc">• Rourkela, Odisha, India</span>
+            </div>
+
+            <p className="p3r-edu-summary">
+              Pursuing undergraduate studies at NIT Rourkela, bridging fundamental physical engineering
+              rigour with independent systems architecture, machine learning research, and full-stack software development.
+            </p>
           </div>
-        )}
 
-        {/* View Mode 2: RPG Equipment Loadout */}
-        {viewMode === 'loadout' && (
-          <div className="p3r-loadout-grid" role="tabpanel">
-            {EQUIPMENT_LOADOUT.map(slot => (
-              <div key={slot.slotName} className="p3r-loadout-card">
-                <div className="p3r-loadout-header">
-                  <span className="p3r-loadout-slot-name">{slot.slotName}</span>
-                  <span className="p3r-loadout-tier">{slot.rarity}</span>
+          <div className="p3r-edu-action-col">
+            <button
+              type="button"
+              className="p3r-resume-dispatch-btn"
+              onClick={handleOpenResume}
+              onMouseEnter={() => playSfx('hover')}
+            >
+              <span>DISPATCH DOSSIER [RESUME]</span>
+              <span className="p3r-resume-arrow">↗</span>
+            </button>
+            <span className="p3r-resume-note">VERIFIED CREDENTIALS ARCHIVE</span>
+          </div>
+        </section>
+
+        {/* ================================================================
+            PRIMARY SECTION: PROJECT EXPERIENCE VERTICAL TIMELINE
+            ================================================================ */}
+        <section className="p3r-journey-section">
+          <div className="p3r-journey-header">
+            <div className="p3r-journey-title-wrap">
+              <span className="p3r-journey-sec-num">02</span>
+              <h2>PROJECT EXPERIENCE &amp; ENGINEERING JOURNEY</h2>
+            </div>
+            <span className="p3r-journey-count">{projectMilestones.length} CHRONICLES RECORDED</span>
+          </div>
+
+          <div className="p3r-vertical-timeline">
+            {/* Blue Central Guide Line */}
+            <div className="p3r-timeline-spine" aria-hidden="true" />
+
+            {projectMilestones.map((item, idx) => (
+              <article
+                key={item.id}
+                className="p3r-timeline-entry"
+                onMouseEnter={() => playSfx('hover')}
+              >
+                {/* Large Timeline Numeral & Marker */}
+                <div className="p3r-entry-marker-col">
+                  <span className="p3r-entry-numeral">0{idx + 1}</span>
+                  <div className="p3r-entry-node" />
                 </div>
 
-                <div className="p3r-loadout-item-name">{slot.itemName}</div>
-                <div className="p3r-loadout-spec">{slot.powerStat} &bull; {slot.defenseStat}</div>
-                <p className="p3r-loadout-desc">{slot.description}</p>
+                {/* Asymmetric Content Plate */}
+                <div className="p3r-entry-content-plate">
+                  <div className="p3r-entry-meta-row">
+                    <span className="p3r-entry-period">{item.period}</span>
+                    <span className="p3r-entry-role">{item.role}</span>
+                    <span className="p3r-entry-loc">{item.location}</span>
+                  </div>
 
-                <div className="p3r-loadout-perks">
-                  {slot.perks.map((perk, pIdx) => (
-                    <div key={pIdx} className="p3r-perk-line">
-                      <span className="p3r-perk-arrow">✦</span>
-                      <span>{perk}</span>
-                    </div>
-                  ))}
+                  <h3 className="p3r-entry-title">{item.organization}</h3>
+                  <p className="p3r-entry-summary">{item.summary}</p>
+
+                  {/* Key Engineering Contributions */}
+                  <div className="p3r-entry-contributions">
+                    <span className="p3r-contrib-heading">KEY CONTRIBUTIONS &amp; ARCHITECTURAL IMPACT:</span>
+                    <ul className="p3r-contrib-list">
+                      {item.achievements.map((ach, aIdx) => (
+                        <li key={aIdx} className="p3r-contrib-item">
+                          <span className="p3r-contrib-bullet">✦</span>
+                          <span>{ach}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Technologies Used */}
+                  <div className="p3r-entry-tech-row">
+                    {item.skills.map((skill, sIdx) => (
+                      <span key={sIdx} className="p3r-tech-tag">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
-        )}
+        </section>
 
-        {/* Resume Dispatch Modal */}
+        {/* ================================================================
+            RESUME DOSSIER MODAL
+            ================================================================ */}
         {showResumeModal && (
           <div
-            className="p3r-resume-modal-overlay"
-            onClick={handleCloseResume}
+            className="p3r-resume-modal-backdrop"
             role="dialog"
             aria-modal="true"
             aria-labelledby="resume-modal-title"
           >
             <div
               ref={modalRef}
-              className="p3r-resume-modal-card"
-              onClick={e => e.stopPropagation()}
+              className="p3r-resume-modal-plate"
+              tabIndex={-1}
             >
-              <h3 id="resume-modal-title" style={{ fontFamily: 'var(--font-display)', fontSize: '2rem', fontStyle: 'italic', color: 'var(--p3r-snow)' }}>
-                PERSONNEL DOSSIER VERIFICATION
-              </h3>
-              <p style={{ fontSize: '0.9rem', color: 'rgba(240, 246, 255, 0.85)', lineHeight: 1.6 }}>
-                The official credentials and curriculum vitae for <strong>Pritesh Jena</strong> are cataloged within the live repository and LinkedIn verification channels.
-              </p>
-              <div style={{ background: 'rgba(3, 8, 20, 0.7)', padding: '14px', borderLeft: '4px solid var(--p3r-cyan)', margin: '14px 0' }}>
-                <p style={{ fontSize: '0.85rem', color: 'var(--p3r-ice)', fontWeight: 600 }}>
-                  CURRENT STATUS: Undergraduate Engineering Student at NIT Rourkela &bull; Lead Systems Architect (SALVUS)
-                </p>
-                <p style={{ fontSize: '0.85rem', color: 'rgba(240, 246, 255, 0.7)', marginTop: '4px' }}>
-                  Direct PDF dossier can be requested directly via email: <strong>priteshjena16@gmail.com</strong>
-                </p>
-              </div>
-
-              <div className="p3r-modal-actions">
+              <div className="p3r-resume-modal-head">
+                <div className="p3r-resume-modal-title-box">
+                  <span className="p3r-resume-modal-tag">PERSONNEL DOCUMENT</span>
+                  <h2 id="resume-modal-title" className="p3r-resume-modal-title">
+                    PRITESH KUMAR JENA — ENGINEERING DOSSIER
+                  </h2>
+                </div>
                 <button
                   type="button"
-                  className="p3r-resume-download-btn"
-                  onClick={() => {
-                    playSfx('select');
-                    window.print();
-                  }}
-                  style={{ display: 'inline-flex', cursor: 'pointer' }}
+                  className="p3r-modal-close-btn"
+                  onClick={handleCloseResume}
+                  aria-label="Close Resume Modal"
                 >
-                  <span>PRINT / SAVE PDF</span>
+                  ✕ CLOSE
                 </button>
+              </div>
+
+              <div className="p3r-resume-modal-body">
+                <div className="p3r-resume-section">
+                  <h3 className="p3r-resume-sec-title">EDUCATION</h3>
+                  <div className="p3r-resume-record">
+                    <div className="p3r-resume-row">
+                      <span className="p3r-resume-bold">National Institute of Technology, Rourkela</span>
+                      <span className="p3r-resume-dim">Rourkela, Odisha, India</span>
+                    </div>
+                    <div className="p3r-resume-row">
+                      <span>Bachelor of Technology in Mining Engineering</span>
+                      <span className="p3r-resume-accent">Second-Year Undergraduate</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p3r-resume-section">
+                  <h3 className="p3r-resume-sec-title">CORE TECHNICAL COMPETENCIES</h3>
+                  <p className="p3r-resume-p">
+                    <b>Languages:</b> Python, JavaScript (ES6+), TypeScript, C/C++, SQL, HTML5, CSS3<br />
+                    <b>Backend &amp; APIs:</b> FastAPI, Node.js, Express, REST APIs, WebSockets (Socket.IO), SQLAlchemy<br />
+                    <b>Frontend:</b> React 19, Vite, Tailwind CSS, Framer Motion, Vanilla CSS Architecture<br />
+                    <b>AI &amp; Heuristics:</b> PyTorch, Ultralytics YOLO, ByteTrack, Gemini API, Groq Llama, Vector DBs
+                  </p>
+                </div>
+
+                <div className="p3r-resume-section">
+                  <h3 className="p3r-resume-sec-title">NOTABLE ARCHITECTURAL HIGHLIGHTS</h3>
+                  <ul className="p3r-resume-bullets">
+                    <li><b>SALVUS (SIH 2026):</b> Lead Systems Architect &amp; AI Integration Engineer for emergency disaster coordination platform with 3-tier AI triage and human command safety locks.</li>
+                    <li><b>Project AETHON:</b> Independent scientific computing research prototype investigating unsupervised anomaly detection to surface uncatalogued astronomical radio transients.</li>
+                    <li><b>Project RouteMind:</b> Intelligent multi-model LLM router classifying query intent across cost, speed, and quality trade-offs.</li>
+                    <li><b>Project Zogan:</b> AI-assisted wildlife detection and tracking prototype using fine-tuned YOLO and ByteTrack.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="p3r-resume-modal-foot">
+                <a
+                  href="https://github.com/pritesh-4"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p3r-resume-external-btn"
+                  onClick={() => playSfx('confirm')}
+                >
+                  <span>GITHUB PROFILE ↗</span>
+                </a>
                 <a
                   href="https://www.linkedin.com/in/pritesh-jena-8980a6373"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p3r-resume-download-btn"
-                  style={{ textDecoration: 'none', display: 'inline-flex' }}
+                  className="p3r-resume-external-btn"
+                  onClick={() => playSfx('confirm')}
                 >
-                  <span>VIEW LINKEDIN</span>
+                  <span>LINKEDIN PROFILE ↗</span>
                 </a>
-                <a
-                  href="mailto:priteshjena16@gmail.com?subject=Dossier%20Request%20-%20Pritesh%20Jena"
-                  className="p3r-resume-download-btn"
-                  style={{ textDecoration: 'none', display: 'inline-flex' }}
-                >
-                  <span>REQUEST VIA EMAIL</span>
-                </a>
-                <button
-                  type="button"
-                  className="p3r-back-btn"
-                  onClick={handleCloseResume}
-                >
-                  <span>CLOSE [ESC]</span>
-                </button>
               </div>
             </div>
           </div>

@@ -2,8 +2,6 @@ export interface CharacterAttribute {
   id: string;
   name: string;
   category: 'ENGINEERING' | 'PROBLEM_SOLVING' | 'DEVELOPMENT' | 'AI_ML' | 'DESIGN';
-  rankGrade: 'RANK S' | 'RANK A+' | 'RANK A';
-  rankScore: number; // 1 to 5 stars or numerical weight
   experienceLabel: string;
   evidenceSummary: string;
   supportingSkills: string[];
@@ -16,9 +14,6 @@ export interface CharacterAttribute {
 
 export interface CharacterProfileData {
   name: string;
-  codename: string;
-  level: number;
-  personaArcana: string;
   role: string;
   affiliation: string;
   location: string;
@@ -41,14 +36,11 @@ export interface CharacterProfileData {
 
 export const CHARACTER_PROFILE: CharacterProfileData = {
   name: 'PRITESH KUMAR JENA',
-  codename: 'S.E.E.S. ARCHITECT',
-  level: 99,
-  personaArcana: 'FOOL / DEATH (ORPHEUS)',
   role: 'Mining Engineering Undergraduate & Full-Stack Developer',
   affiliation: 'National Institute of Technology, Rourkela',
   location: 'Rourkela, Odisha, India',
   introduction:
-    'Second-year Mining Engineering undergraduate student at NIT Rourkela with a strong technical passion for AI systems, intelligent model routing, and production-grade full-stack architectures.',
+    'Second-year Mining Engineering undergraduate student at NIT Rourkela with a strong technical focus on AI systems, intelligent model routing, and production-grade full-stack architectures.',
   currentInterests: [
     'Edge Computer Vision & Multi-Object Tracking',
     'Multimodal LLM Dynamic Intent Routing',
@@ -92,8 +84,6 @@ export const CHARACTER_ATTRIBUTES: CharacterAttribute[] = [
     id: 'engineering',
     name: 'SYSTEMS ENGINEERING',
     category: 'ENGINEERING',
-    rankGrade: 'RANK S',
-    rankScore: 5,
     experienceLabel: 'Production Systems Architect & Dispatch Engine Lead',
     evidenceSummary:
       'Proven capacity to architect decoupled full-stack systems with real-time state synchronization, fault tolerance, and deterministic telemetry.',
@@ -120,8 +110,6 @@ export const CHARACTER_ATTRIBUTES: CharacterAttribute[] = [
     id: 'ai-ml',
     name: 'AI & MACHINE LEARNING',
     category: 'AI_ML',
-    rankGrade: 'RANK S',
-    rankScore: 5,
     experienceLabel: 'Edge Computer Vision & Multimodal Agent Integration',
     evidenceSummary:
       'Practical expertise in dataset curation, object detection model training (YOLOv8), multi-object tracking, and multi-model LLM API orchestration.',
@@ -153,8 +141,6 @@ export const CHARACTER_ATTRIBUTES: CharacterAttribute[] = [
     id: 'development',
     name: 'FULL-STACK DEVELOPMENT',
     category: 'DEVELOPMENT',
-    rankGrade: 'RANK S',
-    rankScore: 5,
     experienceLabel: 'Modern React 19, TypeScript & Async Python',
     evidenceSummary:
       'Deep fluency with modern component architecture, type safety, sub-second Vite bundling, and high-performance asynchronous backends.',
@@ -181,8 +167,6 @@ export const CHARACTER_ATTRIBUTES: CharacterAttribute[] = [
     id: 'problem-solving',
     name: 'PROBLEM SOLVING & LOGIC',
     category: 'PROBLEM_SOLVING',
-    rankGrade: 'RANK A+',
-    rankScore: 4,
     experienceLabel: 'Algorithmic Optimization & Real-Time Triage',
     evidenceSummary:
       'Rigorous grounding in data structures, mathematical modeling, graph traversal, and resource allocation logic honed at NIT Rourkela.',
@@ -209,8 +193,6 @@ export const CHARACTER_ATTRIBUTES: CharacterAttribute[] = [
     id: 'design-creativity',
     name: 'DESIGN & CREATIVITY',
     category: 'DESIGN',
-    rankGrade: 'RANK A+',
-    rankScore: 4,
     experienceLabel: 'Game UI Aesthetic & Narrative Web Craft',
     evidenceSummary:
       'Demonstrated talent for recreating high-fidelity game interfaces (Persona 3 Reload) and cinematic web storytelling without vector shortcuts.',

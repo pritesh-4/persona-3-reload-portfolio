@@ -30,7 +30,7 @@ export interface ProfileData {
 
 export const PROFILE_DATA: ProfileData = {
   name: 'PRITESH KUMAR JENA',
-  codename: 'AI BUILDER // S.E.E.S. ARCHIVE',
+  codename: 'AI & SYSTEMS BUILDER // PERSONNEL DOSSIER',
   role: 'Mining Engineering Undergraduate & Full-Stack Developer',
   headline: 'MINING ENGINEERING STUDENT • FULL-STACK DEVELOPER • AI BUILDER',
   institution: 'National Institute of Technology, Rourkela (NIT Rourkela)',
@@ -38,7 +38,7 @@ export const PROFILE_DATA: ProfileData = {
   location: 'Rourkela, Odisha, India',
   status: '2ND YEAR UNDERGRADUATE // ACTIVE BUILDER',
   summary:
-    'Second-year Mining Engineering undergraduate at NIT Rourkela with a strong interest in technology, actively exploring AI, software engineering, and intelligent systems through independent projects.',
+    'Second-year Mining Engineering undergraduate at National Institute of Technology, Rourkela, with a strong interest in technology and independent software development.',
   cards: [
     {
       id: 'education',
@@ -112,7 +112,7 @@ export const PROFILE_DATA: ProfileData = {
   attributes: [
     { label: 'DEGREE PROGRAM', value: 'MINING ENGINEERING (2ND YEAR)', rating: 'ACTIVE' },
     { label: 'INSTITUTION', value: 'NIT ROURKELA', rating: 'VERIFIED' },
-    { label: 'TECHNICAL FOCUS', value: 'AI & SOFTWARE ENGINEERING', rating: 'S-RANK' },
+    { label: 'TECHNICAL FOCUS', value: 'AI & SOFTWARE ENGINEERING', rating: 'VERIFIED' },
     { label: 'RESEARCH DOMAIN', value: 'SCIENTIFIC COMPUTING (AETHON)', rating: 'ACTIVE' },
     { label: 'KEY PROJECTS', value: 'SALVUS • ROUTEMIND • ZOGAN', rating: 'SHIPPED' },
     { label: 'LOCATION', value: 'ROURKELA, ODISHA (INDIA)', rating: 'LOCAL' }

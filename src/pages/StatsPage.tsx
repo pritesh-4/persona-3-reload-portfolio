@@ -1,7 +1,6 @@
-import { useState, useEffect, useMemo, useCallback, type FC } from 'react';
+import { useState, useEffect, useCallback, type FC } from 'react';
 import { InternalPageLayout } from '../components/layout/InternalPageLayout';
 import {
-  CHARACTER_PROFILE,
   CHARACTER_ATTRIBUTES,
   type CharacterAttribute,
 } from '../data/characterStatusData';
@@ -34,15 +33,17 @@ interface StatsState {
   repos: GitHubRepo[];
   languages: { name: string; percentage: number }[];
   isCached: boolean;
+  cachedTimestamp?: string;
 }
 
-const FALLBACK_STATS: StatsState = {
+const BENCHMARK_FALLBACK_STATS: StatsState = {
   loading: false,
   publicRepos: 19,
   followers: 8,
   following: 6,
   starsCount: 9,
   isCached: true,
+  cachedTimestamp: 'OCTOBER 2026 (BENCHMARK ARCHIVE)',
   repos: [
     {
       id: 1,
@@ -113,7 +114,7 @@ const FALLBACK_STATS: StatsState = {
   ],
 };
 
-type StatsTab = 'STATUS' | 'CALENDAR' | 'RADAR';
+type StatsTab = 'TELEMETRY' | 'CALENDAR';
 
 interface StatsPageProps {
   onNavigate: (route: string) => void;
@@ -122,10 +123,10 @@ interface StatsPageProps {
 
 export const StatsPage: FC<StatsPageProps> = ({ onNavigate, onBackToMenu }) => {
   const { playSfx } = useAudioContext();
-  const [activeTab, setActiveTab] = useState<StatsTab>('STATUS');
+  const [activeTab, setActiveTab] = useState<StatsTab>('TELEMETRY');
 
-  // Character Status State
-  const [selectedAttribute, setSelectedAttribute] = useState<CharacterAttribute>(CHARACTER_ATTRIBUTES[0]);
+  // Selected Technical Focus Area
+  const [selectedFocus, setSelectedFocus] = useState<CharacterAttribute>(CHARACTER_ATTRIBUTES[0]);
 
   // Calendar State
   const [selectedYear, setSelectedYear] = useState<number | 'ALL'>('ALL');
@@ -169,7 +170,6 @@ export const StatsPage: FC<StatsPageProps> = ({ onNavigate, onBackToMenu }) => {
 
         if (!isMounted) return;
 
-        // Calculate language counts and total stars (filtering out forks)
         const originalRepos = reposData.filter((repo) => !repo.fork);
         const activeReposList = originalRepos.length > 0 ? originalRepos : reposData;
 
@@ -196,28 +196,22 @@ export const StatsPage: FC<StatsPageProps> = ({ onNavigate, onBackToMenu }) => {
           following: userData.following || 0,
           starsCount: totalStars,
           repos: activeReposList,
-          languages: languages.length > 0 ? languages : FALLBACK_STATS.languages,
+          languages: languages.length > 0 ? languages : BENCHMARK_FALLBACK_STATS.languages,
           isCached: false,
         });
       } catch {
         if (!isMounted) return;
-        setStats(FALLBACK_STATS);
+        setStats(BENCHMARK_FALLBACK_STATS);
       }
     }
 
     fetchGitHubData();
-
     return () => {
       isMounted = false;
     };
   }, []);
 
-  const filteredMilestones = useMemo(() => {
-    if (selectedYear === 'ALL') return CALENDAR_MILESTONES;
-    return CALENDAR_MILESTONES.filter((m) => m.year === selectedYear);
-  }, [selectedYear]);
-
-  const handleTabSwitch = useCallback(
+  const handleTabChange = useCallback(
     (tab: StatsTab) => {
       playSfx('select');
       setActiveTab(tab);
@@ -225,474 +219,292 @@ export const StatsPage: FC<StatsPageProps> = ({ onNavigate, onBackToMenu }) => {
     [playSfx]
   );
 
+  const filteredMilestones =
+    selectedYear === 'ALL'
+      ? CALENDAR_MILESTONES
+      : CALENDAR_MILESTONES.filter((m) => m.year === selectedYear);
+
   return (
     <InternalPageLayout
-      title="STATUS & CALENDAR"
-      sublabel="CHARACTER ATTRIBUTES, DEVELOPMENT JOURNEY & TELEMETRY"
+      title="STATS"
+      sublabel="DEVELOPER TELEMETRY & CHRONOLOGICAL CALENDAR"
       sectionId="004"
-      characterId="fuuka"
-      backgroundPath="/assets/persona3/backgrounds/official-wallpapers/p3r-main-key-art.png"
+      characterId="mitsuru"
+      backgroundPath="/assets/persona3/backgrounds/main-visuals/p3r-main-visual.png"
       currentRoute="/stats"
       onNavigate={onNavigate}
       onBackToMenu={onBackToMenu}
-      customHint="SWITCH BETWEEN CHARACTER STATUS, DARK HOUR CALENDAR & GITHUB TELEMETRY"
+      customHint="INSPECT LIVE REPOSITORY METRICS & DEVELOPMENT CHRONICLES"
     >
       <div className="p3r-stats-screen">
-        {/* Top Subview Switcher Tabs */}
-        <div className="p3r-stats-subview-nav" role="tablist" aria-label="Status Sections">
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeTab === 'STATUS'}
-            className={`p3r-subview-btn ${activeTab === 'STATUS' ? 'active' : ''}`}
-            onClick={() => handleTabSwitch('STATUS')}
-            onMouseEnter={() => playSfx('hover')}
-          >
-            <span>[01] CHARACTER STATUS & ATTRIBUTES</span>
-          </button>
+        {/* Navigation Mode Switcher */}
+        <div className="p3r-stats-toolbar">
+          <div className="p3r-stats-tabs" role="tablist">
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activeTab === 'TELEMETRY'}
+              className={`p3r-stats-tab-btn ${activeTab === 'TELEMETRY' ? 'active' : ''}`}
+              onClick={() => handleTabChange('TELEMETRY')}
+            >
+              <span>TELEMETRY &amp; GITHUB STATUS</span>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activeTab === 'CALENDAR'}
+              className={`p3r-stats-tab-btn ${activeTab === 'CALENDAR' ? 'active' : ''}`}
+              onClick={() => handleTabChange('CALENDAR')}
+            >
+              <span>DEVELOPMENT CALENDAR</span>
+            </button>
+          </div>
 
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeTab === 'CALENDAR'}
-            className={`p3r-subview-btn ${activeTab === 'CALENDAR' ? 'active' : ''}`}
-            onClick={() => handleTabSwitch('CALENDAR')}
-            onMouseEnter={() => playSfx('hover')}
-          >
-            <span>[02] DARK HOUR CALENDAR & TIMELINE</span>
-          </button>
-
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeTab === 'RADAR'}
-            className={`p3r-subview-btn ${activeTab === 'RADAR' ? 'active' : ''}`}
-            onClick={() => handleTabSwitch('RADAR')}
-            onMouseEnter={() => playSfx('hover')}
-          >
-            <span>[03] GITHUB SATELLITE RADAR</span>
-          </button>
+          {/* Data Authenticity / Integrity Status Pill */}
+          <div className="p3r-telemetry-badge-box">
+            {stats.loading ? (
+              <span className="p3r-stat-status-pill loading">CONNECTING TO GITHUB...</span>
+            ) : stats.isCached ? (
+              <span className="p3r-stat-status-pill cached">
+                CACHED BENCHMARK ({stats.cachedTimestamp || 'FALLBACK'})
+              </span>
+            ) : (
+              <span className="p3r-stat-status-pill live">LIVE GITHUB API FEED (@pritesh-4)</span>
+            )}
+          </div>
         </div>
 
-        {/* ==============================================================
-            TAB 1: CHARACTER STATUS SCREEN (EXPERIENCE 2)
-            ============================================================== */}
-        {activeTab === 'STATUS' && (
-          <div className="p3r-status-view-stage" role="tabpanel" aria-label="Character Status" aria-live="polite">
-            {/* Profile Overview Card */}
-            <div className="p3r-char-profile-card">
-              <div className="p3r-char-profile-left">
-                <div className="p3r-char-avatar-frame">
-                  <img
-                    src={CHARACTER_PROFILE.portraitThumb}
-                    alt={CHARACTER_PROFILE.name}
-                    className="p3r-char-avatar-img"
+        {/* ================================================================
+            VIEW 1: TELEMETRY & GITHUB STATUS
+            ================================================================ */}
+        {activeTab === 'TELEMETRY' && (
+          <div className="p3r-telemetry-view">
+            {/* Top Stat Numerals Bar */}
+            <div className="p3r-metric-numerals-strip">
+              <div className="p3r-numeral-plate">
+                <span className="p3r-numeral-tag">PUBLIC REPOSITORIES</span>
+                <span className="p3r-numeral-val">{stats.publicRepos}</span>
+                <span className="p3r-numeral-sub">VERIFIED PUBLIC REPOS</span>
+              </div>
+              <div className="p3r-numeral-plate">
+                <span className="p3r-numeral-tag">FOLLOWERS</span>
+                <span className="p3r-numeral-val">{stats.followers}</span>
+                <span className="p3r-numeral-sub">OPEN SOURCE NETWORK</span>
+              </div>
+              <div className="p3r-numeral-plate">
+                <span className="p3r-numeral-tag">STARS COLLECTED</span>
+                <span className="p3r-numeral-val">{stats.starsCount}</span>
+                <span className="p3r-numeral-sub">COMMUNITY APPRECIATION</span>
+              </div>
+              <div className="p3r-numeral-plate">
+                <span className="p3r-numeral-tag">CORE LANGUAGES</span>
+                <span className="p3r-numeral-val">{stats.languages.length}</span>
+                <span className="p3r-numeral-sub">POLYGLOT STACK</span>
+              </div>
+            </div>
+
+            {/* Language Distribution Bar */}
+            <div className="p3r-lang-distribution-plate">
+              <div className="p3r-lang-head">
+                <span className="p3r-lang-label">LANGUAGE DISTRIBUTION PROFILE</span>
+                <span className="p3r-lang-meta">DERIVED FROM REPOSITORY CODEBASE</span>
+              </div>
+
+              <div className="p3r-lang-bar-track">
+                {stats.languages.map((lang, idx) => (
+                  <div
+                    key={lang.name}
+                    className={`p3r-lang-bar-segment seg-${idx % 4}`}
+                    style={{ width: `${lang.percentage}%` }}
+                    title={`${lang.name}: ${lang.percentage}%`}
                   />
-                  <div className="p3r-char-lvl-tag">LV. {CHARACTER_PROFILE.level}</div>
-                </div>
-
-                <div className="p3r-char-name-block">
-                  <span className="p3r-char-arcana-badge">{CHARACTER_PROFILE.personaArcana}</span>
-                  <h1 className="p3r-char-name">{CHARACTER_PROFILE.name}</h1>
-                  <span className="p3r-char-role">{CHARACTER_PROFILE.role}</span>
-                  <span className="p3r-char-affiliation">🏛 {CHARACTER_PROFILE.affiliation}</span>
-                </div>
+                ))}
               </div>
 
-              <div className="p3r-char-profile-right">
-                <p className="p3r-char-intro">{CHARACTER_PROFILE.introduction}</p>
-
-                <div className="p3r-char-interests-box">
-                  <span className="p3r-interests-label">CURRENT AREAS OF EXPLORATION:</span>
-                  <div className="p3r-interests-chips">
-                    {CHARACTER_PROFILE.currentInterests.map((interest, idx) => (
-                      <span key={idx} className="p3r-interest-chip">
-                        &bull; {interest}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Direct Teleport Links */}
-                <div className="p3r-char-teleport-links">
-                  <a
-                    href={CHARACTER_PROFILE.links.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p3r-status-link-btn"
-                  >
-                    <span>GITHUB ARCHIVE ↗</span>
-                  </a>
-                  <a
-                    href={CHARACTER_PROFILE.links.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p3r-status-link-btn"
-                  >
-                    <span>LINKEDIN NODE ↗</span>
-                  </a>
-                  <a
-                    href={CHARACTER_PROFILE.links.portfolio}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p3r-status-link-btn"
-                  >
-                    <span>SISTER PORTFOLIO ↗</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Core Attributes & Interactive Inspection Stage */}
-            <div className="p3r-attributes-split-stage">
-              {/* Left Column: Attribute Selector Cards */}
-              <div className="p3r-attributes-selector-col" role="listbox" aria-label="Attributes">
-                <h2 className="p3r-column-heading">
-                  <span>CORE ATTRIBUTES</span>
-                  <span>//</span>
-                  <span style={{ fontSize: '0.8rem', color: 'var(--p3r-ice)' }}>SELECT TO INSPECT EVIDENCE</span>
-                </h2>
-
-                <div className="p3r-attributes-cards-list">
-                  {CHARACTER_ATTRIBUTES.map((attr) => (
-                    <button
-                      key={attr.id}
-                      type="button"
-                      role="option"
-                      aria-selected={selectedAttribute.id === attr.id}
-                      className={`p3r-attr-card-btn ${selectedAttribute.id === attr.id ? 'active' : ''}`}
-                      onClick={() => {
-                        playSfx('select');
-                        setSelectedAttribute(attr);
-                      }}
-                      onMouseEnter={() => playSfx('hover')}
-                    >
-                      <div className="p3r-attr-card-top">
-                        <span className="p3r-attr-card-name">{attr.name}</span>
-                        <span className="p3r-attr-card-grade">{attr.rankGrade}</span>
-                      </div>
-                      <span className="p3r-attr-card-label">{attr.experienceLabel}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Right Column: Attribute Detail Evidence Panel */}
-              <div className="p3r-attribute-detail-panel">
-                <div className="p3r-attr-panel-header">
-                  <div className="p3r-attr-panel-title-group">
-                    <span className="p3r-attr-panel-category">ATTRIBUTE DOSSIER // S.E.E.S. ARCHIVE</span>
-                    <h3 className="p3r-attr-panel-title">{selectedAttribute.name}</h3>
-                    <span className="p3r-attr-panel-tagline">{selectedAttribute.experienceLabel}</span>
-                  </div>
-
-                  <div className="p3r-attr-panel-badge-box">
-                    <span className="p3r-attr-big-grade">{selectedAttribute.rankGrade}</span>
-                    <span className="p3r-attr-verified-tag">VERIFIED PROFICIENCY</span>
-                  </div>
-                </div>
-
-                <div className="p3r-attr-panel-body">
-                  <div className="p3r-attr-body-block">
-                    <h4 className="p3r-attr-section-hdr">EVIDENCE-BACKED PROFICIENCY SUMMARY</h4>
-                    <p className="p3r-attr-p">{selectedAttribute.evidenceSummary}</p>
-                  </div>
-
-                  <div className="p3r-attr-body-block">
-                    <h4 className="p3r-attr-section-hdr">SUPPORTING TECHNICAL CAPABILITIES</h4>
-                    <div className="p3r-attr-skills-grid">
-                      {selectedAttribute.supportingSkills.map((skill, sIdx) => (
-                        <div key={sIdx} className="p3r-attr-skill-pill">
-                          <span className="p3r-skill-bullet">◆</span>
-                          <span>{skill}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="p3r-attr-body-block">
-                    <h4 className="p3r-attr-section-hdr">RELEVANT IMPLEMENTATION PROVENANCE</h4>
-                    <div className="p3r-attr-projects-stack">
-                      {selectedAttribute.relevantProjects.map((proj, pIdx) => (
-                        <div key={pIdx} className="p3r-attr-project-row">
-                          <div className="p3r-attr-proj-top">
-                            <span className="p3r-attr-proj-name">{proj.name}</span>
-                            <span className="p3r-attr-proj-role">{proj.role}</span>
-                          </div>
-                          <p className="p3r-attr-proj-evidence">{proj.evidence}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Selected Achievements Ribbon */}
-            <div className="p3r-achievements-ribbon">
-              <h2 className="p3r-ribbon-heading">
-                <span>VERIFIED SYSTEM ACHIEVEMENTS</span>
-                <span>//</span>
-                <span style={{ fontSize: '0.8rem', color: 'var(--p3r-ice)' }}>GROUND TRUTH</span>
-              </h2>
-
-              <div className="p3r-achievements-grid">
-                {CHARACTER_PROFILE.achievements.map((ach, aIdx) => (
-                  <div key={aIdx} className="p3r-achievement-tile" onMouseEnter={() => playSfx('hover')}>
-                    <span className="p3r-achievement-tag">{ach.tag}</span>
-                    <h3 className="p3r-achievement-title">{ach.title}</h3>
-                    <p className="p3r-achievement-desc">{ach.context}</p>
+              <div className="p3r-lang-legend-row">
+                {stats.languages.map((lang, idx) => (
+                  <div key={lang.name} className="p3r-lang-legend-item">
+                    <span className={`p3r-lang-legend-dot seg-${idx % 4}`} />
+                    <span className="p3r-lang-name">{lang.name}</span>
+                    <span className="p3r-lang-pct">{lang.percentage}%</span>
                   </div>
                 ))}
               </div>
             </div>
+
+            {/* Asymmetrical Lower Spread: Recent Repositories + Technical Focus Areas */}
+            <div className="p3r-telemetry-lower-grid">
+              {/* Repositories Activity Index */}
+              <section className="p3r-repos-column">
+                <div className="p3r-section-header-row">
+                  <h3 className="p3r-sec-title">ACTIVE REPOSITORY ARCHIVE</h3>
+                  <a
+                    href="https://github.com/pritesh-4"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p3r-gh-profile-link"
+                  >
+                    VIEW ALL ON GITHUB ↗
+                  </a>
+                </div>
+
+                <div className="p3r-repos-list">
+                  {stats.repos.slice(0, 6).map((repo) => (
+                    <a
+                      key={repo.id}
+                      href={repo.html_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p3r-repo-item-card"
+                      onMouseEnter={() => playSfx('hover')}
+                    >
+                      <div className="p3r-repo-card-head">
+                        <span className="p3r-repo-name">{repo.name}</span>
+                        {repo.language && (
+                          <span className="p3r-repo-lang-tag">{repo.language}</span>
+                        )}
+                      </div>
+                      <p className="p3r-repo-desc">
+                        {repo.description || 'Public software engineering repository.'}
+                      </p>
+                      <div className="p3r-repo-meta">
+                        <span>⭐ {repo.stargazers_count}</span>
+                        <span>UPDATED: {repo.updated_at.slice(0, 10)}</span>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </section>
+
+              {/* Technical Domain Focus Areas (Evidence-based, no fake S-rank) */}
+              <aside className="p3r-focus-column">
+                <div className="p3r-section-header-row">
+                  <h3 className="p3r-sec-title">TECHNICAL DOMAIN FOCUS</h3>
+                  <span className="p3r-sec-sub">EVIDENCE-BACKED COMPETENCIES</span>
+                </div>
+
+                <div className="p3r-focus-tabs-row">
+                  {CHARACTER_ATTRIBUTES.map((attr) => (
+                    <button
+                      key={attr.id}
+                      type="button"
+                      className={`p3r-focus-tab ${selectedFocus.id === attr.id ? 'active' : ''}`}
+                      onClick={() => {
+                        playSfx('select');
+                        setSelectedFocus(attr);
+                      }}
+                      onMouseEnter={() => playSfx('hover')}
+                    >
+                      <span>{attr.name}</span>
+                    </button>
+                  ))}
+                </div>
+
+                <div className="p3r-focus-detail-plate">
+                  <div className="p3r-focus-head">
+                    <span className="p3r-focus-cat">{selectedFocus.category}</span>
+                    <h4 className="p3r-focus-title">{selectedFocus.name}</h4>
+                    <span className="p3r-focus-exp">{selectedFocus.experienceLabel}</span>
+                  </div>
+
+                  <p className="p3r-focus-summary">{selectedFocus.evidenceSummary}</p>
+
+                  <div className="p3r-focus-section">
+                    <span className="p3r-focus-label">CORE SKILLS IN PRACTICE:</span>
+                    <div className="p3r-focus-skills-wrap">
+                      {selectedFocus.supportingSkills.map((sk, idx) => (
+                        <span key={idx} className="p3r-focus-skill-tag">
+                          {sk}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="p3r-focus-section">
+                    <span className="p3r-focus-label">CORRESPONDING REAL-WORLD EVIDENCE:</span>
+                    <div className="p3r-focus-evidence-list">
+                      {selectedFocus.relevantProjects.map((proj, pIdx) => (
+                        <div key={pIdx} className="p3r-focus-evidence-item">
+                          <span className="p3r-evidence-proj-name">{proj.name} ({proj.role})</span>
+                          <span className="p3r-evidence-text">{proj.evidence}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </aside>
+            </div>
           </div>
         )}
 
-        {/* ==============================================================
-            TAB 2: CALENDAR & DEVELOPMENT TIMELINE (EXPERIENCE 3)
-            ============================================================== */}
+        {/* ================================================================
+            VIEW 2: DEVELOPMENT CALENDAR
+            ================================================================ */}
         {activeTab === 'CALENDAR' && (
-          <div className="p3r-calendar-view-stage" role="tabpanel" aria-label="Dark Hour Calendar" aria-live="polite">
-            {/* Calendar Year Navigation */}
-            <div className="p3r-calendar-year-bar">
-              <span className="p3r-cal-filter-label">TIMELINE CYCLE:</span>
+          <div className="p3r-calendar-view">
+            <div className="p3r-cal-filter-bar">
+              <span className="p3r-cal-filter-label">YEAR FILTER:</span>
               <button
                 type="button"
                 className={`p3r-cal-year-btn ${selectedYear === 'ALL' ? 'active' : ''}`}
-                onClick={() => {
-                  playSfx('select');
-                  setSelectedYear('ALL');
-                }}
-                onMouseEnter={() => playSfx('hover')}
+                onClick={() => setSelectedYear('ALL')}
               >
-                <span>ALL CYCLES</span>
+                <span>ALL TIME</span>
               </button>
               {CALENDAR_YEARS.map((yr) => (
                 <button
                   key={yr}
                   type="button"
                   className={`p3r-cal-year-btn ${selectedYear === yr ? 'active' : ''}`}
-                  onClick={() => {
-                    playSfx('select');
-                    setSelectedYear(yr);
-                  }}
-                  onMouseEnter={() => playSfx('hover')}
+                  onClick={() => setSelectedYear(yr)}
                 >
                   <span>{yr}</span>
                 </button>
               ))}
             </div>
 
-            {/* Calendar Main Grid & Selected Event Split */}
-            <div className="p3r-calendar-stage-split">
-              {/* Chronological Milestone Cards List */}
-              <div className="p3r-calendar-events-col">
-                <div className="p3r-calendar-track-list">
-                  {filteredMilestones.map((m) => (
-                    <div
-                      key={m.id}
-                      className={`p3r-calendar-event-card ${selectedMilestone?.id === m.id ? 'selected' : ''}`}
-                      onClick={() => {
-                        playSfx('select');
-                        setSelectedMilestone(m);
-                      }}
-                      onMouseEnter={() => playSfx('hover')}
-                    >
-                      <div className="p3r-cal-card-left">
-                        <span className="p3r-cal-moon-icon" title={`Phase: ${m.moonPhase}`}>
-                          {m.moonIcon}
-                        </span>
-                        <div className="p3r-cal-date-block">
-                          <span className="p3r-cal-date-str">{m.date}</span>
-                          <span className="p3r-cal-phase-str">{m.moonPhase}</span>
-                        </div>
-                      </div>
-
-                      <div className="p3r-cal-card-right">
-                        <div className="p3r-cal-card-topline">
-                          <span className="p3r-cal-category-badge">{m.categoryLabel}</span>
-                          <span className="p3r-cal-badge">{m.badge}</span>
-                        </div>
-                        <h3 className="p3r-cal-title">{m.title}</h3>
-                        <p className="p3r-cal-summary">{m.summary}</p>
-                      </div>
+            <div className="p3r-cal-grid">
+              <div className="p3r-cal-milestones-list">
+                {filteredMilestones.map((m) => (
+                  <div
+                    key={m.id}
+                    className={`p3r-cal-milestone-card ${selectedMilestone?.id === m.id ? 'selected' : ''}`}
+                    onClick={() => {
+                      playSfx('select');
+                      setSelectedMilestone(m);
+                    }}
+                    onMouseEnter={() => playSfx('hover')}
+                  >
+                    <div className="p3r-cal-card-head">
+                      <span className="p3r-cal-date">{m.displayDate || m.date}</span>
+                      <span className="p3r-cal-cat">{m.categoryLabel || m.category}</span>
                     </div>
-                  ))}
-                </div>
+                    <h4 className="p3r-cal-card-title">{m.title}</h4>
+                    <p className="p3r-cal-card-desc">{m.summary.slice(0, 90)}...</p>
+                  </div>
+                ))}
               </div>
 
-              {/* Event Detail Inspector Panel */}
               {selectedMilestone && (
-                <div className="p3r-calendar-detail-panel">
-                  <div className="p3r-cal-detail-header">
-                    <div className="p3r-cal-header-phase">
-                      <span className="p3r-cal-big-moon">{selectedMilestone.moonIcon}</span>
-                      <div className="p3r-cal-header-dates">
-                        <span className="p3r-cal-header-phase-name">{selectedMilestone.moonPhase} INCIDENT</span>
-                        <h3 className="p3r-cal-header-date-title">{selectedMilestone.displayDate}</h3>
-                      </div>
-                    </div>
-
-                    <span className="p3r-cal-detail-badge">{selectedMilestone.badge}</span>
+                <aside className="p3r-cal-inspector">
+                  <div className="p3r-cal-inspector-head">
+                    <span className="p3r-cal-inspector-date">{selectedMilestone.displayDate} // {selectedMilestone.categoryLabel}</span>
+                    <h3 className="p3r-cal-inspector-title">{selectedMilestone.title}</h3>
                   </div>
-
-                  <div className="p3r-cal-detail-body">
-                    <h2 className="p3r-cal-detail-title">{selectedMilestone.title}</h2>
-
-                    <div className="p3r-cal-detail-section">
-                      <span className="p3r-cal-section-tag">MILESTONE CONTEXT & PURPOSE</span>
-                      <p className="p3r-cal-detail-p">{selectedMilestone.summary}</p>
+                  <p className="p3r-cal-inspector-text">{selectedMilestone.summary}</p>
+                  {selectedMilestone.technicalDetails && (
+                    <p className="p3r-cal-inspector-details">{selectedMilestone.technicalDetails}</p>
+                  )}
+                  {selectedMilestone.relatedProject && (
+                    <div className="p3r-cal-tags-row">
+                      <span className="p3r-cal-tag">
+                        PROJECT: {selectedMilestone.relatedProject}
+                      </span>
                     </div>
-
-                    <div className="p3r-cal-detail-section">
-                      <span className="p3r-cal-section-tag">TECHNICAL CHALLENGE & SOLVED ARCHITECTURE</span>
-                      <p className="p3r-cal-detail-p">{selectedMilestone.technicalDetails}</p>
-                    </div>
-
-                    <div className="p3r-cal-detail-section">
-                      <span className="p3r-cal-section-tag">ASSOCIATED REPOSITORY / PROJECT</span>
-                      <div className="p3r-cal-project-box">
-                        <span className="p3r-cal-project-name">📦 {selectedMilestone.relatedProject}</span>
-                        <a
-                          href={selectedMilestone.projectUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p3r-cal-project-link"
-                          onClick={() => playSfx('confirm')}
-                        >
-                          <span>VISIT TARGET REPO / DEMO ↗</span>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                  )}
+                </aside>
               )}
             </div>
-          </div>
-        )}
-
-        {/* ==============================================================
-            TAB 3: GITHUB SATELLITE RADAR & TELEMETRY
-            ============================================================== */}
-        {activeTab === 'RADAR' && (
-          <div className="p3r-radar-view-stage" role="tabpanel" aria-label="GitHub Satellite Radar" aria-live="polite">
-            {/* Telemetry Status Banner */}
-            <div className="p3r-stats-telemetry-banner">
-              <div className="p3r-telemetry-signal">
-                <span className="p3r-signal-radar-blip" />
-                <span className="p3r-telemetry-channel">
-                  RADAR LINK // USER: github.com/pritesh-4
-                </span>
-              </div>
-
-              <span className="p3r-telemetry-mode-tag">
-                {stats.isCached ? 'CACHED BACKUP TELEMETRY' : 'LIVE API TELEMETRY LINKED'}
-              </span>
-            </div>
-
-            {stats.loading ? (
-              <div className="p3r-stats-loading-box">
-                <div className="p3r-radar-spinner" />
-                <span style={{ fontFamily: 'var(--font-ui)', color: 'var(--p3r-cyan)', letterSpacing: '0.15em' }}>
-                  CALIBRATING S.E.E.S. NAVIGATIONAL RADAR...
-                </span>
-              </div>
-            ) : (
-              <>
-                {/* 4 Stat Tiles */}
-                <div className="p3r-stats-metrics-grid">
-                  <div className="p3r-metric-tile" onMouseEnter={() => playSfx('hover')}>
-                    <span className="p3r-metric-lbl">PUBLIC REPOSITORIES</span>
-                    <span className="p3r-metric-num">{stats.publicRepos}</span>
-                    <span className="p3r-metric-sub">VERIFIED CODE BASES</span>
-                  </div>
-
-                  <div className="p3r-metric-tile" onMouseEnter={() => playSfx('hover')}>
-                    <span className="p3r-metric-lbl">TOTAL STARS EARNED</span>
-                    <span className="p3r-metric-num">{stats.starsCount}</span>
-                    <span className="p3r-metric-sub">COMMUNITY RECOGNITION</span>
-                  </div>
-
-                  <div className="p3r-metric-tile" onMouseEnter={() => playSfx('hover')}>
-                    <span className="p3r-metric-lbl">FOLLOWERS</span>
-                    <span className="p3r-metric-num">{stats.followers}</span>
-                    <span className="p3r-metric-sub">NETWORK NODES</span>
-                  </div>
-
-                  <div className="p3r-metric-tile" onMouseEnter={() => playSfx('hover')}>
-                    <span className="p3r-metric-lbl">FOLLOWING NODES</span>
-                    <span className="p3r-metric-num">{stats.following}</span>
-                    <span className="p3r-metric-sub">COLLABORATIVE PEERS</span>
-                  </div>
-                </div>
-
-                {/* Repositories & Language Breakdown */}
-                <div className="p3r-stats-two-col">
-                  {/* Repositories List */}
-                  <div className="p3r-repos-card">
-                    <h2 className="p3r-card-heading">
-                      <span>ACTIVE REPOSITORIES</span>
-                      <span>//</span>
-                      <span style={{ fontSize: '0.8rem', color: 'var(--p3r-ice)' }}>RECENT COMMITS</span>
-                    </h2>
-
-                    <div className="p3r-repo-list">
-                      {stats.repos.map((repo) => (
-                        <a
-                          key={repo.id}
-                          href={repo.html_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p3r-repo-item"
-                          onMouseEnter={() => playSfx('hover')}
-                        >
-                          <div className="p3r-repo-item-left">
-                            <span className="p3r-repo-item-name">{repo.name}</span>
-                            {repo.description && (
-                              <span className="p3r-repo-item-desc">{repo.description}</span>
-                            )}
-                          </div>
-
-                          <div className="p3r-repo-item-right">
-                            {repo.language && (
-                              <span className="p3r-repo-lang-tag">{repo.language}</span>
-                            )}
-                            <span className="p3r-repo-star-tag">★ {repo.stargazers_count}</span>
-                          </div>
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Language Distribution Breakdown */}
-                  <div className="p3r-languages-card">
-                    <h2 className="p3r-card-heading">
-                      <span>LANGUAGE MATRIX</span>
-                      <span>//</span>
-                      <span style={{ fontSize: '0.8rem', color: 'var(--p3r-ice)' }}>DISTRIBUTION</span>
-                    </h2>
-
-                    <div className="p3r-lang-bar-list">
-                      {stats.languages.map((lang, idx) => (
-                        <div key={idx} className="p3r-lang-row">
-                          <div className="p3r-lang-row-head">
-                            <span>{lang.name}</span>
-                            <span style={{ color: 'var(--p3r-cyan)' }}>{lang.percentage}%</span>
-                          </div>
-                          <div className="p3r-lang-progress-track">
-                            <div
-                              className="p3r-lang-progress-fill"
-                              style={{ width: `${lang.percentage}%` }}
-                            />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </>
-            )}
           </div>
         )}
       </div>

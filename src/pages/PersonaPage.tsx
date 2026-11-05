@@ -15,147 +15,145 @@ export const PersonaPage: FC<PersonaPageProps> = ({ onNavigate, onBackToMenu }) 
   return (
     <InternalPageLayout
       title="PERSONA"
-      sublabel="IDENTITY & ARCHIVE"
+      sublabel="IDENTITY DOSSIER & ARCHIVE"
       sectionId="001"
       characterId="makoto"
       backgroundPath="/assets/persona3/backgrounds/official-wallpapers/p3r-main-key-art.png"
       currentRoute="/about"
       onNavigate={onNavigate}
       onBackToMenu={onBackToMenu}
-      customHint="PRESS ESC TO RETURN TO HUB"
+      customHint="PERSONNEL IDENTITY & RESEARCH INQUIRY DOSSIER"
     >
       <div className="p3r-persona-screen">
-        {/* Personnel Hero Dossier */}
-        <div className="p3r-dossier-hero">
-          <div className="p3r-dossier-meta-row">
-            <span className="p3r-dossier-tag">
-              <span>PERSONNEL RECORD</span>
-              <span>//</span>
-              <span>FILE: 001</span>
-            </span>
-            <span className="p3r-dossier-badge">IDENTITY CONFIRMED</span>
-          </div>
-
-          <h1 className="p3r-dossier-name">{PROFILE_DATA.name}</h1>
-          <p className="p3r-dossier-role">{PROFILE_DATA.headline}</p>
-          <p className="p3r-dossier-subrole">
-            {PROFILE_DATA.role} <span style={{ color: 'var(--p3r-cyan)', margin: '0 8px' }}>//</span> {PROFILE_DATA.institution}
-          </p>
-
-          <div className="p3r-dossier-stats-strip">
-            <div className="p3r-dossier-stat-chip">
-              <span className="p3r-stat-chip-label">INSTITUTION</span>
-              <span className="p3r-stat-chip-value">NIT ROURKELA</span>
+        {/* ================================================================
+            EDITORIAL HERO DOSSIER COMPOSITION
+            ================================================================ */}
+        <section className="p3r-persona-hero-plate">
+          <div className="p3r-hero-content-col">
+            <div className="p3r-hero-tag-row">
+              <span className="p3r-hero-tag-text">PERSONNEL FILE // 001</span>
+              <span className="p3r-hero-status-pill">IDENTITY CONFIRMED</span>
             </div>
-            <div className="p3r-dossier-stat-chip">
-              <span className="p3r-stat-chip-label">LOCATION</span>
-              <span className="p3r-stat-chip-value">ROURKELA, ODISHA</span>
-            </div>
-            <div className="p3r-dossier-stat-chip">
-              <span className="p3r-stat-chip-label">STATUS</span>
-              <span className="p3r-stat-chip-value">2ND YEAR UNDERGRAD</span>
-            </div>
-          </div>
-        </div>
 
-        {/* 5 Verified Profile Dossier Cards */}
-        <div className="p3r-dossier-cards-section">
-          <div className="p3r-dossier-section-header">
-            <span className="p3r-section-title">VERIFIED PROFILE DOSSIER</span>
-            <span className="p3r-section-line" />
-            <span className="p3r-section-tag">EDUCATION & TECHNICAL INTERESTS</span>
-          </div>
+            <h1 className="p3r-persona-hero-name">{PROFILE_DATA.name}</h1>
+            <div className="p3r-persona-hero-headline">{PROFILE_DATA.headline}</div>
+            
+            <p className="p3r-persona-hero-statement">
+              {PROFILE_DATA.summary}
+            </p>
 
-          <div className="p3r-dossier-cards-grid">
-            {PROFILE_DATA.cards.map((card) => (
-              <div
-                key={card.id}
-                className={`p3r-dossier-card card-${card.id}`}
-                onMouseEnter={() => playSfx('hover')}
-              >
-                <div className="p3r-dossier-card-top">
-                  <span className="p3r-card-label">{card.label}</span>
-                  <span className="p3r-card-accent-pill">VERIFIED</span>
-                </div>
-                <h3 className="p3r-card-value">{card.primaryValue}</h3>
-                <ul className="p3r-card-info-list">
-                  {card.supportingInfo.map((info, idx) => (
-                    <li key={idx} className="p3r-card-info-item">
-                      <span className="p3r-info-bullet">✦</span>
-                      <span>{info}</span>
-                    </li>
-                  ))}
-                </ul>
+            <div className="p3r-hero-meta-badges">
+              <div className="p3r-meta-badge-item">
+                <span className="p3r-meta-badge-label">EDUCATION</span>
+                <span className="p3r-meta-badge-val">MINING ENGINEERING</span>
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Narrative & Philosophy Grid */}
-        <div className="p3r-persona-grid">
-          {/* Biography & Mission */}
-          <div className="p3r-dossier-bio-card">
-            <h2 className="p3r-card-heading">
-              <span>SUBJECT SUMMARY</span>
-              <span>//</span>
-              <span style={{ fontSize: '0.8rem', color: 'var(--p3r-ice)' }}>DOSSIER 001</span>
-            </h2>
-
-            <p className="p3r-bio-lead">{PROFILE_DATA.summary}</p>
-
-            <div className="p3r-bio-paragraphs">
-              {PROFILE_DATA.biography.map((p, idx) => (
-                <p key={idx} className="p3r-bio-p">
-                  {p}
-                </p>
-              ))}
+              <div className="p3r-meta-badge-item">
+                <span className="p3r-meta-badge-label">INSTITUTION</span>
+                <span className="p3r-meta-badge-val">NIT ROURKELA</span>
+              </div>
+              <div className="p3r-meta-badge-item">
+                <span className="p3r-meta-badge-label">LOCATION</span>
+                <span className="p3r-meta-badge-val">ROURKELA, ODISHA, INDIA</span>
+              </div>
+              <div className="p3r-meta-badge-item">
+                <span className="p3r-meta-badge-label">ACADEMIC STATUS</span>
+                <span className="p3r-meta-badge-val">2ND YEAR UNDERGRADUATE</span>
+              </div>
             </div>
           </div>
 
-          {/* Core Directives / Philosophy */}
-          <div className="p3r-directives-card">
-            <h2 className="p3r-card-heading">
-              <span>CORE DIRECTIVES</span>
-              <span>//</span>
-              <span style={{ fontSize: '0.8rem', color: 'var(--p3r-ice)' }}>PHILOSOPHY</span>
-            </h2>
+          {/* Graphic Asymmetrical Accent Slabs */}
+          <div className="p3r-hero-accent-block" aria-hidden="true">
+            <div className="p3r-accent-slant-bg" />
+            <div className="p3r-hero-art-window">
+              <img
+                src="/assets/persona3/characters/makoto-yuki.webp"
+                alt=""
+                className="p3r-hero-art-img"
+              />
+            </div>
+            <div className="p3r-hero-stamp-tag">P3R // PROTAGONIST ARCHETYPE</div>
+          </div>
+        </section>
 
-            {PROFILE_DATA.philosophy.map((item, idx) => (
-              <div
-                key={idx}
-                className="p3r-directive-item"
-                onMouseEnter={() => playSfx('hover')}
-              >
-                <h3 className="p3r-directive-title">{item.title}</h3>
-                <p className="p3r-directive-desc">{item.statement}</p>
+        {/* ================================================================
+            TWO-COLUMN EDITORIAL SPREAD
+            ================================================================ */}
+        <div className="p3r-persona-editorial-grid">
+          {/* LEFT: Biography & Architectural Philosophy */}
+          <div className="p3r-editorial-col-main">
+            {/* Biography Section */}
+            <section className="p3r-editorial-section">
+              <div className="p3r-editorial-section-title">
+                <span className="p3r-sec-num">01</span>
+                <h2>PROFILE &amp; RESEARCH INQUIRY</h2>
               </div>
-            ))}
+
+              <div className="p3r-bio-text-block">
+                {PROFILE_DATA.biography.map((para, idx) => (
+                  <p key={idx} className="p3r-bio-paragraph">
+                    {para}
+                  </p>
+                ))}
+              </div>
+            </section>
+
+            {/* Directives / Philosophy Section */}
+            <section className="p3r-editorial-section">
+              <div className="p3r-editorial-section-title">
+                <span className="p3r-sec-num">02</span>
+                <h2>ENGINEERING DIRECTIVES &amp; PHILOSOPHY</h2>
+              </div>
+
+              <div className="p3r-directives-numbered-list">
+                {PROFILE_DATA.philosophy.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="p3r-directive-row"
+                    onMouseEnter={() => playSfx('hover')}
+                  >
+                    <span className="p3r-directive-index">0{idx + 1}</span>
+                    <div className="p3r-directive-body">
+                      <h3 className="p3r-directive-title">{item.title}</h3>
+                      <p className="p3r-directive-statement">{item.statement}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
           </div>
 
-          {/* Combat / Technical Attributes */}
-          <div className="p3r-attributes-card">
-            <h2 className="p3r-card-heading">
-              <span>OPERATIONAL ATTRIBUTES</span>
-              <span>//</span>
-              <span style={{ fontSize: '0.8rem', color: 'var(--p3r-ice)' }}>STATUS MATRIX</span>
-            </h2>
+          {/* RIGHT: Verified Domains & Technical Interests Index */}
+          <aside className="p3r-editorial-col-sidebar">
+            <div className="p3r-editorial-section-title">
+              <span className="p3r-sec-num">03</span>
+              <h2>TECHNICAL INTERESTS &amp; DOMAINS</h2>
+            </div>
 
-            <div className="p3r-attrs-list">
-              {PROFILE_DATA.attributes.map((attr, idx) => (
+            <div className="p3r-interests-stack">
+              {PROFILE_DATA.cards.map((card) => (
                 <div
-                  key={idx}
-                  className="p3r-attr-slot"
+                  key={card.id}
+                  className="p3r-interest-plate"
                   onMouseEnter={() => playSfx('hover')}
                 >
-                  <div className="p3r-attr-label-box">
-                    <span className="p3r-attr-label">{attr.label}</span>
-                    <span className="p3r-attr-val">{attr.value}</span>
+                  <div className="p3r-interest-plate-head">
+                    <span className="p3r-interest-plate-label">{card.label}</span>
+                    <span className="p3r-interest-plate-tag">CONFIRMED</span>
                   </div>
-                  <span className="p3r-attr-rating">{attr.rating}</span>
+                  <h4 className="p3r-interest-plate-val">{card.primaryValue}</h4>
+                  <ul className="p3r-interest-list">
+                    {card.supportingInfo.map((info, idx) => (
+                      <li key={idx} className="p3r-interest-item">
+                        <span className="p3r-interest-bullet">▸</span>
+                        <span>{info}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               ))}
             </div>
-          </div>
+          </aside>
         </div>
       </div>
     </InternalPageLayout>

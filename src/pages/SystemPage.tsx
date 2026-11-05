@@ -36,7 +36,7 @@ export const SystemPage: FC<SystemPageProps> = ({ onNavigate, onBackToMenu }) =>
   return (
     <InternalPageLayout
       title="SYSTEM"
-      sublabel="SYSTEM CONFIGURATION & OPERATIONAL PREFERENCES"
+      sublabel="SYSTEM CONFIGURATION & PREFERENCES"
       sectionId="007"
       characterId="koromaru"
       backgroundPath="/assets/persona3/backgrounds/title/persona3-reload-title.jpg"
@@ -46,233 +46,227 @@ export const SystemPage: FC<SystemPageProps> = ({ onNavigate, onBackToMenu }) =>
       customHint="REAL PREFERENCES ARE PERSISTED IN LOCAL BROWSER STORAGE"
     >
       <div className="p3r-system-screen">
-        <div className="p3r-system-grid">
-          {/* Controls Column */}
-          <div className="p3r-settings-column">
+        <div className="p3r-system-console-grid">
+          {/* LEFT: FLAT CONFIGURATION ROWS */}
+          <div className="p3r-config-column">
             {/* Audio Settings Group */}
-            <section className="p3r-settings-group" aria-labelledby="audio-settings-title">
-              <h2 id="audio-settings-title" className="p3r-settings-group-title">
-                <span>🔊 AUDIO CALIBRATION</span>
+            <section className="p3r-config-group" aria-labelledby="audio-settings-title">
+              <h2 id="audio-settings-title" className="p3r-config-group-title">
+                AUDIO CALIBRATION
               </h2>
 
-              {/* Primary Soundtrack Status Card */}
-              <div className="p3r-setting-row p3r-soundtrack-card">
-                <div className="p3r-setting-meta">
-                  <span className="p3r-setting-name">PRIMARY STARTUP SOUNDTRACK</span>
-                  <span className="p3r-setting-desc">
+              {/* Primary Soundtrack Status */}
+              <div className="p3r-config-row">
+                <div className="p3r-config-meta">
+                  <span className="p3r-config-name">PRIMARY SOUNDTRACK</span>
+                  <span className="p3r-config-desc">
                     <b>{trackInfo.name}</b> &bull; {trackInfo.artist}
                   </span>
-                  <span className="p3r-setting-subdesc" style={{ fontSize: '0.75rem', color: 'var(--p3r-ice)', opacity: 0.85, marginTop: '2px', display: 'block' }}>
-                    Asset Path: <code>public/assets/persona3/audio/bgm/colour-your-night.mp3</code>
-                  </span>
                 </div>
-                <div className="p3r-soundtrack-badge-box">
-                  <span className={`p3r-track-status-pill ${trackInfo.isFallback ? 'fallback' : 'verified'}`}>
-                    {trackInfo.isFallback ? '⚠️ LOCAL FILE REQUIRED (PROCEDURAL FALLBACK)' : '🟢 ACTIVE LOCAL AUDIO'}
+                <div className="p3r-config-control">
+                  <span className={`p3r-audio-status-pill ${trackInfo.isFallback ? 'fallback' : 'verified'}`}>
+                    {trackInfo.isFallback ? 'PROCEDURAL SYNTH' : 'OFFICIAL OST'}
                   </span>
                 </div>
               </div>
 
-              {/* Consolidated Canonical Background Music (BGM) Toggle */}
-              <div className="p3r-setting-row">
-                <div className="p3r-setting-meta">
-                  <span className="p3r-setting-name">BACKGROUND MUSIC (BGM)</span>
-                  <span className="p3r-setting-desc">Ambient soundtrack loop during exploration (Key: M)</span>
+              {/* BGM Switch */}
+              <div className="p3r-config-row">
+                <div className="p3r-config-meta">
+                  <span className="p3r-config-name">BACKGROUND MUSIC (BGM)</span>
+                  <span className="p3r-config-desc">Ambient soundtrack loop during exploration (Key: M)</span>
                 </div>
-                <button
-                  type="button"
-                  className={`p3r-toggle-btn ${bgmEnabled ? 'on' : 'off'}`}
-                  onClick={() => {
-                    toggleBgm();
-                    playSfx('select');
-                  }}
-                  aria-label="Toggle Background Music"
-                >
-                  <span>{bgmEnabled ? '♪ MUSIC ON' : '♪ MUSIC OFF'}</span>
-                </button>
+                <div className="p3r-config-control">
+                  <button
+                    type="button"
+                    className={`p3r-switch-btn ${bgmEnabled ? 'on' : 'off'}`}
+                    onClick={() => {
+                      toggleBgm();
+                      playSfx('select');
+                    }}
+                    aria-label="Toggle Background Music"
+                  >
+                    <span>{bgmEnabled ? 'ON' : 'OFF'}</span>
+                  </button>
+                </div>
               </div>
 
               {/* BGM Volume Slider */}
-              <div className="p3r-setting-row">
-                <div className="p3r-setting-meta">
-                  <span className="p3r-setting-name">BGM VOLUME LEVEL</span>
-                  <span className="p3r-setting-desc">Soundtrack amplitude gain</span>
+              <div className="p3r-config-row">
+                <div className="p3r-config-meta">
+                  <span className="p3r-config-name">BGM VOLUME</span>
+                  <span className="p3r-config-desc">Soundtrack output gain</span>
                 </div>
-                <div className="p3r-slider-wrap">
+                <div className="p3r-config-control p3r-slider-box">
                   <input
                     type="range"
                     min="0"
                     max="1"
                     step="0.05"
                     value={bgmVolume}
-                    onChange={e => setBgmVolume(parseFloat(e.target.value))}
-                    className="p3r-range-slider"
+                    onChange={(e) => setBgmVolume(parseFloat(e.target.value))}
+                    className="p3r-flat-slider"
                     aria-label="BGM Volume"
                   />
-                  <span className="p3r-slider-val">{Math.round(bgmVolume * 100)}%</span>
+                  <span className="p3r-slider-percent">{Math.round(bgmVolume * 100)}%</span>
                 </div>
               </div>
 
-              {/* SFX Toggle */}
-              <div className="p3r-setting-row">
-                <div className="p3r-setting-meta">
-                  <span className="p3r-setting-name">UI SOUND EFFECTS (SFX)</span>
-                  <span className="p3r-setting-desc">Tactile audio feedback on selection and confirm</span>
+              {/* SFX Switch */}
+              <div className="p3r-config-row">
+                <div className="p3r-config-meta">
+                  <span className="p3r-config-name">SOUND EFFECTS (SFX)</span>
+                  <span className="p3r-config-desc">Tactile audio feedback on selection and confirm</span>
                 </div>
-                <button
-                  type="button"
-                  className={`p3r-toggle-btn ${sfxEnabled ? 'on' : 'off'}`}
-                  onClick={() => {
-                    toggleSfx();
-                    playSfx('select');
-                  }}
-                >
-                  <span>{sfxEnabled ? 'ENABLED' : 'DISABLED'}</span>
-                </button>
+                <div className="p3r-config-control">
+                  <button
+                    type="button"
+                    className={`p3r-switch-btn ${sfxEnabled ? 'on' : 'off'}`}
+                    onClick={() => {
+                      toggleSfx();
+                      playSfx('select');
+                    }}
+                    aria-label="Toggle SFX"
+                  >
+                    <span>{sfxEnabled ? 'ON' : 'OFF'}</span>
+                  </button>
+                </div>
               </div>
 
               {/* SFX Volume Slider */}
-              <div className="p3r-setting-row">
-                <div className="p3r-setting-meta">
-                  <span className="p3r-setting-name">SFX VOLUME LEVEL</span>
-                  <span className="p3r-setting-desc">UI sound cue amplitude gain</span>
+              <div className="p3r-config-row">
+                <div className="p3r-config-meta">
+                  <span className="p3r-config-name">SFX VOLUME</span>
+                  <span className="p3r-config-desc">Interface cue output gain</span>
                 </div>
-                <div className="p3r-slider-wrap">
+                <div className="p3r-config-control p3r-slider-box">
                   <input
                     type="range"
                     min="0"
                     max="1"
                     step="0.05"
                     value={sfxVolume}
-                    onChange={e => {
+                    onChange={(e) => {
                       setSfxVolume(parseFloat(e.target.value));
                       playSfx('hover');
                     }}
-                    className="p3r-range-slider"
+                    className="p3r-flat-slider"
                     aria-label="SFX Volume"
                   />
-                  <span className="p3r-slider-val">{Math.round(sfxVolume * 100)}%</span>
+                  <span className="p3r-slider-percent">{Math.round(sfxVolume * 100)}%</span>
                 </div>
               </div>
             </section>
 
             {/* Display & Visual Preferences */}
-            <section className="p3r-settings-group" aria-labelledby="display-settings-title">
-              <h2 id="display-settings-title" className="p3r-settings-group-title">
-                <span>🖥 DISPLAY & MOTION PREFERENCES</span>
+            <section className="p3r-config-group" aria-labelledby="display-settings-title">
+              <h2 id="display-settings-title" className="p3r-config-group-title">
+                DISPLAY &amp; MOTION
               </h2>
 
-              {/* Reduced Motion */}
-              <div className="p3r-setting-row">
-                <div className="p3r-setting-meta">
-                  <span className="p3r-setting-name">REDUCED MOTION</span>
-                  <span className="p3r-setting-desc">Disables heavy layout rotations and transforms</span>
+              {/* Reduced Motion Switch */}
+              <div className="p3r-config-row">
+                <div className="p3r-config-meta">
+                  <span className="p3r-config-name">REDUCED MOTION</span>
+                  <span className="p3r-config-desc">Suppresses heavy transitions and rotational transforms</span>
                 </div>
-                <button
-                  type="button"
-                  className={`p3r-toggle-btn ${reducedMotion ? 'on' : 'off'}`}
-                  onClick={() => {
-                    setReducedMotion(!reducedMotion);
-                    playSfx('select');
-                  }}
-                >
-                  <span>{reducedMotion ? 'ACTIVE' : 'OFF'}</span>
-                </button>
+                <div className="p3r-config-control">
+                  <button
+                    type="button"
+                    className={`p3r-switch-btn ${reducedMotion ? 'on' : 'off'}`}
+                    onClick={() => {
+                      setReducedMotion(!reducedMotion);
+                      playSfx('select');
+                    }}
+                    aria-label="Toggle Reduced Motion"
+                  >
+                    <span>{reducedMotion ? 'ON' : 'OFF'}</span>
+                  </button>
+                </div>
               </div>
 
               {/* Artwork Intensity Slider */}
-              <div className="p3r-setting-row">
-                <div className="p3r-setting-meta">
-                  <span className="p3r-setting-name">BACKGROUND ARTWORK INTENSITY</span>
-                  <span className="p3r-setting-desc">Brightness and opacity of wallpapers</span>
+              <div className="p3r-config-row">
+                <div className="p3r-config-meta">
+                  <span className="p3r-config-name">BACKGROUND ARTWORK INTENSITY</span>
+                  <span className="p3r-config-desc">Opacity of atmospheric background wallpapers</span>
                 </div>
-                <div className="p3r-slider-wrap">
+                <div className="p3r-config-control p3r-slider-box">
                   <input
                     type="range"
                     min="0.2"
                     max="1"
                     step="0.05"
                     value={artworkIntensity}
-                    onChange={e => setArtworkIntensity(parseFloat(e.target.value))}
-                    className="p3r-range-slider"
+                    onChange={(e) => setArtworkIntensity(parseFloat(e.target.value))}
+                    className="p3r-flat-slider"
                     aria-label="Artwork Intensity"
                   />
-                  <span className="p3r-slider-val">{Math.round(artworkIntensity * 100)}%</span>
+                  <span className="p3r-slider-percent">{Math.round(artworkIntensity * 100)}%</span>
                 </div>
               </div>
             </section>
 
-            {/* Reset to Factory Defaults */}
-            <button
-              type="button"
-              className="p3r-reset-defaults-btn"
-              onClick={handleReset}
-              onMouseEnter={() => playSfx('hover')}
-            >
-              <span>↺ RESTORE FACTORY CONFIGURATION</span>
-            </button>
+            {/* Reset Defaults Action Button */}
+            <div className="p3r-reset-action-box">
+              <button
+                type="button"
+                className="p3r-reset-button"
+                onClick={handleReset}
+                onMouseEnter={() => playSfx('hover')}
+              >
+                <span>↺ RESTORE FACTORY CONFIGURATION</span>
+              </button>
+            </div>
           </div>
 
-          {/* Info & Keybindings Column */}
-          <div className="p3r-info-column">
-            {/* Keybindings Guide */}
-            <div className="p3r-keys-guide-card">
-              <h2 className="p3r-card-heading">
-                <span>KEYBOARD SHORTCUTS</span>
-                <span>//</span>
-                <span style={{ fontSize: '0.8rem', color: 'var(--p3r-ice)' }}>GUIDE</span>
-              </h2>
-
-              <div className="p3r-keys-list">
-                <div className="p3r-key-row">
+          {/* RIGHT: SHORTCUTS REFERENCE & ARCHITECTURE NOTES */}
+          <aside className="p3r-system-reference-column">
+            {/* Keyboard Shortcuts Guide */}
+            <div className="p3r-ref-card">
+              <h3 className="p3r-ref-card-title">KEYBOARD CONTROLS</h3>
+              <div className="p3r-shortcuts-list">
+                <div className="p3r-shortcut-row">
                   <span className="p3r-key-badge">ESC</span>
-                  <span className="p3r-key-purpose">Return to Main Menu / Close Dialog</span>
+                  <span className="p3r-key-desc">Return to Main Menu / Close Dialog</span>
                 </div>
-                <div className="p3r-key-row">
+                <div className="p3r-shortcut-row">
                   <span className="p3r-key-badge">ENTER / SPACE</span>
-                  <span className="p3r-key-purpose">Confirm Selection / Open Item</span>
+                  <span className="p3r-key-desc">Confirm Selection / Open Item</span>
                 </div>
-                <div className="p3r-key-row">
+                <div className="p3r-shortcut-row">
                   <span className="p3r-key-badge">↑ / ↓ / ← / →</span>
-                  <span className="p3r-key-purpose">Navigate Options in Menu Arc</span>
+                  <span className="p3r-key-desc">Navigate Options in Menu Arc &amp; Lists</span>
                 </div>
-                <div className="p3r-key-row">
+                <div className="p3r-shortcut-row">
                   <span className="p3r-key-badge">M</span>
-                  <span className="p3r-key-purpose">Toggle Background Music (ON / OFF)</span>
+                  <span className="p3r-key-desc">Toggle Background Music (ON / OFF)</span>
                 </div>
               </div>
             </div>
 
-            {/* System Info & Legal Attribution */}
-            <div className="p3r-sys-about-card">
-              <h2 className="p3r-card-heading">
-                <span>SYSTEM ARCHITECTURE</span>
-                <span>//</span>
-                <span style={{ fontSize: '0.8rem', color: 'var(--p3r-ice)' }}>ABOUT</span>
-              </h2>
-
-              <div className="p3r-sys-item-row">
-                <span className="p3r-sys-item-lbl">PORTFOLIO VERSION:</span>
-                <span className="p3r-sys-item-val">{SYSTEM_INFO.version}</span>
+            {/* Architecture Details */}
+            <div className="p3r-ref-card">
+              <h3 className="p3r-ref-card-title">SYSTEM ARCHITECTURE</h3>
+              <div className="p3r-arch-specs-list">
+                <div className="p3r-spec-item">
+                  <span className="p3r-spec-name">FRAMEWORK:</span>
+                  <span className="p3r-spec-val">{SYSTEM_INFO.engine}</span>
+                </div>
+                <div className="p3r-spec-item">
+                  <span className="p3r-spec-name">DEVELOPER:</span>
+                  <span className="p3r-spec-val">{SYSTEM_INFO.developer}</span>
+                </div>
+                <div className="p3r-spec-item">
+                  <span className="p3r-spec-name">AUDIO SUBSYSTEM:</span>
+                  <span className="p3r-spec-val">{SYSTEM_INFO.audioSpecs}</span>
+                </div>
               </div>
-              <div className="p3r-sys-item-row">
-                <span className="p3r-sys-item-lbl">ENGINE:</span>
-                <span className="p3r-sys-item-val">{SYSTEM_INFO.engine}</span>
-              </div>
-              <div className="p3r-sys-item-row">
-                <span className="p3r-sys-item-lbl">DEVELOPER:</span>
-                <span className="p3r-sys-item-val">{SYSTEM_INFO.developer}</span>
-              </div>
-              <div className="p3r-sys-item-row">
-                <span className="p3r-sys-item-lbl">AUDIO SPEC:</span>
-                <span className="p3r-sys-item-val">{SYSTEM_INFO.audioSpecs}</span>
-              </div>
-
-              <p className="p3r-sys-legal-notice">
+              <p className="p3r-legal-statement">
                 {SYSTEM_INFO.legalNotice}
               </p>
             </div>
-          </div>
+          </aside>
         </div>
       </div>
     </InternalPageLayout>

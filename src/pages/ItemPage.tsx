@@ -54,134 +54,157 @@ export const ItemPage: FC<ItemPageProps> = ({ onNavigate, onBackToMenu }) => {
   return (
     <InternalPageLayout
       title="SKILL"
-      sublabel="TECHNICAL TOOLKIT & COMPETENCIES"
+      sublabel="TECHNICAL ABILITY & COMPETENCY INDEX"
       sectionId="002"
       characterId="aigis"
       backgroundPath="/assets/persona3/backgrounds/main-visuals/p3r-main-visual.png"
       currentRoute="/tools"
       onNavigate={onNavigate}
       onBackToMenu={onBackToMenu}
-      customHint="HOVER OR SELECT ANY SKILL TO INSPECT PURPOSE, IMPLEMENTATION NOTES & DOCS"
+      customHint="HOVER OR SELECT ANY SKILL TO INSPECT ARCHITECTURAL NOTES & PROJECTS"
     >
-      <div className="p3r-item-screen">
-        {/* Category Filter Tabs */}
-        <div className="p3r-item-tabs-bar" role="tablist" aria-label="Skill Categories">
-          {INVENTORY_CATEGORIES.map((cat) => (
-            <button
-              key={cat.id}
-              type="button"
-              role="tab"
-              aria-selected={selectedCat === cat.id}
-              className={`p3r-item-tab-btn ${selectedCat === cat.id ? 'active' : ''}`}
-              onClick={() => handleSelectCategory(cat.id)}
-              onMouseEnter={() => playSfx('hover')}
-            >
-              <span>{cat.label}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Two-Column Grid: Slot Grid + Skill Inspection Panel */}
-        <div className="p3r-item-stage-grid">
-          {/* Collectible Slot Grid */}
-          <div className="p3r-inventory-slot-grid" role="listbox" aria-label="Skills Grid" aria-live="polite">
-            {filteredItems.map((item) => (
-              <div
-                key={item.id}
-                role="option"
-                aria-selected={selectedItem.id === item.id}
-                tabIndex={0}
-                className={`p3r-inv-slot rarity-${item.rarity.toLowerCase()} ${
-                  selectedItem.id === item.id ? 'selected' : ''
-                }`}
-                onClick={() => handleSelectItem(item)}
-                onMouseEnter={() => handleSelectItem(item, true)}
-                onFocus={() => handleSelectItem(item, true)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    handleSelectItem(item);
-                  } else if (e.key === 'ArrowDown') {
-                    e.preventDefault();
-                    const next = e.currentTarget.nextElementSibling as HTMLElement | null;
-                    next?.focus();
-                  } else if (e.key === 'ArrowUp') {
-                    e.preventDefault();
-                    const prev = e.currentTarget.previousElementSibling as HTMLElement | null;
-                    prev?.focus();
-                  }
-                }}
-              >
-                <div className="p3r-inv-slot-top">
-                  <span className="p3r-inv-icon">{item.icon}</span>
-                  <span className="p3r-inv-rarity-pill">{item.rarity}</span>
-                </div>
-
-                <div className="p3r-inv-slot-mid">
-                  <span className="p3r-inv-slot-name">{item.name}</span>
-                  <span className="p3r-inv-slot-cat">{item.categoryLabel}</span>
-                </div>
-
-                <div className="p3r-inv-slot-bottom">
-                  <span className="p3r-inv-quantity">{item.quantity}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Skill Inspection Panel */}
-          <aside className="p3r-item-inspection-panel" aria-label="Skill Inspector" aria-live="polite">
-            <div className="p3r-item-head-box">
-              <span className="p3r-item-huge-icon" aria-hidden="true">{selectedItem.icon}</span>
-              <div className="p3r-item-head-text">
-                <div className="p3r-item-head-meta">
-                  <span className="p3r-item-cat-sub">{selectedItem.categoryLabel}</span>
-                  <span className={`p3r-item-rarity-tag rarity-${selectedItem.rarity.toLowerCase()}`}>
-                    {selectedItem.rarity}
-                  </span>
-                </div>
-                <h2 className="p3r-item-title">{selectedItem.name}</h2>
-              </div>
+      <div className="p3r-skill-screen">
+        {/* ================================================================
+            3-COLUMN ABILITY SELECTION INTERFACE
+            Left: Category Index | Centre: Skill Rows | Right: Live Inspector
+            ================================================================ */}
+        <div className="p3r-skill-tri-layout">
+          {/* COLUMN 1: CATEGORY INDEX */}
+          <nav className="p3r-skill-cat-column" aria-label="Skill Categories">
+            <div className="p3r-cat-col-header">
+              <span className="p3r-cat-col-tag">CATEGORY INDEX</span>
+              <span className="p3r-cat-col-count">{filteredItems.length} SKILLS</span>
             </div>
 
-            {/* WHAT IT IS USED FOR */}
-            <div className="p3r-item-section">
-              <h3 className="p3r-item-sec-heading">WHAT IT IS USED FOR</h3>
-              <p className="p3r-item-effect-text">{selectedItem.whatItIsUsedFor}</p>
-            </div>
-
-            {/* IMPLEMENTATION NOTES */}
-            <div className="p3r-item-section">
-              <h3 className="p3r-item-sec-heading">IMPLEMENTATION NOTES</h3>
-              <p className="p3r-item-flavor-text">&ldquo;{selectedItem.flavorText}&rdquo;</p>
-            </div>
-
-            {/* RELEVANT PROJECTS WHERE ACTUALLY USED */}
-            <div className="p3r-item-section">
-              <h3 className="p3r-item-sec-heading">RELEVANT PROJECTS WHERE ACTUALLY USED</h3>
-              <div className="p3r-item-projects-list">
-                {selectedItem.relevantProjects.map((proj, pIdx) => (
-                  <span key={pIdx} className="p3r-item-project-pill">
-                    📦 {proj}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* DOCUMENTATION LINK */}
-            {selectedItem.docsUrl && selectedItem.docsUrl !== '#' && (
-              <div className="p3r-item-docs-box">
-                <a
-                  href={selectedItem.docsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p3r-item-docs-link"
-                  onClick={() => playSfx('confirm')}
+            <div className="p3r-cat-btn-list" role="tablist">
+              {INVENTORY_CATEGORIES.map((cat) => (
+                <button
+                  key={cat.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={selectedCat === cat.id}
+                  className={`p3r-cat-tab-row ${selectedCat === cat.id ? 'active' : ''}`}
+                  onClick={() => handleSelectCategory(cat.id)}
+                  onMouseEnter={() => playSfx('hover')}
                 >
-                  <span>OFFICIAL DOCUMENTATION ↗</span>
-                </a>
+                  <span className="p3r-cat-indicator" />
+                  <span className="p3r-cat-name">{cat.label}</span>
+                </button>
+              ))}
+            </div>
+          </nav>
+
+          {/* COLUMN 2: SKILLS AND TECHNOLOGY LIST */}
+          <section className="p3r-skill-list-column" aria-label="Technologies List">
+            <div className="p3r-skill-list-header">
+              <span className="p3r-skill-list-title">REGISTERED COMPETENCIES</span>
+              <span className="p3r-skill-list-sub">HOVER TO PREVIEW</span>
+            </div>
+
+            <div
+              className="p3r-skill-rows-container"
+              role="listbox"
+              aria-label="Skill list"
+              aria-live="polite"
+            >
+              {filteredItems.map((item) => (
+                <div
+                  key={item.id}
+                  role="option"
+                  aria-selected={selectedItem.id === item.id}
+                  tabIndex={0}
+                  className={`p3r-skill-item-row ${selectedItem.id === item.id ? 'selected' : ''}`}
+                  onClick={() => handleSelectItem(item)}
+                  onMouseEnter={() => handleSelectItem(item, true)}
+                  onFocus={() => handleSelectItem(item, true)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handleSelectItem(item);
+                    } else if (e.key === 'ArrowDown') {
+                      e.preventDefault();
+                      const next = e.currentTarget.nextElementSibling as HTMLElement | null;
+                      next?.focus();
+                    } else if (e.key === 'ArrowUp') {
+                      e.preventDefault();
+                      const prev = e.currentTarget.previousElementSibling as HTMLElement | null;
+                      prev?.focus();
+                    }
+                  }}
+                >
+                  <span className="p3r-skill-row-icon" aria-hidden="true">{item.icon}</span>
+                  <div className="p3r-skill-row-info">
+                    <div className="p3r-skill-row-main">
+                      <span className="p3r-skill-row-name">{item.name}</span>
+                      <span className="p3r-skill-row-cat">{item.categoryLabel}</span>
+                    </div>
+                    <span className="p3r-skill-row-desc">
+                      {item.whatItIsUsedFor.slice(0, 75)}...
+                    </span>
+                  </div>
+                  <span className="p3r-skill-row-arrow">▸</span>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* COLUMN 3: LIVE ABILITY INSPECTOR */}
+          <aside className="p3r-skill-inspector-column" aria-label="Live Ability Inspector" aria-live="polite">
+            <div className="p3r-inspector-plate">
+              {/* Header Box */}
+              <div className="p3r-inspector-head">
+                <div className="p3r-inspector-meta-row">
+                  <span className="p3r-inspector-cat-tag">{selectedItem.categoryLabel}</span>
+                  <span className="p3r-inspector-verified-tag">VERIFIED PRODUCTION STACK</span>
+                </div>
+                <div className="p3r-inspector-title-row">
+                  <span className="p3r-inspector-hero-icon" aria-hidden="true">{selectedItem.icon}</span>
+                  <h2 className="p3r-inspector-title">{selectedItem.name}</h2>
+                </div>
               </div>
-            )}
+
+              {/* Inspector Content Sections */}
+              <div className="p3r-inspector-body">
+                {/* 1. ACTUAL PURPOSE */}
+                <div className="p3r-inspector-section">
+                  <h3 className="p3r-inspector-sec-label">ACTUAL PURPOSE &amp; UTILITY</h3>
+                  <p className="p3r-inspector-text">{selectedItem.whatItIsUsedFor}</p>
+                </div>
+
+                {/* 2. HOW IT HAS BEEN USED */}
+                <div className="p3r-inspector-section">
+                  <h3 className="p3r-inspector-sec-label">ENGINEERING IMPLEMENTATION NOTES</h3>
+                  <p className="p3r-inspector-quote">&ldquo;{selectedItem.flavorText}&rdquo;</p>
+                </div>
+
+                {/* 3. RELEVANT PROJECTS */}
+                <div className="p3r-inspector-section">
+                  <h3 className="p3r-inspector-sec-label">SHIPPED PROJECT DEPLOYMENTS</h3>
+                  <div className="p3r-inspector-projects-wrap">
+                    {selectedItem.relevantProjects.map((proj, pIdx) => (
+                      <span key={pIdx} className="p3r-inspector-project-badge">
+                        📦 {proj}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 4. DOCUMENTATION LINK */}
+                {selectedItem.docsUrl && selectedItem.docsUrl !== '#' && (
+                  <div className="p3r-inspector-actions">
+                    <a
+                      href={selectedItem.docsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p3r-inspector-doc-btn"
+                      onClick={() => playSfx('confirm')}
+                    >
+                      <span>OFFICIAL DOCUMENTATION ↗</span>
+                    </a>
+                  </div>
+                )}
+              </div>
+            </div>
           </aside>
         </div>
       </div>

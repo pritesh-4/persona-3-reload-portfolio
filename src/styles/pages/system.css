@@ -1,303 +1,346 @@
 /* ================================================================
-   PERSONA 3 RELOAD — SYSTEM SCREEN (CONFIGURATION MENU)
+   PERSONA 3 RELOAD — SYSTEM SCREEN (CONFIGURATION CONSOLE)
    ================================================================ */
 
 .p3r-system-screen {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  max-width: 1040px;
   width: 100%;
-  animation: p3r-fade-slide 400ms var(--ease-out-expo);
+  max-width: 1360px;
+  margin: 0 auto;
+  animation: p3r-system-enter 350ms var(--ease-out-expo);
 }
 
-/* System Grid: 2 columns (Settings Controls + Keybindings & About) */
-.p3r-system-grid {
+@keyframes p3r-system-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================================================================
+   TWO-COLUMN CONSOLE GRID
+   ================================================================ */
+.p3r-system-console-grid {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 1fr 400px;
   gap: 24px;
+  align-items: start;
 }
 
-/* Settings Column */
-.p3r-settings-column {
+/* ----------------------------------------------------------------
+   LEFT: FLAT CONFIGURATION ROWS
+   ---------------------------------------------------------------- */
+.p3r-config-column {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 22px;
 }
 
-.p3r-settings-group {
-  background: rgba(6, 19, 33, 0.92);
-  border: 1px solid rgba(0, 212, 255, 0.25);
-  border-left: 6px solid var(--p3r-cyan);
+.p3r-config-group {
+  background: linear-gradient(
+    180deg,
+    rgba(3, 11, 25, 0.94) 0%,
+    rgba(9, 38, 75, 0.9) 100%
+  );
+  border: 1px solid rgba(55, 217, 242, 0.25);
+  border-top: 4px solid var(--abyss-reload);
+  clip-path: var(--p3r-cut-plate);
   padding: 22px 26px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
-.p3r-settings-group-title {
+.p3r-config-group-title {
   font-family: var(--font-ui);
   font-size: 1.15rem;
-  letter-spacing: 0.15em;
-  color: var(--p3r-cyan);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
-  padding-bottom: 8px;
+  letter-spacing: 0.14em;
+  color: var(--abyss-white);
+  border-bottom: 1px solid rgba(55, 217, 242, 0.25);
+  padding-bottom: 10px;
+  margin: 0 0 8px 0;
 }
 
-/* Setting Row */
-.p3r-setting-row {
+.p3r-config-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(55, 217, 242, 0.14);
   gap: 16px;
 }
 
-.p3r-soundtrack-card {
-  background: rgba(0, 102, 255, 0.08);
-  border-left: 3px solid var(--p3r-cyan);
-  padding: 10px 14px;
+.p3r-config-row:last-child {
+  border-bottom: none;
 }
 
-.p3r-soundtrack-card code {
-  font-family: monospace;
-  background: rgba(0, 0, 0, 0.4);
-  padding: 1px 4px;
-  border-radius: 2px;
-  color: var(--p3r-cyan);
-}
-
-.p3r-track-status-pill {
-  font-family: var(--font-ui);
-  font-size: 0.8rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  padding: 4px 10px;
-  border-radius: 2px;
-  white-space: nowrap;
-}
-
-.p3r-track-status-pill.verified {
-  background: rgba(0, 230, 118, 0.15);
-  color: #00e676;
-  border: 1px solid rgba(0, 230, 118, 0.4);
-}
-
-.p3r-track-status-pill.fallback {
-  background: rgba(225, 29, 72, 0.15);
-  color: var(--p3r-magenta);
-  border: 1px solid rgba(225, 29, 72, 0.4);
-}
-
-.p3r-setting-meta {
+.p3r-config-meta {
   display: flex;
   flex-direction: column;
+  gap: 3px;
+  flex: 1;
 }
 
-.p3r-setting-name {
+.p3r-config-name {
   font-family: var(--font-ui);
-  font-size: 1.1rem;
-  letter-spacing: 0.08em;
-  color: var(--p3r-snow);
+  font-size: 0.98rem;
+  letter-spacing: 0.1em;
+  color: var(--abyss-white);
 }
 
-.p3r-setting-desc {
-  font-size: 0.76rem;
-  color: rgba(240, 246, 255, 0.6);
+.p3r-config-desc {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--abyss-mist);
 }
 
-/* Custom Persona Slanted Switch */
-.p3r-setting-switch {
+.p3r-config-control {
   display: flex;
   align-items: center;
-  gap: 8px;
+  flex-shrink: 0;
 }
 
-.p3r-toggle-btn {
-  padding: 6px 16px;
+/* Audio Status Pill */
+.p3r-audio-status-pill {
   font-family: var(--font-ui);
-  font-size: 0.95rem;
-  letter-spacing: 0.1em;
-  transform: skewX(-12deg);
-  border: 1px solid rgba(0, 212, 255, 0.3);
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  padding: 3px 10px;
+  border-radius: 2px;
+}
+
+.p3r-audio-status-pill.verified {
+  background: rgba(5, 150, 105, 0.25);
+  border: 1px solid #10b981;
+  color: #34d399;
+}
+
+.p3r-audio-status-pill.fallback {
+  background: rgba(217, 119, 6, 0.25);
+  border: 1px solid #f59e0b;
+  color: #fbbf24;
+}
+
+/* Flat Switch Button */
+.p3r-switch-btn {
+  padding: 6px 18px;
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  letter-spacing: 0.14em;
   cursor: pointer;
-  transition: all 180ms ease;
+  transition: all 160ms ease;
+  transform: skewX(-10deg);
+  border: 1px solid transparent;
 }
 
-.p3r-toggle-btn > * {
-  transform: skewX(12deg);
+.p3r-switch-btn > * {
+  transform: skewX(10deg);
 }
 
-.p3r-toggle-btn.on {
-  background: var(--p3r-royal);
-  color: var(--p3r-snow);
-  border-color: var(--p3r-cyan);
-  box-shadow: 0 0 12px rgba(0, 212, 255, 0.5);
+.p3r-switch-btn.on {
+  background: var(--abyss-reload);
+  border-color: var(--abyss-cyan);
+  color: var(--abyss-white);
+  box-shadow: 0 0 10px rgba(21, 88, 214, 0.4);
 }
 
-.p3r-toggle-btn.off {
-  background: rgba(10, 30, 56, 0.6);
-  color: rgba(240, 246, 255, 0.4);
+.p3r-switch-btn.off {
+  background: rgba(9, 38, 75, 0.7);
+  border-color: rgba(55, 217, 242, 0.3);
+  color: var(--abyss-mist);
 }
 
-/* Custom Range Slider */
-.p3r-slider-wrap {
+.p3r-switch-btn:hover {
+  border-color: var(--abyss-cyan);
+  color: #fff;
+}
+
+/* Range Slider Control */
+.p3r-slider-box {
   display: flex;
   align-items: center;
   gap: 12px;
-  min-width: 180px;
 }
 
-.p3r-range-slider {
+.p3r-flat-slider {
   -webkit-appearance: none;
-  width: 100%;
+  appearance: none;
+  width: 140px;
   height: 6px;
-  background: rgba(10, 30, 56, 0.9);
-  border: 1px solid rgba(0, 212, 255, 0.3);
-  border-radius: 2px;
+  background: rgba(9, 38, 75, 0.8);
+  border: 1px solid rgba(55, 217, 242, 0.3);
   outline: none;
+  cursor: pointer;
 }
 
-.p3r-range-slider::-webkit-slider-thumb {
+.p3r-flat-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
+  appearance: none;
   width: 16px;
   height: 16px;
-  background: var(--p3r-cyan);
+  background: var(--abyss-cyan);
+  border: 2px solid var(--abyss-midnight);
   cursor: pointer;
-  box-shadow: 0 0 10px var(--p3r-cyan);
-  transform: rotate(45deg);
+  box-shadow: 0 0 6px var(--abyss-cyan);
 }
 
-.p3r-range-slider::-moz-range-thumb {
+.p3r-flat-slider::-moz-range-thumb {
   width: 16px;
   height: 16px;
-  background: var(--p3r-cyan);
+  background: var(--abyss-cyan);
+  border: 2px solid var(--abyss-midnight);
   cursor: pointer;
-  box-shadow: 0 0 10px var(--p3r-cyan);
-  transform: rotate(45deg);
 }
 
-.p3r-slider-val {
+.p3r-slider-percent {
   font-family: var(--font-ui);
-  font-size: 1rem;
-  color: var(--p3r-cyan);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  color: var(--abyss-cyan);
   min-width: 44px;
   text-align: right;
 }
 
-/* Info & Keys Column */
-.p3r-info-column {
+/* Reset Button */
+.p3r-reset-action-box {
+  padding-top: 4px;
+}
+
+.p3r-reset-button {
+  padding: 10px 22px;
+  background: rgba(9, 38, 75, 0.7);
+  border: 1px solid var(--abyss-pink);
+  color: var(--abyss-white);
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  transform: skewX(-12deg);
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+
+.p3r-reset-button > * {
+  transform: skewX(12deg);
+}
+
+.p3r-reset-button:hover {
+  background: var(--abyss-pink);
+  border-color: #ff6b9d;
+  color: #fff;
+  transform: skewX(-12deg) scale(1.02);
+}
+
+/* ----------------------------------------------------------------
+   RIGHT: REFERENCE & ARCHITECTURE NOTES
+   ---------------------------------------------------------------- */
+.p3r-system-reference-column {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-/* Keybindings Guide */
-.p3r-keys-guide-card {
-  background: rgba(6, 19, 33, 0.92);
-  border: 1px solid rgba(0, 212, 255, 0.25);
-  border-top: 5px solid var(--p3r-red);
-  padding: 22px 24px;
+.p3r-ref-card {
+  background: linear-gradient(
+    180deg,
+    rgba(3, 11, 25, 0.94) 0%,
+    rgba(9, 38, 75, 0.9) 100%
+  );
+  border: 1px solid rgba(55, 217, 242, 0.22);
+  border-top: 4px solid var(--abyss-cyan);
+  padding: 20px 24px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
-.p3r-keys-list {
+.p3r-ref-card-title {
+  font-family: var(--font-ui);
+  font-size: 1.05rem;
+  letter-spacing: 0.14em;
+  color: var(--abyss-white);
+  margin: 0;
+  border-bottom: 1px solid rgba(55, 217, 242, 0.2);
+  padding-bottom: 8px;
+}
+
+.p3r-shortcuts-list {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.p3r-key-row {
+.p3r-shortcut-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 6px 0;
-  border-bottom: 1px solid rgba(0, 212, 255, 0.1);
-}
-
-.p3r-key-badge {
-  font-family: var(--font-ui);
-  font-size: 0.95rem;
-  color: var(--p3r-cyan);
-  background: rgba(10, 30, 56, 0.8);
-  border: 1px solid rgba(0, 212, 255, 0.3);
-  padding: 2px 10px;
-  border-radius: 2px;
-}
-
-.p3r-key-purpose {
-  font-size: 0.82rem;
-  color: rgba(240, 246, 255, 0.85);
-}
-
-/* System Details & Legal Card */
-.p3r-sys-about-card {
-  background: rgba(6, 19, 33, 0.92);
-  border: 1px solid rgba(0, 212, 255, 0.25);
-  padding: 22px 24px;
-  display: flex;
-  flex-direction: column;
   gap: 12px;
 }
 
-.p3r-sys-item-row {
+.p3r-key-badge {
+  background: var(--abyss-deep);
+  border: 1px solid rgba(55, 217, 242, 0.4);
+  color: var(--abyss-cyan);
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border-radius: 2px;
+  min-width: 58px;
+  text-align: center;
+}
+
+.p3r-key-desc {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--abyss-ice);
+}
+
+.p3r-arch-specs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.p3r-spec-item {
   display: flex;
   justify-content: space-between;
+  font-family: var(--font-body);
   font-size: 0.82rem;
+  border-bottom: 1px solid rgba(55, 217, 242, 0.1);
+  padding-bottom: 4px;
 }
 
-.p3r-sys-item-lbl {
-  color: rgba(240, 246, 255, 0.6);
+.p3r-spec-name {
+  color: var(--abyss-cyan);
+  font-family: var(--font-ui);
+  letter-spacing: 0.08em;
 }
 
-.p3r-sys-item-val {
-  color: var(--p3r-snow);
+.p3r-spec-val {
+  color: var(--abyss-white);
   font-weight: 600;
 }
 
-.p3r-sys-legal-notice {
-  font-size: 0.72rem;
+.p3r-legal-statement {
+  font-family: var(--font-body);
+  font-size: 0.74rem;
   line-height: 1.5;
-  color: rgba(240, 246, 255, 0.55);
-  border-top: 1px solid rgba(0, 212, 255, 0.15);
-  padding-top: 10px;
-  margin-top: 6px;
+  color: var(--abyss-mist);
+  margin: 4px 0 0 0;
+  padding-top: 8px;
+  border-top: 1px solid rgba(55, 217, 242, 0.15);
 }
 
-/* Reset Button */
-.p3r-reset-defaults-btn {
-  padding: 10px 20px;
-  background: var(--p3r-slate);
-  border: 1px solid var(--p3r-red);
-  color: var(--p3r-snow);
-  font-family: var(--font-ui);
-  font-size: 1.05rem;
-  letter-spacing: 0.1em;
-  transform: skewX(-12deg);
-  cursor: pointer;
-  transition: all 180ms ease;
-  align-self: flex-start;
-}
-
-.p3r-reset-defaults-btn > * {
-  transform: skewX(12deg);
-}
-
-.p3r-reset-defaults-btn:hover {
-  background: var(--p3r-red);
-  box-shadow: 0 0 16px rgba(225, 29, 72, 0.6);
-}
-
-/* ----------------------------------------------------------------
+/* ================================================================
    RESPONSIVE DESIGN
-   ---------------------------------------------------------------- */
-@media (max-width: 900px) {
-  .p3r-system-grid {
+   ================================================================ */
+@media (max-width: 960px) {
+  .p3r-system-console-grid {
     grid-template-columns: 1fr;
   }
 }
-

@@ -5,30 +5,50 @@
 /* Google Fonts are preconnected and loaded asynchronously in index.html to avoid render-blocking waterfalls */
 
 :root {
-  /* P3R Core Palette */
-  --p3r-ink: #030814;
+  /* ================================================================
+     ABYSSAL EDITORIAL — THE SEA OF SOULS PALETTE
+     ================================================================ */
+  --abyss-midnight: #030B19; /* Primary environment */
+  --abyss-navy: #09264B;     /* Secondary surfaces */
+  --abyss-deep: #0D3D75;     /* Structural blue planes */
+  --abyss-reload: #1558D6;   /* Strong interactive surfaces */
+  --abyss-cyan: #37D9F2;     /* Small accents and indicators */
+  --abyss-ice: #F1F5FA;      /* Main typography & high-contrast plates */
+  --abyss-mist: #A4B8CD;     /* Secondary / metadata text */
+  --abyss-pink: #F0195B;     /* Selected and critical actions */
+  --abyss-white: #FFFFFF;    /* Pure emphasis */
+
+  /* P3R Canonical Mapping */
+  --p3r-ink: #030B19;
   --p3r-deep: #061321;
-  --p3r-navy: #0a1e38;
-  --p3r-slate: #132d52;
-  --p3r-blue: #1a4b8a;
-  --p3r-royal: #2563eb;
-  --p3r-cyan: #00d4ff;
-  --p3r-ice: #7dd3fc;
-  --p3r-white: #f0f6ff;
-  --p3r-snow: #ffffff;
+  --p3r-navy: #09264B;
+  --p3r-slate: #0D3D75;
+  --p3r-blue: #1558D6;
+  --p3r-royal: #1558D6;
+  --p3r-cyan: #37D9F2;
+  --p3r-ice: #F1F5FA;
+  --p3r-mist: #A4B8CD;
+  --p3r-white: #F1F5FA;
+  --p3r-snow: #FFFFFF;
   
   /* Accent System */
-  --p3r-red: #e11d48;
+  --p3r-red: #F0195B;
   --p3r-magenta: #f43f7a;
   --p3r-rose: #ff6b9d;
   --p3r-crimson: #dc143c;
   --p3r-amber: #f59e0b;
   
-  /* Surfaces */
-  --p3r-panel: rgba(6, 19, 33, 0.92);
-  --p3r-panel-light: rgba(10, 30, 56, 0.85);
-  --p3r-panel-border: rgba(20, 56, 100, 0.6);
-  --p3r-glass: rgba(0, 212, 255, 0.08);
+  /* Editorial Surfaces */
+  --p3r-panel: rgba(9, 38, 75, 0.95);
+  --p3r-panel-light: rgba(13, 61, 117, 0.9);
+  --p3r-panel-border: rgba(55, 217, 242, 0.35);
+  --p3r-glass: rgba(55, 217, 242, 0.05);
+
+  /* Angular Editorial Cuts */
+  --p3r-cut-sm: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  --p3r-cut-md: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+  --p3r-cut-diagonal: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
+  --p3r-cut-plate: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
   
   /* Typography Scale */
   --font-display: 'Anton', 'Impact', sans-serif;
