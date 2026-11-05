@@ -228,8 +228,8 @@ export const StatsPage: FC<StatsPageProps> = ({ onNavigate, onBackToMenu }) => {
     <InternalPageLayout
       title="STATS"
       sublabel="DEVELOPER TELEMETRY & CHRONOLOGICAL CALENDAR"
-      sectionId="004"
-      characterId="mitsuru"
+      sectionId="005"
+      characterId="fuuka"
       backgroundPath="/assets/persona3/backgrounds/main-visuals/p3r-main-visual.png"
       currentRoute="/stats"
       onNavigate={onNavigate}

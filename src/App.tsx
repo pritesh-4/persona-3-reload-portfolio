@@ -16,6 +16,9 @@ const PersonaPage = lazy(() =>
 const EquipPage = lazy(() =>
   import('./pages/EquipPage').then(m => ({ default: m.EquipPage }))
 );
+const ExperiencePage = lazy(() =>
+  import('./pages/ExperiencePage').then(m => ({ default: m.ExperiencePage }))
+);
 const StatsPage = lazy(() =>
   import('./pages/StatsPage').then(m => ({ default: m.StatsPage }))
 );
@@ -173,7 +176,18 @@ export const App: FC = () => {
             }
           />
 
-          {/* 4. STATS: GitHub Activity & Telemetry */}
+          {/* 4. EXPERIENCE: Field Record & Professional Achievements */}
+          <Route
+            path="/experience"
+            element={
+              <ExperiencePage
+                onNavigate={handleNavigateTo}
+                onBackToMenu={handleBackToMenu}
+              />
+            }
+          />
+
+          {/* 5. STATS: GitHub Activity & Telemetry */}
           <Route
             path="/stats"
             element={
@@ -184,13 +198,13 @@ export const App: FC = () => {
             }
           />
 
-          {/* 5. Legacy route compatibility: redirect /projects to /resume (EQUIP) */}
+          {/* Legacy route compatibility: redirect /projects to /resume (EQUIP) */}
           <Route
             path="/projects"
             element={<Navigate to="/resume" replace />}
           />
 
-          {/* 7. SOCIAL LINK: Communication Terminal */}
+          {/* 6. SOCIAL LINK: Communication Terminal */}
           <Route
             path="/contact"
             element={
@@ -201,7 +215,7 @@ export const App: FC = () => {
             }
           />
 
-          {/* 8. SYSTEM: In-game Configuration & Audio Settings */}
+          {/* 7. SYSTEM: In-game Configuration & Audio Settings */}
           <Route
             path="/system"
             element={

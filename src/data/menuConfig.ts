@@ -41,6 +41,16 @@ export const MENU_ITEMS: MenuItemConfig[] = [
     bgKey: 'promoGroup',
   },
   {
+    id: 'experience',
+    label: 'EXPERIENCE',
+    sublabel: 'PROFESSIONAL EXPERIENCE & ACHIEVEMENTS',
+    description: 'Explore industry AI engineering, open-source participation, hackathon leadership, scientific research, and pursuits.',
+    icon: '★',
+    route: '/experience',
+    characterId: 'mitsuru',
+    bgKey: 'mainVisual',
+  },
+  {
     id: 'stats',
     label: 'STATS',
     sublabel: 'DEVELOPER PERFORMANCE',

@@ -80,6 +80,8 @@ export const MainMenu: FC<MainMenuProps> = ({
         backgroundPath={
           activeItem.bgKey === 'promoGroup'
             ? '/assets/persona3/backgrounds/promotional-art/persona3-reload-promo-group.jpg'
+            : activeItem.bgKey === 'mainVisual'
+            ? '/assets/persona3/backgrounds/main-visuals/p3r-main-visual.png'
             : '/assets/persona3/backgrounds/official-wallpapers/p3r-main-key-art.png'
         }
       />
