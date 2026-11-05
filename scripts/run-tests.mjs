@@ -75,6 +75,10 @@ expectedAudio.forEach((snd) => {
   assert(`Procedural audio asset present & valid: ${snd}`, exists);
 });
 
+const primaryBgm = path.join(publicAssets, 'audio', 'bgm', 'colour-your-night.mp3');
+const hasPrimaryBgm = fs.existsSync(primaryBgm) && fs.statSync(primaryBgm).size > 1000000;
+assert(`Primary OST soundtrack present & valid: bgm/colour-your-night.mp3 (${(fs.statSync(primaryBgm).size / (1024 * 1024)).toFixed(2)} MB)`, hasPrimaryBgm);
+
 // 2. Data Integrity & Content Ground Truth
 console.log('\n[2/4] Verifying Data Model Contracts & Content Truth...');
 
