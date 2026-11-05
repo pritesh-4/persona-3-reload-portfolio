@@ -1,14 +1,15 @@
 /* ================================================================
-   PERSONA 3 RELOAD — ITEM SCREEN (DEVELOPER INVENTORY)
+   PERSONA 3 RELOAD — ITEM SCREEN (DEVELOPER INVENTORY & TOOLKIT)
    ================================================================ */
 
 .p3r-item-screen {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: 1040px;
+  max-width: 1100px;
   width: 100%;
   animation: p3r-fade-slide 400ms var(--ease-out-expo);
+  padding-bottom: 40px;
 }
 
 /* Category Filter Bar */
@@ -16,20 +17,22 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  overflow-x: auto;
+  flex-wrap: wrap;
 }
 
 .p3r-item-tab-btn {
-  padding: 8px 18px;
-  background: rgba(6, 19, 33, 0.9);
+  padding: 6px 14px;
+  background: rgba(6, 18, 38, 0.7);
   border: 1px solid rgba(0, 212, 255, 0.25);
   font-family: var(--font-ui);
-  font-size: 1rem;
+  font-size: 0.88rem;
+  font-weight: 800;
   letter-spacing: 0.1em;
-  color: rgba(240, 246, 255, 0.7);
+  color: var(--p3r-ice);
   transform: skewX(-12deg);
   transition: all 180ms ease;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .p3r-item-tab-btn > * {
@@ -38,19 +41,20 @@
 }
 
 .p3r-item-tab-btn:hover {
-  background: rgba(0, 212, 255, 0.15);
+  background: rgba(0, 212, 255, 0.2);
   color: var(--p3r-snow);
   border-color: var(--p3r-cyan);
 }
 
 .p3r-item-tab-btn.active {
-  background: var(--p3r-red);
+  background: var(--p3r-royal);
   color: var(--p3r-snow);
-  border-color: var(--p3r-magenta);
-  box-shadow: 0 0 16px rgba(225, 29, 72, 0.5);
+  border-color: var(--p3r-cyan);
+  border-left: 3px solid var(--p3r-red);
+  box-shadow: 0 0 14px rgba(0, 212, 255, 0.45);
 }
 
-/* Inventory Grid + Inspection Panel */
+/* Inventory Grid + Inspection Panel Stage */
 .p3r-item-stage-grid {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
@@ -60,80 +64,147 @@
 /* Grid of Inventory Slots */
 .p3r-inventory-slot-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 12px;
-  max-height: 520px;
+  max-height: 560px;
   overflow-y: auto;
   padding-right: 6px;
 }
 
 .p3r-inv-slot {
-  background: rgba(6, 19, 33, 0.9);
+  background: rgba(6, 19, 33, 0.92);
   border: 1px solid rgba(0, 212, 255, 0.25);
   border-top: 3px solid var(--p3r-cyan);
-  padding: 14px 10px;
+  padding: 12px 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
+  justify-content: space-between;
+  gap: 8px;
   cursor: pointer;
   position: relative;
   transition: all 180ms var(--ease-out-expo);
-  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .p3r-inv-slot:hover {
-  background: rgba(10, 30, 56, 0.95);
+  background: rgba(10, 30, 56, 0.98);
   border-color: var(--p3r-cyan);
   transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6), 0 0 12px rgba(0, 212, 255, 0.2);
 }
 
 .p3r-inv-slot.selected {
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.4) 0%, rgba(6, 19, 33, 0.95) 100%);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.4) 0%, rgba(6, 19, 33, 0.98) 100%);
   border-color: var(--p3r-cyan);
   border-top-color: var(--p3r-red);
-  box-shadow: 0 0 18px rgba(0, 212, 255, 0.4);
+  box-shadow: 0 0 18px rgba(0, 212, 255, 0.45);
+}
+
+/* Rarity Accents on Slots */
+.p3r-inv-slot.rarity-legendary {
+  border-top-color: #f59e0b;
+}
+
+.p3r-inv-slot.rarity-epic {
+  border-top-color: #ec4899;
+}
+
+.p3r-inv-slot.rarity-rare {
+  border-top-color: var(--p3r-cyan);
+}
+
+.p3r-inv-slot.rarity-uncommon {
+  border-top-color: #10b981;
+}
+
+.p3r-inv-slot-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .p3r-inv-icon {
-  font-size: 2rem;
+  font-size: 1.8rem;
   line-height: 1;
 }
 
-.p3r-inv-slot-name {
+.p3r-inv-rarity-pill {
   font-family: var(--font-ui);
-  font-size: 0.95rem;
-  letter-spacing: 0.05em;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  padding: 1px 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--p3r-ice);
+}
+
+.p3r-inv-slot.rarity-legendary .p3r-inv-rarity-pill {
+  background: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.p3r-inv-slot.rarity-epic .p3r-inv-rarity-pill {
+  background: rgba(236, 72, 153, 0.2);
+  color: #ec4899;
+  border: 1px solid rgba(236, 72, 153, 0.4);
+}
+
+.p3r-inv-slot.rarity-rare .p3r-inv-rarity-pill {
+  background: rgba(0, 212, 255, 0.2);
+  color: var(--p3r-cyan);
+  border: 1px solid rgba(0, 212, 255, 0.4);
+}
+
+.p3r-inv-slot-mid {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.p3r-inv-slot-name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
   color: var(--p3r-snow);
-  margin-top: 4px;
-  word-break: break-word;
+  line-height: 1.15;
+}
+
+.p3r-inv-slot-cat {
+  font-size: 0.65rem;
+  color: var(--p3r-ice);
+  opacity: 0.75;
+}
+
+.p3r-inv-slot-bottom {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .p3r-inv-quantity {
-  position: absolute;
-  bottom: 4px;
-  right: 6px;
   font-family: var(--font-ui);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 700;
   color: var(--p3r-cyan);
 }
 
-/* Item Detail Panel */
+/* ================================================================
+   ITEM INSPECTION PANEL
+   ================================================================ */
 .p3r-item-inspection-panel {
   background: linear-gradient(
     180deg,
-    rgba(6, 19, 33, 0.96) 0%,
-    rgba(10, 30, 56, 0.92) 100%
+    rgba(6, 19, 33, 0.97) 0%,
+    rgba(10, 30, 56, 0.94) 100%
   );
   border: 1px solid rgba(0, 212, 255, 0.35);
-  border-top: 6px solid var(--p3r-red);
-  padding: 26px;
+  border-top: 5px solid var(--p3r-red);
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.6);
+  gap: 16px;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.65);
 }
 
 .p3r-item-head-box {
@@ -145,10 +216,10 @@
 }
 
 .p3r-item-huge-icon {
-  font-size: 3rem;
+  font-size: 2.8rem;
   line-height: 1;
   background: rgba(0, 212, 255, 0.1);
-  border: 1px solid rgba(0, 212, 255, 0.3);
+  border: 1px solid rgba(0, 212, 255, 0.35);
   padding: 10px 14px;
   border-radius: 4px;
 }
@@ -156,6 +227,48 @@
 .p3r-item-head-text {
   display: flex;
   flex-direction: column;
+  gap: 2px;
+}
+
+.p3r-item-head-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.p3r-item-cat-sub {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--p3r-cyan);
+  font-weight: 700;
+}
+
+.p3r-item-rarity-tag {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  padding: 1px 6px;
+  border-radius: 2px;
+}
+
+.p3r-item-rarity-tag.rarity-legendary {
+  background: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.45);
+}
+
+.p3r-item-rarity-tag.rarity-epic {
+  background: rgba(236, 72, 153, 0.2);
+  color: #ec4899;
+  border: 1px solid rgba(236, 72, 153, 0.45);
+}
+
+.p3r-item-rarity-tag.rarity-rare {
+  background: rgba(0, 212, 255, 0.2);
+  color: var(--p3r-cyan);
+  border: 1px solid rgba(0, 212, 255, 0.45);
 }
 
 .p3r-item-title {
@@ -163,13 +276,7 @@
   font-size: 2rem;
   font-style: italic;
   color: var(--p3r-snow);
-}
-
-.p3r-item-cat-sub {
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
-  color: var(--p3r-cyan);
-  font-weight: 700;
+  line-height: 1.1;
 }
 
 .p3r-item-section {
@@ -180,79 +287,82 @@
 
 .p3r-item-sec-heading {
   font-family: var(--font-ui);
-  font-size: 0.9rem;
+  font-size: 0.78rem;
   letter-spacing: 0.15em;
   color: var(--p3r-cyan);
 }
 
 .p3r-item-effect-text {
   font-size: 0.88rem;
-  line-height: 1.6;
+  line-height: 1.55;
   color: var(--p3r-snow);
 }
 
 .p3r-item-flavor-text {
   font-size: 0.82rem;
   line-height: 1.5;
-  color: rgba(240, 246, 255, 0.7);
+  color: rgba(240, 246, 255, 0.75);
   font-style: italic;
-  border-left: 2px solid var(--p3r-slate);
+  border-left: 3px solid var(--p3r-magenta);
   padding-left: 10px;
 }
 
-.p3r-item-proj-box {
-  background: rgba(0, 212, 255, 0.08);
-  border-left: 4px solid var(--p3r-red);
-  padding: 10px 14px;
+.p3r-item-projects-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
-.p3r-item-proj-label {
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  color: var(--p3r-cyan);
-}
-
-.p3r-item-proj-val {
-  font-size: 0.86rem;
+.p3r-item-project-pill {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  background: rgba(0, 102, 255, 0.18);
+  border: 1px solid rgba(0, 212, 255, 0.3);
   color: var(--p3r-snow);
-  font-weight: 600;
-  margin-top: 2px;
+  padding: 3px 8px;
+  border-radius: 2px;
 }
 
-/* ----------------------------------------------------------------
-   RESPONSIVE DESIGN
-   ---------------------------------------------------------------- */
+.p3r-item-docs-box {
+  margin-top: 6px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0, 212, 255, 0.15);
+}
+
+.p3r-item-docs-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--p3r-cyan);
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 212, 255, 0.35);
+  padding: 6px 14px;
+  text-decoration: none;
+  transform: skewX(-10deg);
+  transition: all 180ms ease;
+}
+
+.p3r-item-docs-link > * {
+  transform: skewX(10deg);
+}
+
+.p3r-item-docs-link:hover {
+  background: var(--p3r-cyan);
+  color: var(--p3r-ink);
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+/* Responsive */
 @media (max-width: 900px) {
   .p3r-item-stage-grid {
     grid-template-columns: 1fr;
   }
   .p3r-inventory-slot-grid {
-    max-height: none;
-    overflow-y: visible;
+    max-height: 400px;
   }
 }
-
-@media (max-width: 600px) {
-  .p3r-inventory-slot-grid {
-    grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
-    gap: 8px;
-  }
-
-  .p3r-inv-slot {
-    padding: 10px 6px;
-  }
-
-  .p3r-inv-icon {
-    font-size: 1.6rem;
-  }
-
-  .p3r-inv-slot-name {
-    font-size: 0.85rem;
-  }
-
-  .p3r-item-title {
-    font-size: 1.6rem;
-  }
-}
-

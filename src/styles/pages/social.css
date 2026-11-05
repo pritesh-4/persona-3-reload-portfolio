@@ -1,14 +1,15 @@
 /* ================================================================
-   PERSONA 3 RELOAD — SOCIAL LINK SCREEN (COMMUNICATION TERMINAL)
+   PERSONA 3 RELOAD — SOCIAL LINK SYSTEM (ARCANA CARDS & INSPECTOR)
    ================================================================ */
 
 .p3r-social-screen {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: 1000px;
+  max-width: 1100px;
   width: 100%;
   animation: p3r-fade-slide 400ms var(--ease-out-expo);
+  padding-bottom: 40px;
 }
 
 /* Transmission Terminal Hero Banner */
@@ -20,12 +21,13 @@
   );
   border: 1px solid rgba(0, 212, 255, 0.35);
   border-left: 6px solid var(--p3r-red);
-  padding: 22px 28px;
+  padding: 20px 26px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
 }
 
 .p3r-social-hero-left {
@@ -35,21 +37,21 @@
 
 .p3r-social-tag {
   font-family: var(--font-ui);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   letter-spacing: 0.2em;
   color: var(--p3r-cyan);
 }
 
 .p3r-social-hero-title {
   font-family: var(--font-display);
-  font-size: 2.8rem;
+  font-size: 2.6rem;
   font-style: italic;
   line-height: 1;
   color: var(--p3r-snow);
 }
 
 .p3r-social-hero-sub {
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   color: var(--p3r-ice);
   margin-top: 4px;
 }
@@ -58,9 +60,14 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(3, 8, 20, 0.6);
+  background: rgba(3, 8, 20, 0.65);
   padding: 8px 16px;
-  border: 1px solid rgba(0, 212, 255, 0.2);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  transform: skewX(-8deg);
+}
+
+.p3r-social-status-indicator > * {
+  transform: skewX(8deg);
 }
 
 .p3r-social-dot {
@@ -73,112 +80,427 @@
 
 .p3r-social-status-txt {
   font-family: var(--font-ui);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   letter-spacing: 0.1em;
   color: var(--p3r-snow);
 }
 
-/* Channel Panels Grid */
-.p3r-social-channels-grid {
+/* Category Filter Tabs */
+.p3r-social-category-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.p3r-social-tab-btn {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  padding: 6px 14px;
+  background: rgba(6, 18, 38, 0.7);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  color: var(--p3r-ice);
+  transform: skewX(-12deg);
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+
+.p3r-social-tab-btn > * {
+  transform: skewX(12deg);
+  display: inline-block;
+}
+
+.p3r-social-tab-btn:hover {
+  background: rgba(0, 212, 255, 0.2);
+  color: var(--p3r-snow);
+  border-color: var(--p3r-cyan);
+}
+
+.p3r-social-tab-btn.active {
+  background: var(--p3r-royal);
+  color: #fff;
+  border-color: var(--p3r-cyan);
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.45);
+}
+
+/* Arcana Social Link Cards Grid */
+.p3r-social-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 18px;
 }
 
-.p3r-channel-card {
+.p3r-social-tarot-card {
   background: rgba(6, 19, 33, 0.92);
   border: 1px solid rgba(0, 212, 255, 0.25);
-  border-left: 6px solid var(--p3r-cyan);
-  padding: 22px 26px;
+  border-top: 3px solid var(--p3r-cyan);
+  padding: 18px 20px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  transition: all 180ms var(--ease-out-expo);
+  cursor: pointer;
+  position: relative;
+  transition: all 200ms var(--ease-out-expo);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.55);
 }
 
-.p3r-channel-card:hover {
-  background: rgba(10, 30, 56, 0.95);
+.p3r-social-tarot-card:hover,
+.p3r-social-tarot-card:focus-visible {
+  background: rgba(10, 30, 56, 0.98);
   border-color: var(--p3r-cyan);
-  border-left-color: var(--p3r-red);
-  transform: translateX(4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  border-top-color: var(--p3r-red);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.7), 0 0 16px rgba(0, 212, 255, 0.25);
+  outline: none;
 }
 
-.p3r-channel-head {
+/* Card Header */
+.p3r-tarot-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+  padding-bottom: 8px;
 }
 
-.p3r-channel-icon-wrap {
+.p3r-tarot-arcana-badge {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.p3r-arcana-numeral {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--p3r-cyan);
+  letter-spacing: 0.05em;
+}
+
+.p3r-arcana-name {
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: var(--p3r-snow);
+}
+
+.p3r-tarot-rank-indicator {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  padding: 2px 8px;
+  background: rgba(225, 29, 72, 0.2);
+  color: var(--p3r-magenta);
+  border: 1px solid rgba(225, 29, 72, 0.45);
+  border-radius: 2px;
+}
+
+/* 10-Pip Rank Meter */
+.p3r-rank-pip-track {
+  display: flex;
+  gap: 3px;
+  height: 6px;
+  width: 100%;
+}
+
+.p3r-rank-pip {
+  flex: 1;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1px;
+  transition: all 200ms ease;
+}
+
+.p3r-rank-pip.filled {
+  background: var(--p3r-cyan);
+  box-shadow: 0 0 4px rgba(0, 212, 255, 0.6);
+}
+
+.p3r-rank-pip.filled.max {
+  background: #f43f5e;
+  box-shadow: 0 0 4px rgba(244, 63, 94, 0.6);
+}
+
+/* Card Body */
+.p3r-tarot-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.p3r-tarot-title-row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
-.p3r-channel-symbol {
-  font-size: 1.6rem;
+.p3r-tarot-symbol {
+  font-size: 1.4rem;
   color: var(--p3r-cyan);
 }
 
-.p3r-channel-name-block {
+.p3r-tarot-titles {
   display: flex;
   flex-direction: column;
 }
 
-.p3r-channel-name {
+.p3r-tarot-title {
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   letter-spacing: 0.04em;
   color: var(--p3r-snow);
+  line-height: 1.1;
 }
 
-.p3r-channel-sublabel {
-  font-size: 0.7rem;
+.p3r-tarot-category-tag {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
   letter-spacing: 0.15em;
-  color: rgba(240, 246, 255, 0.55);
+  color: var(--p3r-ice);
+  opacity: 0.8;
 }
 
-.p3r-channel-rank-badge {
+.p3r-tarot-handle {
   font-family: var(--font-ui);
-  font-size: 0.85rem;
-  color: var(--p3r-red);
-  background: rgba(225, 29, 72, 0.15);
-  padding: 3px 10px;
-  border: 1px solid rgba(225, 29, 72, 0.4);
-}
-
-.p3r-channel-handle {
-  font-family: var(--font-ui);
-  font-size: 1.15rem;
-  letter-spacing: 0.08em;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
   color: var(--p3r-cyan);
-  background: rgba(3, 8, 20, 0.5);
-  padding: 6px 12px;
-  border-left: 3px solid var(--p3r-cyan);
+  background: rgba(3, 8, 20, 0.55);
+  padding: 4px 8px;
+  border-left: 2px solid var(--p3r-cyan);
   word-break: break-all;
-  overflow-wrap: anywhere;
 }
 
-.p3r-channel-desc {
-  font-size: 0.84rem;
-  line-height: 1.55;
+.p3r-tarot-desc {
+  font-size: 0.82rem;
+  line-height: 1.5;
   color: rgba(240, 246, 255, 0.8);
 }
 
-.p3r-channel-actions {
+/* Card Footer */
+.p3r-tarot-footer {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 6px;
+  border-top: 1px solid rgba(0, 212, 255, 0.1);
+}
+
+.p3r-tarot-inspect-hint {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: var(--p3r-cyan);
+}
+
+.p3r-tarot-symbol-accent {
+  font-size: 1.1rem;
+}
+
+/* ================================================================
+   DETAILED SOCIAL LINK MODAL INSPECTOR
+   ================================================================ */
+.p3r-social-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  background: rgba(3, 8, 20, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+  padding: 20px;
+  animation: p3r-fade-slide 200ms ease-out;
+}
+
+.p3r-social-modal-box {
+  background: linear-gradient(135deg, rgba(6, 19, 33, 0.98) 0%, rgba(10, 30, 56, 0.96) 100%);
+  border: 1px solid var(--p3r-panel-border);
+  border-top: 4px solid var(--p3r-red);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.8), 0 0 24px rgba(0, 212, 255, 0.25);
+  max-width: 680px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.p3r-social-modal-header {
+  padding: 20px 24px 16px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+  gap: 16px;
+}
+
+.p3r-modal-arcana-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.p3r-modal-arcana-num {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  line-height: 1;
+  color: var(--p3r-cyan);
+  text-shadow: 0 0 12px rgba(0, 212, 255, 0.5);
+}
+
+.p3r-modal-arcana-titles {
+  display: flex;
+  flex-direction: column;
+}
+
+.p3r-modal-arcana-tag {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--p3r-magenta);
+}
+
+.p3r-modal-arcana-name {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--p3r-snow);
+  line-height: 1.1;
+}
+
+.p3r-social-modal-close {
+  background: transparent;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  color: var(--p3r-cyan);
+  width: 32px;
+  height: 32px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 180ms ease;
+}
+
+.p3r-social-modal-close:hover {
+  background: var(--p3r-red);
+  color: #fff;
+  border-color: var(--p3r-magenta);
+}
+
+/* Modal Rank Row */
+.p3r-modal-rank-row {
+  background: rgba(3, 8, 20, 0.65);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+  gap: 16px;
+}
+
+.p3r-modal-rank-badge {
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  color: var(--p3r-ice);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.p3r-modal-rank-badge b {
+  color: var(--p3r-cyan);
+  letter-spacing: 0.1em;
+}
+
+.p3r-modal-pips-track {
+  display: flex;
+  gap: 4px;
+  height: 8px;
+  width: 140px;
+}
+
+.p3r-modal-pip {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 1px;
+}
+
+.p3r-modal-pip.filled {
+  background: var(--p3r-cyan);
+  box-shadow: 0 0 6px var(--p3r-cyan);
+}
+
+/* Modal Body */
+.p3r-social-modal-body {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.p3r-modal-section-title {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  color: var(--p3r-cyan);
+  margin-bottom: 6px;
+}
+
+.p3r-modal-p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: rgba(240, 246, 255, 0.88);
+}
+
+.p3r-significance-quote {
+  font-style: italic;
+  color: var(--p3r-ice);
+  border-left: 3px solid var(--p3r-magenta);
+  padding-left: 12px;
+}
+
+.p3r-modal-projects-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   margin-top: 4px;
 }
 
-.p3r-channel-btn {
+.p3r-modal-project-badge {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  background: rgba(0, 102, 255, 0.2);
+  border: 1px solid rgba(0, 212, 255, 0.35);
+  color: var(--p3r-snow);
+  padding: 3px 10px;
+  border-radius: 2px;
+}
+
+/* Modal Footer */
+.p3r-social-modal-footer {
+  padding: 16px 24px;
+  background: rgba(3, 8, 20, 0.65);
+  border-top: 1px solid rgba(0, 212, 255, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.p3r-modal-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 7px 16px;
+  padding: 8px 18px;
   font-family: var(--font-ui);
   font-size: 0.95rem;
+  font-weight: 800;
   letter-spacing: 0.1em;
   transform: skewX(-12deg);
   text-decoration: none;
@@ -186,33 +508,23 @@
   transition: all 180ms ease;
 }
 
-.p3r-channel-btn > * {
+.p3r-modal-btn > * {
   transform: skewX(12deg);
 }
 
-.p3r-btn-primary {
-  background: var(--p3r-royal);
-  border: 1px solid var(--p3r-cyan);
-  color: var(--p3r-snow);
-}
-
-.p3r-btn-primary:hover {
-  background: var(--p3r-red);
-  border-color: var(--p3r-magenta);
-}
-
-.p3r-btn-secondary {
-  background: rgba(10, 30, 56, 0.8);
-  border: 1px solid rgba(0, 212, 255, 0.3);
+.p3r-btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: var(--p3r-ice);
+  margin-left: auto;
 }
 
-.p3r-btn-secondary:hover {
-  background: rgba(0, 212, 255, 0.2);
-  color: var(--p3r-snow);
+.p3r-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
 }
 
-/* Copy notification toast */
+/* Toast */
 .p3r-copy-toast {
   position: fixed;
   bottom: 60px;
@@ -226,7 +538,7 @@
   font-size: 1.15rem;
   letter-spacing: 0.15em;
   box-shadow: 0 0 24px rgba(225, 29, 72, 0.7);
-  z-index: 100;
+  z-index: 1300;
   animation: p3r-toast-in 200ms ease-out;
 }
 
@@ -234,26 +546,16 @@
   transform: skewX(12deg);
 }
 
-@keyframes p3r-toast-in {
-  from { opacity: 0; transform: translate(-50%, 20px) skewX(-12deg); }
-  to { opacity: 1; transform: translate(-50%, 0) skewX(-12deg); }
-}
-
-/* ----------------------------------------------------------------
-   RESPONSIVE DESIGN
-   ---------------------------------------------------------------- */
-@media (max-width: 900px) {
-  .p3r-social-channels-grid {
+/* Responsive */
+@media (max-width: 768px) {
+  .p3r-social-cards-grid {
     grid-template-columns: 1fr;
   }
-}
-
-@media (max-width: 600px) {
   .p3r-social-hero-title {
     font-size: 2.2rem;
   }
-  .p3r-channel-card {
-    padding: 16px;
+  .p3r-modal-btn {
+    width: 100%;
+    justify-content: center;
   }
 }
-

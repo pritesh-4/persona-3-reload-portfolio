@@ -1,198 +1,331 @@
+export type InventoryCategory =
+  | 'LANGUAGES'
+  | 'FRAMEWORKS'
+  | 'AI_ML'
+  | 'DEV_TOOLS'
+  | 'INFRASTRUCTURE'
+  | 'HARDWARE';
+
 export interface InventoryItem {
   id: string;
   name: string;
-  category: 'WORKSTATION' | 'DEV_ENV' | 'DEPLOY_OPS' | 'INSPECTION';
+  category: InventoryCategory;
   categoryLabel: string;
   icon: string;
   rarity: 'LEGENDARY' | 'EPIC' | 'RARE' | 'UNCOMMON';
   quantity: string;
-  effect: string;
+  whatItIsUsedFor: string;
   flavorText: string;
-  associatedProject: string;
+  relevantProjects: string[];
+  docsUrl: string;
 }
 
 export const INVENTORY_CATEGORIES = [
-  { id: 'all', label: 'ALL GEAR' },
-  { id: 'WORKSTATION', label: 'HARDWARE & RIG' },
-  { id: 'DEV_ENV', label: 'SHELL & EDITOR' },
-  { id: 'DEPLOY_OPS', label: 'CONTAINERS & CI/CD' },
-  { id: 'INSPECTION', label: 'PROBES & AUDIT' }
+  { id: 'ALL', label: 'ALL GEAR' },
+  { id: 'LANGUAGES', label: 'LANGUAGES' },
+  { id: 'FRAMEWORKS', label: 'FRAMEWORKS & LIBS' },
+  { id: 'AI_ML', label: 'AI & ML' },
+  { id: 'DEV_TOOLS', label: 'DEV TOOLS' },
+  { id: 'INFRASTRUCTURE', label: 'DATA & INFRA' },
+  { id: 'HARDWARE', label: 'HARDWARE RIG' },
 ] as const;
 
 export const INVENTORY_ITEMS: InventoryItem[] = [
-  // Workstation Hardware
+  // 1. Programming Languages
   {
-    id: 'gear-dual-ips',
-    name: 'Dual IPS Panoramic Rig',
-    category: 'WORKSTATION',
-    categoryLabel: 'HARDWARE & RIG',
-    icon: '🖥',
+    id: 'lang-python',
+    name: 'Python 3.11+',
+    category: 'LANGUAGES',
+    categoryLabel: 'Programming Languages',
+    icon: '🐍',
+    rarity: 'LEGENDARY',
+    quantity: 'x5',
+    whatItIsUsedFor: 'Core engine for machine learning pipelines, FastAPI microservices, computer vision inference, and data processing.',
+    flavorText: 'High-level expressive syntax paired with high-performance native tensor libraries. The quintessential language of modern intelligence.',
+    relevantProjects: ['Project Zogan', 'Project AETHON', 'SALVUS Backend', 'Project-FRIDAY'],
+    docsUrl: 'https://www.python.org/'
+  },
+  {
+    id: 'lang-typescript',
+    name: 'TypeScript 6.0',
+    category: 'LANGUAGES',
+    categoryLabel: 'Programming Languages',
+    icon: '🔷',
+    rarity: 'LEGENDARY',
+    quantity: 'x4',
+    whatItIsUsedFor: 'Strict static type enforcement, compile-time contract safety, and predictable state across complex web interfaces.',
+    flavorText: 'An impenetrable structural shield eliminating runtime type mutations and enforcing crystal-clear component contracts.',
+    relevantProjects: ['Persona 3 Reload Portfolio', 'SALVUS Frontend', 'Project RouteMind'],
+    docsUrl: 'https://www.typescriptlang.org/'
+  },
+  {
+    id: 'lang-javascript',
+    name: 'JavaScript (ES2024+)',
+    category: 'LANGUAGES',
+    categoryLabel: 'Programming Languages',
+    icon: '⚡',
+    rarity: 'EPIC',
+    quantity: 'x6',
+    whatItIsUsedFor: 'Dynamic client-side interactivity, asynchronous event loops, DOM orchestration, and web API integration.',
+    flavorText: 'The ubiquitous lingua franca of the modern web. Flexible, rapid, and universally understood across all connected client nodes.',
+    relevantProjects: ['RouteMind', 'DevLore', 'The Last Chronicle', 'code-Geass-fan-page-'],
+    docsUrl: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript'
+  },
+  {
+    id: 'lang-cpp',
+    name: 'C / C++ 20',
+    category: 'LANGUAGES',
+    categoryLabel: 'Programming Languages',
+    icon: '⚙️',
+    rarity: 'RARE',
+    quantity: 'x2',
+    whatItIsUsedFor: 'Algorithmic problem solving, low-level memory allocation, data structures, and computational optimization.',
+    flavorText: 'Bare-metal deterministic execution. Yields maximum compute throughput and direct control over pointers and memory layouts.',
+    relevantProjects: ['NIT Rourkela Computational Core', 'Data Structures & Algorithms Lab'],
+    docsUrl: 'https://en.cppreference.com/'
+  },
+
+  // 2. Frameworks & Libraries
+  {
+    id: 'fw-react',
+    name: 'React 19.3',
+    category: 'FRAMEWORKS',
+    categoryLabel: 'Frameworks & Libraries',
+    icon: '⚛️',
+    rarity: 'LEGENDARY',
+    quantity: 'x4',
+    whatItIsUsedFor: 'Declarative component hierarchies, server actions, concurrent rendering transitions, and reactive UI architecture.',
+    flavorText: 'The latest evolution of reactive virtual DOM rendering. Powers this portfolio\'s complex curved menus and real-time state trees.',
+    relevantProjects: ['Persona 3 Reload Portfolio', 'SALVUS', 'RouteMind', 'DevLore'],
+    docsUrl: 'https://react.dev/'
+  },
+  {
+    id: 'fw-fastapi',
+    name: 'FastAPI',
+    category: 'FRAMEWORKS',
+    categoryLabel: 'Frameworks & Libraries',
+    icon: '⚡',
+    rarity: 'EPIC',
+    quantity: 'x2',
+    whatItIsUsedFor: 'High-concurrency async Python REST endpoints, automatic OpenAPI schema generation, and ML model serving.',
+    flavorText: 'Lightweight Starlette-powered asynchronous framework. Delivers near-Go throughput with Pydantic type safety.',
+    relevantProjects: ['Project AETHON Microservice', 'SALVUS Emergency API'],
+    docsUrl: 'https://fastapi.tiangolo.com/'
+  },
+  {
+    id: 'fw-framer-motion',
+    name: 'Framer Motion 14.9',
+    category: 'FRAMEWORKS',
+    categoryLabel: 'Frameworks & Libraries',
+    icon: '🎭',
     rarity: 'LEGENDARY',
     quantity: 'x2',
-    effect: 'Enables panoramic visual multitasking with 100% sRGB color accuracy for pixel-perfect UI/UX auditing.',
-    flavorText: 'Dual high-refresh IPS panels mounted on articulating gas-spring arms, eliminating viewport switching latency during live debugging.',
-    associatedProject: 'Full-Stack Command Center'
+    whatItIsUsedFor: 'Spring physics-driven layout animations, diagonal screen transition wipes, and gesture drag interactions.',
+    flavorText: 'Translates physical mechanics into 60fps kinetic screen choreography. Powers the signature Persona 3 diagonal transition slashes.',
+    relevantProjects: ['Persona 3 Reload Portfolio', 'The Last Chronicle'],
+    docsUrl: 'https://www.framer.com/motion/'
   },
   {
-    id: 'gear-mech-deck',
-    name: 'Hot-Swap Mechanical Deck',
-    category: 'WORKSTATION',
-    categoryLabel: 'HARDWARE & RIG',
-    icon: '⌨',
-    rarity: 'EPIC',
-    quantity: 'x1',
-    effect: 'Delivers responsive 55g tactile feedback and low-latency actuation for sustained marathon coding sessions.',
-    flavorText: 'Custom 75% mechanical layout equipped with factory-lubed tactile switches, sound-dampening foam, and PBT double-shot keycaps.',
-    associatedProject: 'Engineering Architecture & Prose'
-  },
-  {
-    id: 'gear-mouse',
-    name: 'High-DPI Precision Mouse',
-    category: 'WORKSTATION',
-    categoryLabel: 'HARDWARE & RIG',
-    icon: '🖱',
+    id: 'fw-tailwind',
+    name: 'Tailwind CSS',
+    category: 'FRAMEWORKS',
+    categoryLabel: 'Frameworks & Libraries',
+    icon: '🎨',
     rarity: 'RARE',
-    quantity: 'x1',
-    effect: 'Grants sub-millimeter cursor precision for CSS layout alignment and multi-monitor navigational sweeps.',
-    flavorText: 'Ergonomic optical sensor tuned to 3,200 DPI with low-friction PTFE skates and programmable thumb macros for workspace switching.',
-    associatedProject: 'UI Prototyping & Inspection'
-  },
-  {
-    id: 'gear-cans',
-    name: 'Studio Monitoring Headphones',
-    category: 'WORKSTATION',
-    categoryLabel: 'HARDWARE & RIG',
-    icon: '🎧',
-    rarity: 'EPIC',
-    quantity: 'x1',
-    effect: 'Isolates developer cognitive focus through passive noise isolation and acoustic soundstage clarity.',
-    flavorText: 'Over-ear studio monitoring cans calibrated with a flat frequency response curve for web audio balancing and deep-flow sessions.',
-    associatedProject: 'Audio Direction & Sound Synthesis'
+    quantity: 'x3',
+    whatItIsUsedFor: 'Rapid utility-first responsive styling, zero-runtime CSS purging, and design token consistency.',
+    flavorText: 'Atomic utility styling system compiling to minimal CSS bundles for instant production layout rendering.',
+    relevantProjects: ['SALVUS Dashboard', 'RouteMind Interface'],
+    docsUrl: 'https://tailwindcss.com/'
   },
 
-  // Shell & Editor
+  // 3. AI / Machine Learning
   {
-    id: 'env-linux-wsl',
-    name: 'Linux WSL2 / Ubuntu Shell',
-    category: 'DEV_ENV',
-    categoryLabel: 'SHELL & EDITOR',
-    icon: '🐧',
+    id: 'ai-yolov8',
+    name: 'Ultralytics YOLOv8',
+    category: 'AI_ML',
+    categoryLabel: 'AI / Machine Learning',
+    icon: '🎯',
     rarity: 'LEGENDARY',
     quantity: 'x1',
-    effect: 'Executes native ELF-64 POSIX toolchains, system daemons, and bash automation scripts on Windows host.',
-    flavorText: 'Hardened Linux subsystem paired with zsh, Oh My Posh prompt, and unified cross-platform path mapping for seamless virtualization.',
-    associatedProject: 'AI Inference & Systems Automation'
+    whatItIsUsedFor: 'Real-time edge object detection, bounding box classification, and wildlife incident prevention.',
+    flavorText: 'State-of-the-art vision architecture. Fine-tuned on 456 elephant image annotations to achieve 88.2% mAP@50 under low-light forest environments.',
+    relevantProjects: ['Project Zogan'],
+    docsUrl: 'https://docs.ultralytics.com/'
   },
   {
-    id: 'env-nvim-vscode',
-    name: 'Neovim & VS Code Hybrid',
-    category: 'DEV_ENV',
-    categoryLabel: 'SHELL & EDITOR',
-    icon: '💻',
+    id: 'ai-pytorch',
+    name: 'PyTorch 2.0+',
+    category: 'AI_ML',
+    categoryLabel: 'AI / Machine Learning',
+    icon: '🔥',
     rarity: 'LEGENDARY',
-    quantity: 'x1',
-    effect: 'Combines blazing modal editing ergonomics with rich Language Server Protocol (LSP) AST intellisense.',
-    flavorText: 'Heavily tuned environment featuring Vim keybindings, Treesitter semantic highlights, and custom Persona theme palette.',
-    associatedProject: 'Daily Core Engineering & Refactoring'
+    quantity: 'x2',
+    whatItIsUsedFor: 'Dynamic computational tensor graphs, neural network training loops, and loss convergence optimization.',
+    flavorText: 'The premier deep learning framework. Enables GPU-accelerated gradient backpropagation with intuitive Pythonic control flow.',
+    relevantProjects: ['Project Zogan', 'Project AETHON'],
+    docsUrl: 'https://pytorch.org/'
   },
   {
-    id: 'env-starship',
-    name: 'Starship Cross-Shell Prompt',
-    category: 'DEV_ENV',
-    categoryLabel: 'SHELL & EDITOR',
-    icon: '🚀',
+    id: 'ai-bytetrack',
+    name: 'ByteTrack Multi-Object Tracking',
+    category: 'AI_ML',
+    categoryLabel: 'AI / Machine Learning',
+    icon: '🔍',
+    rarity: 'EPIC',
+    quantity: 'x1',
+    whatItIsUsedFor: 'Associating bounding boxes across video frames, handling occlusions, and computing trajectory vectors.',
+    flavorText: 'High-accuracy tracking algorithm utilizing low-score detection boxes to maintain persistent identity IDs through dense vegetation.',
+    relevantProjects: ['Project Zogan (Elephant Detection)'],
+    docsUrl: 'https://github.com/ifzhang/ByteTrack'
+  },
+  {
+    id: 'ai-llm-orchestration',
+    name: 'OpenAI & Google Gemini APIs',
+    category: 'AI_ML',
+    categoryLabel: 'AI / Machine Learning',
+    icon: '🤖',
+    rarity: 'LEGENDARY',
+    quantity: 'x2',
+    whatItIsUsedFor: 'Prompt engineering, intent classification, token cost arbitrage, and automated reasoning pipelines.',
+    flavorText: 'Leading multimodal frontier models integrated via intelligent routing heuristics to maximize answer quality while minimizing latency.',
+    relevantProjects: ['Project RouteMind', 'Project-FRIDAY'],
+    docsUrl: 'https://platform.openai.com/'
+  },
+  {
+    id: 'ai-chromadb',
+    name: 'ChromaDB Vector Store',
+    category: 'AI_ML',
+    categoryLabel: 'AI / Machine Learning',
+    icon: '🧬',
     rarity: 'RARE',
     quantity: 'x1',
-    effect: 'Visualizes git branch status, active package versions, and command duration directly in prompt line.',
-    flavorText: 'Ultra-fast Rust-powered shell prompt that gives instant situational awareness before executing git actions or builds.',
-    associatedProject: 'Terminal Workflow Optimization'
+    whatItIsUsedFor: 'Embedding generation, similarity search, and semantic long-term memory retrieval for conversational agents.',
+    flavorText: 'Local-first open-source vector database storing high-dimensional semantic vectors for instant nearest-neighbor recall.',
+    relevantProjects: ['Project-FRIDAY (Virtual Assistant)'],
+    docsUrl: 'https://www.trychroma.com/'
+  },
+
+  // 4. Developer Tools
+  {
+    id: 'tool-git',
+    name: 'Git & GitHub Toolchain',
+    category: 'DEV_TOOLS',
+    categoryLabel: 'Developer Tools',
+    icon: '🐙',
+    rarity: 'LEGENDARY',
+    quantity: 'x1',
+    whatItIsUsedFor: 'Distributed version control, atomic commit histories, branch workflows, and automated GitHub Actions CI/CD.',
+    flavorText: 'Immutable cryptographic version tree. Tracks every modification across all 19 public repositories with complete transparency.',
+    relevantProjects: ['All 19 Public GitHub Repositories'],
+    docsUrl: 'https://github.com/pritesh-4'
   },
   {
-    id: 'env-powershell',
-    name: 'PowerShell 7 Hardened Console',
-    category: 'DEV_ENV',
-    categoryLabel: 'SHELL & EDITOR',
+    id: 'tool-vite',
+    name: 'Vite 8.3 & Rolldown',
+    category: 'DEV_TOOLS',
+    categoryLabel: 'Developer Tools',
     icon: '⚡',
-    rarity: 'RARE',
+    rarity: 'LEGENDARY',
+    quantity: 'x2',
+    whatItIsUsedFor: 'Sub-second ESM hot module replacement, optimized chunk splitting, and production bundle minification in 463ms.',
+    flavorText: 'Next-generation web build toolchain. Replaces sluggish legacy bundlers with native ES modules and lightning-fast Rollup builds.',
+    relevantProjects: ['Persona 3 Reload Portfolio', 'SALVUS'],
+    docsUrl: 'https://vite.dev/'
+  },
+  {
+    id: 'tool-playwright',
+    name: 'Playwright Test Suite',
+    category: 'DEV_TOOLS',
+    categoryLabel: 'Developer Tools',
+    icon: '🎭',
+    rarity: 'EPIC',
     quantity: 'x1',
-    effect: 'Drives object-oriented pipeline scripting, environment synchronization, and task automation on Windows.',
-    flavorText: 'Modern cross-platform PS Core shell configured with PSReadLine syntax prediction and posh-git integration.',
-    associatedProject: 'Local Build Systems & Task Orchestration'
+    whatItIsUsedFor: 'Headless browser end-to-end regression testing, screenshot visual verification, and console error audits.',
+    flavorText: 'Chromium automation engine that rigorously audits all 11 screens across desktop and mobile viewports with zero console warnings.',
+    relevantProjects: ['Persona 3 Portfolio Verification Suite'],
+    docsUrl: 'https://playwright.dev/'
+  },
+  {
+    id: 'tool-editor',
+    name: 'VS Code & Neovim',
+    category: 'DEV_TOOLS',
+    categoryLabel: 'Developer Tools',
+    icon: '💻',
+    rarity: 'EPIC',
+    quantity: 'x1',
+    whatItIsUsedFor: 'Modal editing, Language Server Protocol (LSP) AST code intelligence, and cross-platform terminal workspaces.',
+    flavorText: 'Ergonomic developer cockpit configured with Vim modal navigation and custom Persona Dark Hour color schemes.',
+    relevantProjects: ['Daily Systems & Full-Stack Development'],
+    docsUrl: 'https://code.visualstudio.com/'
   },
 
-  // Containers & CI/CD
+  // 5. Databases & Infrastructure
   {
-    id: 'ops-docker',
-    name: 'Docker Container Engine',
-    category: 'DEPLOY_OPS',
-    categoryLabel: 'CONTAINERS & CI/CD',
+    id: 'infra-vercel',
+    name: 'Vercel Edge Platform',
+    category: 'INFRASTRUCTURE',
+    categoryLabel: 'Databases & Infrastructure',
+    icon: '▲',
+    rarity: 'LEGENDARY',
+    quantity: 'x5',
+    whatItIsUsedFor: 'Global edge network delivery, instant Git deployments, preview branches, and serverless compute.',
+    flavorText: 'Serverless deployment network hosting live production apps with sub-50ms latency across global edge points.',
+    relevantProjects: ['SALVUS (Live)', 'RouteMind (Live)', 'Friday (Live)', 'DevLore (Live)', 'The Last Chronicle (Live)'],
+    docsUrl: 'https://vercel.com/'
+  },
+  {
+    id: 'infra-docker',
+    name: 'Docker Containers',
+    category: 'INFRASTRUCTURE',
+    categoryLabel: 'Databases & Infrastructure',
     icon: '🐳',
-    rarity: 'LEGENDARY',
-    quantity: 'x8',
-    effect: 'Encapsulates dependencies into reproducible container images, eliminating "works on my machine" anomalies.',
-    flavorText: 'Multi-stage Docker builds orchestrating microservices, model weights, and web runtime environments in isolated cgroups.',
-    associatedProject: 'SALVUS & Friday Microservices'
+    rarity: 'EPIC',
+    quantity: 'x1',
+    whatItIsUsedFor: 'Isolated service packaging, containerized ML inference environments, and reproducible production runtimes.',
+    flavorText: 'Standardized OS-level virtualization guaranteeing that software executes identically across development and cloud environments.',
+    relevantProjects: ['Project AETHON Microservice', 'FastAPI Backends'],
+    docsUrl: 'https://www.docker.com/'
   },
   {
-    id: 'ops-gh-actions',
-    name: 'GitHub Actions CI/CD Pipeline',
-    category: 'DEPLOY_OPS',
-    categoryLabel: 'CONTAINERS & CI/CD',
-    icon: '⚙',
-    rarity: 'EPIC',
-    quantity: 'x12',
-    effect: 'Automates linting, type validation, security scanning, and atomic deployment on every push to main.',
-    flavorText: 'Automated workflow pipelines executing Matrix builds, artifact compression, and zero-downtime edge distribution.',
-    associatedProject: 'Persona Portfolio & Open Source Repositories'
-  },
-  {
-    id: 'ops-vercel-edge',
-    name: 'Vercel & Cloudflare Edge Fabric',
-    category: 'DEPLOY_OPS',
-    categoryLabel: 'CONTAINERS & CI/CD',
-    icon: '🌐',
-    rarity: 'EPIC',
-    quantity: 'x4',
-    effect: 'Routes worldwide requests through globally distributed edge nodes with sub-50ms TTFB and automatic HTTPS.',
-    flavorText: 'Decentralized serverless edge network handling static asset caching, header security policies, and 404 rewriting.',
-    associatedProject: 'Portfolio Production Hosting'
+    id: 'infra-storage',
+    name: 'LocalStorage & IndexedDB',
+    category: 'INFRASTRUCTURE',
+    categoryLabel: 'Databases & Infrastructure',
+    icon: '💾',
+    rarity: 'RARE',
+    quantity: 'x2',
+    whatItIsUsedFor: 'Zero-latency offline client state caching, user system calibration preferences, and session telemetry.',
+    flavorText: 'Browser client database keeping Persona SYSTEM volumes, artwork dimmers, and DevLore quiz analytics persisted locally.',
+    relevantProjects: ['Persona 3 Portfolio System Settings', 'DevLore Analytics'],
+    docsUrl: 'https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage'
   },
 
-  // Probes & Audit
+  // 6. Hardware & Physical Rig
   {
-    id: 'audit-postman',
-    name: 'Postman & Bruno API Probes',
-    category: 'INSPECTION',
-    categoryLabel: 'PROBES & AUDIT',
-    icon: '📡',
-    rarity: 'RARE',
-    quantity: 'x30',
-    effect: 'Dispatches automated REST payloads, monitors latency percentiles, and verifies HTTP status contracts.',
-    flavorText: 'Pre-configured test collections verifying JSON schemas, authentication tokens, and API error codes across endpoints.',
-    associatedProject: 'REST API & Microservice Integration'
-  },
-  {
-    id: 'audit-lighthouse',
-    name: 'Lighthouse Telemetry Scanner',
-    category: 'INSPECTION',
-    categoryLabel: 'PROBES & AUDIT',
-    icon: '🚨',
+    id: 'hw-dual-ips',
+    name: 'Dual IPS Display Workstation',
+    category: 'HARDWARE',
+    categoryLabel: 'Hardware / Physical Equipment',
+    icon: '🖥️',
     rarity: 'EPIC',
-    quantity: 'x100',
-    effect: 'Benchmarks Performance, Accessibility, Best Practices, and SEO against Core Web Vitals targets.',
-    flavorText: 'Automated auditing module reporting 100/100 scores across DOM depth, script execution time, and color contrast.',
-    associatedProject: 'Performance Tuning & Auditing'
+    quantity: 'x1',
+    whatItIsUsedFor: 'Simultaneous side-by-side terminal debugging, responsive viewport testing, and design system inspection.',
+    flavorText: 'Dual high-resolution panels with calibrated sRGB accuracy eliminating context-switching friction during complex development.',
+    relevantProjects: ['Full-Stack Engineering Command Center'],
+    docsUrl: '#'
   },
   {
-    id: 'audit-git-lfs',
-    name: 'Git LFS & Cryptographic Keyring',
-    category: 'INSPECTION',
-    categoryLabel: 'PROBES & AUDIT',
-    icon: '🔑',
-    rarity: 'LEGENDARY',
+    id: 'hw-mech-deck',
+    name: 'Tactile Mechanical Keyboard',
+    category: 'HARDWARE',
+    categoryLabel: 'Hardware / Physical Equipment',
+    icon: '⌨️',
+    rarity: 'RARE',
     quantity: 'x1',
-    effect: 'Signs commits with Ed25519 GPG keys and manages multi-gigabyte neural network weights via pointers.',
-    flavorText: 'Secure hardware-backed cryptographic credentials verifying source integrity across open-source collaborations.',
-    associatedProject: 'Security & Open-Source Verification'
+    whatItIsUsedFor: 'Low-latency tactile actuation and sustained typing comfort for marathon programming sessions.',
+    flavorText: 'Custom mechanical deck with responsive switches providing crisp audio-tactile feedback on every keystroke.',
+    relevantProjects: ['Daily Engineering Execution'],
+    docsUrl: '#'
   }
 ];
