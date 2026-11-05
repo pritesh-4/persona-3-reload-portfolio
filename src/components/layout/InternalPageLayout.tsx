@@ -51,7 +51,7 @@ export const InternalPageLayout: FC<InternalPageLayoutProps> = ({
       : currentRoute === '/stats'
       ? 'stats'
       : currentRoute === '/projects'
-      ? 'quest'
+      ? 'equip'
       : currentRoute === '/tools'
       ? 'item'
       : currentRoute === '/contact'

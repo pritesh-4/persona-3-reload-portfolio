@@ -19,9 +19,6 @@ const EquipPage = lazy(() =>
 const StatsPage = lazy(() =>
   import('./pages/StatsPage').then(m => ({ default: m.StatsPage }))
 );
-const QuestPage = lazy(() =>
-  import('./pages/QuestPage').then(m => ({ default: m.QuestPage }))
-);
 const ItemPage = lazy(() =>
   import('./pages/ItemPage').then(m => ({ default: m.ItemPage }))
 );
@@ -187,15 +184,10 @@ export const App: FC = () => {
             }
           />
 
-          {/* 5. QUEST: Project Archive & Mission Database */}
+          {/* 5. Legacy route compatibility: redirect /projects to /resume (EQUIP) */}
           <Route
             path="/projects"
-            element={
-              <QuestPage
-                onNavigate={handleNavigateTo}
-                onBackToMenu={handleBackToMenu}
-              />
-            }
+            element={<Navigate to="/resume" replace />}
           />
 
           {/* 7. SOCIAL LINK: Communication Terminal */}

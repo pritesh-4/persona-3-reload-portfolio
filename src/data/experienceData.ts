@@ -11,6 +11,7 @@ export interface EquipmentSlot {
 
 export interface ProgressionMilestone {
   id: string;
+  projectId?: string;
   period: string;
   category: 'EDUCATION' | 'EXPERIENCE' | 'OPEN_SOURCE' | 'MILESTONE';
   title: string;
@@ -78,6 +79,7 @@ export const EQUIPMENT_LOADOUT: EquipmentSlot[] = [
 export const PROGRESSION_TIMELINE: ProgressionMilestone[] = [
   {
     id: 'exp-salvus',
+    projectId: 'quest-01',
     period: '2026',
     category: 'EXPERIENCE',
     title: 'Lead Systems Architect & AI Integration Engineer',
@@ -94,6 +96,7 @@ export const PROGRESSION_TIMELINE: ProgressionMilestone[] = [
   },
   {
     id: 'exp-aethon',
+    projectId: 'quest-02',
     period: '2026',
     category: 'MILESTONE',
     title: 'Lead Researcher & Frontend Architect',
@@ -110,6 +113,7 @@ export const PROGRESSION_TIMELINE: ProgressionMilestone[] = [
   },
   {
     id: 'exp-routemind',
+    projectId: 'quest-03',
     period: '2026',
     category: 'MILESTONE',
     title: 'Creator & AI Systems Developer',
@@ -126,6 +130,7 @@ export const PROGRESSION_TIMELINE: ProgressionMilestone[] = [
   },
   {
     id: 'exp-zogan',
+    projectId: 'quest-04',
     period: '2026',
     category: 'MILESTONE',
     title: 'Computer Vision & ML Developer',
@@ -142,6 +147,7 @@ export const PROGRESSION_TIMELINE: ProgressionMilestone[] = [
   },
   {
     id: 'exp-friday',
+    projectId: 'quest-05',
     period: '2026',
     category: 'MILESTONE',
     title: 'Creator & AI Assistant Architect',
@@ -157,36 +163,38 @@ export const PROGRESSION_TIMELINE: ProgressionMilestone[] = [
     skills: ['React 19', 'FastAPI', 'ChromaDB', 'WebSockets', 'Framer Motion', 'WebGL Shaders']
   },
   {
-    id: 'exp-yumei',
+    id: 'exp-holytrial',
+    projectId: 'quest-08',
     period: '2026',
     category: 'MILESTONE',
-    title: 'Creator & Narrative UI Engineer',
-    organization: 'The Last Chronicle (Project Yumei)',
-    role: 'Creative Frontend Engineer',
-    location: 'Independent Web Experience',
-    summary: 'Reimagined the developer portfolio as an interactive narrative journey inspired by Omniscient Reader\'s Viewpoint.',
+    title: 'Lead Frontend & Systems Architect',
+    organization: 'Project Holy Trial (The Obsidian Tribunal)',
+    role: 'Lead Systems Architect',
+    location: 'Open Source / Independent',
+    summary: 'Designed an institutional investigative workspace connecting proposition formulation, empirical evidence ingestion, adversarial cross-examination, and structured judicial adjudication.',
     achievements: [
-      'Built scenario-based narrative entry and milestone constellation timelines with fluid spring physics.',
-      'Constructed responsive ORV system windows and hidden unlockable scenario routes with hand-crafted zero-dependency CSS.',
-      'Deployed live web experience at pritesh-jena-portfolio.vercel.app with high engagement.'
+      'Designed a multi-stage judicial workflow: Threshold Prologue, Claim Docket, Chamber of Evidence, Adversarial Scrutiny, and Adjudication Verdict.',
+      'Implemented triple-vector evidence ingestion with cryptographic SHA-256 integrity fingerprints and auditable ledger.',
+      'Constructed grounded adversarial analysis citing exact exhibits with contradiction mapping and confidence gauges.'
     ],
-    skills: ['React', 'Vite', 'Framer Motion', 'Storytelling UI', 'CSS3 Engine']
+    skills: ['React 19', 'TypeScript', 'Vite', 'FastAPI', 'Python', 'Tailwind CSS', 'Web Audio API']
   },
   {
-    id: 'exp-devlore',
-    period: '2026',
+    id: 'exp-orbit',
+    projectId: 'quest-09',
+    period: 'Ongoing',
     category: 'MILESTONE',
-    title: 'Creator & Frontend Developer',
-    organization: 'Project DevLore',
-    role: 'Frontend Engineer',
-    location: 'Independent Web Application',
-    summary: 'Engineered a stateful developer knowledge quiz compilation platform from scratch with custom React hooks and API integration.',
+    title: 'Robotics & Embedded Systems Designer',
+    organization: 'Project ORBIT (AI Desk Companion Robot)',
+    role: 'Robotics & Embedded Designer',
+    location: 'Hardware Prototyping / Research',
+    summary: 'Architected an independent robotics and embedded systems project exploring multimodal human-robot interaction through an expressive desk companion built from the ground up on ESP32-S3.',
     achievements: [
-      'Designed responsive modular interface with dynamic Open Trivia DB API question ingestion.',
-      'Constructed state persistence layer ensuring quiz progress and historical analytics survive browser refreshes.',
-      'Deployed live at devlore-ebon.vercel.app with full test suite passing.'
+      'Designed articulated 2-axis (pan/tilt) servo neck mechanism for expressive physical tracking and head-tilts.',
+      'Constructed circular visual display architecture rendering animated eye micro-expressions and gaze cues.',
+      'Engineered dual-bus power isolation separating inductive servo noise from sensitive ESP32-S3 microcontroller logic.'
     ],
-    skills: ['React', 'Vite', 'Axios', 'REST APIs', 'LocalStorage', 'CSS3']
+    skills: ['ESP32-S3', 'C/C++', 'Robotics Kinematics', 'I2S Audio', 'HRI Design', 'CAD / 3D Print']
   },
   {
     id: 'edu-nitr',

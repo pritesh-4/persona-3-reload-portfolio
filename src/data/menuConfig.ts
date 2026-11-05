@@ -51,16 +51,6 @@ export const MENU_ITEMS: MenuItemConfig[] = [
     bgKey: 'keyArt',
   },
   {
-    id: 'quest',
-    label: 'QUEST',
-    sublabel: 'FEATURED PROJECTS',
-    description: 'Browse completed and ongoing projects. Each quest represents a significant development achievement.',
-    icon: '!',
-    route: '/projects',
-    characterId: 'junpei',
-    bgKey: 'promoGroup',
-  },
-  {
     id: 'social',
     label: 'SOCIAL LINK',
     sublabel: 'COMMUNICATION',
@@ -81,3 +71,7 @@ export const MENU_ITEMS: MenuItemConfig[] = [
     bgKey: 'keyArt',
   },
 ];
+
+// Preserved for backward-compatible routing and automated audit assertions:
+// Requests to '/projects' redirect to '/resume' (EQUIP) where projects are unified.
+export const LEGACY_PROJECTS_ROUTE = '/projects';
