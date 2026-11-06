@@ -63,9 +63,11 @@ export const PROFILE_DATA: ProfileData = {
     {
       id: 'research',
       label: 'RESEARCH INTEREST',
-      primaryValue: 'SCIENTIFIC COMPUTING',
+      primaryValue: 'ASTROPHYSICS',
       supportingInfo: [
-        'Astronomical signal analysis and anomaly detection — Project AETHON.'
+        'Exploring astrophysics through astronomical observations, radio-signal analysis and the study of celestial phenomena.',
+        'Interested in detecting unusual astronomical radio signatures using time-frequency analysis and anomaly detection.',
+        'Participating in the NASA-recognised International Astronomical Search Collaboration (IASC), a citizen-science asteroid search programme.'
       ]
     },
     {

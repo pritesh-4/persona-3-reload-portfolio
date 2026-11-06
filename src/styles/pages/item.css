@@ -2,6 +2,23 @@
    PERSONA 3 RELOAD — SKILL SCREEN (3-COLUMN ABILITY INTERFACE)
    ================================================================ */
 
+.p3r-skill-screen,
+.p3r-skill-tri-layout,
+.p3r-skill-tri-layout > *,
+.p3r-inspector-plate {
+  box-sizing: border-box;
+}
+
+.p3r-skill-cat-column,
+.p3r-skill-list-column,
+.p3r-skill-inspector-column,
+.p3r-inspector-plate,
+.p3r-inspector-body,
+.p3r-skill-row-info {
+  min-width: 0;
+  max-width: 100%;
+}
+
 .p3r-skill-screen {
   display: flex;
   flex-direction: column;
@@ -9,6 +26,8 @@
   max-width: 1560px;
   margin: 0 auto;
   height: 100%;
+  min-height: 0;
+  flex: 1;
   animation: p3r-skill-enter 350ms var(--ease-out-expo);
 }
 
@@ -24,18 +43,25 @@
 }
 
 /* ================================================================
-   TRI-COLUMN LAYOUT
-   Col 1: Category Index (220px)
-   Col 2: Skills List (1fr)
-   Col 3: Live Ability Inspector (440px)
+   TRI-COLUMN LAYOUT — RESPONSIVE GRID TRACKS
+   Col 1: Category Index (minmax 180px, 0.75fr)
+   Col 2: Skills List (minmax 0, 2fr)
+   Col 3: Live Ability Inspector (minmax 330px, 1.25fr)
    ================================================================ */
 .p3r-skill-tri-layout {
   display: grid;
-  grid-template-columns: 240px 1fr 460px;
-  gap: 18px;
+  grid-template-columns:
+    minmax(180px, 0.75fr)
+    minmax(0, 2fr)
+    minmax(330px, 1.25fr);
+  gap: clamp(10px, 1.1vw, 16px);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   align-items: stretch;
   height: 100%;
-  min-height: 520px;
+  min-height: 0;
+  flex: 1;
 }
 
 /* ----------------------------------------------------------------
@@ -54,6 +80,9 @@
   flex-direction: column;
   gap: 14px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 .p3r-cat-col-header {
@@ -146,7 +175,10 @@
   flex-direction: column;
   gap: 12px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-  max-height: calc(100vh - 170px);
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .p3r-skill-list-header {
@@ -155,6 +187,7 @@
   justify-content: space-between;
   border-bottom: 1px solid rgba(55, 217, 242, 0.2);
   padding-bottom: 8px;
+  flex-shrink: 0;
 }
 
 .p3r-skill-list-title {
@@ -176,6 +209,8 @@
   flex-direction: column;
   gap: 8px;
   overflow-y: auto;
+  flex: 1;
+  min-height: 0;
   padding-right: 6px;
 }
 
@@ -189,6 +224,8 @@
   border-left: 3px solid transparent;
   cursor: pointer;
   transition: all 160ms ease;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .p3r-skill-row-icon {
@@ -208,6 +245,8 @@
   display: flex;
   align-items: baseline;
   gap: 10px;
+  min-width: 0;
+  flex-wrap: wrap;
 }
 
 .p3r-skill-row-name {
@@ -216,6 +255,8 @@
   letter-spacing: 0.08em;
   color: var(--abyss-white);
   line-height: 1.1;
+  min-width: 0;
+  overflow-wrap: break-word;
 }
 
 .p3r-skill-row-cat {
@@ -225,6 +266,7 @@
   color: var(--abyss-cyan);
   text-transform: uppercase;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .p3r-skill-row-desc {
@@ -241,6 +283,7 @@
   color: var(--abyss-mist);
   opacity: 0.4;
   transition: all 160ms ease;
+  flex-shrink: 0;
 }
 
 .p3r-skill-item-row:hover {
@@ -283,6 +326,10 @@
 .p3r-skill-inspector-column {
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  max-width: 100%;
+  height: 100%;
+  min-height: 0;
 }
 
 .p3r-inspector-plate {
@@ -293,12 +340,14 @@
   );
   border: 1px solid rgba(55, 217, 242, 0.35);
   border-top: 5px solid var(--abyss-pink);
-  padding: 24px;
+  padding: clamp(16px, 1.6vw, 24px);
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
   box-shadow: 0 10px 32px rgba(0, 0, 0, 0.6);
-  max-height: calc(100vh - 170px);
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
   overflow-y: auto;
 }
 
@@ -308,6 +357,9 @@
   gap: 8px;
   border-bottom: 1px solid rgba(55, 217, 242, 0.25);
   padding-bottom: 14px;
+  min-width: 0;
+  max-width: 100%;
+  flex-shrink: 0;
 }
 
 .p3r-inspector-meta-row {
@@ -315,7 +367,9 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 8px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .p3r-inspector-cat-tag {
@@ -323,6 +377,8 @@
   font-size: 0.78rem;
   letter-spacing: 0.14em;
   color: var(--abyss-cyan);
+  min-width: 0;
+  overflow-wrap: break-word;
 }
 
 .p3r-inspector-verified-tag {
@@ -334,38 +390,54 @@
   letter-spacing: 0.12em;
   padding: 2px 8px;
   border-radius: 2px;
+  white-space: normal;
+  max-width: 100%;
+  text-align: right;
+  flex-shrink: 1;
 }
 
 .p3r-inspector-title-row {
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .p3r-inspector-hero-icon {
   font-size: 2.2rem;
+  flex-shrink: 0;
+  line-height: 1;
 }
 
 .p3r-inspector-title {
   font-family: var(--font-display);
-  font-size: 2.1rem;
+  font-size: clamp(1.6rem, 2.2vw, 2.1rem);
   font-style: italic;
   letter-spacing: 0.04em;
   color: var(--abyss-white);
-  line-height: 1;
+  line-height: 1.1;
   margin: 0;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: normal;
 }
 
 .p3r-inspector-body {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .p3r-inspector-section {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .p3r-inspector-sec-label {
@@ -374,6 +446,8 @@
   letter-spacing: 0.14em;
   color: var(--abyss-cyan);
   margin: 0;
+  min-width: 0;
+  overflow-wrap: break-word;
 }
 
 .p3r-inspector-text {
@@ -382,6 +456,9 @@
   line-height: 1.6;
   color: var(--abyss-ice);
   margin: 0;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .p3r-inspector-quote {
@@ -394,12 +471,17 @@
   border-left: 3px solid var(--abyss-reload);
   padding: 8px 12px;
   margin: 0;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .p3r-inspector-projects-wrap {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .p3r-inspector-project-badge {
@@ -410,19 +492,27 @@
   color: var(--abyss-ice);
   padding: 3px 8px;
   border-radius: 2px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: normal;
 }
 
 .p3r-inspector-actions {
   margin-top: 6px;
   padding-top: 12px;
   border-top: 1px solid rgba(55, 217, 242, 0.2);
+  min-width: 0;
+  max-width: 100%;
 }
 
 .p3r-inspector-doc-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 8px 16px;
+  max-width: calc(100% - 16px);
+  margin-left: 8px;
   background: var(--abyss-reload);
   border: 1px solid var(--abyss-cyan);
   color: var(--abyss-white);
@@ -432,6 +522,8 @@
   text-decoration: none;
   transform: skewX(-12deg);
   transition: all 180ms ease;
+  white-space: normal;
+  text-align: center;
 }
 
 .p3r-inspector-doc-btn > * {
@@ -445,26 +537,181 @@
 }
 
 /* ================================================================
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN & DELIBERATE BREAKPOINTS
    ================================================================ */
-@media (max-width: 1200px) {
+
+/* Large Desktop (1440px and above) */
+@media (min-width: 1440px) {
   .p3r-skill-tri-layout {
-    grid-template-columns: 200px 1fr 380px;
+    grid-template-columns:
+      minmax(195px, 0.8fr)
+      minmax(0, 2.2fr)
+      minmax(360px, 1.35fr);
+    gap: 18px;
   }
 }
 
-@media (max-width: 960px) {
+/* Compact Laptop / Tablet Landscape (960px to 1199px) */
+@media (max-width: 1199px) and (min-width: 960px) {
   .p3r-skill-tri-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1.25fr) minmax(330px, 1fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "cats cats"
+      "list inspector";
+    gap: 14px;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .p3r-skill-cat-column {
+    grid-area: cats;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 14px;
+    gap: 14px;
     height: auto;
-  }
-  .p3r-skill-cat-column,
-  .p3r-skill-list-column,
-  .p3r-inspector-plate {
     max-height: none;
+    overflow-y: visible;
   }
+
+  .p3r-cat-col-header {
+    border-bottom: none;
+    border-right: 1px solid rgba(55, 217, 242, 0.2);
+    padding-bottom: 0;
+    padding-right: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    flex-shrink: 0;
+  }
+
   .p3r-cat-btn-list {
     flex-direction: row;
     flex-wrap: wrap;
+    gap: 6px;
+    flex: 1;
+  }
+
+  .p3r-cat-tab-row {
+    padding: 7px 10px;
+    font-size: 0.85rem;
+  }
+
+  .p3r-skill-list-column {
+    grid-area: list;
+    height: 100%;
+    max-height: 100%;
+  }
+
+  .p3r-skill-inspector-column {
+    grid-area: inspector;
+    height: 100%;
+  }
+
+  .p3r-inspector-plate {
+    height: 100%;
+    max-height: 100%;
+    padding: 18px;
+  }
+}
+
+/* Tablet Portrait & Mobile Stacking (below 960px) */
+@media (max-width: 959px) {
+  .p3r-skill-screen {
+    height: auto;
+    min-height: 100%;
+  }
+
+  .p3r-skill-tri-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: auto;
+    min-height: 0;
+  }
+
+  .p3r-skill-cat-column {
+    height: auto;
+    max-height: none;
+    padding: 12px;
+    gap: 10px;
+    overflow-y: visible;
+  }
+
+  .p3r-cat-col-header {
+    border-bottom: 1px solid rgba(55, 217, 242, 0.2);
+    padding-bottom: 6px;
+  }
+
+  .p3r-cat-btn-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .p3r-cat-tab-row {
+    padding: 6px 10px;
+    font-size: 0.82rem;
+  }
+
+  .p3r-skill-list-column {
+    height: auto;
+    max-height: 380px;
+    padding: 14px 16px;
+  }
+
+  .p3r-skill-rows-container {
+    max-height: 300px;
+  }
+
+  .p3r-skill-inspector-column {
+    height: auto;
+    min-height: 0;
+  }
+
+  .p3r-inspector-plate {
+    height: auto;
+    max-height: none;
+    overflow-y: visible;
+    padding: 18px 16px;
+  }
+}
+
+/* Small Mobile Screens (below 768px) */
+@media (max-width: 767px) {
+  .p3r-skill-list-column {
+    max-height: 340px;
+    padding: 12px 14px;
+  }
+
+  .p3r-skill-rows-container {
+    max-height: 260px;
+  }
+
+  .p3r-skill-item-row {
+    padding: 8px 10px;
+    gap: 10px;
+  }
+
+  .p3r-skill-row-name {
+    font-size: 1.05rem;
+  }
+
+  .p3r-skill-row-desc {
+    font-size: 0.74rem;
+  }
+
+  .p3r-inspector-plate {
+    padding: 16px 14px;
+    gap: 14px;
+  }
+
+  .p3r-inspector-title {
+    font-size: 1.55rem;
+  }
+
+  .p3r-inspector-hero-icon {
+    font-size: 1.8rem;
   }
 }
