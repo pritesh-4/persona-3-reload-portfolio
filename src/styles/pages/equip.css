@@ -266,7 +266,6 @@
   font-style: italic;
   color: var(--abyss-cyan);
   line-height: 1;
-  text-shadow: 0 2px 10px rgba(55, 217, 242, 0.4);
 }
 
 .p3r-entry-node {
@@ -275,7 +274,6 @@
   background: var(--abyss-midnight);
   border: 2px solid var(--abyss-cyan);
   border-radius: 50%;
-  box-shadow: 0 0 8px var(--abyss-cyan);
   transition: all 180ms ease;
 }
 

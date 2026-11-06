@@ -175,7 +175,7 @@ export const ExperiencePage: FC<ExperiencePageProps> = ({
                 <div className="p3r-entry-spec-row">
                   <span className="p3r-entry-spec-badge">SPECIALISATION</span>
                   <span className="p3r-entry-spec-text">{HOARDSPACE_EXPERIENCE.headline}</span>
-                  <span className="p3r-entry-loc">📍 {HOARDSPACE_EXPERIENCE.location}</span>
+                  <span className="p3r-entry-loc">◈ {HOARDSPACE_EXPERIENCE.location}</span>
                 </div>
                 <p className="p3r-entry-summary">{HOARDSPACE_EXPERIENCE.summary}</p>
               </div>
@@ -371,7 +371,7 @@ export const ExperiencePage: FC<ExperiencePageProps> = ({
                     <ul className="p3r-drawer-checklist">
                       {HOARDSPACE_EXPERIENCE.privacySafeguards?.map((safe, i) => (
                         <li key={i}>
-                          <span className="p3r-list-bullet shield">🛡</span>
+                          <span className="p3r-list-bullet shield">◈</span>
                           <span>{safe}</span>
                         </li>
                       ))}

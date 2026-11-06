@@ -183,7 +183,7 @@ export const ItemPage: FC<ItemPageProps> = ({ onNavigate, onBackToMenu }) => {
                   <div className="p3r-inspector-projects-wrap">
                     {selectedItem.relevantProjects.map((proj, pIdx) => (
                       <span key={pIdx} className="p3r-inspector-project-badge">
-                        📦 {proj}
+                        ◈ {proj}
                       </span>
                     ))}
                   </div>

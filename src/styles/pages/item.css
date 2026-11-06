@@ -229,8 +229,28 @@
 }
 
 .p3r-skill-row-icon {
-  font-size: 1.25rem;
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 2px 6px;
+  background: rgba(9, 38, 75, 0.75);
+  border: 1px solid rgba(55, 217, 242, 0.35);
+  color: var(--abyss-cyan);
+  border-radius: 2px;
   flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.p3r-skill-row.is-active .p3r-skill-row-icon {
+  background: var(--abyss-reload);
+  border-color: var(--abyss-white);
+  color: var(--abyss-white);
 }
 
 .p3r-skill-row-info {
@@ -405,9 +425,20 @@
 }
 
 .p3r-inspector-hero-icon {
-  font-size: 2.2rem;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  padding: 6px 12px;
+  background: rgba(9, 38, 75, 0.85);
+  border: 1px solid var(--abyss-cyan);
+  color: var(--abyss-cyan);
+  clip-path: var(--p3r-cut-sm);
   flex-shrink: 0;
   line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .p3r-inspector-title {
@@ -731,6 +762,7 @@
   }
 
   .p3r-inspector-hero-icon {
-    font-size: 1.8rem;
+    font-size: 0.75rem;
+    padding: 4px 8px;
   }
 }

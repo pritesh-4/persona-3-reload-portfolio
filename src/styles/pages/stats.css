@@ -108,13 +108,8 @@
 
 .p3r-status-dot.pulsing {
   background: var(--abyss-cyan);
-  box-shadow: 0 0 8px var(--abyss-cyan);
-  animation: p3r-dot-pulse 1.2s infinite ease-in-out;
-}
-
-@keyframes p3r-dot-pulse {
-  0%, 100% { opacity: 0.4; transform: scale(0.9); }
-  50% { opacity: 1; transform: scale(1.15); }
+  box-shadow: 0 0 6px var(--abyss-cyan);
+  opacity: 0.85;
 }
 
 .p3r-stat-status-pill.live {
@@ -160,7 +155,7 @@
   border: 1px solid rgba(55, 217, 242, 0.25);
   border-left: 4px solid var(--abyss-reload);
   clip-path: var(--p3r-cut-plate);
-  padding: 18px 22px;
+  padding: 16px 24px;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -178,11 +173,11 @@
   font-family: var(--font-display);
   font-size: 3.2rem;
   font-style: italic;
+  font-variant-numeric: tabular-nums;
   letter-spacing: 0.04em;
   color: var(--abyss-white);
   line-height: 0.95;
   margin: 4px 0;
-  text-shadow: 0 4px 16px rgba(55, 217, 242, 0.3);
 }
 
 .p3r-numeral-sub {
@@ -200,7 +195,7 @@
     rgba(9, 38, 75, 0.85) 100%
   );
   border: 1px solid rgba(55, 217, 242, 0.22);
-  padding: 16px 22px;
+  padding: 16px 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -235,10 +230,10 @@
   border-radius: 2px;
 }
 
-.p3r-lang-bar-segment.seg-0 { background: #3b82f6; }
-.p3r-lang-bar-segment.seg-1 { background: #f59e0b; }
-.p3r-lang-bar-segment.seg-2 { background: #ec4899; }
-.p3r-lang-bar-segment.seg-3 { background: #10b981; }
+.p3r-lang-bar-segment.seg-0 { background: var(--abyss-cyan); }
+.p3r-lang-bar-segment.seg-1 { background: var(--abyss-reload); }
+.p3r-lang-bar-segment.seg-2 { background: #0D3D75; }
+.p3r-lang-bar-segment.seg-3 { background: #A4B8CD; }
 
 .p3r-lang-legend-row {
   display: flex;
@@ -257,10 +252,10 @@
   height: 8px;
   border-radius: 50%;
 }
-.p3r-lang-legend-dot.seg-0 { background: #3b82f6; }
-.p3r-lang-legend-dot.seg-1 { background: #f59e0b; }
-.p3r-lang-legend-dot.seg-2 { background: #ec4899; }
-.p3r-lang-legend-dot.seg-3 { background: #10b981; }
+.p3r-lang-legend-dot.seg-0 { background: var(--abyss-cyan); }
+.p3r-lang-legend-dot.seg-1 { background: var(--abyss-reload); }
+.p3r-lang-legend-dot.seg-2 { background: #0D3D75; }
+.p3r-lang-legend-dot.seg-3 { background: #A4B8CD; }
 
 .p3r-lang-name {
   font-family: var(--font-body);
@@ -271,6 +266,7 @@
 .p3r-lang-pct {
   font-family: var(--font-ui);
   font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
   color: var(--abyss-mist);
 }
 

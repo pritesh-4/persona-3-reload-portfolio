@@ -5,7 +5,7 @@
 .p3r-social-screen {
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 24px;
   width: 100%;
   max-width: 1360px;
   margin: 0 auto;
@@ -39,7 +39,7 @@
   border: 1px solid rgba(55, 217, 242, 0.35);
   border-left: 6px solid var(--abyss-reload);
   clip-path: var(--p3r-cut-plate);
-  padding: 24px 34px;
+  padding: 24px 32px;
   box-shadow: 0 10px 32px rgba(0, 0, 0, 0.55);
 }
 
@@ -80,7 +80,6 @@
   color: var(--abyss-white);
   line-height: 1;
   margin: 0;
-  text-shadow: 0 4px 18px rgba(55, 217, 242, 0.35);
 }
 
 .p3r-social-hero-statement {
@@ -139,7 +138,7 @@
   border: 1px solid rgba(55, 217, 242, 0.22);
   border-left: 4px solid var(--abyss-deep);
   clip-path: var(--p3r-cut-sm);
-  padding: 22px 24px;
+  padding: 24px 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -322,7 +321,7 @@
   border: 1px solid var(--abyss-cyan);
   border-top: 5px solid var(--abyss-pink);
   clip-path: var(--p3r-cut-plate);
-  padding: 26px 34px;
+  padding: 24px 32px;
   box-shadow: 0 14px 40px rgba(0, 0, 0, 0.65);
   align-items: center;
 }
@@ -353,7 +352,7 @@
   font-family: var(--font-ui);
   font-size: 0.7rem;
   letter-spacing: 0.12em;
-  padding: 2px 7px;
+  padding: 2px 8px;
   border-radius: 2px;
 }
 
@@ -453,7 +452,7 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 10px 18px;
+  padding: 10px 16px;
   background: rgba(9, 38, 75, 0.75);
   border: 1px solid rgba(55, 217, 242, 0.35);
   color: var(--abyss-cyan);

@@ -189,12 +189,12 @@ export const SocialLinkPage: FC<SocialLinkPageProps> = ({ onNavigate, onBackToMe
               onClick={handleCopyEmail}
               onMouseEnter={() => playSfx('hover')}
             >
-              <span>📋 COPY EMAIL ADDRESS</span>
+              <span>COPY EMAIL ADDRESS</span>
             </button>
 
             {copyFeedback && (
               <div className="p3r-copy-toast" role="status">
-                <span>✓ {copyFeedback}</span>
+                <span>◈ {copyFeedback}</span>
               </div>
             )}
           </div>

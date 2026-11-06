@@ -233,7 +233,7 @@ export const QuestPage: FC<QuestPageProps> = ({ onNavigate, onBackToMenu }) => {
                 className="p3r-quest-action-btn"
                 onMouseEnter={() => playSfx('hover')}
               >
-                <span>📂 SOURCE REPO</span>
+                <span>SOURCE REPOSITORY ↗</span>
               </a>
               {selectedMission.demoUrl && (
                 <a
@@ -244,7 +244,7 @@ export const QuestPage: FC<QuestPageProps> = ({ onNavigate, onBackToMenu }) => {
                   style={{ background: 'var(--p3r-red)', borderColor: 'var(--p3r-magenta)' }}
                   onMouseEnter={() => playSfx('hover')}
                 >
-                  <span>🚀 LIVE DEPLOYMENT</span>
+                  <span>LIVE DEPLOYMENT ↗</span>
                 </a>
               )}
             </div>

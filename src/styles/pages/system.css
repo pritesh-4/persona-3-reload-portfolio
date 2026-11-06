@@ -200,6 +200,7 @@
 .p3r-slider-percent {
   font-family: var(--font-ui);
   font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
   letter-spacing: 0.08em;
   color: var(--abyss-cyan);
   min-width: 44px;

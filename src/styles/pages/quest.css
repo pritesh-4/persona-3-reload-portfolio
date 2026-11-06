@@ -334,7 +334,8 @@
 }
 
 .p3r-limitation-item::before {
-  content: '⚠️ ';
+  content: '◈ ';
+  color: #f59e0b;
 }
 
 .p3r-dossier-actions {

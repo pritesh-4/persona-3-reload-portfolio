@@ -37,7 +37,7 @@ export const MusicControl: FC<MusicControlProps> = ({
         className={`p3r-music-toggle-btn ${bgmEnabled ? 'is-enabled' : 'is-disabled'} ${isMusicActive ? 'is-playing' : ''}`}
         onClick={handleClick}
         aria-label={bgmEnabled ? 'Disable Background Music (Key: M)' : 'Enable Background Music (Key: M)'}
-        title={bgmEnabled ? '♪ MUSIC ON (Press M to toggle)' : '♪ MUSIC OFF (Press M to toggle)'}
+        title={bgmEnabled ? 'BGM: ON (Press M to toggle)' : 'BGM: OFF (Press M to toggle)'}
       >
         <span className="p3r-music-toggle-icon" aria-hidden="true">♪</span>
         <span className="p3r-music-toggle-label">

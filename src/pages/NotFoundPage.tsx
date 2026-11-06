@@ -145,7 +145,7 @@ export const NotFoundPage: FC<NotFoundPageProps> = ({ onNavigate, onBackToMenu }
                       }}
                       onMouseEnter={() => playSfx('hover')}
                     >
-                      <span>👤 PERSONA (Profile)</span>
+                      <span>♠ PERSONA (Profile)</span>
                     </button>
 
                     <button
@@ -166,7 +166,7 @@ export const NotFoundPage: FC<NotFoundPageProps> = ({ onNavigate, onBackToMenu }
                       }}
                       onMouseEnter={() => playSfx('hover')}
                     >
-                      <span>⚡ SKILL (Abilities)</span>
+                      <span>⚔ SKILL (Abilities)</span>
                     </button>
 
                     <button
@@ -187,7 +187,7 @@ export const NotFoundPage: FC<NotFoundPageProps> = ({ onNavigate, onBackToMenu }
                       }}
                       onMouseEnter={() => playSfx('hover')}
                     >
-                      <span>📋 EQUIP (Resume)</span>
+                      <span>★ EQUIP (Resume)</span>
                     </button>
 
                     <button
@@ -208,7 +208,7 @@ export const NotFoundPage: FC<NotFoundPageProps> = ({ onNavigate, onBackToMenu }
                       }}
                       onMouseEnter={() => playSfx('hover')}
                     >
-                      <span>📊 STATS (Telemetry)</span>
+                      <span>◆ STATS (Telemetry)</span>
                     </button>
 
                     <button
@@ -229,7 +229,7 @@ export const NotFoundPage: FC<NotFoundPageProps> = ({ onNavigate, onBackToMenu }
                       }}
                       onMouseEnter={() => playSfx('hover')}
                     >
-                      <span>🔍 QUEST (Projects)</span>
+                      <span>✦ QUEST (Projects)</span>
                     </button>
 
                     <button
@@ -250,7 +250,7 @@ export const NotFoundPage: FC<NotFoundPageProps> = ({ onNavigate, onBackToMenu }
                       }}
                       onMouseEnter={() => playSfx('hover')}
                     >
-                      <span>🎮 ITEM (Tools)</span>
+                      <span>♥ ITEM (Tools)</span>
                     </button>
 
                     <button
@@ -271,7 +271,7 @@ export const NotFoundPage: FC<NotFoundPageProps> = ({ onNavigate, onBackToMenu }
                       }}
                       onMouseEnter={() => playSfx('hover')}
                     >
-                      <span>📡 SOCIAL LINK (Contact)</span>
+                      <span>◈ SOCIAL LINK (Contact)</span>
                     </button>
 
                     <button
@@ -292,7 +292,7 @@ export const NotFoundPage: FC<NotFoundPageProps> = ({ onNavigate, onBackToMenu }
                       }}
                       onMouseEnter={() => playSfx('hover')}
                     >
-                      <span>⚙️ SYSTEM (Config)</span>
+                      <span>⚙ SYSTEM (Config)</span>
                     </button>
                   </div>
 

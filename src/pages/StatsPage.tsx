@@ -372,7 +372,7 @@ export const StatsPage: FC<StatsPageProps> = ({ onNavigate, onBackToMenu }) => {
                         {repo.description || 'Public software engineering repository.'}
                       </p>
                       <div className="p3r-repo-meta">
-                        <span>⭐ {repo.stargazers_count}</span>
+                        <span>★ {repo.stargazers_count}</span>
                         <span>UPDATED: {repo.updated_at.slice(0, 10)}</span>
                       </div>
                     </a>
