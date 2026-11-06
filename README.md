@@ -12,22 +12,22 @@ An interactive, game-inspired developer portfolio built with **React 19**, **Typ
 
 ---
 
-## 🚀 Live Demo & Deployment Links
+## Live Demo & Deployment Links
 - **Production URL**: [https://pritesh-4.github.io/persona-3-reload-portfolio/](https://pritesh-4.github.io/persona-3-reload-portfolio/)
 - **Release & Quality Documentation**:
-  - 🎮 [**Persona 3 System Expansion Report (4 New Experiences)**](./SYSTEM_EXPANSION_REPORT.md)
-  - 🎵 [**"Colour Your Night" Soundtrack Implementation Report**](./AUDIO_IMPLEMENTATION_REPORT.md)
-  - 👤 [**GitHub Personalisation & Real Project Dossier Report**](./GITHUB_PERSONALISATION_REPORT.md)
-  - 🧹 [**Product Cleanup & Feature Consolidation Report (Phase 5)**](./PRODUCT_CLEANUP_REPORT.md)
-  - ✅ [**Product Completeness Checklist (Phase 5)**](./PRODUCT_COMPLETENESS_CHECKLIST.md)
-  - 📋 [**Final Production Release Report (Phase 4)**](./FINAL_RELEASE_REPORT.md)
-  - 📖 [**Multi-Platform Deployment Guide**](./PRODUCTION_DEPLOYMENT_GUIDE.md)
-  - 🔒 [**Security & Privacy Review**](./SECURITY_REVIEW.md)
-  - ⚖️ [**Production Asset Rights Report**](./PRODUCTION_ASSET_RIGHTS_REPORT.md)
+  - ◈ [**Persona 3 System Expansion Report (4 New Experiences)**](./SYSTEM_EXPANSION_REPORT.md)
+  - ◈ [**"Colour Your Night" Soundtrack Implementation Report**](./AUDIO_IMPLEMENTATION_REPORT.md)
+  - ◈ [**GitHub Personalisation & Real Project Dossier Report**](./GITHUB_PERSONALISATION_REPORT.md)
+  - ◈ [**Product Cleanup & Feature Consolidation Report (Phase 5)**](./PRODUCT_CLEANUP_REPORT.md)
+  - ◈ [**Product Completeness Checklist (Phase 5)**](./PRODUCT_COMPLETENESS_CHECKLIST.md)
+  - ◈ [**Final Production Release Report (Phase 4)**](./FINAL_RELEASE_REPORT.md)
+  - ◈ [**Multi-Platform Deployment Guide**](./PRODUCTION_DEPLOYMENT_GUIDE.md)
+  - ◈ [**Security & Privacy Review**](./SECURITY_REVIEW.md)
+  - ◈ [**Production Asset Rights Report**](./PRODUCTION_ASSET_RIGHTS_REPORT.md)
 
 ---
 
-## 🌟 Complete Architecture & Features
+## Architecture & Features
 
 ### 1. Opening Experience & Main Menu (Phase 1)
 - **Cinematic Boot Sequence**: Atmospheric system initialization with scanlines, real asset preloading, progress indicator, and skippable prompt.
@@ -75,7 +75,7 @@ Every section is built with its own distinctive Persona 3 Reload interface conce
 
 ---
 
-## 🎮 Controls Reference
+## Controls Reference
 
 | Input | Action |
 |---|---|
@@ -87,7 +87,7 @@ Every section is built with its own distinctive Persona 3 Reload interface conce
 
 ---
 
-## 📸 Visual Verification & Quality Assurance
+## Visual Verification & Quality Assurance
 
 All screens and navigation flows are verified via automated end-to-end tests across multiple viewport profiles with **0 console errors**:
 - **Desktop Ultra (1920 &times; 1080)**: Complete curved arc navigation, full-screen background watermark composition, and high-contrast typography.
@@ -97,7 +97,7 @@ All screens and navigation flows are verified via automated end-to-end tests acr
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - **Node.js**: `20.19+` or `22.12+` (Vite 8 prerequisite)
@@ -139,7 +139,7 @@ For manual deployment instructions on **Vercel**, **Netlify**, or **Custom Domai
 
 ---
 
-## 📁 Project Architecture
+## Project Architecture
 
 ```text
 src/
@@ -162,7 +162,7 @@ src/
 
 ---
 
-## ⚖️ Legal & Intellectual Property Notice
+## Legal & Intellectual Property Notice
 
 All characters, trademarks, logos, and visual designs of **Persona 3 Reload** are the intellectual property of **ATLUS Co., Ltd.** and **SEGA Corporation**.
 

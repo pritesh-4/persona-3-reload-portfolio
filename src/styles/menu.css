@@ -50,7 +50,6 @@
 /* Travelling selection marker on curve */
 .p3r-arc-marker {
   fill: var(--p3r-red);
-  filter: drop-shadow(0 0 8px var(--p3r-magenta));
   transition: cx 300ms var(--ease-out-expo), cy 300ms var(--ease-out-expo);
 }
 
@@ -97,7 +96,6 @@
   width: 6px;
   height: 100%;
   background: var(--p3r-red);
-  box-shadow: 0 0 10px var(--p3r-magenta);
 }
 
 .p3r-menu-plate-content {
@@ -141,7 +139,7 @@
   border-color: var(--p3r-snow);
   box-shadow: 
     -6px 6px 0px var(--p3r-red),
-    0 8px 28px rgba(0, 212, 255, 0.4);
+    0 8px 28px rgba(0, 0, 0, 0.65);
   transform: skewX(-14deg) scale(1.18);
 }
 
@@ -164,7 +162,7 @@
 .p3r-menu-item-btn:not(.active):hover .p3r-menu-plate {
   background: rgba(16, 44, 84, 0.95);
   border-color: var(--p3r-cyan);
-  box-shadow: 0 0 16px rgba(0, 212, 255, 0.35);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.55);
   transform: skewX(-14deg) scale(1.05);
 }
 
@@ -226,7 +224,7 @@
     transform: skewX(-12deg) scale(1.15);
     box-shadow: 
       -4px 4px 0px var(--p3r-red),
-      0 6px 20px rgba(0, 212, 255, 0.45);
+      0 6px 20px rgba(0, 0, 0, 0.65);
   }
 }
 
