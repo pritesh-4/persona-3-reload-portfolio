@@ -1,4 +1,4 @@
-import { useCallback, type FC } from 'react';
+import { useState, useCallback, type FC } from 'react';
 import { InternalPageLayout } from '../components/layout/InternalPageLayout';
 import { SYSTEM_INFO } from '../data/systemConfig';
 import { useAudioContext } from '../hooks/useAudioContext';
@@ -28,10 +28,19 @@ export const SystemPage: FC<SystemPageProps> = ({ onNavigate, onBackToMenu }) =>
     playSfx,
   } = useAudioContext();
 
+  const [isConfirmingReset, setIsConfirmingReset] = useState(false);
+
   const handleReset = useCallback(() => {
+    if (!isConfirmingReset) {
+      playSfx('select');
+      setIsConfirmingReset(true);
+      setTimeout(() => setIsConfirmingReset(false), 4000);
+      return;
+    }
     playSfx('confirm');
     resetAllSettings();
-  }, [resetAllSettings, playSfx]);
+    setIsConfirmingReset(false);
+  }, [isConfirmingReset, resetAllSettings, playSfx]);
 
   return (
     <InternalPageLayout
@@ -211,11 +220,15 @@ export const SystemPage: FC<SystemPageProps> = ({ onNavigate, onBackToMenu }) =>
             <div className="p3r-reset-action-box">
               <button
                 type="button"
-                className="p3r-reset-button"
+                className={`p3r-reset-button ${isConfirmingReset ? 'confirming-danger' : ''}`}
                 onClick={handleReset}
                 onMouseEnter={() => playSfx('hover')}
               >
-                <span>↺ RESTORE FACTORY CONFIGURATION</span>
+                <span>
+                  {isConfirmingReset
+                    ? '⚠ CLICK AGAIN TO CONFIRM RESTORE'
+                    : '↺ RESTORE FACTORY CONFIGURATION'}
+                </span>
               </button>
             </div>
           </div>
@@ -235,8 +248,12 @@ export const SystemPage: FC<SystemPageProps> = ({ onNavigate, onBackToMenu }) =>
                   <span className="p3r-key-desc">Confirm Selection / Open Item</span>
                 </div>
                 <div className="p3r-shortcut-row">
-                  <span className="p3r-key-badge">↑ / ↓ / ← / →</span>
-                  <span className="p3r-key-desc">Navigate Options in Menu Arc &amp; Lists</span>
+                  <span className="p3r-key-badge">W / S or ↑ / ↓</span>
+                  <span className="p3r-key-desc">Traverse Options along Menu Arc</span>
+                </div>
+                <div className="p3r-shortcut-row">
+                  <span className="p3r-key-badge">A / D or ← / →</span>
+                  <span className="p3r-key-desc">Step Previous / Next in Arc &amp; Sliders</span>
                 </div>
                 <div className="p3r-shortcut-row">
                   <span className="p3r-key-badge">M</span>

@@ -235,6 +235,19 @@
   transform: skewX(-12deg) scale(1.02);
 }
 
+.p3r-reset-button.confirming-danger {
+  background: var(--abyss-pink);
+  border-color: #ff6b9d;
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(240, 25, 91, 0.65);
+  animation: p3r-danger-pulse 0.9s infinite alternate;
+}
+
+@keyframes p3r-danger-pulse {
+  from { box-shadow: 0 0 8px rgba(240, 25, 91, 0.5); transform: skewX(-12deg) scale(1.01); }
+  to { box-shadow: 0 0 20px rgba(240, 25, 91, 0.85); transform: skewX(-12deg) scale(1.03); }
+}
+
 /* ----------------------------------------------------------------
    RIGHT: REFERENCE & ARCHITECTURE NOTES
    ---------------------------------------------------------------- */

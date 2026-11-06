@@ -13,7 +13,7 @@ An interactive, game-inspired developer portfolio built with **React 19**, **Typ
 ---
 
 ## 🚀 Live Demo & Deployment Links
-- **Production URL**: [https://pritesh-4.github.io/Person-3-Reload-Portfolio/](https://pritesh-4.github.io/Person-3-Reload-Portfolio/)
+- **Production URL**: [https://pritesh-4.github.io/persona-3-reload-portfolio/](https://pritesh-4.github.io/persona-3-reload-portfolio/)
 - **Release & Quality Documentation**:
   - 🎮 [**Persona 3 System Expansion Report (4 New Experiences)**](./SYSTEM_EXPANSION_REPORT.md)
   - 🎵 [**"Colour Your Night" Soundtrack Implementation Report**](./AUDIO_IMPLEMENTATION_REPORT.md)
@@ -106,8 +106,8 @@ All screens and navigation flows are verified via automated end-to-end tests acr
 ### Installation & Development
 ```bash
 # Clone the repository
-git clone https://github.com/pritesh-4/Person-3-Reload-Portfolio.git
-cd Person-3-Reload-Portfolio
+git clone https://github.com/pritesh-4/persona-3-reload-portfolio.git
+cd persona-3-reload-portfolio
 
 # Install dependencies reproducibly
 npm ci

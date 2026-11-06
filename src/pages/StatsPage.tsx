@@ -263,13 +263,17 @@ export const StatsPage: FC<StatsPageProps> = ({ onNavigate, onBackToMenu }) => {
           {/* Data Authenticity / Integrity Status Pill */}
           <div className="p3r-telemetry-badge-box">
             {stats.loading ? (
-              <span className="p3r-stat-status-pill loading">CONNECTING TO GITHUB...</span>
+              <span className="p3r-stat-status-pill loading">
+                <span className="p3r-status-dot pulsing" aria-hidden="true" /> CONNECTING TO GITHUB...
+              </span>
             ) : stats.isCached ? (
               <span className="p3r-stat-status-pill cached">
-                CACHED BENCHMARK ({stats.cachedTimestamp || 'FALLBACK'})
+                <span className="p3r-status-dot warning" aria-hidden="true" /> CACHED ARCHIVE ({stats.cachedTimestamp || 'FALLBACK'})
               </span>
             ) : (
-              <span className="p3r-stat-status-pill live">LIVE GITHUB API FEED (@pritesh-4)</span>
+              <span className="p3r-stat-status-pill live">
+                <span className="p3r-status-dot active" aria-hidden="true" /> LIVE TELEMETRY // @pritesh-4
+              </span>
             )}
           </div>
         </div>

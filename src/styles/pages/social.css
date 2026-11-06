@@ -524,7 +524,18 @@
     justify-content: center;
   }
   .p3r-email-plate-addr {
-    font-size: 1rem;
+    font-size: 0.95rem;
     word-break: break-all;
+  }
+  .p3r-send-email-cta-btn {
+    min-height: 48px;
+    font-size: 1.05rem;
+  }
+  .p3r-copy-email-sub-btn {
+    min-height: 44px;
+  }
+  .p3r-copy-toast {
+    font-size: 0.78rem;
+    padding: 8px 12px;
   }
 }

@@ -83,6 +83,38 @@
   letter-spacing: 0.14em;
   padding: 4px 10px;
   border-radius: 2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.p3r-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.p3r-status-dot.active {
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+}
+
+.p3r-status-dot.warning {
+  background: #f59e0b;
+  box-shadow: 0 0 8px #f59e0b;
+}
+
+.p3r-status-dot.pulsing {
+  background: var(--abyss-cyan);
+  box-shadow: 0 0 8px var(--abyss-cyan);
+  animation: p3r-dot-pulse 1.2s infinite ease-in-out;
+}
+
+@keyframes p3r-dot-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.15); }
 }
 
 .p3r-stat-status-pill.live {
@@ -690,5 +722,31 @@
 @media (max-width: 600px) {
   .p3r-metric-numerals-strip {
     grid-template-columns: 1fr;
+  }
+  .p3r-stats-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .p3r-stats-tabs {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .p3r-stats-tab-btn {
+    font-size: 0.78rem;
+    padding: 7px 8px;
+    text-align: center;
+  }
+  .p3r-telemetry-badge-box {
+    justify-content: center;
+  }
+  .p3r-stat-status-pill {
+    font-size: 0.72rem;
+    padding: 4px 8px;
+  }
+  .p3r-lang-legend-row {
+    gap: 8px 12px;
   }
 }

@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "description": "Persona 3 Reload interactive developer portfolio built with React 19, TypeScript, Vite 8, and Framer Motion",
-  "homepage": "https://pritesh-4.github.io/Person-3-Reload-Portfolio",
+  "homepage": "https://pritesh-4.github.io/persona-3-reload-portfolio",
   "type": "module",
   "scripts": {
     "dev": "vite",
