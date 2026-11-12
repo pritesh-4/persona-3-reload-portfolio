@@ -15,10 +15,8 @@ export const EquipPage: FC<EquipPageProps> = ({ onNavigate, onBackToMenu }) => {
   const { playSfx } = useAudioContext();
 
   // Modal dialog states
-  const [showResumeModal, setShowResumeModal] = useState(false);
   const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
 
-  const resumeModalRef = useFocusTrap<HTMLDivElement>(showResumeModal);
   const projectModalRef = useFocusTrap<HTMLDivElement>(Boolean(activeProjectId));
 
   // Resolved active project record
@@ -31,26 +29,13 @@ export const EquipPage: FC<EquipPageProps> = ({ onNavigate, onBackToMenu }) => {
     (m) => m.category !== 'EDUCATION'
   );
 
-  // Resume Modal Handlers
-  const handleOpenResume = useCallback(() => {
-    if (activeProjectId) return; // Prevent concurrent dialogs
-    playSfx('confirm');
-    setShowResumeModal(true);
-  }, [playSfx, activeProjectId]);
-
-  const handleCloseResume = useCallback(() => {
-    playSfx('back');
-    setShowResumeModal(false);
-  }, [playSfx]);
-
   // Project Dossier Handlers
   const handleOpenProjectDossier = useCallback(
     (projId: string) => {
-      if (showResumeModal) return; // Prevent concurrent dialogs
       playSfx('confirm');
       setActiveProjectId(projId);
     },
-    [playSfx, showResumeModal]
+    [playSfx]
   );
 
   const handleCloseProjectDossier = useCallback(() => {
@@ -58,30 +43,16 @@ export const EquipPage: FC<EquipPageProps> = ({ onNavigate, onBackToMenu }) => {
     setActiveProjectId(null);
   }, [playSfx]);
 
-  // Lock background scroll when any dialog is active
+  // Lock background scroll when project dossier modal is active
   useEffect(() => {
-    if (showResumeModal || activeProjectId) {
+    if (activeProjectId) {
       const originalOverflow = document.body.style.overflow;
       document.body.style.overflow = 'hidden';
       return () => {
         document.body.style.overflow = originalOverflow;
       };
     }
-  }, [showResumeModal, activeProjectId]);
-
-  // Escape key handling for Resume modal
-  useEffect(() => {
-    if (!showResumeModal) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        e.preventDefault();
-        e.stopPropagation();
-        handleCloseResume();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown, true);
-    return () => window.removeEventListener('keydown', handleKeyDown, true);
-  }, [showResumeModal, handleCloseResume]);
+  }, [activeProjectId]);
 
   // Escape key handling for Project Dossier modal
   useEffect(() => {
@@ -103,7 +74,6 @@ export const EquipPage: FC<EquipPageProps> = ({ onNavigate, onBackToMenu }) => {
       sublabel="EDUCATION & DEVELOPMENT PROGRESSION"
       sectionId="003"
       characterId="akihiko"
-      backgroundPath="/assets/persona3/backgrounds/main-visuals/p3r-main-visual.png"
       currentRoute="/resume"
       onNavigate={onNavigate}
       onBackToMenu={onBackToMenu}
@@ -137,15 +107,18 @@ export const EquipPage: FC<EquipPageProps> = ({ onNavigate, onBackToMenu }) => {
           </div>
 
           <div className="p3r-edu-action-col">
-            <button
-              type="button"
+            <a
+              href="https://drive.google.com/file/d/1GmxHQImCLP-AZtlD72_Ex-XqxM6zu1T3/view?usp=drive_link"
+              target="_blank"
+              rel="noopener noreferrer"
               className="p3r-resume-dispatch-btn"
-              onClick={handleOpenResume}
+              onClick={() => playSfx('confirm')}
               onMouseEnter={() => playSfx('hover')}
+              aria-label="RESUME (opens Google Drive document in new tab)"
             >
-              <span>DISPATCH DOSSIER [RESUME]</span>
+              <span>RESUME</span>
               <span className="p3r-resume-arrow">↗</span>
-            </button>
+            </a>
             <span className="p3r-resume-note">VERIFIED CREDENTIALS ARCHIVE</span>
           </div>
         </section>
@@ -391,103 +364,6 @@ export const EquipPage: FC<EquipPageProps> = ({ onNavigate, onBackToMenu }) => {
                     <span className="p3r-action-arrow">↗</span>
                   </a>
                 )}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* ================================================================
-            RESUME DOSSIER MODAL
-            ================================================================ */}
-        {showResumeModal && (
-          <div
-            className="p3r-resume-modal-backdrop"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="resume-modal-title"
-            onClick={(e) => {
-              if (e.target === e.currentTarget) {
-                handleCloseResume();
-              }
-            }}
-          >
-            <div
-              ref={resumeModalRef}
-              className="p3r-resume-modal-plate"
-              tabIndex={-1}
-            >
-              <div className="p3r-resume-modal-head">
-                <div className="p3r-resume-modal-title-box">
-                  <span className="p3r-resume-modal-tag">PERSONNEL DOCUMENT</span>
-                  <h2 id="resume-modal-title" className="p3r-resume-modal-title">
-                    PRITESH KUMAR JENA — ENGINEERING DOSSIER
-                  </h2>
-                </div>
-                <button
-                  type="button"
-                  className="p3r-modal-close-btn"
-                  onClick={handleCloseResume}
-                  aria-label="Close Resume Modal"
-                >
-                  ✕ CLOSE
-                </button>
-              </div>
-
-              <div className="p3r-resume-modal-body">
-                <div className="p3r-resume-section">
-                  <h3 className="p3r-resume-sec-title">EDUCATION</h3>
-                  <div className="p3r-resume-record">
-                    <div className="p3r-resume-row">
-                      <span className="p3r-resume-bold">National Institute of Technology, Rourkela</span>
-                      <span className="p3r-resume-dim">Rourkela, Odisha, India</span>
-                    </div>
-                    <div className="p3r-resume-row">
-                      <span>Bachelor of Technology in Mining Engineering</span>
-                      <span className="p3r-resume-accent">Second-Year Undergraduate</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p3r-resume-section">
-                  <h3 className="p3r-resume-sec-title">CORE TECHNICAL COMPETENCIES</h3>
-                  <p className="p3r-resume-p">
-                    <b>Languages:</b> Python, JavaScript (ES6+), TypeScript, C/C++, SQL, HTML5, CSS3<br />
-                    <b>Backend &amp; APIs:</b> FastAPI, Node.js, Express, REST APIs, WebSockets (Socket.IO), SQLAlchemy<br />
-                    <b>Frontend:</b> React 19, Vite, Tailwind CSS, Framer Motion, Vanilla CSS Architecture<br />
-                    <b>AI &amp; Heuristics:</b> PyTorch, Ultralytics YOLO, ByteTrack, Gemini API, Groq Llama, Vector DBs
-                  </p>
-                </div>
-
-                <div className="p3r-resume-section">
-                  <h3 className="p3r-resume-sec-title">NOTABLE ARCHITECTURAL HIGHLIGHTS</h3>
-                  <ul className="p3r-resume-bullets">
-                    <li><b>SALVUS (SIH 2026):</b> Lead Systems Architect &amp; AI Integration Engineer for emergency disaster coordination platform with 3-tier AI triage and human command safety locks.</li>
-                    <li><b>Project AETHON:</b> Independent scientific computing research prototype investigating unsupervised anomaly detection to surface uncatalogued astronomical radio transients.</li>
-                    <li><b>Project RouteMind:</b> Intelligent multi-model LLM router classifying query intent across cost, speed, and quality trade-offs.</li>
-                    <li><b>Project Zogan:</b> AI-assisted wildlife detection and tracking prototype using fine-tuned YOLO and ByteTrack.</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="p3r-resume-modal-foot">
-                <a
-                  href="https://github.com/pritesh-4"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p3r-resume-external-btn"
-                  onClick={() => playSfx('confirm')}
-                >
-                  <span>GITHUB PROFILE ↗</span>
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/pritesh-jena-8980a6373"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p3r-resume-external-btn"
-                  onClick={() => playSfx('confirm')}
-                >
-                  <span>LINKEDIN PROFILE ↗</span>
-                </a>
               </div>
             </div>
           </div>

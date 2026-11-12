@@ -14,6 +14,7 @@ interface MenuItemProps {
     scale?: number;
     isVisible?: boolean;
   };
+  isPartialArc?: boolean;
   onSelect: () => void;
   onConfirm: () => void;
   onHover: () => void;
@@ -24,6 +25,7 @@ export const MenuItem: FC<MenuItemProps> = ({
   index,
   isActive,
   position,
+  isPartialArc = false,
   onSelect,
   onConfirm,
   onHover,
@@ -33,28 +35,37 @@ export const MenuItem: FC<MenuItemProps> = ({
   const scale = position.scale !== undefined ? position.scale : 1;
   const isVisible = position.isVisible !== undefined ? position.isVisible : true;
 
-  if (!isVisible && opacity === 0) {
-    return null;
-  }
-
   return (
     <button
       type="button"
-      className={`p3r-menu-item-btn ${isActive ? 'active' : ''}`}
+      className={`p3r-menu-item-btn ${isActive ? 'active' : ''} ${!isVisible ? 'is-hidden-slot' : ''}`}
       style={{
         left: `${position.x}px`,
         top: `${position.y}px`,
         transform: `translate(-50%, -50%) rotate(${position.angle}deg) scale(${scale})`,
         opacity,
-        pointerEvents: opacity < 0.2 ? 'none' : 'auto',
+        pointerEvents: !isVisible || opacity < 0.2 ? 'none' : 'auto',
+        visibility: opacity === 0 ? 'hidden' : 'visible',
       }}
+      tabIndex={!isVisible ? -1 : 0}
+      aria-hidden={!isVisible ? 'true' : undefined}
       onClick={() => {
-        onSelect();
-        onConfirm();
+        if (isPartialArc) {
+          if (isActive) {
+            onConfirm();
+          } else {
+            onSelect();
+          }
+        } else {
+          onSelect();
+          onConfirm();
+        }
       }}
       onMouseEnter={() => {
-        onHover();
-        onSelect();
+        if (isVisible) {
+          onHover();
+          onSelect();
+        }
       }}
       role="menuitem"
       aria-label={`${item.label} - ${item.sublabel}`}

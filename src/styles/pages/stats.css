@@ -180,6 +180,14 @@
   margin: 4px 0;
 }
 
+.p3r-numeral-inline-sub {
+  font-size: 1.4rem;
+  color: var(--abyss-mist);
+  font-style: normal;
+  font-family: var(--font-ui);
+  vertical-align: middle;
+}
+
 .p3r-numeral-sub {
   font-family: var(--font-body);
   font-size: 0.72rem;

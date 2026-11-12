@@ -1,9 +1,12 @@
-import { useState, useCallback, useMemo, type FC } from 'react';
+import { useState, useCallback, useMemo, useEffect, useRef, type FC } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { InternalPageLayout } from '../components/layout/InternalPageLayout';
 import {
   PROJECTS_DATA,
   type ProjectMission,
 } from '../data/projectsData';
+import { ArchitectureExplorer } from '../components/quest/ArchitectureExplorer';
+import { CaptureLightbox } from '../components/quest/CaptureLightbox';
 import { useAudioContext } from '../hooks/useAudioContext';
 import '../styles/pages/quest.css';
 
@@ -13,6 +16,36 @@ const CATEGORIES = [
   { id: 'SYSTEMS', label: 'SYSTEMS & AGENTS' },
 ];
 
+/** Short category tag shown on archive entries. */
+const CATEGORY_TAG: Record<ProjectMission['category'], string> = {
+  'AI / ML': 'AI/ML',
+  'SYSTEMS': 'SYSTEMS',
+};
+
+/**
+ * Per-mission visual identity. Every dossier gets its own accent and a
+ * technical motif strip that reflects the project's actual subject matter.
+ * Pure CSS compositions — never presented as product screenshots.
+ */
+const DOSSIER_THEMES: Record<string, { motifClass: string; motifLabel: string }> = {
+  'quest-01': { motifClass: 'theme-salvus', motifLabel: 'GEOSPATIAL OPERATIONS GRID' },
+  'quest-02': { motifClass: 'theme-aethon', motifLabel: 'RADIO SPECTROGRAM FIELD' },
+  'quest-03': { motifClass: 'theme-routemind', motifLabel: 'MODEL ROUTING PIPELINE' },
+  'quest-04': { motifClass: 'theme-zogan', motifLabel: 'DETECTION BOX OVERLAY' },
+  'quest-05': { motifClass: 'theme-friday', motifLabel: 'COGNITIVE ORB RESONANCE' },
+  'quest-08': { motifClass: 'theme-holytrial', motifLabel: 'CASE FILE REGISTRY' },
+  'quest-09': { motifClass: 'theme-orbit', motifLabel: 'DEVICE SCHEMATIC BLUEPRINT' },
+};
+
+function statusBadgeClass(status: ProjectMission['implementationStatus']): string {
+  switch (status) {
+    case 'VERIFIED IMPLEMENTED': return 'p3r-mstatus-implemented';
+    case 'RESEARCH PROTOTYPE': return 'p3r-mstatus-prototype';
+    case 'EXPERIMENTAL CONCEPT': return 'p3r-mstatus-concept';
+    default: return 'p3r-mstatus-early';
+  }
+}
+
 interface QuestPageProps {
   onNavigate: (route: string) => void;
   onBackToMenu: () => void;
@@ -20,13 +53,54 @@ interface QuestPageProps {
 
 export const QuestPage: FC<QuestPageProps> = ({ onNavigate, onBackToMenu }) => {
   const { playSfx } = useAudioContext();
+  const [searchParams] = useSearchParams();
   const [selectedCat, setSelectedCat] = useState('ALL');
-  const [selectedMission, setSelectedMission] = useState<ProjectMission>(PROJECTS_DATA[0]);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const dossierRef = useRef<HTMLElement | null>(null);
+  // Deep-link support: /projects?mission=quest-02 or /projects?id=salvus
+  const missionParam = searchParams.get('mission') || searchParams.get('id');
+
+  const [selectedMission, setSelectedMission] = useState<ProjectMission>(() => {
+    if (missionParam) {
+      const match = PROJECTS_DATA.find(
+        m =>
+          m.id.toLowerCase() === missionParam.toLowerCase() ||
+          m.code.toLowerCase() === missionParam.toLowerCase() ||
+          m.title.toLowerCase() === missionParam.toLowerCase()
+      );
+      if (match) return match;
+    }
+    return PROJECTS_DATA[0];
+  });
+
+  const [prevParam, setPrevParam] = useState(missionParam);
+  if (missionParam !== prevParam) {
+    setPrevParam(missionParam);
+    if (missionParam) {
+      const target = PROJECTS_DATA.find(
+        m =>
+          m.id.toLowerCase() === missionParam.toLowerCase() ||
+          m.code.toLowerCase() === missionParam.toLowerCase() ||
+          m.title.toLowerCase() === missionParam.toLowerCase()
+      );
+      if (target) {
+        setSelectedMission(target);
+        if (selectedCat !== 'ALL' && target.category !== selectedCat) {
+          setSelectedCat('ALL');
+        }
+      }
+    }
+  }
 
   const filteredMissions = useMemo(() => {
     if (selectedCat === 'ALL') return PROJECTS_DATA;
     return PROJECTS_DATA.filter(m => m.category === selectedCat);
   }, [selectedCat]);
+
+  // Keep the dossier scroll anchored to its newest content
+  useEffect(() => {
+    dossierRef.current?.scrollTo({ top: 0 });
+  }, [selectedMission.id]);
 
   const handleSelectMission = useCallback(
     (mission: ProjectMission, isPreview = false) => {
@@ -34,11 +108,13 @@ export const QuestPage: FC<QuestPageProps> = ({ onNavigate, onBackToMenu }) => {
         if (selectedMission.id !== mission.id) {
           playSfx('hover');
           setSelectedMission(mission);
+          setLightboxIndex(null);
         }
         return;
       }
       playSfx('select');
       setSelectedMission(mission);
+      setLightboxIndex(null);
     },
     [selectedMission.id, playSfx]
   );
@@ -47,26 +123,32 @@ export const QuestPage: FC<QuestPageProps> = ({ onNavigate, onBackToMenu }) => {
     (catId: string) => {
       playSfx('select');
       setSelectedCat(catId);
-      const first =
+      // The dossier must never show a mission hidden by the active filter
+      const nextPool =
         catId === 'ALL'
-          ? PROJECTS_DATA[0]
-          : PROJECTS_DATA.find(m => m.category === catId) || PROJECTS_DATA[0];
-      setSelectedMission(first);
+          ? PROJECTS_DATA
+          : PROJECTS_DATA.filter(m => m.category === catId);
+      if (!nextPool.some(m => m.id === selectedMission.id)) {
+        setSelectedMission(nextPool[0]);
+        setLightboxIndex(null);
+      }
     },
-    [playSfx]
+    [selectedMission.id, playSfx]
   );
+
+  const theme = DOSSIER_THEMES[selectedMission.id];
+  const captures = selectedMission.screenshots ?? [];
 
   return (
     <InternalPageLayout
       title="QUEST"
-      sublabel="FEATURED MISSIONS & SOFTWARE ARCHIVES"
+      sublabel="PROJECT ARCHIVE & MISSION DOSSIERS"
       sectionId="005"
       characterId="junpei"
-      backgroundPath="/assets/persona3/backgrounds/promotional-art/persona3-reload-promo-group.jpg"
       currentRoute="/projects"
       onNavigate={onNavigate}
       onBackToMenu={onBackToMenu}
-      customHint="HOVER OR SELECT MISSION TO INSPECT ARCHITECTURAL DOSSIER"
+      customHint="SELECT MISSION TO OPEN TECHNICAL DOSSIER"
     >
       <div className="p3r-quest-screen">
         {/* Category Filters */}
@@ -84,11 +166,14 @@ export const QuestPage: FC<QuestPageProps> = ({ onNavigate, onBackToMenu }) => {
               <span>{cat.label}</span>
             </button>
           ))}
+          <span className="p3r-quest-count">
+            {filteredMissions.length} / {PROJECTS_DATA.length} MISSIONS
+          </span>
         </div>
 
         {/* Two-Column Grid: Mission List + Detailed Mission Dossier */}
         <div className="p3r-quest-stage-grid">
-          {/* Mission Archive Cards */}
+          {/* Mission Archive Entries */}
           <div className="p3r-mission-list-container" role="listbox" aria-label="Missions Archive" aria-live="polite">
             {filteredMissions.map(m => (
               <div
@@ -117,21 +202,17 @@ export const QuestPage: FC<QuestPageProps> = ({ onNavigate, onBackToMenu }) => {
               >
                 <div className="p3r-mission-head-row">
                   <span className="p3r-mission-code">{m.code}</span>
-                  <span className={`p3r-mission-status-badge ${
-                    m.implementationStatus === 'VERIFIED IMPLEMENTED'
-                      ? 'p3r-mstatus-implemented'
-                      : m.implementationStatus === 'RESEARCH PROTOTYPE'
-                      ? 'p3r-mstatus-prototype'
-                      : m.implementationStatus === 'EXPERIMENTAL CONCEPT'
-                      ? 'p3r-mstatus-concept'
-                      : 'p3r-mstatus-early'
-                  }`}>
+                  <span className={`p3r-mission-status-badge ${statusBadgeClass(m.implementationStatus)}`}>
                     {m.implementationStatus}
                   </span>
                 </div>
 
                 <h3 className="p3r-mission-title">{m.title}</h3>
-                <span className="p3r-mission-role">{m.role}</span>
+                <div className="p3r-mission-meta-row">
+                  <span className="p3r-mission-cat">{CATEGORY_TAG[m.category]}</span>
+                  <span className="p3r-mission-rank">{m.difficulty}</span>
+                  <span className="p3r-mission-role">{m.role}</span>
+                </div>
                 <p className="p3r-mission-summary">{m.summary}</p>
 
                 <div className="p3r-mission-tags-row">
@@ -149,39 +230,89 @@ export const QuestPage: FC<QuestPageProps> = ({ onNavigate, onBackToMenu }) => {
           </div>
 
           {/* Mission Dossier Detail Panel */}
-          <aside className="p3r-mission-dossier-panel" aria-live="polite">
+          <aside className="p3r-mission-dossier-panel" aria-live="polite" ref={dossierRef}>
+            {/* Per-project technical motif — visual identity, not a screenshot */}
+            <div className={`p3r-dossier-visual ${theme.motifClass}`} aria-hidden="true">
+              <span className="p3r-dossier-visual-label">{theme.motifLabel}</span>
+              <span className="p3r-dossier-visual-code">{selectedMission.code}</span>
+            </div>
+
             <div className="p3r-dossier-header-block">
               <div className="p3r-dossier-badge-row">
-                <span className={`p3r-mission-status-badge ${
-                  selectedMission.implementationStatus === 'VERIFIED IMPLEMENTED'
-                    ? 'p3r-mstatus-implemented'
-                    : selectedMission.implementationStatus === 'RESEARCH PROTOTYPE'
-                    ? 'p3r-mstatus-prototype'
-                    : selectedMission.implementationStatus === 'EXPERIMENTAL CONCEPT'
-                    ? 'p3r-mstatus-concept'
-                    : 'p3r-mstatus-early'
-                }`}>
+                <span className={`p3r-mission-status-badge ${statusBadgeClass(selectedMission.implementationStatus)}`}>
                   {selectedMission.implementationStatus}
                 </span>
+                <span className="p3r-dossier-codename">{selectedMission.codename}</span>
               </div>
               <h2 className="p3r-dossier-title">{selectedMission.title}</h2>
               <div className="p3r-dossier-subtitle">{selectedMission.subtitle}</div>
+
+              {/* Mission Identity Grid */}
+              <dl className="p3r-dossier-identity-grid">
+                <div className="p3r-dossier-identity-cell">
+                  <dt>MISSION CODE</dt>
+                  <dd>{selectedMission.code}</dd>
+                </div>
+                <div className="p3r-dossier-identity-cell">
+                  <dt>CATEGORY</dt>
+                  <dd>{CATEGORY_TAG[selectedMission.category]}</dd>
+                </div>
+                <div className="p3r-dossier-identity-cell">
+                  <dt>DIFFICULTY</dt>
+                  <dd>{selectedMission.difficulty}</dd>
+                </div>
+                <div className="p3r-dossier-identity-cell">
+                  <dt>ARCANA</dt>
+                  <dd>{selectedMission.targetArcana}</dd>
+                </div>
+              </dl>
               <div className="p3r-dossier-role-tag">ROLE: {selectedMission.role}</div>
             </div>
 
-            {selectedMission.screenshot && (
-              <div className="p3r-dossier-screenshot-wrap">
-                <img
-                  src={selectedMission.screenshot}
-                  alt={`${selectedMission.title} screenshot`}
-                  className="p3r-dossier-screenshot"
-                  loading="lazy"
+            {captures.length > 0 && (
+              <div className="p3r-dossier-gallery" key={selectedMission.id}>
+                {captures.map((capture, idx) => (
+                  <figure key={capture.src} className="p3r-dossier-capture">
+                    <button
+                      type="button"
+                      className="p3r-dossier-capture-btn"
+                      aria-label={`Inspect capture: ${capture.alt}`}
+                      onClick={() => {
+                        playSfx('select');
+                        setLightboxIndex(idx);
+                      }}
+                    >
+                      <img
+                        src={capture.src}
+                        alt={capture.alt}
+                        className="p3r-dossier-screenshot"
+                        loading="lazy"
+                      />
+                      <span className="p3r-dossier-capture-hint" aria-hidden="true">
+                        ⛶ INSPECT
+                      </span>
+                    </button>
+                  </figure>
+                ))}
+              </div>
+            )}
+
+            {selectedMission.architecture && (
+              <div className="p3r-dossier-arch-section" key={`arch-${selectedMission.id}`}>
+                <ArchitectureExplorer
+                  diagram={selectedMission.architecture}
+                  systemName={selectedMission.title}
                 />
               </div>
             )}
 
             <div className="p3r-dossier-section">
-              <h4 className="p3r-dossier-heading">THE CHALLENGE & PROBLEM</h4>
+              <h4 className="p3r-dossier-heading">PROJECT BRIEFING</h4>
+              <p className="p3r-dossier-text">{selectedMission.summary}</p>
+            </div>
+
+            <div className="p3r-dossier-section">
+              <h4 className="p3r-dossier-heading">THE REAL PROBLEM</h4>
               <p className="p3r-dossier-text">{selectedMission.problem}</p>
             </div>
 
@@ -201,7 +332,7 @@ export const QuestPage: FC<QuestPageProps> = ({ onNavigate, onBackToMenu }) => {
               </div>
             </div>
 
-            {selectedMission.limitations && selectedMission.limitations.length > 0 && (
+            {selectedMission.limitations.length > 0 && (
               <div className="p3r-dossier-limitations-box">
                 <div className="p3r-limitations-heading">
                   <span>TECHNICAL HONESTY & REAL-WORLD BOUNDARIES</span>
@@ -240,8 +371,7 @@ export const QuestPage: FC<QuestPageProps> = ({ onNavigate, onBackToMenu }) => {
                   href={selectedMission.demoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p3r-quest-action-btn"
-                  style={{ background: 'var(--p3r-red)', borderColor: 'var(--p3r-magenta)' }}
+                  className="p3r-quest-action-btn p3r-quest-action-live"
                   onMouseEnter={() => playSfx('hover')}
                 >
                   <span>LIVE DEPLOYMENT ↗</span>
@@ -250,6 +380,14 @@ export const QuestPage: FC<QuestPageProps> = ({ onNavigate, onBackToMenu }) => {
             </div>
           </aside>
         </div>
+
+        {/* Capture inspection overlay (QUEST dossiers with real screenshots) */}
+        <CaptureLightbox
+          captures={captures}
+          index={lightboxIndex}
+          onClose={() => setLightboxIndex(null)}
+          onNavigate={setLightboxIndex}
+        />
       </div>
     </InternalPageLayout>
   );

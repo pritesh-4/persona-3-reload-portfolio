@@ -44,34 +44,31 @@ An interactive, game-inspired developer portfolio built with **React 19**, **Typ
   - Game-style control keycap hints.
   - Theme status badge (`THEME: P3R`).
 
-### 2. All Eight Internal Portfolio Screens (Phase 2)
+### 2. Eight Internal Portfolio Destinations
 Every section is built with its own distinctive Persona 3 Reload interface concept:
-1. **PERSONA (`/about`)**: Character Profile / Personnel Database File 001. Features Makoto Yuki artwork, S-rank combat/engineering attribute matrix, personal narrative bio, and core engineering directives.
-2. **SKILL (`/skills`)**: Ability Tree & Competency Matrix. Features Mitsuru Kirijo artwork, category filter tabs (Programming, Development, AI/ML, Engineering, Tools), SP costs, ability tiers, and interactive ability inspector panel.
-3. **EQUIP (`/resume`)**: Progression & Equipment. Features Akihiko Sanada artwork, dual-mode progression timeline (SALVUS Lead Architect, AETHON Researcher, RouteMind Creator, Zogan ML, NIT Rourkela) vs. RPG equipment loadout view, and resume dispatch modal.
-4. **STATS (`/stats`)**: Developer Telemetry & GitHub Activity. Features Fuuka Yamagishi artwork, real-time GitHub API integration (`pritesh-4`), public repo metrics, language matrix distribution bars, and fallback caching.
-5. **QUEST (`/projects`)**: Mission Archive. Features Junpei Iori artwork, Tartarus request cards with difficulty ranks (Rank S, Rank A), mission status tags, and interactive detail panel with architecture breakdown, live demos, and repos.
-6. **ITEM (`/tools`)**: Developer Tooling & Inventory. Features Aigis artwork, grid slot layout with icons/quantities, rarity tiers, and item inspection panel with functional lore and project provenance.
-7. **SOCIAL LINK (`/contact`)**: Communication Terminal. Features Yukari Takeba artwork, frequency link cards (GitHub, LinkedIn, Email, Chronicles of Fate), one-click copy email with visual toast, and external links.
-8. **SYSTEM (`/system`)**: In-Game Configuration Menu. Features Koromaru artwork, real functional controls for BGM/SFX volumes, mute, reduced motion, artwork dimmer, and factory reset, all persisted in `localStorage`.
+1. **PERSONA (`/about`, ID 001)**: Character Profile / Personnel Database File 001. Features Makoto Yuki artwork, S-rank combat/engineering attribute matrix, personal narrative bio, and core engineering directives.
+2. **SKILL (`/tools`, ID 002 — legacy `/skills` redirects here)**: Technical Toolkit & Competencies. Features Aigis artwork, category filter tabs, and an interactive item inspection panel.
+3. **EQUIP (`/resume`, ID 003)**: Progression & Equipment. Features Akihiko Sanada artwork, dual-mode progression timeline vs. RPG equipment loadout view, project provenance, and zero-dependency resume PDF export.
+4. **EXPERIENCE (`/experience`, ID 004)**: Field Record & Achievements. Professional activities, leadership, research and achievement records.
+5. **QUEST (`/projects`, ID 005)**: Mission Archive & Project Dossiers. Features Junpei Iori artwork, seven selectable missions (SALVUS, AETHON, ROUTEMIND, ZOGAN, F.R.I.D.A.Y., HOLY TRIAL, ORBIT) with `M-00X` mission codes, category filters (ALL MISSIONS / AI & HEURISTICS / SYSTEMS & AGENTS), implementation-status badges, and a technical dossier panel with briefing, architecture, capabilities, limitations, capture gallery, and repo/demo actions.
+6. **STATS (`/stats`, ID 006)**: Developer Telemetry & GitHub Activity. Features Fuuka Yamagishi artwork, real-time GitHub API integration (`pritesh-4`), public repo metrics, language matrix distribution bars, and fallback caching.
+7. **SOCIAL LINK (`/contact`, ID 007)**: Communication Terminal. Features Yukari Takeba artwork, frequency link cards (GitHub, LinkedIn, Email, Chronicles of Fate), one-click copy email with visual toast, and external links.
+8. **SYSTEM (`/system`, ID 008)**: In-Game Configuration Menu. Features Koromaru artwork, real functional controls for BGM/SFX volumes, mute, reduced motion, artwork dimmer, and factory reset, all persisted in `localStorage`.
 9. **404 Anomaly Fallback (`*`)**: Themed Dark Hour anomaly screen with quick retreat to command hub.
 10. **Audio Continuity**: Continuous background music across all internal pages with an overarching `AudioProvider` singleton.
 
 ### 3. Visual Polish, UX Refinement & Production Optimization (Phase 3)
-- **Mobile Responsive Curved Arc Navigation**: Re-engineered quadratic Bézier positioning to preserve the curved arc menu on small devices ($\le 768\text{px}$) with an adaptive 5-item sliding window, plate scaling, and touch swipe gestures.
+- **Mobile Responsive Curved Arc Navigation**: Re-engineered quadratic Bézier positioning to preserve the curved arc menu on small devices with an adaptive 5-item sliding window (active up to 1024px viewports), plate scaling, touch swipe gestures, and a portrait offset that keeps the active plate clear of the HUD panel.
 - **Per-Screen Image Engine (`screenArtConfig.ts`)**: Custom desktop/mobile wallpapers, character cutout anchors, clamp scaling, and gradient masks ensuring text never overlaps character cutouts.
 - **Audio Channel Decoupling & SFX Throttling**: Independent BGM vs. UI SFX controls so muting music never silences clicks. SFX throttle cache (70ms hover, 45ms select) prevents audio clipping.
 - **Route-Level Code Splitting**: All internal routes dynamic loaded via `React.lazy()` with `<Suspense fallback={<P3RLoader />}>`, dropping initial bundle transfer to 137 kB gzipped.
 - **In-Game Reduced Motion & Accessibility**: CSS overrides halt transforms and transitions instantly when enabled. Zero horizontal scroll overflow across all 9 target viewports.
 
-### 4. Product Cleanup, Feature Consolidation & Completeness (Phase 5)
-- **Identity Integrity**: Corrected all residual references to verified portfolio owner **PRITESH JENA** across Title screen, Main Menu, and HUD.
-- **Disambiguated SKILL vs ITEM**: Restructured `ITEM` to showcase developer physical/virtual operational apparatus (`WORKSTATION`, `DEV_ENV`, `DEPLOY_OPS`, `INSPECTION`), eliminating duplicate language listings.
-- **Zero-Dependency Resume Export**: Built-in `PRINT / SAVE PDF` action with clean, high-contrast `@media print` styling that hides gaming overlays for crisp employer printing.
-- **Dynamic System Setting Binding**: Bound `--p3r-artwork-intensity` directly to document root CSS variables for instant live background tuning.
-- **Bi-Directional Menu Keybindings**: Extended arc navigation to support horizontal navigation (`←`/`→`, `A`/`D`) with input typing guards.
-- **Dead Code Elimination**: Deleted obsolete placeholder modals and orphaned hooks, keeping code lightweight and intentional.
-- **Complete QA Audit**: 14/14 automated tests passed with 0 console errors and 0 ESLint warnings. Detailed in [`FINAL_QA_REPORT.md`](./FINAL_QA_REPORT.md).
+### 4. Intelligence, Command Terminal & Recruiter Experience (Phase 4 & 5)
+- **Global Command Terminal (`Ctrl + K` / `Cmd + K`)**: Native game-styled command palette (`CommandTerminal.tsx`) offering keyboard-driven instant navigation across all 8 destinations, direct project dossier routing with query parameters (`/projects?mission=quest-0X`), quick action access (Resume, Email, GitHub, LinkedIn), and fuzzy keyword filtering with sound effects.
+- **Genuine GitHub Telemetry Engine**: Live telemetry for `@pritesh-4` computing language distributions from actual repository codebase byte counts (via GitHub `languages_url` APIs) rather than coarse repository counts. Includes verified tracking of total forks, stars, followers, following, and explicit distinction between live telemetry, local storage caching, and archival benchmark data.
+- **Executive Recruiter Quick Profile (`/recruiter`)**: Dedicated scannable profile highlighting academic background at NIT Rourkela, core competencies, 5 flagship project case studies, achievements, verified contact channels, and a print-optimized stylesheet for instant PDF export without replacing the interactive game atmosphere.
+- **Developer Personnel Status Panel**: Transparent status configuration (`developerStatusData.ts`) surfacing current research explorations (computational radio astronomy & anomaly detection), active project builds (SALVUS SIH 2026), technical focus areas, and verified availability windows. Accessible via HUD status trigger, menu pill, and command terminal.
 
 ---
 
@@ -79,9 +76,10 @@ Every section is built with its own distinctive Persona 3 Reload interface conce
 
 | Input | Action |
 |---|---|
-| <kbd>ENTER</kbd> / <kbd>SPACE</kbd> | Confirm selection / Initialize title / Open category overview |
-| <kbd>&uarr;</kbd> / <kbd>&darr;</kbd> or <kbd>W</kbd> / <kbd>S</kbd> | Navigate along the curved arc menu |
-| <kbd>ESC</kbd> | Return to Main Menu / Return to Title Screen |
+| <kbd>ENTER</kbd> / <kbd>SPACE</kbd> | Confirm selection / Initialize title / Activate focused mission |
+| <kbd>&uarr;</kbd> / <kbd>&darr;</kbd> or <kbd>W</kbd> / <kbd>S</kbd> | Navigate along the curved arc menu; move between QUEST mission entries |
+| <kbd>CTRL+K</kbd> / <kbd>CMD+K</kbd> | Open global S.E.E.S. Command Terminal |
+| <kbd>ESC</kbd> | Return to Main Menu / Close active modal or lightbox |
 | <kbd>M</kbd> | Toggle master audio mute |
 | **Mouse / Touch** | Tap or hover any menu plate; click anywhere to enter |
 
@@ -167,4 +165,4 @@ src/
 All characters, trademarks, logos, and visual designs of **Persona 3 Reload** are the intellectual property of **ATLUS Co., Ltd.** and **SEGA Corporation**.
 
 - **Character Artwork**: Acquired from the public SEGA Asia website for local portfolio evaluation & non-commercial demonstration under `REFERENCE ONLY` classification.
-- **Audio Compliance**: No copyrighted game soundtrack files are bundled. The project features an original synthesized ambient test loop and procedural UI sound cues.
+- **Audio Compliance**: The primary background track is a locally hosted MP3 (`public/assets/persona3/audio/bgm/colour-your-night.mp3`) that is not committed for redistribution; when the file is absent the app automatically falls back to the original synthesized ambient test loop. UI sound cues are procedurally generated.

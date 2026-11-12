@@ -18,7 +18,6 @@ export const PersonaPage: FC<PersonaPageProps> = ({ onNavigate, onBackToMenu }) 
       sublabel="IDENTITY DOSSIER & ARCHIVE"
       sectionId="001"
       characterId="makoto"
-      backgroundPath="/assets/persona3/backgrounds/official-wallpapers/p3r-main-key-art.png"
       currentRoute="/about"
       onNavigate={onNavigate}
       onBackToMenu={onBackToMenu}

@@ -1,8 +1,10 @@
-import { useState, useCallback, lazy, Suspense, type FC } from 'react';
+import { useState, useCallback, useEffect, lazy, Suspense, type FC } from 'react';
 import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { BootSequence } from './components/boot/BootSequence';
 import { TitleScreen } from './components/title/TitleScreen';
 import { MainMenu } from './components/menu/MainMenu';
+import { CommandTerminal } from './components/terminal/CommandTerminal';
+import { DeveloperStatusPanel } from './components/hud/DeveloperStatusPanel';
 import { ScreenTransition } from './components/shared/ScreenTransition';
 import { P3RLoader } from './components/shared/P3RLoader';
 import { useAudioContext } from './hooks/useAudioContext';
@@ -15,6 +17,9 @@ const PersonaPage = lazy(() =>
 );
 const EquipPage = lazy(() =>
   import('./pages/EquipPage').then(m => ({ default: m.EquipPage }))
+);
+const QuestPage = lazy(() =>
+  import('./pages/QuestPage').then(m => ({ default: m.QuestPage }))
 );
 const ExperiencePage = lazy(() =>
   import('./pages/ExperiencePage').then(m => ({ default: m.ExperiencePage }))
@@ -31,6 +36,9 @@ const SocialLinkPage = lazy(() =>
 const SystemPage = lazy(() =>
   import('./pages/SystemPage').then(m => ({ default: m.SystemPage }))
 );
+const RecruiterPage = lazy(() =>
+  import('./pages/RecruiterPage').then(m => ({ default: m.RecruiterPage }))
+);
 const NotFoundPage = lazy(() =>
   import('./pages/NotFoundPage').then(m => ({ default: m.NotFoundPage }))
 );
@@ -39,10 +47,12 @@ export const App: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // If visitor arrives directly at a deep link (/about, /skills, etc.), skip boot sequence
+  // If visitor arrives directly at a deep link (/about, /skills, /recruiter, etc.), skip boot sequence
   const isDirectInternal = location.pathname !== '/' && location.pathname !== '/menu';
   const [bootCompleted, setBootCompleted] = useState<boolean>(() => isDirectInternal);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isCommandOpen, setIsCommandOpen] = useState(false);
+  const [isStatusOpen, setIsStatusOpen] = useState(false);
 
   const {
     bgmPlaying,
@@ -52,6 +62,19 @@ export const App: FC = () => {
     toggleMute,
     playSfx,
   } = useAudioContext();
+
+  // Global Ctrl+K / Cmd+K listener to toggle command terminal
+  useEffect(() => {
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) {
+        e.preventDefault();
+        setIsCommandOpen((prev) => !prev);
+      }
+    };
+
+    window.addEventListener('keydown', handleGlobalKeyDown);
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
+  }, []);
 
   // Navigation transition helper
   const navigateWithTransition = useCallback(
@@ -153,7 +176,6 @@ export const App: FC = () => {
             path="/skills"
             element={<Navigate to="/tools" replace />}
           />
-
           {/* 2. SKILL: Technical Toolkit & Competencies */}
           <Route
             path="/tools"
@@ -187,7 +209,7 @@ export const App: FC = () => {
             }
           />
 
-          {/* 5. STATS: GitHub Activity & Telemetry */}
+          {/* 6. STATS: GitHub Activity & Telemetry */}
           <Route
             path="/stats"
             element={
@@ -198,13 +220,18 @@ export const App: FC = () => {
             }
           />
 
-          {/* Legacy route compatibility: redirect /projects to /resume (EQUIP) */}
+          {/* 5. QUEST: Mission Archive & Project Dossiers */}
           <Route
             path="/projects"
-            element={<Navigate to="/resume" replace />}
+            element={
+              <QuestPage
+                onNavigate={handleNavigateTo}
+                onBackToMenu={handleBackToMenu}
+              />
+            }
           />
 
-          {/* 6. SOCIAL LINK: Communication Terminal */}
+          {/* 7. SOCIAL LINK: Communication Terminal */}
           <Route
             path="/contact"
             element={
@@ -215,7 +242,7 @@ export const App: FC = () => {
             }
           />
 
-          {/* 7. SYSTEM: In-game Configuration & Audio Settings */}
+          {/* 8. SYSTEM: In-game Configuration & Audio Settings */}
           <Route
             path="/system"
             element={
@@ -224,6 +251,21 @@ export const App: FC = () => {
                 onBackToMenu={handleBackToMenu}
               />
             }
+          />
+
+          {/* Dedicated Recruiter & Executive Technical Profile */}
+          <Route
+            path="/recruiter"
+            element={
+              <RecruiterPage
+                onNavigate={handleNavigateTo}
+                onBackToMenu={handleBackToMenu}
+              />
+            }
+          />
+          <Route
+            path="/quick-profile"
+            element={<Navigate to="/recruiter" replace />}
           />
 
           {/* Fallback 404 Anomaly Route */}
@@ -241,6 +283,21 @@ export const App: FC = () => {
 
       {/* Cinematic Diagonal Slash Screen Transition */}
       <ScreenTransition active={isTransitioning} />
+
+      {/* Global Command Terminal (Ctrl+K / Cmd+K) */}
+      <CommandTerminal
+        isOpen={isCommandOpen}
+        onClose={() => setIsCommandOpen(false)}
+        onNavigate={handleNavigateTo}
+        onOpenStatusPanel={() => setIsStatusOpen(true)}
+      />
+
+      {/* Global Developer Personnel Status Panel */}
+      <DeveloperStatusPanel
+        isOpen={isStatusOpen}
+        onClose={() => setIsStatusOpen(false)}
+        onNavigate={handleNavigateTo}
+      />
     </div>
   );
 };

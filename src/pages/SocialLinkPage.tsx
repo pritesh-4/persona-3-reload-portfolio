@@ -63,9 +63,8 @@ export const SocialLinkPage: FC<SocialLinkPageProps> = ({ onNavigate, onBackToMe
     <InternalPageLayout
       title="SOCIAL LINK"
       sublabel="COMMUNICATION HUB & DIRECT CHANNELS"
-      sectionId="006"
+      sectionId="007"
       characterId="yukari"
-      backgroundPath="/assets/persona3/backgrounds/official-wallpapers/p3r-main-key-art.png"
       currentRoute="/contact"
       onNavigate={onNavigate}
       onBackToMenu={onBackToMenu}

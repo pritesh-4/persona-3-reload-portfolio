@@ -57,7 +57,6 @@ export const ItemPage: FC<ItemPageProps> = ({ onNavigate, onBackToMenu }) => {
       sublabel="TECHNICAL ABILITY & COMPETENCY INDEX"
       sectionId="002"
       characterId="aigis"
-      backgroundPath="/assets/persona3/backgrounds/main-visuals/p3r-main-visual.png"
       currentRoute="/tools"
       onNavigate={onNavigate}
       onBackToMenu={onBackToMenu}

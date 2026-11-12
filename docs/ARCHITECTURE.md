@@ -61,11 +61,25 @@ $$\theta_{\text{raw}} = \text{atan2}\left(\frac{dy}{dt}, \frac{dx}{dt}\right) \t
 To maintain high readability while giving an authentic game-menu tilt, the angle is scaled and clamped:
 $$\theta = \max\left(-8^\circ, \, \min\left(8^\circ, \, \theta_{\text{raw}} \times 0.4\right)\right)$$
 
-### C. Responsive Scaling
+### C. Responsive Scaling & Normalized Partial-Arc Architecture
 A `ResizeObserver` monitors the stage container dimensions ($W_{\text{container}}, H_{\text{container}}$), scaling the normalized points:
 $$X_{\text{screen}} = x(t) \times \frac{W_{\text{container}}}{1000}, \quad Y_{\text{screen}} = y(t) \times \frac{H_{\text{container}}}{240}$$
 
-On mobile displays ($< 900\text{px}$), the SVG math smoothly degrades into a compact vertical arc stack with full touch targets.
+#### Dual-Mode Responsive Geometry
+1. **Desktop Full Arc ($\ge 1024\text{px}$)**:
+   - All 7 canonical destinations (`PERSONA`, `SKILL`, `EQUIP`, `EXPERIENCE`, `STATS`, `SOCIAL LINK`, `SYSTEM`) are positioned across the entire quadratic Bézier span ($t_i = i / 6$).
+   - Compact desktop typography and plate padding for $1024\text{px} - 1279\text{px}$ ensure guaranteed $\ge 20\text{px}$ gap between neighboring plates with zero boundary clipping.
+   - The travelling red SVG selection marker follows the active destination smoothly along the curve.
+
+2. **Mobile & Tablet Partial-Arc Carousel ($< 1024\text{px}$)**:
+   - For viewports $< 1024\text{px}$ (including tablet portrait $768\times 1024$, problem reference $687\times 950$, and mobile screens down to $360\times 800$), the navigation switches to a focused partial-arc carousel.
+   - The active item is anchored at the curve apex ($t = 0.5$).
+   - For narrow viewports ($< 900\text{px}$, including $687\times 950$), exactly three clear menu plates are presented: the active item at the apex, flanked by its immediate predecessor ($t \approx 0.16$) and successor ($t \approx 0.84$).
+   - On compact mobile screens ($< 420\text{px}$), flank parameters adapt ($t = 0.12$ and $0.88$) with calibrated typography to eliminate all overlap while preserving 44px+ touch targets.
+   - Circular swipe gestures, keyboard arrow keys, and direct plate taps glide items continuously through the apex, keeping all seven destinations accessible.
+
+3. **Upper-Right Composition**:
+   - The floating profile status ID card and recruiter button have been completely removed from the main menu, converting the upper-right into intentional negative space for background artwork and atmosphere.
 
 ---
 

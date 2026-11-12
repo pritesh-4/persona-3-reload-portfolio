@@ -88,7 +88,27 @@ assert('SALVUS emergency project present with valid repo URL', projectsFile.incl
 assert('Project AETHON defined with valid repo URL', projectsFile.includes('https://github.com/pritesh-4/Project_Aethon'));
 assert('Project RouteMind defined with valid repo URL', projectsFile.includes('https://github.com/pritesh-4/Project_RouteMind'));
 assert('Project Zogan defined with valid repo URL', projectsFile.includes('https://github.com/pritesh-4/Project_Zogan'));
+assert('Mission codes M-008 & M-009 preserved for HOLY TRIAL & PROJECT ORBIT', projectsFile.includes("code: 'M-008'") && projectsFile.includes("code: 'M-009'"));
 assert('Explicit implementationStatus boundaries declared', projectsFile.includes('VERIFIED IMPLEMENTED') && projectsFile.includes('RESEARCH PROTOTYPE'));
+assert('Architecture diagram data model defined (IMPLEMENTED vs PLANNED statuses)', projectsFile.includes("status: 'IMPLEMENTED'") && projectsFile.includes("status: 'PLANNED'"));
+
+const questArchDataFile = fs.readFileSync(path.join(rootDir, 'src', 'data', 'projectsData.ts'), 'utf8');
+const questPageComponent = fs.readFileSync(path.join(rootDir, 'src', 'pages', 'QuestPage.tsx'), 'utf8');
+assert('QuestPage renders the interactive ArchitectureExplorer', questPageComponent.includes('ArchitectureExplorer'));
+assert('QuestPage renders the CaptureLightbox for dossier galleries', questPageComponent.includes('CaptureLightbox'));
+assert('Architecture diagrams derive from project data (no invented modules)', questArchDataFile.includes('architecture: {') && questPageComponent.includes('selectedMission.architecture'));
+
+// Phase 4 & 5 Contracts: Developer Status, Command Palette, Recruiter Dossier, GitHub Telemetry
+const devStatusFile = fs.readFileSync(path.join(rootDir, 'src', 'data', 'developerStatusData.ts'), 'utf8');
+assert('Developer Status config defines currentlyExploring, currentlyBuilding, and availability', 
+  devStatusFile.includes('currentlyExploring') && devStatusFile.includes('currentlyBuilding') && devStatusFile.includes('availability'));
+assert('Developer Status transparently declares verified personnel record', devStatusFile.includes('verifiedSource'));
+
+const statsPageFile = fs.readFileSync(path.join(rootDir, 'src', 'pages', 'StatsPage.tsx'), 'utf8');
+assert('StatsPage calculates language distribution from byte counts, not repo counts', 
+  statsPageFile.includes('languages_url') && statsPageFile.includes('byteMap') && !statsPageFile.includes('langMap[repo.language] = (langMap[repo.language] || 0) + 1'));
+assert('StatsPage tracks forks count and distinguishes live from cached telemetry', 
+  statsPageFile.includes('forksCount') && statsPageFile.includes('cacheSource'));
 
 const socialFile = fs.readFileSync(path.join(rootDir, 'src', 'data', 'socialLinksData.ts'), 'utf8');
 assert('Social Links contain Pritesh Jena GitHub', socialFile.includes('https://github.com/pritesh-4'));
@@ -101,6 +121,8 @@ const canonicalMenuRoutes = ['/about', '/tools', '/resume', '/stats', '/projects
 canonicalMenuRoutes.forEach((route) => {
   assert(`Menu config routes to ${route}`, menuFile.includes(`'${route}'`) || menuFile.includes(`"${route}"`));
 });
+assert('Menu config defines exactly 7 canonical destinations', (menuFile.match(/id:\s*['"][a-z0-9_-]+['"]/g) || []).length === 7);
+assert('Menu config preserves legacy /projects route marker', menuFile.includes('LEGACY_PROJECTS_ROUTE'));
 
 // 3. Routing & Structural Component Integrity
 console.log('\n[3/4] Verifying Application Route Tree & Layout Contracts...');
@@ -109,6 +131,11 @@ canonicalMenuRoutes.forEach((route) => {
   assert(`App.tsx defines route for ${route}`, appFile.includes(`path="${route}"`));
 });
 assert('App.tsx defines backward-compatible redirect for legacy /skills', appFile.includes('path="/skills"'));
+assert('App.tsx defines dedicated recruiter dossier route /recruiter', appFile.includes('path="/recruiter"') && appFile.includes('RecruiterPage'));
+assert('App.tsx defines quick-profile alias redirect', appFile.includes('path="/quick-profile"'));
+assert('App.tsx mounts global CommandTerminal with Ctrl+K keybinding', appFile.includes('<CommandTerminal') && appFile.includes("e.key === 'k' || e.key === 'K'"));
+assert('App.tsx mounts DeveloperStatusPanel component', appFile.includes('<DeveloperStatusPanel'));
+assert('App.tsx no longer redirects /projects away from QUEST', !appFile.includes('to="/resume"'));
 assert('App.tsx defines 404 anomaly fallback route', appFile.includes('path="*"'));
 assert('App.tsx implements lazy-loaded route chunking', appFile.includes('lazy('));
 assert('ScreenTransition diagonal slash mounted', appFile.includes('<ScreenTransition'));

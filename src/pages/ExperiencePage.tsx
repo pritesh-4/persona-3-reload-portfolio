@@ -97,7 +97,6 @@ export const ExperiencePage: FC<ExperiencePageProps> = ({
       sublabel="FIELD OPERATIONS & ARCHIVE"
       sectionId="004"
       characterId="mitsuru"
-      backgroundPath="/assets/persona3/backgrounds/main-visuals/p3r-main-visual.png"
       currentRoute="/experience"
       onNavigate={onNavigate}
       onBackToMenu={onBackToMenu}

@@ -6,23 +6,27 @@
   position: relative;
   width: 100%;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: flex-start;
 }
 
-/* Arc Navigation Stage */
+/* Arc Navigation Stage — Elevated Upper-Middle Region */
 .p3r-arc-nav-stage {
   position: relative;
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  height: 280px;
+  width: calc(100% - 96px);
+  max-width: 1520px;
+  /* Elevated upper band: 8-11vh upward adjustment on large desktop to keep negative space above character portrait */
+  margin: var(--p3r-arc-stage-margin, clamp(-16px, calc(9vh - 100px), 8px)) auto 0;
+  height: 260px;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 20;
+  pointer-events: none;
 }
 
 .p3r-arc-svg-guide {
@@ -36,14 +40,14 @@
 
 .p3r-arc-track {
   fill: none;
-  stroke: rgba(0, 212, 255, 0.25);
+  stroke: rgba(0, 212, 255, 0.28);
   stroke-width: 2px;
   stroke-dasharray: 6 8;
 }
 
 .p3r-arc-track-glow {
   fill: none;
-  stroke: rgba(0, 102, 255, 0.15);
+  stroke: rgba(0, 102, 255, 0.16);
   stroke-width: 8px;
 }
 
@@ -51,6 +55,7 @@
 .p3r-arc-marker {
   fill: var(--p3r-red);
   transition: cx 300ms var(--ease-out-expo), cy 300ms var(--ease-out-expo);
+  filter: drop-shadow(0 0 6px rgba(240, 25, 91, 0.6));
 }
 
 /* Items placement container */
@@ -58,6 +63,7 @@
   position: absolute;
   inset: 0;
   z-index: 5;
+  pointer-events: none;
 }
 
 /* Individual Menu Item Button */
@@ -69,22 +75,32 @@
   border: none;
   background: none;
   padding: 0;
-  transition: transform 250ms var(--ease-out-expo), filter 250ms;
+  pointer-events: auto;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: 
+    left 320ms var(--ease-out-expo),
+    top 320ms var(--ease-out-expo),
+    transform 320ms var(--ease-out-expo),
+    opacity 240ms ease;
+  will-change: left, top, transform, opacity;
 }
 
 .p3r-menu-plate {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 24px;
-  background: rgba(8, 24, 48, 0.85);
+  gap: 10px;
+  padding: 8px 18px;
+  background: rgba(8, 24, 48, 0.88);
   border: 1px solid var(--p3r-panel-border);
   border-radius: 2px;
   transform: skewX(-14deg);
   transition: all 250ms var(--ease-out-expo);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.55);
   position: relative;
   overflow: hidden;
+  user-select: none;
+  min-height: 44px;
 }
 
 /* Red accent offset slab behind active plate */
@@ -93,7 +109,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 6px;
+  width: 5px;
   height: 100%;
   background: var(--p3r-red);
 }
@@ -106,27 +122,30 @@
 }
 
 .p3r-item-icon {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--p3r-cyan);
   font-weight: 800;
+  line-height: 1;
 }
 
 .p3r-item-label {
   font-family: var(--font-display);
-  font-size: 26px;
+  font-size: 22px;
   font-style: italic;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   color: var(--p3r-white);
   line-height: 1;
+  white-space: nowrap;
   transition: color 200ms;
 }
 
 .p3r-item-index {
   font-family: var(--font-ui);
-  font-size: 13px;
+  font-size: 12px;
   letter-spacing: 0.1em;
   color: var(--p3r-ice);
-  opacity: 0.6;
+  opacity: 0.65;
+  line-height: 1;
 }
 
 /* Active State: The iconic P3R White Slanted Plate */
@@ -139,8 +158,8 @@
   border-color: var(--p3r-snow);
   box-shadow: 
     -6px 6px 0px var(--p3r-red),
-    0 8px 28px rgba(0, 0, 0, 0.65);
-  transform: skewX(-14deg) scale(1.18);
+    0 8px 28px rgba(0, 0, 0, 0.7);
+  transform: skewX(-14deg) scale(1.12);
 }
 
 .p3r-menu-item-btn.active .p3r-item-label {
@@ -154,7 +173,7 @@
 
 .p3r-menu-item-btn.active .p3r-item-index {
   color: var(--p3r-slate);
-  opacity: 0.8;
+  opacity: 0.85;
   font-weight: 700;
 }
 
@@ -162,54 +181,44 @@
 .p3r-menu-item-btn:not(.active):hover .p3r-menu-plate {
   background: rgba(16, 44, 84, 0.95);
   border-color: var(--p3r-cyan);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.55);
-  transform: skewX(-14deg) scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  transform: skewX(-14deg) scale(1.04);
 }
 
 .p3r-menu-item-btn:not(.active):hover .p3r-item-label {
   color: var(--p3r-cyan);
 }
 
-/* Focus outline */
+/* Focus outline for keyboard navigation */
 .p3r-menu-item-btn:focus-visible .p3r-menu-plate {
   outline: 2px solid var(--p3r-cyan);
   outline-offset: 4px;
 }
 
-/* Transition for gliding along the quadratic Bézier arc */
-.p3r-menu-item-btn {
-  transition: 
-    left 320ms var(--ease-out-expo),
-    top 320ms var(--ease-out-expo),
-    transform 320ms var(--ease-out-expo),
-    opacity 240ms ease;
-}
+/* ================================================================
+   RESPONSIVE COMPOSITION & NORMALIZED BREAKPOINTS
+   ================================================================ */
 
-/* Mobile responsive menu: Preserves signature curved arc geometry */
-@media (max-width: 900px) {
+/* Compact Desktop (1024px to 1279px): Calibrated spacing so all 7 plates fit comfortably */
+@media (min-width: 1024px) and (max-width: 1279px) {
   .p3r-arc-nav-stage {
-    height: 230px;
-    padding: 0 10px;
-    max-width: 100%;
-  }
-
-  .p3r-arc-svg-guide {
-    display: block;
-    opacity: 0.8;
+    width: calc(100% - 64px);
+    height: 240px;
+    margin: clamp(4px, calc(8vh - 46px), 22px) auto 0;
   }
 
   .p3r-menu-plate {
-    padding: 6px 14px;
-    transform: skewX(-12deg);
+    gap: 7px;
+    padding: 6px 12px;
+    min-height: 38px;
   }
 
   .p3r-menu-plate-content {
-    transform: skewX(12deg);
-    gap: 8px;
+    gap: 7px;
   }
 
   .p3r-item-label {
-    font-size: clamp(15px, 4vw, 20px);
+    font-size: 17px;
   }
 
   .p3r-item-icon {
@@ -221,27 +230,142 @@
   }
 
   .p3r-menu-item-btn.active .p3r-menu-plate {
-    transform: skewX(-12deg) scale(1.15);
-    box-shadow: 
-      -4px 4px 0px var(--p3r-red),
-      0 6px 20px rgba(0, 0, 0, 0.65);
+    transform: skewX(-14deg) scale(1.08);
   }
 }
 
-@media (max-width: 600px) {
+/* Tablet & Mobile Partial-Arc Stage (< 1024px) */
+@media (max-width: 1023px) {
   .p3r-arc-nav-stage {
-    height: 200px;
+    width: 100%;
+    max-width: 100%;
+    height: 220px;
+    padding: 0 16px;
+    /* 5-8vh upward adjustment on tablet & mobile portrait to clear character portrait */
+    margin: clamp(16px, calc(11vh - 55px), 52px) auto 0;
+  }
+
+  .p3r-arc-svg-guide {
+    display: block;
+    opacity: 0.85;
   }
 
   .p3r-menu-plate {
-    padding: 5px 10px;
+    padding: 7px 16px;
+    transform: skewX(-13deg);
+    min-height: 44px;
+  }
+
+  .p3r-menu-plate-content {
+    transform: skewX(13deg);
+    gap: 9px;
   }
 
   .p3r-item-label {
-    font-size: 15px;
+    font-size: clamp(16px, 3.6vw, 20px);
+  }
+
+  .p3r-item-icon {
+    font-size: 12px;
+  }
+
+  .p3r-item-index {
+    font-size: 12px;
+  }
+
+  .p3r-menu-item-btn.active .p3r-menu-plate {
+    transform: skewX(-13deg) scale(1.12);
+    box-shadow: 
+      -5px 5px 0px var(--p3r-red),
+      0 8px 24px rgba(0, 0, 0, 0.65);
   }
 }
 
+/* Small Phone Screens (< 480px) */
+@media (max-width: 480px) {
+  .p3r-arc-nav-stage {
+    height: 200px;
+    padding: 0 10px;
+    margin: clamp(16px, calc(9vh - 36px), 42px) auto 0;
+  }
+
+  .p3r-menu-plate {
+    padding: 5px 11px;
+    min-height: 40px;
+    gap: 6px;
+  }
+
+  .p3r-menu-plate-content {
+    gap: 6px;
+  }
+
+  .p3r-item-label {
+    font-size: clamp(13px, 3.8vw, 16px);
+  }
+
+  .p3r-item-icon {
+    font-size: 10px;
+  }
+
+  .p3r-item-index {
+    font-size: 10px;
+  }
+
+  .p3r-menu-item-btn.active .p3r-menu-plate {
+    transform: skewX(-12deg) scale(1.1);
+    box-shadow: 
+      -4px 4px 0px var(--p3r-red),
+      0 6px 18px rgba(0, 0, 0, 0.65);
+  }
+}
+
+/* Compact Narrow Phone Screens (< 400px, e.g. 360px & 375px) */
+@media (max-width: 400px) {
+  .p3r-arc-nav-stage {
+    height: 190px;
+    padding: 0 6px;
+    margin: clamp(12px, calc(8vh - 30px), 36px) auto 0;
+  }
+
+  .p3r-menu-plate {
+    padding: 4px 8px;
+    min-height: 36px;
+    gap: 5px;
+  }
+
+  .p3r-menu-plate-content {
+    gap: 5px;
+  }
+
+  .p3r-item-label {
+    font-size: clamp(12px, 3.4vw, 14px);
+  }
+
+  .p3r-item-icon {
+    font-size: 9px;
+  }
+
+  .p3r-item-index {
+    font-size: 9px;
+  }
+
+  .p3r-menu-item-btn.active .p3r-menu-plate {
+    transform: skewX(-12deg) scale(1.06);
+    box-shadow: 
+      -3px 3px 0px var(--p3r-red),
+      0 4px 14px rgba(0, 0, 0, 0.65);
+  }
+}
+
+/* Reduced Motion Mode */
+@media (prefers-reduced-motion: reduce) {
+  .p3r-menu-item-btn,
+  .p3r-arc-marker,
+  .p3r-menu-plate {
+    transition: none !important;
+    animation: none !important;
+  }
+}
 
 /* ================================================================
    PERSONA 3 RELOAD — PRESENTATION ARTWORK BACKDROP SYSTEM
@@ -266,7 +390,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: var(--p3r-bg-pos-desktop, center);
   opacity: var(--p3r-artwork-intensity, 0.85);
   filter: brightness(calc(0.4 + 0.35 * var(--p3r-artwork-intensity, 0.85))) contrast(1.08) saturate(1.1);
   transform: scale(1.02);
@@ -351,9 +475,13 @@
 }
 
 @media (max-width: 900px) {
+  .p3r-backdrop-wallpaper {
+    object-position: var(--p3r-bg-pos-mobile, var(--p3r-bg-pos-desktop, center));
+  }
+
   .p3r-backdrop-char-stage {
     right: 5%;
-    height: 55vh;
+    height: var(--p3r-char-height-mobile, 65vh);
     --p3r-char-opacity: var(--p3r-char-opacity-mobile, 0.45);
   }
   .p3r-backdrop-char-img {

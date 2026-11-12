@@ -69,7 +69,7 @@
    ================================================================ */
 .p3r-quest-stage-grid {
   display: grid;
-  grid-template-columns: 380px 1fr;
+  grid-template-columns: 380px minmax(0, 1fr);
   gap: 22px;
   align-items: stretch;
 }
@@ -82,6 +82,7 @@
   max-height: calc(100vh - 180px);
   overflow-y: auto;
   padding-right: 6px;
+  min-width: 0;
 }
 
 .p3r-mission-card {
@@ -157,11 +158,52 @@
   margin: 0;
 }
 
+/* Filter bar mission counter */
+.p3r-quest-count {
+  margin-left: auto;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  color: var(--abyss-mist);
+  white-space: nowrap;
+}
+
+/* Mission card metadata row: category, rank, role */
+.p3r-mission-meta-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.p3r-mission-cat,
+.p3r-mission-rank {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  padding: 1px 6px;
+  border: 1px solid rgba(55, 217, 242, 0.35);
+  color: var(--abyss-cyan);
+  background: rgba(13, 61, 117, 0.4);
+}
+
+.p3r-mission-rank {
+  border-color: rgba(240, 25, 91, 0.45);
+  color: var(--abyss-pink);
+  background: transparent;
+}
+
 .p3r-mission-role {
   font-family: var(--font-ui);
-  font-size: 0.76rem;
-  color: var(--abyss-cyan);
-  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  color: var(--abyss-mist);
+  letter-spacing: 0.06em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+  text-align: right;
 }
 
 .p3r-mission-summary {
@@ -216,10 +258,214 @@
   padding-bottom: 12px;
 }
 
+/* ================================================================
+   PER-PROJECT VISUAL IDENTITY — TECHNICAL MOTIF STRIP
+   Pure CSS compositions reflecting each mission's subject matter.
+   Never presented as product screenshots.
+   ================================================================ */
+.p3r-dossier-visual {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 64px;
+  padding: 10px 14px;
+  border: 1px solid rgba(55, 217, 242, 0.3);
+  border-left: 5px solid var(--abyss-pink);
+  background-color: rgba(3, 11, 25, 0.9);
+  flex-shrink: 0;
+}
+
+.p3r-dossier-visual-label {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  color: var(--abyss-mist);
+  background: rgba(3, 11, 25, 0.85);
+  padding: 2px 8px;
+}
+
+.p3r-dossier-visual-code {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-style: italic;
+  letter-spacing: 0.08em;
+  color: var(--abyss-ice);
+  opacity: 0.85;
+  line-height: 1;
+}
+
+/* SALVUS — geospatial operations grid over emergency crimson */
+.p3r-dossier-visual.theme-salvus {
+  border-left-color: var(--abyss-pink);
+  background-image:
+    linear-gradient(rgba(55, 217, 242, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(55, 217, 242, 0.14) 1px, transparent 1px),
+    linear-gradient(135deg, rgba(240, 25, 91, 0.28) 0%, rgba(9, 38, 75, 0.4) 60%);
+  background-size: 22px 22px, 22px 22px, 100% 100%;
+}
+
+/* AETHON — vertical spectrogram frequency bars over deep observatory blue */
+.p3r-dossier-visual.theme-aethon {
+  border-left-color: var(--abyss-cyan);
+  background-image:
+    repeating-linear-gradient(90deg,
+      rgba(55, 217, 242, 0.32) 0 3px,
+      rgba(21, 88, 214, 0.18) 3px 5px,
+      transparent 5px 14px),
+    linear-gradient(180deg, rgba(13, 61, 117, 0.5) 0%, rgba(3, 11, 25, 0.6) 100%);
+}
+
+/* ROUTEMIND — pipeline nodes and link lanes over electric blue */
+.p3r-dossier-visual.theme-routemind {
+  border-left-color: var(--abyss-reload);
+  background-image:
+    radial-gradient(circle 4px at 12% 50%, rgba(55, 217, 242, 0.9) 100%, transparent),
+    radial-gradient(circle 4px at 38% 50%, rgba(55, 217, 242, 0.9) 100%, transparent),
+    radial-gradient(circle 4px at 64% 50%, rgba(55, 217, 242, 0.9) 100%, transparent),
+    linear-gradient(90deg, transparent 12%, rgba(55, 217, 242, 0.4) 12% 38%, transparent 38%,
+      transparent 38.5%, rgba(55, 217, 242, 0.4) 38.5% 64%, transparent 64%,
+      transparent 64.5%, rgba(55, 217, 242, 0.4) 64.5% 90%, transparent 90%),
+    linear-gradient(135deg, rgba(21, 88, 214, 0.4) 0%, rgba(3, 11, 25, 0.5) 100%);
+}
+
+/* ZOGAN — dashed detection bounding boxes over structural blue */
+.p3r-dossier-visual.theme-zogan {
+  border-left-color: var(--abyss-deep);
+  background-image:
+    repeating-linear-gradient(90deg, rgba(55, 217, 242, 0.55) 0 8px, transparent 8px 16px),
+    repeating-linear-gradient(0deg, rgba(55, 217, 242, 0.55) 0 8px, transparent 8px 16px),
+    linear-gradient(135deg, rgba(13, 61, 117, 0.55) 0%, rgba(3, 11, 25, 0.6) 100%);
+  background-size: 100% 2px, 2px 100%, 100% 100%;
+  background-repeat: no-repeat;
+  background-position: 0 0, 100% 0, 0 0;
+}
+
+/* F.R.I.D.A.Y. — concentric cognitive orb rings */
+.p3r-dossier-visual.theme-friday {
+  border-left-color: var(--abyss-ice);
+  background-image:
+    repeating-radial-gradient(circle at 82% 50%,
+      transparent 0 10px,
+      rgba(55, 217, 242, 0.22) 10px 12px,
+      transparent 12px 24px),
+    linear-gradient(135deg, rgba(9, 38, 75, 0.6) 0%, rgba(3, 11, 25, 0.6) 100%);
+}
+
+/* HOLY TRIAL — ruled case-file registry lines */
+.p3r-dossier-visual.theme-holytrial {
+  border-left-color: var(--abyss-mist);
+  background-image:
+    repeating-linear-gradient(0deg,
+      rgba(164, 184, 205, 0.18) 0 1px,
+      transparent 1px 12px),
+    linear-gradient(135deg, rgba(9, 38, 75, 0.55) 0%, rgba(3, 11, 25, 0.65) 100%);
+}
+
+/* PROJECT ORBIT — device schematic blueprint with crosshair */
+.p3r-dossier-visual.theme-orbit {
+  border-left-color: var(--abyss-cyan);
+  background-image:
+    linear-gradient(rgba(55, 217, 242, 0.5) 100%, transparent) ,
+    linear-gradient(90deg, rgba(55, 217, 242, 0.5) 100%, transparent),
+    radial-gradient(circle 12px at 78% 50%, transparent 10px, rgba(55, 217, 242, 0.35) 10px 11px, transparent 11px),
+    repeating-linear-gradient(90deg, rgba(21, 88, 214, 0.16) 0 1px, transparent 1px 26px),
+    linear-gradient(135deg, rgba(9, 38, 75, 0.6) 0%, rgba(3, 11, 25, 0.6) 100%);
+  background-size: 18px 1px, 1px 18px, 100% 100%, 100% 100%, 100% 100%;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat, no-repeat;
+  background-position: 70% 22%, 79% 50%, 0 0, 0 0, 0 0;
+}
+
+/* ================================================================
+   DOSSIER MISSION IDENTITY GRID
+   ================================================================ */
 .p3r-dossier-badge-row {
   display: flex;
   align-items: center;
+  gap: 10px;
   margin-bottom: 8px;
+}
+
+.p3r-dossier-codename {
+  font-family: var(--font-ui);
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  color: var(--abyss-mist);
+}
+
+.p3r-dossier-identity-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(55, 217, 242, 0.25);
+  border: 1px solid rgba(55, 217, 242, 0.25);
+  margin: 10px 0 0;
+}
+
+.p3r-dossier-identity-cell {
+  background: rgba(3, 11, 25, 0.92);
+  padding: 6px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.p3r-dossier-identity-cell dt {
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  color: var(--abyss-cyan);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.p3r-dossier-identity-cell dd {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: var(--abyss-ice);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ================================================================
+   DOSSIER CAPTURE GALLERY
+   ================================================================ */
+.p3r-dossier-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+  animation: p3r-dossier-reveal 320ms var(--ease-out-expo);
+}
+
+@keyframes p3r-dossier-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.p3r-dossier-capture {
+  margin: 0;
+  border: 1px solid rgba(55, 217, 242, 0.35);
+  overflow: hidden;
+  max-height: 220px;
+  display: flex;
+}
+
+.p3r-dossier-capture img {
+  width: 100%;
+  height: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  display: block;
 }
 
 .p3r-dossier-title {
@@ -251,18 +497,12 @@
   margin-top: 6px;
 }
 
-.p3r-dossier-screenshot-wrap {
-  position: relative;
-  border: 1px solid rgba(55, 217, 242, 0.35);
-  max-height: 220px;
-  overflow: hidden;
-}
-
 .p3r-dossier-screenshot {
   width: 100%;
-  height: 100%;
+  height: auto;
   max-height: 220px;
   object-fit: cover;
+  object-position: top center;
   display: block;
 }
 
@@ -373,15 +613,535 @@
   transform: skewX(-12deg) scale(1.03);
 }
 
+/* Live deployment emphasis variant (crimson primary action) */
+.p3r-quest-action-live {
+  background: var(--abyss-pink);
+  border-color: var(--abyss-pink);
+}
+
+.p3r-quest-action-live:hover {
+  background: var(--abyss-reload);
+  border-color: var(--abyss-cyan);
+}
+
+/* ================================================================
+   INTERACTIVE ARCHITECTURE EXPLORER
+   1000 x 520 SVG canvas rendered from projectsData diagrams.
+   Cyan = implemented components. Crimson dashed = planned/target spec.
+   ================================================================ */
+.p3r-dossier-arch-section {
+  margin-top: 4px;
+  border: 1px solid rgba(55, 217, 242, 0.25);
+  background: rgba(3, 11, 25, 0.72);
+  padding: 12px;
+}
+
+.p3r-arch-heading-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.p3r-arch-heading-row .p3r-dossier-heading {
+  margin: 0;
+}
+
+.p3r-arch-legend {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.p3r-arch-legend-item {
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  padding: 2px 8px;
+  border: 1px solid;
+}
+
+.p3r-arch-legend-item.legend-implemented {
+  color: var(--abyss-cyan);
+  border-color: rgba(55, 217, 242, 0.5);
+}
+
+.p3r-arch-legend-item.legend-planned {
+  color: var(--abyss-pink);
+  border-color: rgba(240, 25, 91, 0.5);
+  border-style: dashed;
+}
+
+.p3r-arch-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-color: rgba(55, 217, 242, 0.4) rgba(3, 11, 25, 0.5);
+}
+
+.p3r-arch-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.p3r-arch-scroll::-webkit-scrollbar-thumb {
+  background: rgba(55, 217, 242, 0.35);
+}
+
+.p3r-arch-svg {
+  display: block;
+  width: 100%;
+  min-width: 640px;
+  height: auto;
+  aspect-ratio: 1000 / 520;
+}
+
+/* Edges */
+.p3r-arch-edge.edge-implemented {
+  stroke: rgba(55, 217, 242, 0.45);
+  stroke-width: 1.5;
+  transition: stroke 180ms ease;
+}
+
+.p3r-arch-edge.edge-planned {
+  stroke: rgba(240, 25, 91, 0.6);
+  stroke-width: 1.5;
+  stroke-dasharray: 7 6;
+  transition: stroke 180ms ease;
+}
+
+.p3r-arch-edge.edge-active {
+  stroke: var(--abyss-ice);
+  stroke-width: 2;
+}
+
+.p3r-arch-arrow-head {
+  fill: rgba(55, 217, 242, 0.45);
+}
+
+.p3r-arch-arrow-head-planned {
+  fill: rgba(240, 25, 91, 0.6);
+}
+
+/* Nodes */
+.p3r-arch-node {
+  cursor: pointer;
+  outline: none;
+}
+
+.p3r-arch-node rect {
+  fill: rgba(9, 38, 75, 0.9);
+  stroke: var(--abyss-cyan);
+  stroke-width: 1.2;
+  transition: fill 180ms ease, stroke 180ms ease, stroke-width 180ms ease;
+}
+
+.p3r-arch-node.node-planned rect {
+  stroke: var(--abyss-pink);
+  stroke-dasharray: 6 4;
+}
+
+.p3r-arch-node:hover rect,
+.p3r-arch-node:focus-visible rect {
+  fill: rgba(13, 61, 117, 0.95);
+  stroke-width: 2;
+}
+
+.p3r-arch-node:focus-visible rect {
+  stroke: var(--abyss-ice);
+}
+
+.p3r-arch-node.node-selected rect {
+  fill: rgba(13, 61, 117, 1);
+  stroke: var(--abyss-ice);
+  stroke-width: 2.2;
+  stroke-dasharray: none;
+}
+
+.p3r-arch-node-label {
+  fill: var(--abyss-ice);
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.p3r-arch-node-status {
+  font-family: var(--font-ui);
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.p3r-arch-node-status.status-implemented {
+  fill: var(--abyss-cyan);
+}
+
+.p3r-arch-node-status.status-planned {
+  fill: var(--abyss-pink);
+}
+
+/* Component inspection panel */
+.p3r-arch-detail {
+  margin-top: 10px;
+  border-top: 1px solid rgba(55, 217, 242, 0.25);
+  padding-top: 10px;
+  min-height: 96px;
+}
+
+.p3r-arch-detail-empty {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  color: var(--abyss-mist);
+  margin: 0;
+}
+
+.p3r-arch-detail-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.p3r-arch-detail-name {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  color: var(--abyss-ice);
+}
+
+.p3r-arch-detail-status {
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  padding: 2px 8px;
+  border: 1px solid;
+}
+
+.p3r-arch-detail-status.status-implemented {
+  color: var(--abyss-cyan);
+  border-color: rgba(55, 217, 242, 0.5);
+}
+
+.p3r-arch-detail-status.status-planned {
+  color: var(--abyss-pink);
+  border-color: rgba(240, 25, 91, 0.5);
+  border-style: dashed;
+}
+
+.p3r-arch-detail-purpose {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--abyss-mist);
+  margin: 6px 0 10px;
+}
+
+.p3r-arch-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.p3r-arch-detail-subhead {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  color: var(--abyss-cyan);
+  margin-bottom: 4px;
+}
+
+.p3r-arch-detail-io ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.p3r-arch-detail-io li {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--abyss-ice);
+  padding-left: 12px;
+  position: relative;
+}
+
+.p3r-arch-detail-io li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--abyss-cyan);
+}
+
+.p3r-arch-detail-row {
+  margin-bottom: 10px;
+}
+
+.p3r-arch-detail-row > p {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: var(--abyss-mist);
+  margin: 0;
+}
+
+.p3r-arch-connections {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.p3r-arch-connection-chip {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--abyss-ice);
+  background: rgba(9, 38, 75, 0.7);
+  border: 1px solid rgba(55, 217, 242, 0.35);
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+.p3r-arch-connection-chip:hover,
+.p3r-arch-connection-chip:focus-visible {
+  border-color: var(--abyss-pink);
+  background: rgba(13, 61, 117, 0.8);
+}
+
+.p3r-arch-connection-chip.connection-out {
+  border-style: solid;
+}
+
+.p3r-arch-connection-chip.connection-in {
+  border-style: dashed;
+}
+
+/* ================================================================
+   CAPTURE LIGHTBOX
+   ================================================================ */
+.p3r-dossier-capture-btn {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: zoom-in;
+  position: relative;
+}
+
+.p3r-dossier-capture-hint {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  color: var(--abyss-ice);
+  background: rgba(3, 11, 25, 0.85);
+  border: 1px solid rgba(55, 217, 242, 0.4);
+  padding: 2px 7px;
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+
+.p3r-dossier-capture-btn:hover .p3r-dossier-capture-hint,
+.p3r-dossier-capture-btn:focus-visible .p3r-dossier-capture-hint {
+  opacity: 1;
+}
+
+.p3r-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(3, 11, 25, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: p3r-lightbox-in 200ms var(--ease-out-expo);
+}
+
+@keyframes p3r-lightbox-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.p3r-lightbox-stage {
+  width: min(1100px, 100%);
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.p3r-lightbox-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.p3r-lightbox-counter {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  color: var(--abyss-cyan);
+}
+
+.p3r-lightbox-close {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: var(--abyss-ice);
+  background: rgba(9, 38, 75, 0.8);
+  border: 1px solid rgba(55, 217, 242, 0.4);
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+.p3r-lightbox-close:hover,
+.p3r-lightbox-close:focus-visible {
+  border-color: var(--abyss-pink);
+  background: rgba(13, 61, 117, 0.9);
+}
+
+.p3r-lightbox-figure {
+  margin: 0;
+  border: 1px solid rgba(55, 217, 242, 0.4);
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.p3r-lightbox-figure img {
+  display: block;
+  width: 100%;
+  max-height: calc(100vh - 190px);
+  object-fit: contain;
+  background: rgba(3, 11, 25, 0.9);
+}
+
+.p3r-lightbox-caption {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--abyss-mist);
+  padding: 10px 12px;
+  border-top: 1px solid rgba(55, 217, 242, 0.25);
+}
+
+.p3r-lightbox-nav {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
 /* ================================================================
    RESPONSIVE DESIGN
+   Two-column archive collapses into a stacked mission selector +
+   dossier flow. Identity grid and gallery adapt, never shrink text
+   into unreadability.
    ================================================================ */
 @media (max-width: 960px) {
   .p3r-quest-stage-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
+
   .p3r-mission-list-container,
   .p3r-mission-dossier-panel {
     max-height: none;
+    overflow-y: visible;
+    min-width: 0;
+  }
+
+  .p3r-mission-list-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+    padding-right: 0;
+  }
+
+  .p3r-dossier-title {
+    font-size: 1.9rem;
+  }
+
+  .p3r-dossier-identity-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .p3r-dossier-visual {
+    height: 56px;
+  }
+
+  .p3r-dossier-visual-code {
+    font-size: 1.2rem;
+  }
+
+  .p3r-quest-count {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .p3r-arch-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .p3r-quest-screen {
+    gap: 14px;
+  }
+
+  .p3r-mission-list-container {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .p3r-mission-role {
+    flex-basis: 100%;
+    text-align: left;
+    white-space: normal;
+  }
+
+  .p3r-mission-dossier-panel {
+    padding: 18px 16px;
+  }
+
+  .p3r-dossier-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .p3r-dossier-arch-section {
+    padding: 10px;
+  }
+
+  .p3r-arch-heading-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .p3r-dossier-actions .p3r-quest-action-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .p3r-lightbox {
+    padding: 12px;
+  }
+
+  .p3r-lightbox-figure img {
+    max-height: calc(100vh - 230px);
   }
 }

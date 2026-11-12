@@ -10,6 +10,7 @@ interface InternalPageLayoutProps {
   sublabel: string;
   sectionId: string;
   characterId: string;
+  /** Omit to let screenArtConfig drive the artwork for this screen. */
   backgroundPath?: string;
   screenId?: string;
   currentRoute: string;
@@ -24,7 +25,7 @@ export const InternalPageLayout: FC<InternalPageLayoutProps> = ({
   sublabel,
   sectionId,
   characterId,
-  backgroundPath = '/assets/persona3/backgrounds/official-wallpapers/p3r-main-key-art.png',
+  backgroundPath,
   screenId,
   currentRoute,
   onNavigate,
@@ -45,7 +46,7 @@ export const InternalPageLayout: FC<InternalPageLayoutProps> = ({
     (currentRoute === '/about'
       ? 'persona'
       : currentRoute === '/skills'
-      ? 'skill'
+      ? 'item'
       : currentRoute === '/resume'
       ? 'equip'
       : currentRoute === '/experience'
@@ -53,7 +54,7 @@ export const InternalPageLayout: FC<InternalPageLayoutProps> = ({
       : currentRoute === '/stats'
       ? 'stats'
       : currentRoute === '/projects'
-      ? 'equip'
+      ? 'quest'
       : currentRoute === '/tools'
       ? 'item'
       : currentRoute === '/contact'
@@ -174,6 +175,10 @@ export const InternalPageLayout: FC<InternalPageLayoutProps> = ({
           <div className="p3r-hint-item">
             <span className="p3r-hint-key">M</span>
             <span>MUSIC ON/OFF</span>
+          </div>
+          <div className="p3r-hint-item">
+            <span className="p3r-hint-key">CTRL+K</span>
+            <span>TERMINAL</span>
           </div>
           {customHint && (
             <div className="p3r-hint-item p3r-hint-custom">

@@ -2,7 +2,6 @@ import { useCallback, useEffect, type FC } from 'react';
 import { MENU_ITEMS } from '../../data/menuConfig';
 import { useMenuNavigation } from '../../hooks/useMenuNavigation';
 import { ArcNavigation } from './ArcNavigation';
-import { ProfileStatus } from '../hud/ProfileStatus';
 import { ControlHints } from '../hud/ControlHints';
 import { ThemeIndicator } from '../hud/ThemeIndicator';
 import { MusicControl } from '../hud/MusicControl';
@@ -86,7 +85,7 @@ export const MainMenu: FC<MainMenuProps> = ({
         }
       />
 
-      {/* Top HUD: Music Control & Profile Status */}
+      {/* Top-Left HUD: Unobtrusive Music Control */}
       <MusicControl
         isPlaying={isPlayingBgm}
         isMuted={isMuted}
@@ -94,14 +93,7 @@ export const MainMenu: FC<MainMenuProps> = ({
         onToggleMute={onToggleMute}
       />
 
-      <ProfileStatus
-        portraitPath="/assets/persona3/characters/thumbnails/makoto-yuki-thumb.webp"
-        name="PRITESH KUMAR JENA"
-        level={99}
-        role="MINING ENG. // FULL-STACK & AI"
-      />
-
-      {/* Lower Center: Curved Arc Navigation */}
+      {/* Upper-Middle: Curved Arc Navigation (No competing top-right overlay) */}
       <ArcNavigation
         items={MENU_ITEMS}
         activeIndex={activeIndex}

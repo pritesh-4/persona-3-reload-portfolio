@@ -25,7 +25,14 @@ export const ControlHints: FC = () => {
         <span className="p3r-hint-text">TITLE</span>
       </div>
 
-      <div className="p3r-hint-item">
+      <div className="p3r-hint-item p3r-hint-secondary">
+        <span className="p3r-keycap">
+          <span className="p3r-keycap-inner">CTRL+K</span>
+        </span>
+        <span className="p3r-hint-text">TERMINAL</span>
+      </div>
+
+      <div className="p3r-hint-item p3r-hint-secondary">
         <span className="p3r-keycap">
           <span className="p3r-keycap-inner">M</span>
         </span>
@@ -34,4 +41,3 @@ export const ControlHints: FC = () => {
     </footer>
   );
 };
-

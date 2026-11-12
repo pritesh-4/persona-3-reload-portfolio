@@ -29,17 +29,30 @@ export const CharacterBackdrop: FC<CharacterBackdropProps> = ({
 
   return (
     <div className="p3r-character-backdrop" aria-hidden="true">
-      {/* 1. Background Wallpaper Layer */}
+      {/* 1. Background Wallpaper Layer — art-directed per-screen crop, with an
+             optional dedicated mobile composition served via <picture> */}
       <div className="p3r-backdrop-wallpaper-wrap">
-        <img
-          src={effectiveBgPath}
-          alt=""
-          className="p3r-backdrop-wallpaper"
-          loading="eager"
-        />
+        <picture>
+          {config?.mobileBg && (
+            <source
+              media="(max-width: 900px)"
+              srcSet={config.mobileBg}
+            />
+          )}
+          <img
+            src={effectiveBgPath}
+            alt=""
+            className="p3r-backdrop-wallpaper"
+            loading="eager"
+            style={{
+              '--p3r-bg-pos-desktop': config?.bgPositionDesktop ?? 'center',
+              '--p3r-bg-pos-mobile': config?.bgPositionMobile ?? 'center',
+            } as React.CSSProperties}
+          />
+        </picture>
       </div>
 
-      {/* 2. Atmospheric Gradient Overlay (Darkens left and bottom for UI text) */}
+      {/* 2. Atmospheric Gradient Overlay (per-screen lighting direction) */}
       <div
         className="p3r-backdrop-gradient"
         style={config?.gradientOverlay ? { background: config.gradientOverlay } : undefined}
@@ -54,6 +67,7 @@ export const CharacterBackdrop: FC<CharacterBackdropProps> = ({
         style={{
           right: config?.characterRightDesktop,
           bottom: config?.characterBottomDesktop ?? '0',
+          '--p3r-char-height-mobile': config?.characterHeightMobile,
           '--p3r-char-opacity-desktop': String(charOpacityDesktop),
           '--p3r-char-opacity-mobile': String(charOpacityMobile),
         } as React.CSSProperties}
