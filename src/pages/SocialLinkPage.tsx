@@ -1,6 +1,6 @@
 import { useState, useCallback, type FC } from 'react';
 import { InternalPageLayout } from '../components/layout/InternalPageLayout';
-import { VERIFIED_CHANNELS } from '../data/socialLinksData';
+import { VERIFIED_CHANNELS, PRIMARY_CONTACT } from '../data/socialLinksData';
 import { useAudioContext } from '../hooks/useAudioContext';
 import '../styles/pages/social.css';
 
@@ -38,8 +38,8 @@ const PlatformLogos = {
   ),
 };
 
-const CONTACT_EMAIL = 'priteshjena16@gmail.com';
-const MAILTO_URL = `mailto:${CONTACT_EMAIL}?subject=Portfolio%20Inquiry%20%E2%80%94%20Pritesh%20Jena`;
+const CONTACT_EMAIL = PRIMARY_CONTACT.email;
+const MAILTO_URL = PRIMARY_CONTACT.mailtoUrl;
 
 export const SocialLinkPage: FC<SocialLinkPageProps> = ({ onNavigate, onBackToMenu }) => {
   const { playSfx } = useAudioContext();

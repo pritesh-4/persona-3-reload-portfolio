@@ -9,12 +9,23 @@ export interface VerifiedSocialChannel {
   badge: string;
 }
 
+export const PRIMARY_CONTACT = {
+  email: 'priteshjena16@gmail.com',
+  githubUrl: 'https://github.com/pritesh-4',
+  githubHandle: '@pritesh-4',
+  linkedinUrl: 'https://www.linkedin.com/in/pritesh-jena-8980a6373/',
+  linkedinHandle: 'pritesh-jena-8980a6373',
+  xUrl: 'https://x.com/PriteshJena02',
+  xHandle: '@PriteshJena02',
+  mailtoUrl: 'mailto:priteshjena16@gmail.com?subject=Portfolio%20Inquiry%20%E2%80%94%20Pritesh%20Jena',
+};
+
 export const VERIFIED_CHANNELS: VerifiedSocialChannel[] = [
   {
     id: 'github',
     name: 'GitHub',
-    handle: '@pritesh-4',
-    url: 'https://github.com/pritesh-4',
+    handle: PRIMARY_CONTACT.githubHandle,
+    url: PRIMARY_CONTACT.githubUrl,
     purpose: 'Public repositories, engineering projects, experiments and open-source work.',
     actionLabel: 'OPEN GITHUB',
     brandColor: '#F1F5FA',
@@ -23,8 +34,8 @@ export const VERIFIED_CHANNELS: VerifiedSocialChannel[] = [
   {
     id: 'linkedin',
     name: 'LinkedIn',
-    handle: 'pritesh-jena-8980a6373',
-    url: 'https://www.linkedin.com/in/pritesh-jena-8980a6373/',
+    handle: PRIMARY_CONTACT.linkedinHandle,
+    url: PRIMARY_CONTACT.linkedinUrl,
     purpose: 'Professional networking, opportunities and engineering connections.',
     actionLabel: 'CONNECT ON LINKEDIN',
     brandColor: '#0A66C2',
@@ -33,8 +44,8 @@ export const VERIFIED_CHANNELS: VerifiedSocialChannel[] = [
   {
     id: 'x',
     name: 'X',
-    handle: '@PriteshJena02',
-    url: 'https://x.com/PriteshJena02',
+    handle: PRIMARY_CONTACT.xHandle,
+    url: PRIMARY_CONTACT.xUrl,
     purpose: 'Technology interests, thoughts and public updates.',
     actionLabel: 'FOLLOW ON X',
     brandColor: '#F1F5FA',
@@ -43,8 +54,8 @@ export const VERIFIED_CHANNELS: VerifiedSocialChannel[] = [
   {
     id: 'email',
     name: 'Direct Email',
-    handle: 'priteshjena16@gmail.com',
-    url: 'mailto:priteshjena16@gmail.com?subject=Portfolio%20Inquiry%20%E2%80%94%20Pritesh%20Jena',
+    handle: PRIMARY_CONTACT.email,
+    url: PRIMARY_CONTACT.mailtoUrl,
     purpose: 'Direct 1-on-1 correspondence for collaborations, technical inquiries and opportunities.',
     actionLabel: 'SEND DIRECT EMAIL',
     brandColor: '#37D9F2',

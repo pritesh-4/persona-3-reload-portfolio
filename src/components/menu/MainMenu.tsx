@@ -1,6 +1,8 @@
 import { useCallback, useEffect, type FC } from 'react';
 import { MENU_ITEMS } from '../../data/menuConfig';
+import { PERSONA_BACKGROUNDS } from '../../config/personaAssets';
 import { useMenuNavigation } from '../../hooks/useMenuNavigation';
+import { useAudioContext } from '../../hooks/useAudioContext';
 import { ArcNavigation } from './ArcNavigation';
 import { ControlHints } from '../hud/ControlHints';
 import { ThemeIndicator } from '../hud/ThemeIndicator';
@@ -11,22 +13,13 @@ import '../../styles/menu.css';
 interface MainMenuProps {
   onBackToTitle: () => void;
   onNavigate?: (route: string) => void;
-  playSfx: (cue: 'select' | 'hover' | 'confirm' | 'back' | 'transition') => void;
-  isPlayingBgm: boolean;
-  isMuted: boolean;
-  onTogglePlayBgm: () => void;
-  onToggleMute: () => void;
 }
 
 export const MainMenu: FC<MainMenuProps> = ({
   onBackToTitle,
   onNavigate,
-  playSfx,
-  isPlayingBgm,
-  isMuted,
-  onTogglePlayBgm,
-  onToggleMute,
 }) => {
+  const { playSfx, toggleBgm } = useAudioContext();
   const { activeIndex, activeItem, selectIndex } = useMenuNavigation();
 
   const handleHover = useCallback(() => {
@@ -50,7 +43,6 @@ export const MainMenu: FC<MainMenuProps> = ({
     }
   }, [activeItem, onNavigate, playSfx]);
 
-  // Global keybindings
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -59,7 +51,7 @@ export const MainMenu: FC<MainMenuProps> = ({
         onBackToTitle();
       } else if (e.key === 'm' || e.key === 'M') {
         e.preventDefault();
-        onToggleMute();
+        toggleBgm();
       } else if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         handleConfirm();
@@ -68,32 +60,18 @@ export const MainMenu: FC<MainMenuProps> = ({
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onBackToTitle, onToggleMute, handleConfirm, playSfx]);
+  }, [onBackToTitle, toggleBgm, handleConfirm, playSfx]);
 
   return (
     <div className="p3r-main-menu-container" role="main" aria-label="Main Portfolio Menu">
-      {/* Dynamic Persona 3 Presentation Artwork Backdrop */}
       <CharacterBackdrop
         characterId={activeItem.characterId}
         screenId="menu"
-        backgroundPath={
-          activeItem.bgKey === 'promoGroup'
-            ? '/assets/persona3/backgrounds/promotional-art/persona3-reload-promo-group.jpg'
-            : activeItem.bgKey === 'mainVisual'
-            ? '/assets/persona3/backgrounds/main-visuals/p3r-main-visual.png'
-            : '/assets/persona3/backgrounds/official-wallpapers/p3r-main-key-art.png'
-        }
+        backgroundPath={PERSONA_BACKGROUNDS[activeItem.bgKey]?.path}
       />
 
-      {/* Top-Left HUD: Unobtrusive Music Control */}
-      <MusicControl
-        isPlaying={isPlayingBgm}
-        isMuted={isMuted}
-        onTogglePlay={onTogglePlayBgm}
-        onToggleMute={onToggleMute}
-      />
+      <MusicControl />
 
-      {/* Upper-Middle: Curved Arc Navigation (No competing top-right overlay) */}
       <ArcNavigation
         items={MENU_ITEMS}
         activeIndex={activeIndex}
@@ -102,7 +80,6 @@ export const MainMenu: FC<MainMenuProps> = ({
         onHover={handleHover}
       />
 
-      {/* Bottom HUD: Keyboard Hints & Theme Status */}
       <ControlHints />
       <ThemeIndicator />
     </div>

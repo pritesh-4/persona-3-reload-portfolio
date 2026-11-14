@@ -3,10 +3,6 @@ import { useAudioContext } from '../../hooks/useAudioContext';
 import '../../styles/hud.css';
 
 export interface MusicControlProps {
-  isPlaying?: boolean;
-  isMuted?: boolean;
-  onTogglePlay?: () => void;
-  onToggleMute?: () => void;
   variant?: 'full' | 'compact' | 'title';
   className?: string;
 }

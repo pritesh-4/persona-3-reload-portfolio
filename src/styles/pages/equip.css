@@ -96,7 +96,7 @@
   color: var(--abyss-cyan);
   background: rgba(21, 88, 214, 0.3);
   border: 1px solid rgba(55, 217, 242, 0.35);
-  padding: 3px 10px;
+  padding: 4px 10px;
 }
 
 .p3r-edu-institution {
@@ -149,7 +149,11 @@
   transform: skewX(-12deg);
   cursor: pointer;
   text-decoration: none;
-  transition: all 180ms ease;
+  transition: 
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
   box-shadow: 0 4px 14px rgba(21, 88, 214, 0.4);
 }
 
@@ -275,13 +279,15 @@
   background: var(--abyss-midnight);
   border: 2px solid var(--abyss-cyan);
   border-radius: 50%;
-  transition: all 180ms ease;
+  transition: 
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
 }
 
 .p3r-timeline-entry:hover .p3r-entry-node {
   background: var(--abyss-pink);
   border-color: #ff6b9d;
-  box-shadow: 0 0 12px var(--abyss-pink);
   transform: scale(1.3);
 }
 
@@ -298,7 +304,10 @@
   flex-direction: column;
   gap: 12px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-  transition: all 180ms ease;
+  transition: 
+    border-color 180ms ease,
+    background 180ms ease,
+    transform 180ms ease;
 }
 
 .p3r-timeline-entry:hover .p3r-entry-content-plate {
@@ -383,7 +392,7 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
 }
 
 .p3r-contrib-item {
@@ -414,7 +423,7 @@
   color: var(--abyss-ice);
   background: rgba(9, 38, 75, 0.7);
   border: 1px solid rgba(55, 217, 242, 0.25);
-  padding: 2px 7px;
+  padding: 2px 8px;
 }
 
 /* Explore Project Action Button in Timeline Entry */
@@ -429,7 +438,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 7px 16px;
+  padding: 8px 16px;
   background: rgba(9, 38, 75, 0.85);
   border: 1px solid rgba(55, 217, 242, 0.45);
   color: var(--abyss-white);
@@ -439,7 +448,11 @@
   text-transform: uppercase;
   transform: skewX(-12deg);
   cursor: pointer;
-  transition: all 180ms ease;
+  transition: 
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
 }
 
 .p3r-explore-project-btn > * {
@@ -482,7 +495,10 @@
   letter-spacing: 0.1em;
   padding: 4px 10px;
   cursor: pointer;
-  transition: all 160ms ease;
+  transition: 
+    color 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease;
 }
 
 .p3r-modal-close-btn:hover {
@@ -790,7 +806,11 @@
   letter-spacing: 0.12em;
   text-decoration: none;
   transform: skewX(-12deg);
-  transition: all 180ms ease;
+  transition: 
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
   cursor: pointer;
 }
 

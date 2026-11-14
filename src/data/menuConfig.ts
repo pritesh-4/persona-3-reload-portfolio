@@ -82,6 +82,19 @@ export const MENU_ITEMS: MenuItemConfig[] = [
   },
 ];
 
+// Route to canonical screen art identity mapping
+export const ROUTE_TO_SCREEN_ID: Record<string, string> = {
+  '/about': 'persona',
+  '/tools': 'item',
+  '/skills': 'item',
+  '/resume': 'equip',
+  '/experience': 'experience',
+  '/stats': 'stats',
+  '/projects': 'quest',
+  '/contact': 'social',
+  '/system': 'system',
+};
+
 // Preserved for backward-compatible routing and automated audit assertions:
 // Requests to '/projects' redirect to '/resume' (EQUIP) where projects are unified.
 export const LEGACY_PROJECTS_ROUTE = '/projects';

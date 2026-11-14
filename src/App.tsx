@@ -54,16 +54,8 @@ export const App: FC = () => {
   const [isCommandOpen, setIsCommandOpen] = useState(false);
   const [isStatusOpen, setIsStatusOpen] = useState(false);
 
-  const {
-    bgmPlaying,
-    muted,
-    playBgm,
-    toggleBgm,
-    toggleMute,
-    playSfx,
-  } = useAudioContext();
+  const { playBgm, playSfx } = useAudioContext();
 
-  // Global Ctrl+K / Cmd+K listener to toggle command terminal
   useEffect(() => {
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) {
@@ -76,7 +68,6 @@ export const App: FC = () => {
     return () => window.removeEventListener('keydown', handleGlobalKeyDown);
   }, []);
 
-  // Navigation transition helper
   const navigateWithTransition = useCallback(
     (targetPath: string) => {
       setIsTransitioning(true);
@@ -88,12 +79,10 @@ export const App: FC = () => {
     [navigate]
   );
 
-  // Complete Boot Sequence -> Ready for Title Screen
   const handleBootComplete = useCallback(() => {
     setBootCompleted(true);
   }, []);
 
-  // Enter from Title Screen -> Main Menu
   const handleTitleEnter = useCallback(() => {
     playSfx('confirm');
     playSfx('transition');
@@ -101,21 +90,18 @@ export const App: FC = () => {
     navigateWithTransition('/menu');
   }, [playBgm, playSfx, navigateWithTransition]);
 
-  // Return to Title Screen from Main Menu
   const handleBackToTitle = useCallback(() => {
     playSfx('back');
     playSfx('transition');
     navigateWithTransition('/');
   }, [playSfx, navigateWithTransition]);
 
-  // Return to Main Menu from any internal page
   const handleBackToMenu = useCallback(() => {
     playSfx('back');
     playSfx('transition');
     navigateWithTransition('/menu');
   }, [playSfx, navigateWithTransition]);
 
-  // Navigate to internal screen
   const handleNavigateTo = useCallback(
     (route: string) => {
       playSfx('confirm');
@@ -129,7 +115,6 @@ export const App: FC = () => {
     <div className="p3r-root-viewport">
       <Suspense fallback={<P3RLoader />}>
         <Routes>
-          {/* Root Route: Boot Sequence & Title Screen */}
           <Route
             path="/"
             element={
@@ -144,23 +129,16 @@ export const App: FC = () => {
             }
           />
 
-          {/* Main Menu with Curved Arc Navigation */}
           <Route
             path="/menu"
             element={
               <MainMenu
                 onBackToTitle={handleBackToTitle}
                 onNavigate={handleNavigateTo}
-                playSfx={playSfx}
-                isPlayingBgm={bgmPlaying}
-                isMuted={muted}
-                onTogglePlayBgm={toggleBgm}
-                onToggleMute={toggleMute}
               />
             }
           />
 
-          {/* 1. PERSONA: Character Profile / Personnel Dossier */}
           <Route
             path="/about"
             element={
@@ -171,12 +149,10 @@ export const App: FC = () => {
             }
           />
 
-          {/* Legacy route compatibility: redirect /skills to /tools */}
           <Route
             path="/skills"
             element={<Navigate to="/tools" replace />}
           />
-          {/* 2. SKILL: Technical Toolkit & Competencies */}
           <Route
             path="/tools"
             element={
@@ -187,7 +163,6 @@ export const App: FC = () => {
             }
           />
 
-          {/* 3. EQUIP: Resume, Progression & Equipment */}
           <Route
             path="/resume"
             element={
@@ -198,7 +173,6 @@ export const App: FC = () => {
             }
           />
 
-          {/* 4. EXPERIENCE: Field Record & Professional Achievements */}
           <Route
             path="/experience"
             element={
@@ -209,7 +183,6 @@ export const App: FC = () => {
             }
           />
 
-          {/* 6. STATS: GitHub Activity & Telemetry */}
           <Route
             path="/stats"
             element={
@@ -220,7 +193,6 @@ export const App: FC = () => {
             }
           />
 
-          {/* 5. QUEST: Mission Archive & Project Dossiers */}
           <Route
             path="/projects"
             element={
@@ -231,7 +203,6 @@ export const App: FC = () => {
             }
           />
 
-          {/* 7. SOCIAL LINK: Communication Terminal */}
           <Route
             path="/contact"
             element={
@@ -242,7 +213,6 @@ export const App: FC = () => {
             }
           />
 
-          {/* 8. SYSTEM: In-game Configuration & Audio Settings */}
           <Route
             path="/system"
             element={
@@ -253,7 +223,6 @@ export const App: FC = () => {
             }
           />
 
-          {/* Dedicated Recruiter & Executive Technical Profile */}
           <Route
             path="/recruiter"
             element={
@@ -268,7 +237,6 @@ export const App: FC = () => {
             element={<Navigate to="/recruiter" replace />}
           />
 
-          {/* Fallback 404 Anomaly Route */}
           <Route
             path="*"
             element={
@@ -281,10 +249,8 @@ export const App: FC = () => {
         </Routes>
       </Suspense>
 
-      {/* Cinematic Diagonal Slash Screen Transition */}
       <ScreenTransition active={isTransitioning} />
 
-      {/* Global Command Terminal (Ctrl+K / Cmd+K) */}
       <CommandTerminal
         isOpen={isCommandOpen}
         onClose={() => setIsCommandOpen(false)}
@@ -292,7 +258,6 @@ export const App: FC = () => {
         onOpenStatusPanel={() => setIsStatusOpen(true)}
       />
 
-      {/* Global Developer Personnel Status Panel */}
       <DeveloperStatusPanel
         isOpen={isStatusOpen}
         onClose={() => setIsStatusOpen(false)}

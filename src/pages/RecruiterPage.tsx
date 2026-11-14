@@ -1,9 +1,9 @@
 import { useState, useCallback, type FC } from 'react';
 import { PROFILE_DATA } from '../data/profileData';
-import { PROJECTS_DATA, type ProjectMission } from '../data/projectsData';
+import { PROJECTS_DATA, type ProjectMission, getImplementationBadge } from '../data/projectsData';
 import { INVENTORY_ITEMS } from '../data/inventoryData';
 import { ALL_EXPERIENCE_ITEMS } from '../data/experienceAchievementsData';
-import { VERIFIED_CHANNELS } from '../data/socialLinksData';
+import { VERIFIED_CHANNELS, PRIMARY_CONTACT } from '../data/socialLinksData';
 import { DEVELOPER_STATUS } from '../data/developerStatusData';
 import { useAudioContext } from '../hooks/useAudioContext';
 import '../styles/pages/recruiter.css';
@@ -30,7 +30,7 @@ export const RecruiterPage: FC<RecruiterPageProps> = ({ onNavigate, onBackToMenu
 
   const handleCopyEmail = useCallback(() => {
     playSfx('select');
-    navigator.clipboard.writeText('priteshjena16@gmail.com');
+    navigator.clipboard.writeText(PRIMARY_CONTACT.email);
     setCopiedEmail(true);
     setTimeout(() => setCopiedEmail(false), 2500);
   }, [playSfx]);
@@ -48,14 +48,8 @@ export const RecruiterPage: FC<RecruiterPageProps> = ({ onNavigate, onBackToMenu
     [playSfx, onNavigate]
   );
 
-  const getStatusBadgeClass = (status: ProjectMission['implementationStatus']) => {
-    switch (status) {
-      case 'VERIFIED IMPLEMENTED': return 'badge-implemented';
-      case 'RESEARCH PROTOTYPE': return 'badge-prototype';
-      case 'EXPERIMENTAL CONCEPT': return 'badge-concept';
-      default: return 'badge-early';
-    }
-  };
+  const getStatusBadgeClass = (status: ProjectMission['implementationStatus']) =>
+    getImplementationBadge(status).recruiterClass;
 
   return (
     <div className="p3r-recruiter-page" role="region" aria-label="Recruiter Quick Profile">
@@ -86,7 +80,7 @@ export const RecruiterPage: FC<RecruiterPageProps> = ({ onNavigate, onBackToMenu
             onClick={handlePrintResume}
             title="Export or Print this Summary Dossier as PDF"
           >
-            <span>🖨 EXPORT / PRINT PDF</span>
+            <span>EXPORT / PRINT PDF</span>
           </button>
           <button
             type="button"
@@ -128,8 +122,8 @@ export const RecruiterPage: FC<RecruiterPageProps> = ({ onNavigate, onBackToMenu
               <div className="p3r-contact-item">
                 <span className="p3r-contact-key">EMAIL</span>
                 <div className="p3r-contact-val-row">
-                  <a href="mailto:priteshjena16@gmail.com" className="p3r-contact-link">
-                    priteshjena16@gmail.com
+                  <a href={`mailto:${PRIMARY_CONTACT.email}`} className="p3r-contact-link">
+                    {PRIMARY_CONTACT.email}
                   </a>
                   <button
                     type="button"
@@ -145,7 +139,7 @@ export const RecruiterPage: FC<RecruiterPageProps> = ({ onNavigate, onBackToMenu
               <div className="p3r-contact-item">
                 <span className="p3r-contact-key">GITHUB</span>
                 <a
-                  href="https://github.com/pritesh-4"
+                  href={PRIMARY_CONTACT.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p3r-contact-link"
@@ -157,7 +151,7 @@ export const RecruiterPage: FC<RecruiterPageProps> = ({ onNavigate, onBackToMenu
               <div className="p3r-contact-item">
                 <span className="p3r-contact-key">LINKEDIN</span>
                 <a
-                  href="https://www.linkedin.com/in/pritesh-jena-8980a6373/"
+                  href={PRIMARY_CONTACT.linkedinUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p3r-contact-link"

@@ -50,7 +50,10 @@
   font-size: 0.95rem;
   letter-spacing: 0.1em;
   transform: skewX(-12deg);
-  transition: all 160ms ease;
+  transition: 
+    color 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease;
   cursor: pointer;
 }
 
@@ -85,7 +88,7 @@
   border-radius: 2px;
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
 }
 
 .p3r-status-dot {
@@ -98,29 +101,26 @@
 
 .p3r-status-dot.active {
   background: #10b981;
-  box-shadow: 0 0 8px #10b981;
 }
 
 .p3r-status-dot.warning {
   background: #f59e0b;
-  box-shadow: 0 0 8px #f59e0b;
 }
 
 .p3r-status-dot.pulsing {
   background: var(--abyss-cyan);
-  box-shadow: 0 0 6px var(--abyss-cyan);
   opacity: 0.85;
 }
 
 .p3r-stat-status-pill.live {
   background: rgba(5, 150, 105, 0.25);
-  border: 1px solid #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.5);
   color: #34d399;
 }
 
 .p3r-stat-status-pill.cached {
   background: rgba(217, 119, 6, 0.25);
-  border: 1px solid #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.5);
   color: #fbbf24;
 }
 
@@ -355,7 +355,11 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
-  transition: all 160ms ease;
+  transition: 
+    color 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
 }
 
 .p3r-repo-item-card:hover {
@@ -413,7 +417,7 @@
 }
 
 .p3r-focus-tab {
-  padding: 5px 10px;
+  padding: 6px 10px;
   background: rgba(13, 61, 117, 0.4);
   border: 1px solid rgba(55, 217, 242, 0.2);
   color: var(--abyss-mist);
@@ -421,7 +425,10 @@
   font-size: 0.78rem;
   letter-spacing: 0.08em;
   cursor: pointer;
-  transition: all 160ms ease;
+  transition: 
+    color 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease;
 }
 
 .p3r-focus-tab:hover {
@@ -507,7 +514,7 @@
   background: rgba(9, 38, 75, 0.8);
   border: 1px solid rgba(55, 217, 242, 0.25);
   color: var(--abyss-ice);
-  padding: 2px 7px;
+  padding: 2px 8px;
 }
 
 .p3r-focus-evidence-list {
@@ -568,7 +575,10 @@
   font-family: var(--font-ui);
   font-size: 0.85rem;
   cursor: pointer;
-  transition: all 160ms ease;
+  transition: 
+    color 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease;
 }
 
 .p3r-cal-year-btn.active {
@@ -597,7 +607,10 @@
   border: 1px solid rgba(55, 217, 242, 0.2);
   border-left: 3px solid var(--abyss-reload);
   cursor: pointer;
-  transition: all 160ms ease;
+  transition: 
+    background 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -740,7 +753,7 @@
   }
   .p3r-stats-tab-btn {
     font-size: 0.78rem;
-    padding: 7px 8px;
+    padding: 8px 8px;
     text-align: center;
   }
   .p3r-telemetry-badge-box {

@@ -1,5 +1,5 @@
 import { useEffect, useCallback, type FC, type ReactNode } from 'react';
-import { MENU_ITEMS } from '../../data/menuConfig';
+import { MENU_ITEMS, ROUTE_TO_SCREEN_ID } from '../../data/menuConfig';
 import { CharacterBackdrop } from '../shared/CharacterBackdrop';
 import { MusicControl } from '../hud/MusicControl';
 import { useAudioContext } from '../../hooks/useAudioContext';
@@ -9,8 +9,7 @@ interface InternalPageLayoutProps {
   title: string;
   sublabel: string;
   sectionId: string;
-  characterId: string;
-  /** Omit to let screenArtConfig drive the artwork for this screen. */
+  characterId?: string;
   backgroundPath?: string;
   screenId?: string;
   currentRoute: string;
@@ -33,35 +32,9 @@ export const InternalPageLayout: FC<InternalPageLayoutProps> = ({
   children,
   customHint,
 }) => {
-  const {
-    bgmPlaying,
-    muted,
-    toggleBgm,
-    toggleMute,
-    playSfx,
-  } = useAudioContext();
+  const { toggleBgm, playSfx } = useAudioContext();
 
-  const deducedScreenId =
-    screenId ||
-    (currentRoute === '/about'
-      ? 'persona'
-      : currentRoute === '/skills'
-      ? 'item'
-      : currentRoute === '/resume'
-      ? 'equip'
-      : currentRoute === '/experience'
-      ? 'experience'
-      : currentRoute === '/stats'
-      ? 'stats'
-      : currentRoute === '/projects'
-      ? 'quest'
-      : currentRoute === '/tools'
-      ? 'item'
-      : currentRoute === '/contact'
-      ? 'social'
-      : currentRoute === '/system'
-      ? 'system'
-      : undefined);
+  const deducedScreenId = screenId || ROUTE_TO_SCREEN_ID[currentRoute] || 'persona';
 
   const handleBack = useCallback(() => {
     playSfx('back');
@@ -104,14 +77,12 @@ export const InternalPageLayout: FC<InternalPageLayoutProps> = ({
 
   return (
     <div className="p3r-internal-page" role="region" aria-label={`${title} Screen`}>
-      {/* Dynamic Official Artwork Stage */}
       <CharacterBackdrop
         characterId={characterId}
         backgroundPath={backgroundPath}
         screenId={deducedScreenId}
       />
 
-      {/* Top Header HUD */}
       <header className="p3r-internal-header">
         <div className="p3r-header-left">
           <button
@@ -134,7 +105,6 @@ export const InternalPageLayout: FC<InternalPageLayoutProps> = ({
           </div>
         </div>
 
-        {/* Quick Section Switcher Pills */}
         <nav className="p3r-header-nav-pills" aria-label="Section Selector">
           {MENU_ITEMS.map(item => (
             <button
@@ -149,23 +119,15 @@ export const InternalPageLayout: FC<InternalPageLayoutProps> = ({
           ))}
         </nav>
 
-        {/* Right Corner Music Control */}
         <div className="p3r-header-right">
-          <MusicControl
-            isPlaying={bgmPlaying}
-            isMuted={muted}
-            onTogglePlay={toggleBgm}
-            onToggleMute={toggleMute}
-          />
+          <MusicControl />
         </div>
       </header>
 
-      {/* Main Content Stage */}
       <main className="p3r-internal-stage">
         {children}
       </main>
 
-      {/* Bottom Status Bar HUD */}
       <footer className="p3r-internal-footer">
         <div className="p3r-footer-hints">
           <div className="p3r-hint-item">

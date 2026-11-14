@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect, type FC } from 'react';
 import { InternalPageLayout } from '../components/layout/InternalPageLayout';
 import { PROGRESSION_TIMELINE, type ProgressionMilestone } from '../data/experienceData';
-import { PROJECTS_DATA, type ProjectMission } from '../data/projectsData';
+import { PROJECTS_DATA, type ProjectMission, getImplementationBadge } from '../data/projectsData';
 import { useAudioContext } from '../hooks/useAudioContext';
 import { useFocusTrap } from '../hooks/useFocusTrap';
 import '../styles/pages/equip.css';
@@ -233,13 +233,7 @@ export const EquipPage: FC<EquipPageProps> = ({ onNavigate, onBackToMenu }) => {
                   <div className="p3r-dossier-meta-badge-row">
                     <span className="p3r-dossier-modal-tag">PROJECT DOSSIER // TECHNICAL BRIEFING</span>
                     <span
-                      className={`p3r-dossier-status-pill ${
-                        activeProject.implementationStatus === 'VERIFIED IMPLEMENTED'
-                          ? 'verified'
-                          : activeProject.implementationStatus === 'RESEARCH PROTOTYPE'
-                          ? 'prototype'
-                          : 'experimental'
-                      }`}
+                      className={`p3r-dossier-status-pill ${getImplementationBadge(activeProject.implementationStatus).modalClass}`}
                     >
                       {activeProject.implementationStatus}
                     </span>

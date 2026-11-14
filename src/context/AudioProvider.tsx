@@ -46,10 +46,9 @@ export const AudioProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const wasPlayingRef = useRef(false);
   const lastSfxTimeRef = useRef<Record<string, number>>({});
 
-  // Initialize single persistent BGM audio element once on mount
   useEffect(() => {
     const audio = new Audio();
-    audio.preload = 'metadata'; // Use preload="metadata" to avoid unnecessary buffering
+    audio.preload = 'metadata';
     audio.loop = true;
     audio.src = PERSONA_AUDIO.bgm.primary.path;
     bgmRef.current = audio;
@@ -106,14 +105,12 @@ export const AudioProvider: FC<{ children: ReactNode }> = ({ children }) => {
     };
   }, []);
 
-  // Sync BGM volume & mute changes
   useEffect(() => {
     if (bgmRef.current) {
       bgmRef.current.volume = muted || !settings.bgmEnabled ? 0 : settings.bgmVolume;
     }
   }, [settings.bgmVolume, settings.bgmEnabled, muted]);
 
-  // Persist settings changes
   useEffect(() => {
     saveStoredSettings(settings);
     if (settings.reducedMotion) {
@@ -127,7 +124,6 @@ export const AudioProvider: FC<{ children: ReactNode }> = ({ children }) => {
     );
   }, [settings]);
 
-  // Direct user-gesture initiated playback
   const playBgm = useCallback(async (): Promise<boolean> => {
     if (!bgmRef.current || !settings.bgmEnabled) return false;
     wasPlayingRef.current = true;
@@ -185,12 +181,10 @@ export const AudioProvider: FC<{ children: ReactNode }> = ({ children }) => {
     setSettings(prev => ({ ...prev, sfxVolume: clamped }));
   }, []);
 
-  // Keyboard 'M' / Master mute controls the canonical BGM setting
   const toggleMute = useCallback(() => {
     toggleBgm();
   }, [toggleBgm]);
 
-  // Toggle UI sound effects independently of BGM
   const toggleSfx = useCallback(() => {
     setSettings(prev => ({ ...prev, sfxEnabled: !prev.sfxEnabled }));
   }, []);
@@ -212,7 +206,6 @@ export const AudioProvider: FC<{ children: ReactNode }> = ({ children }) => {
     }
   }, []);
 
-  // Play short UI sound cues with throttle protection against buffer distortion
   const playSfx = useCallback(
     (cue: 'select' | 'hover' | 'confirm' | 'back' | 'transition') => {
       if (!settings.sfxEnabled) return;

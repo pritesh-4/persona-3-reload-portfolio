@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback, useMemo, type FC } from 'react';
 import { MENU_ITEMS } from '../../data/menuConfig';
 import { PROJECTS_DATA } from '../../data/projectsData';
+import { PRIMARY_CONTACT } from '../../data/socialLinksData';
 import { useAudioContext } from '../../hooks/useAudioContext';
 import '../../styles/terminal.css';
 
@@ -139,7 +140,7 @@ export const CommandTerminal: FC<CommandTerminalProps> = ({
       icon: '↗',
       keywords: ['github', 'code', 'source', 'git', 'pritesh-4', 'repo'],
       onSelect: () => {
-        window.open('https://github.com/pritesh-4', '_blank', 'noopener,noreferrer');
+        window.open(PRIMARY_CONTACT.githubUrl, '_blank', 'noopener,noreferrer');
       },
     });
 
@@ -152,20 +153,20 @@ export const CommandTerminal: FC<CommandTerminalProps> = ({
       icon: '↗',
       keywords: ['linkedin', 'connect', 'network', 'career', 'contact'],
       onSelect: () => {
-        window.open('https://www.linkedin.com/in/pritesh-jena-8980a6373/', '_blank', 'noopener,noreferrer');
+        window.open(PRIMARY_CONTACT.linkedinUrl, '_blank', 'noopener,noreferrer');
       },
     });
 
     items.push({
       id: 'action-email',
       category: 'ACTION',
-      label: 'DIRECT EMAIL // priteshjena16@gmail.com',
+      label: `DIRECT EMAIL // ${PRIMARY_CONTACT.email}`,
       sublabel: 'Send direct email correspondence regarding opportunities and technical collaborations.',
       badge: 'MAIL',
       icon: '✉',
       keywords: ['email', 'mail', 'contact', 'message', 'inquiry'],
       onSelect: () => {
-        window.location.href = 'mailto:priteshjena16@gmail.com?subject=Portfolio%20Inquiry%20%E2%80%94%20Pritesh%20Jena';
+        window.location.href = PRIMARY_CONTACT.mailtoUrl;
       },
     });
 

@@ -4,6 +4,7 @@ import { InternalPageLayout } from '../components/layout/InternalPageLayout';
 import {
   PROJECTS_DATA,
   type ProjectMission,
+  getImplementationBadge,
 } from '../data/projectsData';
 import { ArchitectureExplorer } from '../components/quest/ArchitectureExplorer';
 import { CaptureLightbox } from '../components/quest/CaptureLightbox';
@@ -37,14 +38,8 @@ const DOSSIER_THEMES: Record<string, { motifClass: string; motifLabel: string }>
   'quest-09': { motifClass: 'theme-orbit', motifLabel: 'DEVICE SCHEMATIC BLUEPRINT' },
 };
 
-function statusBadgeClass(status: ProjectMission['implementationStatus']): string {
-  switch (status) {
-    case 'VERIFIED IMPLEMENTED': return 'p3r-mstatus-implemented';
-    case 'RESEARCH PROTOTYPE': return 'p3r-mstatus-prototype';
-    case 'EXPERIMENTAL CONCEPT': return 'p3r-mstatus-concept';
-    default: return 'p3r-mstatus-early';
-  }
-}
+const statusBadgeClass = (status: ProjectMission['implementationStatus']) =>
+  getImplementationBadge(status).questClass;
 
 interface QuestPageProps {
   onNavigate: (route: string) => void;

@@ -53,7 +53,6 @@
   letter-spacing: 0.35em;
   color: var(--p3r-cyan);
   text-transform: uppercase;
-  text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
 }
 
 .boot-title-group {
@@ -76,7 +75,7 @@
   color: var(--p3r-snow);
   letter-spacing: 0.03em;
   line-height: 1;
-  text-shadow: 0 0 40px rgba(0, 212, 255, 0.4);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
 }
 
 .boot-progress-container {
@@ -101,7 +100,6 @@
   background: linear-gradient(90deg, var(--p3r-cyan), var(--p3r-royal));
   border-radius: 2px;
   transition: width 220ms var(--ease-out-expo);
-  box-shadow: 0 0 14px rgba(0, 212, 255, 0.6);
 }
 
 .boot-status-text {
@@ -125,7 +123,9 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 4px;
   cursor: pointer;
-  transition: all var(--duration-fast);
+  transition: 
+    color var(--duration-fast),
+    border-color var(--duration-fast);
   padding: 8px 18px;
   z-index: 5;
 }
@@ -133,7 +133,6 @@
 .boot-skip:hover {
   color: var(--p3r-cyan);
   border-color: var(--p3r-cyan);
-  box-shadow: 0 0 12px rgba(0, 212, 255, 0.25);
 }
 
 /* Screen transition slash */
@@ -157,6 +156,5 @@
     var(--p3r-snow) 60%,
     var(--p3r-blue) 100%
   );
-  box-shadow: 0 0 50px rgba(0, 212, 255, 0.5);
 }
 

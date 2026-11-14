@@ -57,6 +57,19 @@ export interface ProjectMission {
   targetArcana: string;
 }
 
+export function getImplementationBadge(status: ProjectMission['implementationStatus']) {
+  switch (status) {
+    case 'VERIFIED IMPLEMENTED':
+      return { key: 'implemented', label: 'VERIFIED IMPLEMENTED', questClass: 'p3r-mstatus-implemented', recruiterClass: 'badge-implemented', modalClass: 'verified' };
+    case 'RESEARCH PROTOTYPE':
+      return { key: 'prototype', label: 'RESEARCH PROTOTYPE', questClass: 'p3r-mstatus-prototype', recruiterClass: 'badge-prototype', modalClass: 'prototype' };
+    case 'EXPERIMENTAL CONCEPT':
+      return { key: 'concept', label: 'EXPERIMENTAL CONCEPT', questClass: 'p3r-mstatus-concept', recruiterClass: 'badge-concept', modalClass: 'experimental' };
+    default:
+      return { key: 'early', label: status, questClass: 'p3r-mstatus-early', recruiterClass: 'badge-early', modalClass: 'experimental' };
+  }
+}
+
 export const PROJECTS_DATA: ProjectMission[] = [
   // PROJECT 001: SALVUS
   {

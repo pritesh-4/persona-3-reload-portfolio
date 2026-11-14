@@ -303,26 +303,3 @@ export const PERSONA_REFERENCES = {
   }
 };
 
-// Global audio playback cache / pool
-const audioPool: Record<string, HTMLAudioElement> = {};
-
-export function playUiSound(cue: 'select' | 'hover' | 'confirm' | 'back' | 'transition', volume = 0.4): void {
-  try {
-    const sfx = PERSONA_AUDIO.sfx[cue];
-    if (!sfx) return;
-
-    let sound = audioPool[cue];
-    if (!sound) {
-      sound = new Audio(sfx.path);
-      audioPool[cue] = sound;
-    }
-    sound.currentTime = 0;
-    sound.volume = volume;
-    sound.play().catch(() => {
-      // Audio playback might be restricted prior to initial user interaction
-    });
-  } catch {
-    // Fail gracefully
-  }
-}
-

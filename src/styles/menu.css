@@ -47,15 +47,15 @@
 
 .p3r-arc-track-glow {
   fill: none;
-  stroke: rgba(0, 102, 255, 0.16);
-  stroke-width: 8px;
+  stroke: rgba(0, 102, 255, 0.12);
+  stroke-width: 4px;
 }
 
 /* Travelling selection marker on curve */
 .p3r-arc-marker {
   fill: var(--p3r-red);
   transition: cx 300ms var(--ease-out-expo), cy 300ms var(--ease-out-expo);
-  filter: drop-shadow(0 0 6px rgba(240, 25, 91, 0.6));
+  filter: drop-shadow(0 0 3px rgba(240, 25, 91, 0.4));
 }
 
 /* Items placement container */
@@ -95,7 +95,11 @@
   border: 1px solid var(--p3r-panel-border);
   border-radius: 2px;
   transform: skewX(-14deg);
-  transition: all 250ms var(--ease-out-expo);
+  transition: 
+    background-color 250ms var(--ease-out-expo),
+    border-color 250ms var(--ease-out-expo),
+    box-shadow 250ms var(--ease-out-expo),
+    transform 250ms var(--ease-out-expo);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.55);
   position: relative;
   overflow: hidden;
@@ -142,6 +146,7 @@
 .p3r-item-index {
   font-family: var(--font-ui);
   font-size: 12px;
+  font-variant-numeric: tabular-nums;
   letter-spacing: 0.1em;
   color: var(--p3r-ice);
   opacity: 0.65;
@@ -208,13 +213,13 @@
   }
 
   .p3r-menu-plate {
-    gap: 7px;
-    padding: 6px 12px;
-    min-height: 38px;
+    gap: 8px;
+    padding: 8px 12px;
+    min-height: 40px;
   }
 
   .p3r-menu-plate-content {
-    gap: 7px;
+    gap: 8px;
   }
 
   .p3r-item-label {
@@ -251,14 +256,14 @@
   }
 
   .p3r-menu-plate {
-    padding: 7px 16px;
+    padding: 8px 16px;
     transform: skewX(-13deg);
     min-height: 44px;
   }
 
   .p3r-menu-plate-content {
     transform: skewX(13deg);
-    gap: 9px;
+    gap: 8px;
   }
 
   .p3r-item-label {
@@ -290,13 +295,13 @@
   }
 
   .p3r-menu-plate {
-    padding: 5px 11px;
+    padding: 4px 12px;
     min-height: 40px;
-    gap: 6px;
+    gap: 8px;
   }
 
   .p3r-menu-plate-content {
-    gap: 6px;
+    gap: 8px;
   }
 
   .p3r-item-label {
@@ -330,11 +335,11 @@
   .p3r-menu-plate {
     padding: 4px 8px;
     min-height: 36px;
-    gap: 5px;
+    gap: 4px;
   }
 
   .p3r-menu-plate-content {
-    gap: 5px;
+    gap: 4px;
   }
 
   .p3r-item-label {

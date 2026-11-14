@@ -45,7 +45,10 @@
   letter-spacing: 0.1em;
   transform: skewX(-8deg);
   cursor: pointer;
-  transition: all 160ms ease;
+  transition: 
+    color 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease;
 }
 
 .p3r-recruiter-back-btn:hover {
@@ -85,7 +88,7 @@
 }
 
 .p3r-recruiter-action-btn {
-  padding: 7px 16px;
+  padding: 8px 16px;
   background: rgba(9, 38, 75, 0.8);
   border: 1px solid rgba(55, 217, 242, 0.4);
   color: var(--abyss-ice);
@@ -94,7 +97,10 @@
   letter-spacing: 0.1em;
   transform: skewX(-8deg);
   cursor: pointer;
-  transition: all 160ms ease;
+  transition: 
+    color 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -159,7 +165,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 3px 10px;
+  padding: 4px 10px;
   background: rgba(16, 185, 129, 0.15);
   border: 1px solid #10b981;
   color: #34d399;
@@ -174,7 +180,6 @@
   height: 6px;
   border-radius: 50%;
   background: #10b981;
-  box-shadow: 0 0 8px #10b981;
 }
 
 .p3r-recruiter-name {
@@ -257,7 +262,7 @@
   background: rgba(3, 11, 25, 0.8);
   border: 1px solid rgba(55, 217, 242, 0.3);
   color: var(--abyss-ice);
-  padding: 1px 7px;
+  padding: 2px 8px;
   font-family: var(--font-ui);
   font-size: 0.65rem;
   cursor: pointer;
@@ -402,7 +407,7 @@
   background: rgba(240, 25, 91, 0.2);
   border: 1px solid var(--abyss-pink);
   color: var(--abyss-pink);
-  padding: 1px 7px;
+  padding: 2px 8px;
 }
 
 .p3r-edu-notes {
@@ -474,7 +479,7 @@
   font-family: var(--font-ui);
   font-size: 0.65rem;
   letter-spacing: 0.1em;
-  padding: 2px 7px;
+  padding: 2px 8px;
 }
 
 .p3r-rproject-status.badge-implemented {
@@ -557,7 +562,7 @@
   background: rgba(9, 38, 75, 0.8);
   border: 1px solid rgba(55, 217, 242, 0.22);
   color: var(--abyss-ice);
-  padding: 2px 7px;
+  padding: 2px 8px;
 }
 
 .p3r-rproject-actions {
@@ -580,7 +585,10 @@
   text-decoration: none;
   transform: skewX(-8deg);
   cursor: pointer;
-  transition: all 140ms ease;
+  transition: 
+    color 140ms ease,
+    background 140ms ease,
+    border-color 140ms ease;
   display: inline-flex;
   align-items: center;
 }
@@ -644,7 +652,7 @@
   background: rgba(3, 11, 25, 0.75);
   border: 1px solid rgba(55, 217, 242, 0.25);
   color: var(--abyss-ice);
-  padding: 3px 8px;
+  padding: 4px 8px;
 }
 
 /* Experience Cards */

@@ -64,7 +64,6 @@
   height: 8px;
   border-radius: 50%;
   background: var(--p3r-cyan);
-  box-shadow: 0 0 8px var(--p3r-cyan);
 }
 
 .p3r-cmd-sys-title {
@@ -90,7 +89,7 @@
 .p3r-cmd-tag-hint kbd {
   background: rgba(3, 11, 25, 0.8);
   border: 1px solid rgba(55, 217, 242, 0.3);
-  padding: 1px 5px;
+  padding: 2px 6px;
   color: var(--p3r-ice);
   font-family: inherit;
 }
@@ -147,7 +146,7 @@
   background: rgba(9, 38, 75, 0.6);
   border: 1px solid rgba(55, 217, 242, 0.3);
   color: var(--p3r-ice);
-  padding: 3px 8px;
+  padding: 4px 8px;
   font-family: var(--font-ui);
   font-size: 0.65rem;
   letter-spacing: 0.12em;
@@ -179,7 +178,7 @@
   background: rgba(9, 38, 75, 0.35);
   border: 1px solid transparent;
   cursor: pointer;
-  transition: all 120ms ease;
+  transition: background 120ms ease, border-color 120ms ease, transform 120ms ease;
 }
 
 .p3r-cmd-item:hover,

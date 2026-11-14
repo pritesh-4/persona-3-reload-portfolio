@@ -1,10 +1,30 @@
 import { useState, useCallback, useEffect } from 'react';
 import { MENU_ITEMS } from '../data/menuConfig';
 
-let lastMenuIndex = 0;
+const SESSION_MENU_KEY = 'p3r_active_menu_index';
+
+function getInitialMenuIndex(): number {
+  if (typeof window === 'undefined') return 0;
+  try {
+    const stored = sessionStorage.getItem(SESSION_MENU_KEY);
+    const parsed = stored ? parseInt(stored, 10) : 0;
+    return !isNaN(parsed) && parsed >= 0 && parsed < MENU_ITEMS.length ? parsed : 0;
+  } catch {
+    return 0;
+  }
+}
+
+function persistMenuIndex(index: number): void {
+  if (typeof window === 'undefined') return;
+  try {
+    sessionStorage.setItem(SESSION_MENU_KEY, String(index));
+  } catch {
+    // Ignore storage errors in restricted contexts
+  }
+}
 
 export function useMenuNavigation() {
-  const [activeIndex, setActiveIndex] = useState(lastMenuIndex);
+  const [activeIndex, setActiveIndex] = useState(getInitialMenuIndex);
 
   const navigate = useCallback((direction: 'up' | 'down') => {
     setActiveIndex(prev => {
@@ -16,13 +36,13 @@ export function useMenuNavigation() {
           : prev >= MENU_ITEMS.length - 1
           ? 0
           : prev + 1;
-      lastMenuIndex = next;
+      persistMenuIndex(next);
       return next;
     });
   }, []);
 
   const selectIndex = useCallback((index: number) => {
-    lastMenuIndex = index;
+    persistMenuIndex(index);
     setActiveIndex(index);
   }, []);
 

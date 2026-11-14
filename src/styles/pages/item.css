@@ -125,7 +125,10 @@
   font-size: 0.92rem;
   letter-spacing: 0.1em;
   text-align: left;
-  transition: all 160ms ease;
+  transition: 
+    color 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease;
   transform: skewX(-6deg);
 }
 
@@ -137,7 +140,7 @@
   width: 6px;
   height: 6px;
   background: var(--abyss-mist);
-  transition: all 160ms ease;
+  transition: background 160ms ease;
 }
 
 .p3r-cat-tab-row:hover {
@@ -156,7 +159,6 @@
 
 .p3r-cat-tab-row.active .p3r-cat-indicator {
   background: var(--abyss-cyan);
-  box-shadow: 0 0 6px var(--abyss-cyan);
 }
 
 /* ----------------------------------------------------------------
@@ -223,7 +225,11 @@
   border: 1px solid rgba(55, 217, 242, 0.18);
   border-left: 3px solid transparent;
   cursor: pointer;
-  transition: all 160ms ease;
+  transition: 
+    color 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
   min-width: 0;
   max-width: 100%;
 }
@@ -302,7 +308,7 @@
   font-size: 0.9rem;
   color: var(--abyss-mist);
   opacity: 0.4;
-  transition: all 160ms ease;
+  transition: color 160ms ease, opacity 160ms ease;
   flex-shrink: 0;
 }
 
@@ -521,7 +527,7 @@
   background: rgba(9, 38, 75, 0.85);
   border: 1px solid rgba(55, 217, 242, 0.3);
   color: var(--abyss-ice);
-  padding: 3px 8px;
+  padding: 4px 8px;
   border-radius: 2px;
   max-width: 100%;
   overflow-wrap: anywhere;
@@ -552,7 +558,11 @@
   letter-spacing: 0.12em;
   text-decoration: none;
   transform: skewX(-12deg);
-  transition: all 180ms ease;
+  transition: 
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
   white-space: normal;
   text-align: center;
 }
@@ -625,7 +635,7 @@
   }
 
   .p3r-cat-tab-row {
-    padding: 7px 10px;
+    padding: 8px 10px;
     font-size: 0.85rem;
   }
 
@@ -726,7 +736,7 @@
   }
 
   .p3r-cat-tab-row {
-    padding: 5px 8px;
+    padding: 6px 8px;
     font-size: 0.78rem;
   }
 

@@ -42,7 +42,10 @@
   font-size: 0.95rem;
   letter-spacing: 0.1em;
   transform: skewX(-12deg);
-  transition: all 160ms ease;
+  transition: 
+    color 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease;
   cursor: pointer;
 }
 
@@ -98,7 +101,10 @@
   flex-direction: column;
   gap: 6px;
   cursor: pointer;
-  transition: all 180ms ease;
+  transition: 
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
 }
 
 .p3r-mission-card:hover {
@@ -140,7 +146,7 @@
   font-family: var(--font-ui);
   font-size: 0.72rem;
   letter-spacing: 0.12em;
-  padding: 2px 7px;
+  padding: 2px 8px;
   border-radius: 2px;
 }
 
@@ -217,7 +223,7 @@
 .p3r-mission-tags-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 6px;
   margin-top: 4px;
 }
 
@@ -600,7 +606,11 @@
   letter-spacing: 0.1em;
   transform: skewX(-12deg);
   text-decoration: none;
-  transition: all 180ms ease;
+  transition: 
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
 }
 
 .p3r-quest-action-btn > * {
@@ -948,7 +958,7 @@
   color: var(--abyss-ice);
   background: rgba(3, 11, 25, 0.85);
   border: 1px solid rgba(55, 217, 242, 0.4);
-  padding: 2px 7px;
+  padding: 2px 8px;
   opacity: 0;
   transition: opacity 160ms ease;
 }
