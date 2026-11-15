@@ -4,6 +4,7 @@ import { CharacterBackdrop } from '../shared/CharacterBackdrop';
 import { MusicControl } from '../hud/MusicControl';
 import { useAudioContext } from '../../hooks/useAudioContext';
 import '../../styles/layout/internalLayout.css';
+import '../../styles/editorial.css';
 
 interface InternalPageLayoutProps {
   title: string;
@@ -54,7 +55,6 @@ export const InternalPageLayout: FC<InternalPageLayoutProps> = ({
   // Global keybindings on internal pages
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Don't intercept if user is typing in an input or textarea
       if (
         document.activeElement?.tagName === 'INPUT' ||
         document.activeElement?.tagName === 'TEXTAREA'
@@ -83,6 +83,7 @@ export const InternalPageLayout: FC<InternalPageLayoutProps> = ({
         screenId={deducedScreenId}
       />
 
+      {/* Compact, Unified Editorial Header */}
       <header className="p3r-internal-header">
         <div className="p3r-header-left">
           <button
@@ -92,21 +93,23 @@ export const InternalPageLayout: FC<InternalPageLayoutProps> = ({
             onMouseEnter={() => playSfx('hover')}
             title="Return to Main Menu (ESC)"
           >
-            <span>&lt; MENU</span>
+            <span className="p3r-back-arrow">&lt;</span>
+            <span className="p3r-back-label">MENU</span>
             <span className="p3r-back-key-tag">ESC</span>
           </button>
 
-          <div className="p3r-header-title-box">
+          <div className="p3r-header-divider" aria-hidden="true" />
+
+          <div className="p3r-header-title-group">
+            <h1 className="p3r-header-title">{title}</h1>
+            <span className="p3r-header-id-tag">[{sectionId}]</span>
+            <span className="p3r-header-sep" aria-hidden="true">//</span>
             <span className="p3r-header-sublabel">{sublabel}</span>
-            <div className="p3r-header-title-row">
-              <h1 className="p3r-header-title">{title}</h1>
-              <span className="p3r-header-id-tag">[{sectionId}]</span>
-            </div>
           </div>
         </div>
 
         <nav className="p3r-header-nav-pills" aria-label="Section Selector">
-          {MENU_ITEMS.map(item => (
+          {MENU_ITEMS.map((item) => (
             <button
               key={item.id}
               type="button"

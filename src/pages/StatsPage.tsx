@@ -339,7 +339,6 @@ export const StatsPage: FC<StatsPageProps> = ({ onNavigate, onBackToMenu }) => {
       title="STATS"
       sublabel="DEVELOPER TELEMETRY & CHRONOLOGICAL CALENDAR"
       sectionId="006"
-      characterId="fuuka"
       currentRoute="/stats"
       onNavigate={onNavigate}
       onBackToMenu={onBackToMenu}

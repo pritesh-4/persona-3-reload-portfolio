@@ -115,8 +115,9 @@ export const SCREEN_ART_CONFIG: Record<string, ScreenArtConfig> = {
     characterOpacityDesktop: 0.48,
     characterOpacityMobile: 0.40,
     characterHeightMobile: '65vh',
-    // Loadout: crimson accent rail on the left, deep navy floor
-    gradientOverlay: 'linear-gradient(90deg, rgba(240, 25, 91, 0.14) 0%, rgba(3, 11, 25, 0.94) 30%, rgba(6, 19, 33, 0.8) 60%, rgba(3, 11, 25, 0.88) 100%), linear-gradient(0deg, rgba(3, 11, 25, 0.6) 0%, transparent 35%)',
+    // Loadout: crimson accent rail on the left, deep navy floor.
+    // Right side darkened further so editorial timeline text stays readable.
+    gradientOverlay: 'linear-gradient(90deg, rgba(240, 25, 91, 0.12) 0%, rgba(3, 11, 25, 0.94) 30%, rgba(6, 19, 33, 0.78) 55%, rgba(7, 11, 19, 0.92) 80%, rgba(7, 11, 19, 0.96) 100%), linear-gradient(0deg, rgba(3, 11, 25, 0.6) 0%, transparent 35%)',
   },
   experience: {
     screenId: 'experience',
@@ -143,16 +144,17 @@ export const SCREEN_ART_CONFIG: Record<string, ScreenArtConfig> = {
     mobileBg: '/assets/persona3/backgrounds/official-wallpapers/p3r-main-key-art.png',
     bgPositionDesktop: 'center 18%',
     bgPositionMobile: 'center 12%',
-    characterId: 'fuuka',
-    characterName: 'Fuuka Yamagishi',
+    characterId: 'makoto',
+    characterName: 'Makoto Yuki',
     characterScaleDesktop: 0.94,
     characterRightDesktop: 'clamp(20px, 8vw, 170px)',
     characterBottomDesktop: '6%',
-    characterOpacityDesktop: 0.5,
-    characterOpacityMobile: 0.42,
+    characterOpacityDesktop: 0.34,
+    characterOpacityMobile: 0.28,
     characterHeightMobile: '58vh',
-    // Telemetry: moonlit sky crop with cyan cast sweeping from the right
-    gradientOverlay: 'linear-gradient(270deg, rgba(55, 217, 242, 0.10) 0%, rgba(3, 11, 25, 0.88) 40%, rgba(3, 11, 25, 0.92) 100%), linear-gradient(0deg, rgba(3, 11, 25, 0.62) 0%, transparent 40%)',
+    // Telemetry: moonlit sky crop with cyan cast sweeping from the right.
+    // Mid-tones darkened so large numerals stay legible over the artwork.
+    gradientOverlay: 'linear-gradient(270deg, rgba(55, 217, 242, 0.08) 0%, rgba(7, 11, 19, 0.62) 30%, rgba(7, 11, 19, 0.9) 58%, rgba(7, 11, 19, 0.94) 100%), linear-gradient(0deg, rgba(3, 11, 25, 0.62) 0%, transparent 40%)',
   },
   quest: {
     screenId: 'quest',

@@ -81,11 +81,12 @@ export const EquipPage: FC<EquipPageProps> = ({ onNavigate, onBackToMenu }) => {
     >
       <div className="p3r-equip-screen">
         {/* ================================================================
-            PRIMARY SECTION: EDUCATION & CREDENTIALS HERO PLATE
+            1. EDUCATION & RESUME HERO: Clean Scannable Academic Foundation
             ================================================================ */}
-        <section className="p3r-education-anchor-plate">
+        <header className="p3r-education-anchor-plate">
           <div className="p3r-edu-content-col">
             <div className="p3r-edu-tag-row">
+              <span className="p3r-sec-num">01</span>
               <span className="p3r-edu-tag">ACADEMIC FOUNDATION // FORMAL DEGREE</span>
               <span className="p3r-edu-status-badge">CURRENTLY ENROLLED</span>
             </div>
@@ -104,39 +105,55 @@ export const EquipPage: FC<EquipPageProps> = ({ onNavigate, onBackToMenu }) => {
               Pursuing undergraduate studies at NIT Rourkela, bridging fundamental physical engineering
               rigour with independent systems architecture, machine learning research, and full-stack software development.
             </p>
+
+            {/* Resume action cleanly integrated with education metadata */}
+            <div className="p3r-edu-resume-row">
+              <a
+                href="https://drive.google.com/file/d/1GmxHQImCLP-AZtlD72_Ex-XqxM6zu1T3/view?usp=drive_link"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p3r-resume-dispatch-btn"
+                onClick={() => playSfx('confirm')}
+                onMouseEnter={() => playSfx('hover')}
+                aria-label="RESUME (opens Google Drive document in new tab)"
+              >
+                <span>RESUME</span>
+                <span className="p3r-resume-arrow">↗</span>
+              </a>
+              <span className="p3r-resume-note">VERIFIED CREDENTIALS // OFFICIAL DOSSIER</span>
+            </div>
           </div>
 
-          <div className="p3r-edu-action-col">
-            <a
-              href="https://drive.google.com/file/d/1GmxHQImCLP-AZtlD72_Ex-XqxM6zu1T3/view?usp=drive_link"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p3r-resume-dispatch-btn"
-              onClick={() => playSfx('confirm')}
-              onMouseEnter={() => playSfx('hover')}
-              aria-label="RESUME (opens Google Drive document in new tab)"
-            >
-              <span>RESUME</span>
-              <span className="p3r-resume-arrow">↗</span>
-            </a>
-            <span className="p3r-resume-note">VERIFIED CREDENTIALS ARCHIVE</span>
+          {/* Dedicated Right Character Visual Element */}
+          <div className="p3r-edu-portrait-card" aria-label="Progression Personnel Record">
+            <div className="p3r-edu-portrait-art-wrap">
+              <img
+                src="/assets/persona3/characters/shinjiro-aragaki.webp"
+                alt="Shinjiro Aragaki — Progression Archetype"
+                className="p3r-edu-portrait-img"
+              />
+            </div>
+            <div className="p3r-edu-portrait-footer">
+              <span className="p3r-edu-portrait-tag">EQUIP // LOADOUT</span>
+              <span className="p3r-edu-portrait-arcana">HIEROPHANT [005]</span>
+            </div>
           </div>
-        </section>
+        </header>
 
         {/* ================================================================
-            PRIMARY SECTION: PROJECT EXPERIENCE VERTICAL TIMELINE
+            2. PROJECT EXPERIENCE VERTICAL TIMELINE
             ================================================================ */}
-        <section className="p3r-journey-section">
+        <section className="p3r-journey-section" aria-labelledby="journey-heading">
           <div className="p3r-journey-header">
             <div className="p3r-journey-title-wrap">
               <span className="p3r-journey-sec-num">02</span>
-              <h2>PROJECT EXPERIENCE &amp; ENGINEERING JOURNEY</h2>
+              <h2 id="journey-heading">PROJECT EXPERIENCE &amp; ENGINEERING JOURNEY</h2>
             </div>
             <span className="p3r-journey-count">{projectMilestones.length} CHRONICLES RECORDED</span>
           </div>
 
           <div className="p3r-vertical-timeline">
-            {/* Blue Central Guide Line */}
+            {/* Guide line spine */}
             <div className="p3r-timeline-spine" aria-hidden="true" />
 
             {projectMilestones.map((item, idx) => {
@@ -153,7 +170,7 @@ export const EquipPage: FC<EquipPageProps> = ({ onNavigate, onBackToMenu }) => {
                     <div className="p3r-entry-node" />
                   </div>
 
-                  {/* Asymmetric Content Plate */}
+                  {/* Text-led Content Plate */}
                   <div className="p3r-entry-content-plate">
                     <div className="p3r-entry-meta-row">
                       <span className="p3r-entry-period">{item.period}</span>
@@ -209,7 +226,7 @@ export const EquipPage: FC<EquipPageProps> = ({ onNavigate, onBackToMenu }) => {
         </section>
 
         {/* ================================================================
-            PROJECT DETAIL DOSSIER MODAL
+            3. PROJECT DETAIL DOSSIER MODAL
             ================================================================ */}
         {activeProject && (
           <div
@@ -224,140 +241,80 @@ export const EquipPage: FC<EquipPageProps> = ({ onNavigate, onBackToMenu }) => {
             }}
           >
             <div
+              className="p3r-dossier-modal-window"
               ref={projectModalRef}
-              className="p3r-dossier-modal-plate"
               tabIndex={-1}
             >
+              {/* Modal Header */}
               <div className="p3r-dossier-modal-head">
-                <div className="p3r-dossier-modal-title-box">
-                  <div className="p3r-dossier-meta-badge-row">
-                    <span className="p3r-dossier-modal-tag">PROJECT DOSSIER // TECHNICAL BRIEFING</span>
-                    <span
-                      className={`p3r-dossier-status-pill ${getImplementationBadge(activeProject.implementationStatus).modalClass}`}
-                    >
-                      {activeProject.implementationStatus}
-                    </span>
-                  </div>
-                  <h2 id="project-dossier-title" className="p3r-dossier-modal-title">
-                    {activeProject.title}
-                  </h2>
-                  <div className="p3r-dossier-modal-subtitle">{activeProject.subtitle}</div>
-                  <div className="p3r-dossier-modal-role">
-                    <span className="p3r-dim-label">ROLE:</span> {activeProject.role}
-                  </div>
+                <div className="p3r-dossier-head-meta">
+                  <span className="p3r-dossier-code">{activeProject.code}</span>
+                  <span className="p3r-dossier-badge">
+                    {getImplementationBadge(activeProject.implementationStatus).label}
+                  </span>
                 </div>
                 <button
                   type="button"
-                  className="p3r-modal-close-btn"
+                  className="p3r-dossier-close-btn"
                   onClick={handleCloseProjectDossier}
                   aria-label="Close Project Dossier"
                 >
-                  ✕ CLOSE
+                  ✕
                 </button>
               </div>
 
+              {/* Modal Body */}
               <div className="p3r-dossier-modal-body">
-                {/* Visual Screenshot (Rendered only when real screenshot exists) */}
-                {activeProject.screenshot && (
-                  <div className="p3r-dossier-visual-block">
-                    <img
-                      src={activeProject.screenshot}
-                      alt={`${activeProject.title} system interface`}
-                      className="p3r-dossier-screenshot"
-                    />
-                  </div>
-                )}
+                <h2 id="project-dossier-title" className="p3r-dossier-modal-title">
+                  {activeProject.title}
+                </h2>
+                <div className="p3r-dossier-modal-subtitle">{activeProject.subtitle}</div>
 
-                {/* Executive Summary */}
-                <div className="p3r-dossier-summary-block">
-                  <p>{activeProject.summary}</p>
+                <p className="p3r-dossier-modal-description">{activeProject.summary}</p>
+
+                {/* Architecture & Solution */}
+                <div className="p3r-dossier-modal-section">
+                  <h3>SYSTEM ARCHITECTURE &amp; SOLUTION</h3>
+                  <p>{activeProject.solution}</p>
                 </div>
 
-                {/* The Problem */}
-                <div className="p3r-dossier-sec">
-                  <h3 className="p3r-dossier-sec-heading">
-                    <span className="p3r-sec-icon">▸</span> THE PROBLEM &amp; SYSTEM NEED
-                  </h3>
-                  <p className="p3r-dossier-body-text">{activeProject.problem}</p>
-                </div>
-
-                {/* Engineering Approach */}
-                <div className="p3r-dossier-sec">
-                  <h3 className="p3r-dossier-sec-heading">
-                    <span className="p3r-sec-icon">▸</span> ENGINEERING APPROACH &amp; ARCHITECTURE
-                  </h3>
-                  <p className="p3r-dossier-body-text">{activeProject.solution}</p>
-                </div>
-
-                {/* Core Capabilities */}
-                <div className="p3r-dossier-sec">
-                  <h3 className="p3r-dossier-sec-heading">
-                    <span className="p3r-sec-icon">▸</span> CORE CAPABILITIES &amp; FUNCTIONALITY
-                  </h3>
-                  <ul className="p3r-dossier-feature-list">
-                    {activeProject.features.map((feat, idx) => (
-                      <li key={idx} className="p3r-dossier-feature-item">
-                        <span className="p3r-feature-bullet">✦</span>
-                        <span>{feat}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Technical Limitations */}
-                <div className="p3r-dossier-sec p3r-dossier-limitations-sec">
-                  <h3 className="p3r-dossier-sec-heading p3r-limitations-heading">
-                    <span className="p3r-sec-icon">⚠</span> KNOWN TECHNICAL LIMITATIONS &amp; BOUNDARIES
-                  </h3>
-                  <ul className="p3r-dossier-limitation-list">
-                    {activeProject.limitations.map((lim, idx) => (
-                      <li key={idx} className="p3r-dossier-limitation-item">
-                        <span className="p3r-limitation-bullet">▸</span>
-                        <span>{lim}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Technology Stack */}
-                <div className="p3r-dossier-sec">
-                  <h3 className="p3r-dossier-sec-heading">
-                    <span className="p3r-sec-icon">▸</span> TECHNOLOGY STACK &amp; TOOLING
-                  </h3>
-                  <div className="p3r-dossier-tech-pills">
-                    {activeProject.techStack.map((tech, idx) => (
-                      <span key={idx} className="p3r-tech-tag">
+                {/* Tech Stack */}
+                <div className="p3r-dossier-modal-section">
+                  <h3>TECHNOLOGY STACK</h3>
+                  <div className="p3r-modal-tech-grid">
+                    {activeProject.techStack.map((tech, tIdx) => (
+                      <span key={tIdx} className="p3r-modal-tech-item">
                         {tech}
                       </span>
                     ))}
                   </div>
                 </div>
-              </div>
 
-              {/* Action Buttons */}
-              <div className="p3r-dossier-modal-foot">
-                <a
-                  href={activeProject.repoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p3r-dossier-action-btn primary"
-                  onClick={() => playSfx('confirm')}
-                >
-                  <span>OPEN SOURCE REPOSITORY</span>
-                  <span className="p3r-action-arrow">↗</span>
-                </a>
-                {activeProject.demoUrl && (
-                  <a
-                    href={activeProject.demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p3r-dossier-action-btn secondary"
-                    onClick={() => playSfx('confirm')}
-                  >
-                    <span>VIEW LIVE DEMO</span>
-                    <span className="p3r-action-arrow">↗</span>
-                  </a>
-                )}
+                {/* External links */}
+                <div className="p3r-dossier-modal-actions">
+                  {activeProject.repoUrl && (
+                    <a
+                      href={activeProject.repoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p3r-dossier-action-btn"
+                    >
+                      <span>VIEW CODEBASE</span>
+                      <span>↗</span>
+                    </a>
+                  )}
+                  {activeProject.demoUrl && (
+                    <a
+                      href={activeProject.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p3r-dossier-action-btn live"
+                    >
+                      <span>LIVE DEMO</span>
+                      <span>↗</span>
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           </div>

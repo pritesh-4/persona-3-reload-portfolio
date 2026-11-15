@@ -224,7 +224,7 @@ export const QuestPage: FC<QuestPageProps> = ({ onNavigate, onBackToMenu }) => {
             ))}
           </div>
 
-          {/* Mission Dossier Detail Panel */}
+          {/* Mission Dossier Detail Panel — case-study chapters 01–08 */}
           <aside className="p3r-mission-dossier-panel" aria-live="polite" ref={dossierRef}>
             {/* Per-project technical motif — visual identity, not a screenshot */}
             <div className={`p3r-dossier-visual ${theme.motifClass}`} aria-hidden="true">
@@ -241,6 +241,7 @@ export const QuestPage: FC<QuestPageProps> = ({ onNavigate, onBackToMenu }) => {
               </div>
               <h2 className="p3r-dossier-title">{selectedMission.title}</h2>
               <div className="p3r-dossier-subtitle">{selectedMission.subtitle}</div>
+              <p className="p3r-dossier-text p3r-dossier-brief">{selectedMission.summary}</p>
 
               {/* Mission Identity Grid */}
               <dl className="p3r-dossier-identity-grid">
@@ -264,8 +265,47 @@ export const QuestPage: FC<QuestPageProps> = ({ onNavigate, onBackToMenu }) => {
               <div className="p3r-dossier-role-tag">ROLE: {selectedMission.role}</div>
             </div>
 
+            <div className="p3r-dossier-section" data-chapter="02">
+              <h4 className="p3r-dossier-heading">02 · THE PROBLEM</h4>
+              <p className="p3r-dossier-text">{selectedMission.problem}</p>
+            </div>
+
+            <div className="p3r-dossier-section" data-chapter="03">
+              <h4 className="p3r-dossier-heading">03 · THE APPROACH</h4>
+              <p className="p3r-dossier-text">{selectedMission.solution}</p>
+            </div>
+
+            {selectedMission.architecture && (
+              <div className="p3r-dossier-arch-section" data-chapter="04" key={`arch-${selectedMission.id}`}>
+                <ArchitectureExplorer
+                  diagram={selectedMission.architecture}
+                  systemName={selectedMission.title}
+                />
+              </div>
+            )}
+
+            <div className="p3r-dossier-section" data-chapter="05">
+              <h4 className="p3r-dossier-heading">05 · IMPLEMENTATION</h4>
+              <div className="p3r-dossier-bullets">
+                {selectedMission.features.map((feat, idx) => (
+                  <div key={idx} className="p3r-dossier-bullet-item">
+                    <span>{feat}</span>
+                  </div>
+                ))}
+              </div>
+              <h4 className="p3r-dossier-heading p3r-dossier-heading-sub">TECHNOLOGY SPECS</h4>
+              <div className="p3r-mission-tags-row">
+                {selectedMission.techStack.map((tech, idx) => (
+                  <span key={idx} className="p3r-mission-tag">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
             {captures.length > 0 && (
-              <div className="p3r-dossier-gallery" key={selectedMission.id}>
+              <div className="p3r-dossier-gallery" data-chapter="06" key={selectedMission.id}>
+                <h4 className="p3r-dossier-heading">06 · EVIDENCE</h4>
                 {captures.map((capture, idx) => (
                   <figure key={capture.src} className="p3r-dossier-capture">
                     <button
@@ -292,45 +332,10 @@ export const QuestPage: FC<QuestPageProps> = ({ onNavigate, onBackToMenu }) => {
               </div>
             )}
 
-            {selectedMission.architecture && (
-              <div className="p3r-dossier-arch-section" key={`arch-${selectedMission.id}`}>
-                <ArchitectureExplorer
-                  diagram={selectedMission.architecture}
-                  systemName={selectedMission.title}
-                />
-              </div>
-            )}
-
-            <div className="p3r-dossier-section">
-              <h4 className="p3r-dossier-heading">PROJECT BRIEFING</h4>
-              <p className="p3r-dossier-text">{selectedMission.summary}</p>
-            </div>
-
-            <div className="p3r-dossier-section">
-              <h4 className="p3r-dossier-heading">THE REAL PROBLEM</h4>
-              <p className="p3r-dossier-text">{selectedMission.problem}</p>
-            </div>
-
-            <div className="p3r-dossier-section">
-              <h4 className="p3r-dossier-heading">ENGINEERING ARCHITECTURE & APPROACH</h4>
-              <p className="p3r-dossier-text">{selectedMission.solution}</p>
-            </div>
-
-            <div className="p3r-dossier-section">
-              <h4 className="p3r-dossier-heading">CORE CAPABILITIES</h4>
-              <div className="p3r-dossier-bullets">
-                {selectedMission.features.map((feat, idx) => (
-                  <div key={idx} className="p3r-dossier-bullet-item">
-                    <span>{feat}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
             {selectedMission.limitations.length > 0 && (
-              <div className="p3r-dossier-limitations-box">
+              <div className="p3r-dossier-limitations-box" data-chapter="07">
                 <div className="p3r-limitations-heading">
-                  <span>TECHNICAL HONESTY & REAL-WORLD BOUNDARIES</span>
+                  <span>07 · LIMITATIONS & CURRENT BOUNDARIES</span>
                 </div>
                 {selectedMission.limitations.map((lim, idx) => (
                   <div key={idx} className="p3r-limitation-item">
@@ -340,18 +345,7 @@ export const QuestPage: FC<QuestPageProps> = ({ onNavigate, onBackToMenu }) => {
               </div>
             )}
 
-            <div className="p3r-dossier-section">
-              <h4 className="p3r-dossier-heading">TECHNOLOGY SPECS</h4>
-              <div className="p3r-mission-tags-row">
-                {selectedMission.techStack.map((tech, idx) => (
-                  <span key={idx} className="p3r-mission-tag">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div className="p3r-dossier-actions">
+            <div className="p3r-dossier-actions" data-chapter="08">
               <a
                 href={selectedMission.repoUrl}
                 target="_blank"

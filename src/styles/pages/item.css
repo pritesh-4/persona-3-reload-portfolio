@@ -1,34 +1,18 @@
 /* ================================================================
-   PERSONA 3 RELOAD — SKILL SCREEN (3-COLUMN ABILITY INTERFACE)
+   MIDNIGHT EDITORIAL ARCHIVE — PAGE 002 · SKILL
+   Technical field guide / capability index. Interactive selection
+   and category filtering behaviour fully preserved.
    ================================================================ */
-
-.p3r-skill-screen,
-.p3r-skill-tri-layout,
-.p3r-skill-tri-layout > *,
-.p3r-inspector-plate {
-  box-sizing: border-box;
-}
-
-.p3r-skill-cat-column,
-.p3r-skill-list-column,
-.p3r-skill-inspector-column,
-.p3r-inspector-plate,
-.p3r-inspector-body,
-.p3r-skill-row-info {
-  min-width: 0;
-  max-width: 100%;
-}
 
 .p3r-skill-screen {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 1560px;
+  max-width: 1360px;
   margin: 0 auto;
-  height: 100%;
+  height: calc(100vh - 190px);
   min-height: 0;
-  flex: 1;
-  animation: p3r-skill-enter 350ms var(--ease-out-expo);
+  animation: p3r-skill-enter 400ms var(--ease-out-expo);
 }
 
 @keyframes p3r-skill-enter {
@@ -42,543 +26,462 @@
   }
 }
 
-/* ================================================================
-   TRI-COLUMN LAYOUT — RESPONSIVE GRID TRACKS
-   Col 1: Category Index (minmax 180px, 0.75fr)
-   Col 2: Skills List (minmax 0, 2fr)
-   Col 3: Live Ability Inspector (minmax 330px, 1.25fr)
-   ================================================================ */
-.p3r-skill-tri-layout {
-  display: grid;
-  grid-template-columns:
-    minmax(180px, 0.75fr)
-    minmax(0, 2fr)
-    minmax(330px, 1.25fr);
-  gap: clamp(10px, 1.1vw, 16px);
-  width: 100%;
-  max-width: 100%;
+.p3r-inspector-plate {
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+.p3r-skill-row-info {
   min-width: 0;
-  align-items: stretch;
-  height: 100%;
-  min-height: 0;
-  flex: 1;
 }
 
 /* ----------------------------------------------------------------
-   COLUMN 1: CATEGORY INDEX
+   TRI-LAYOUT: category index | skill rows | inspector
    ---------------------------------------------------------------- */
+.p3r-skill-tri-layout {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.8fr) minmax(0, 2.1fr) minmax(340px, 1.3fr);
+  gap: 36px;
+  flex: 1 1 0;
+  min-height: 0;
+  height: 100%;
+}
+
+/* COLUMN 1 — category index: typographic, not decorative */
 .p3r-skill-cat-column {
-  background: linear-gradient(
-    180deg,
-    rgba(3, 11, 25, 0.94) 0%,
-    rgba(9, 38, 75, 0.9) 100%
-  );
-  border: 1px solid rgba(55, 217, 242, 0.25);
-  border-left: 4px solid var(--abyss-reload);
-  padding: 18px 14px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-  height: 100%;
+  gap: 12px;
   min-height: 0;
+  background: none;
+  border: none;
+  border-right: 1px solid var(--ed-divider);
+  padding: 6px 20px 6px 0;
   overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.p3r-skill-cat-column::-webkit-scrollbar {
+  display: none;
 }
 
 .p3r-cat-col-header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(55, 217, 242, 0.2);
-  padding-bottom: 8px;
+  flex-direction: column;
+  gap: 3px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--ed-divider);
 }
 
 .p3r-cat-col-tag {
-  font-family: var(--font-ui);
-  font-size: 0.78rem;
-  letter-spacing: 0.16em;
-  color: var(--abyss-cyan);
+  font-family: var(--font-body);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  color: var(--ed-text-2);
+  text-transform: uppercase;
 }
 
 .p3r-cat-col-count {
-  font-family: var(--font-ui);
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  color: var(--abyss-mist);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-style: italic;
+  letter-spacing: 0.06em;
+  color: var(--ed-blue-muted);
 }
 
 .p3r-cat-btn-list {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 2px;
 }
 
 .p3r-cat-tab-row {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 12px;
-  background: rgba(13, 61, 117, 0.3);
-  border: 1px solid rgba(55, 217, 242, 0.15);
-  color: var(--abyss-mist);
-  font-family: var(--font-ui);
-  font-size: 0.92rem;
-  letter-spacing: 0.1em;
+  padding: 8px 8px 8px 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid transparent;
+  color: var(--ed-text-2);
   text-align: left;
-  transition: 
-    color 160ms ease,
-    background 160ms ease,
-    border-color 160ms ease;
-  transform: skewX(-6deg);
-}
-
-.p3r-cat-tab-row > * {
-  transform: skewX(6deg);
+  transition: color 160ms ease;
 }
 
 .p3r-cat-indicator {
-  width: 6px;
-  height: 6px;
-  background: var(--abyss-mist);
+  width: 14px;
+  height: 2px;
+  background: transparent;
+  border: none;
+  flex-shrink: 0;
   transition: background 160ms ease;
 }
 
 .p3r-cat-tab-row:hover {
-  background: rgba(21, 88, 214, 0.35);
-  color: var(--abyss-white);
-  border-color: var(--abyss-cyan);
+  background: none;
+  color: var(--ed-text);
 }
 
 .p3r-cat-tab-row.active {
-  background: var(--abyss-reload);
-  color: var(--abyss-white);
-  border-color: var(--abyss-cyan);
-  border-left: 4px solid var(--abyss-pink);
-  box-shadow: 0 4px 14px rgba(21, 88, 214, 0.4);
+  background: none;
+  color: var(--ed-text);
 }
 
 .p3r-cat-tab-row.active .p3r-cat-indicator {
-  background: var(--abyss-cyan);
+  background: var(--ed-red);
 }
 
-/* ----------------------------------------------------------------
-   COLUMN 2: SKILLS TYPOGRAPHIC ROWS
-   ---------------------------------------------------------------- */
+.p3r-cat-name {
+  font-family: var(--font-ui);
+  font-size: 0.98rem;
+  letter-spacing: 0.12em;
+}
+
+/* COLUMN 2 — the capability list */
 .p3r-skill-list-column {
-  background: linear-gradient(
-    180deg,
-    rgba(3, 11, 25, 0.92) 0%,
-    rgba(9, 38, 75, 0.85) 100%
-  );
-  border: 1px solid rgba(55, 217, 242, 0.22);
-  border-top: 4px solid var(--abyss-cyan);
-  padding: 18px 20px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-  height: 100%;
-  max-height: 100%;
+  gap: 10px;
   min-height: 0;
-  overflow: hidden;
+  background: none;
+  border: none;
+  padding: 0;
+  box-shadow: none;
 }
 
 .p3r-skill-list-header {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(55, 217, 242, 0.2);
-  padding-bottom: 8px;
-  flex-shrink: 0;
+  gap: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--ed-divider);
 }
 
 .p3r-skill-list-title {
-  font-family: var(--font-ui);
-  font-size: 0.95rem;
-  letter-spacing: 0.14em;
-  color: var(--abyss-white);
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--ed-text);
+  text-transform: uppercase;
 }
 
 .p3r-skill-list-sub {
-  font-family: var(--font-ui);
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  color: var(--abyss-cyan);
+  font-family: var(--font-body);
+  font-size: 0.56rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--ed-text-2);
+  text-transform: uppercase;
 }
 
 .p3r-skill-rows-container {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0;
   overflow-y: auto;
-  flex: 1;
+  overflow-x: hidden;
   min-height: 0;
-  padding-right: 6px;
+  flex: 1 1 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(103, 188, 204, 0.3) transparent;
+  padding-right: 8px;
+}
+
+.p3r-skill-rows-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.p3r-skill-rows-container::-webkit-scrollbar-thumb {
+  background: rgba(103, 188, 204, 0.3);
 }
 
 .p3r-skill-item-row {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 10px 14px;
-  background: rgba(13, 61, 117, 0.35);
-  border: 1px solid rgba(55, 217, 242, 0.18);
-  border-left: 3px solid transparent;
+  padding: 12px 12px 12px 14px;
+  background: none;
+  border: none;
+  border-left: 2px solid transparent;
+  border-bottom: 1px solid rgba(222, 232, 242, 0.07);
   cursor: pointer;
-  transition: 
-    color 160ms ease,
-    background 160ms ease,
-    border-color 160ms ease,
-    transform 160ms ease;
-  min-width: 0;
-  max-width: 100%;
+  transition: background 150ms ease, border-color 150ms ease;
 }
 
 .p3r-skill-row-icon {
-  font-family: var(--font-ui);
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  padding: 2px 6px;
-  background: rgba(9, 38, 75, 0.75);
-  border: 1px solid rgba(55, 217, 242, 0.35);
-  color: var(--abyss-cyan);
-  border-radius: 2px;
-  flex-shrink: 0;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 36px;
-  text-align: center;
-  line-height: 1.2;
-}
-
-.p3r-skill-row.is-active .p3r-skill-row-icon {
-  background: var(--abyss-reload);
-  border-color: var(--abyss-white);
-  color: var(--abyss-white);
-}
-
-.p3r-skill-row-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
+  width: auto;
+  min-width: 34px;
+  flex-shrink: 0;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--ed-blue-muted);
+  background: none;
+  border: none;
 }
 
 .p3r-skill-row-main {
   display: flex;
   align-items: baseline;
   gap: 10px;
-  min-width: 0;
   flex-wrap: wrap;
 }
 
 .p3r-skill-row-name {
-  font-family: var(--font-ui);
-  font-size: 1.15rem;
-  letter-spacing: 0.08em;
-  color: var(--abyss-white);
-  line-height: 1.1;
-  min-width: 0;
-  overflow-wrap: break-word;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--ed-text);
+  line-height: 1.2;
 }
 
 .p3r-skill-row-cat {
   font-family: var(--font-body);
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
-  color: var(--abyss-cyan);
-  text-transform: uppercase;
+  font-size: 0.56rem;
   font-weight: 600;
-  white-space: nowrap;
+  letter-spacing: 0.16em;
+  color: var(--ed-text-2);
+  text-transform: uppercase;
+  opacity: 0.8;
 }
 
 .p3r-skill-row-desc {
   font-family: var(--font-body);
-  font-size: 0.78rem;
-  color: var(--abyss-mist);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: 0.76rem;
+  line-height: 1.5;
+  color: var(--ed-text-2);
+  margin-top: 3px;
+  display: block;
 }
 
 .p3r-skill-row-arrow {
-  font-size: 0.9rem;
-  color: var(--abyss-mist);
-  opacity: 0.4;
-  transition: color 160ms ease, opacity 160ms ease;
+  margin-left: auto;
   flex-shrink: 0;
+  font-size: 0.8rem;
+  color: var(--ed-text-2);
+  opacity: 0;
+  transition: opacity 150ms ease, color 150ms ease;
 }
 
 .p3r-skill-item-row:hover {
-  background: rgba(21, 88, 214, 0.3);
-  border-color: var(--abyss-cyan);
-  border-left-color: var(--abyss-cyan);
-  transform: translateX(4px);
+  background: rgba(222, 232, 242, 0.03);
+  border-color: rgba(222, 232, 242, 0.07);
+  border-left-color: var(--ed-text-2);
 }
 
 .p3r-skill-item-row:hover .p3r-skill-row-arrow {
-  color: var(--abyss-cyan);
   opacity: 1;
 }
 
 .p3r-skill-item-row.selected {
-  background: linear-gradient(90deg, rgba(21, 88, 214, 0.45) 0%, rgba(9, 38, 75, 0.95) 100%);
-  border-color: var(--abyss-cyan);
-  border-left: 4px solid var(--abyss-pink);
-  box-shadow: 0 4px 14px rgba(21, 88, 214, 0.35);
-  transform: translateX(6px);
-}
-
-.p3r-skill-item-row.selected .p3r-skill-row-name {
-  color: var(--abyss-white);
+  background: rgba(25, 36, 50, 0.6);
+  border-color: rgba(222, 232, 242, 0.07);
+  border-left: 2px solid var(--ed-red);
 }
 
 .p3r-skill-item-row.selected .p3r-skill-row-arrow {
-  color: var(--abyss-pink);
   opacity: 1;
+  color: var(--ed-red);
 }
 
 .p3r-skill-item-row:focus-visible {
-  outline: 2px solid var(--abyss-cyan);
-  outline-offset: 2px;
+  outline: 2px solid var(--ed-cyan);
+  outline-offset: -2px;
+  background: rgba(222, 232, 242, 0.04);
 }
 
-/* ----------------------------------------------------------------
-   COLUMN 3: LIVE ABILITY INSPECTOR
-   ---------------------------------------------------------------- */
+/* COLUMN 3 — the inspector: a technical reference panel */
 .p3r-skill-inspector-column {
   display: flex;
   flex-direction: column;
-  min-width: 0;
-  max-width: 100%;
-  height: 100%;
   min-height: 0;
+  background: none;
+  border: none;
+  padding: 0;
+  box-shadow: none;
 }
 
 .p3r-inspector-plate {
-  background: linear-gradient(
-    180deg,
-    rgba(3, 11, 25, 0.96) 0%,
-    rgba(9, 38, 75, 0.92) 100%
-  );
-  border: 1px solid rgba(55, 217, 242, 0.35);
-  border-top: 5px solid var(--abyss-pink);
-  padding: clamp(16px, 1.6vw, 24px);
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.6);
-  height: 100%;
-  max-height: 100%;
-  min-height: 0;
+  gap: 20px;
+  padding: 22px 26px;
+  background: rgba(17, 26, 38, 0.6);
+  border: 1px solid var(--ed-divider);
+  border-top: 2px solid var(--ed-cyan);
   overflow-y: auto;
+  min-height: 0;
+  flex: 1 1 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(103, 188, 204, 0.3) transparent;
+}
+
+.p3r-inspector-plate::-webkit-scrollbar {
+  width: 6px;
+}
+
+.p3r-inspector-plate::-webkit-scrollbar-thumb {
+  background: rgba(103, 188, 204, 0.3);
 }
 
 .p3r-inspector-head {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  border-bottom: 1px solid rgba(55, 217, 242, 0.25);
-  padding-bottom: 14px;
-  min-width: 0;
-  max-width: 100%;
-  flex-shrink: 0;
+  gap: 10px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--ed-divider);
 }
 
 .p3r-inspector-meta-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 12px;
   flex-wrap: wrap;
-  gap: 8px;
-  min-width: 0;
-  max-width: 100%;
 }
 
 .p3r-inspector-cat-tag {
-  font-family: var(--font-ui);
-  font-size: 0.78rem;
-  letter-spacing: 0.14em;
-  color: var(--abyss-cyan);
-  min-width: 0;
-  overflow-wrap: break-word;
+  font-family: var(--font-body);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--ed-cyan);
+  text-transform: uppercase;
 }
 
 .p3r-inspector-verified-tag {
-  background: rgba(21, 88, 214, 0.3);
-  border: 1px solid rgba(55, 217, 242, 0.3);
-  color: var(--abyss-ice);
-  font-family: var(--font-ui);
-  font-size: 0.68rem;
-  letter-spacing: 0.12em;
-  padding: 2px 8px;
-  border-radius: 2px;
-  white-space: normal;
-  max-width: 100%;
-  text-align: right;
-  flex-shrink: 1;
+  font-family: var(--font-body);
+  font-size: 0.56rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--ed-text-2);
+  text-transform: uppercase;
+  padding-left: 12px;
+  border-left: 1px solid var(--ed-divider);
 }
 
 .p3r-inspector-title-row {
   display: flex;
   align-items: center;
   gap: 12px;
-  min-width: 0;
-  max-width: 100%;
 }
 
 .p3r-inspector-hero-icon {
-  font-family: var(--font-ui);
-  font-size: 0.85rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  padding: 6px 12px;
-  background: rgba(9, 38, 75, 0.85);
-  border: 1px solid var(--abyss-cyan);
-  color: var(--abyss-cyan);
-  clip-path: var(--p3r-cut-sm);
-  flex-shrink: 0;
-  line-height: 1;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1rem;
+  color: var(--ed-text);
+  background: none;
+  border: none;
+  padding: 0;
 }
 
 .p3r-inspector-title {
   font-family: var(--font-display);
-  font-size: clamp(1.6rem, 2.2vw, 2.1rem);
+  font-size: 2rem;
   font-style: italic;
   letter-spacing: 0.04em;
-  color: var(--abyss-white);
-  line-height: 1.1;
+  line-height: 1;
+  color: var(--ed-text);
   margin: 0;
-  min-width: 0;
-  max-width: 100%;
-  overflow-wrap: anywhere;
-  word-break: normal;
 }
 
 .p3r-inspector-body {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  min-width: 0;
-  max-width: 100%;
+  gap: 22px;
 }
 
 .p3r-inspector-section {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  min-width: 0;
-  max-width: 100%;
+  gap: 8px;
+  background: none;
+  border: none;
+  padding: 0;
 }
 
 .p3r-inspector-sec-label {
-  font-family: var(--font-ui);
-  font-size: 0.82rem;
-  letter-spacing: 0.14em;
-  color: var(--abyss-cyan);
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--ed-text-2);
+  text-transform: uppercase;
   margin: 0;
-  min-width: 0;
-  overflow-wrap: break-word;
 }
 
 .p3r-inspector-text {
   font-family: var(--font-body);
   font-size: 0.86rem;
-  line-height: 1.6;
-  color: var(--abyss-ice);
+  line-height: 1.7;
+  color: var(--ed-text-2);
   margin: 0;
-  min-width: 0;
-  max-width: 100%;
-  overflow-wrap: anywhere;
 }
 
 .p3r-inspector-quote {
   font-family: var(--font-body);
-  font-size: 0.82rem;
-  line-height: 1.55;
-  color: var(--abyss-mist);
-  font-style: italic;
-  background: rgba(13, 61, 117, 0.3);
-  border-left: 3px solid var(--abyss-reload);
-  padding: 8px 12px;
+  font-size: 0.86rem;
+  line-height: 1.7;
+  color: var(--ed-text);
   margin: 0;
-  min-width: 0;
-  max-width: 100%;
-  overflow-wrap: anywhere;
+  padding-left: 14px;
+  border-left: 2px solid var(--ed-blue-muted);
 }
 
 .p3r-inspector-projects-wrap {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  min-width: 0;
-  max-width: 100%;
+  gap: 8px;
 }
 
 .p3r-inspector-project-badge {
   font-family: var(--font-body);
-  font-size: 0.76rem;
-  background: rgba(9, 38, 75, 0.85);
-  border: 1px solid rgba(55, 217, 242, 0.3);
-  color: var(--abyss-ice);
-  padding: 4px 8px;
-  border-radius: 2px;
-  max-width: 100%;
-  overflow-wrap: anywhere;
-  white-space: normal;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--ed-text);
+  background: rgba(222, 232, 242, 0.05);
+  border: 1px solid var(--ed-divider);
+  padding: 5px 12px;
 }
 
 .p3r-inspector-actions {
-  margin-top: 6px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(55, 217, 242, 0.2);
-  min-width: 0;
-  max-width: 100%;
+  padding-top: 4px;
 }
 
 .p3r-inspector-doc-btn {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
-  padding: 8px 16px;
-  max-width: calc(100% - 16px);
-  margin-left: 8px;
-  background: var(--abyss-reload);
-  border: 1px solid var(--abyss-cyan);
-  color: var(--abyss-white);
+  padding: 10px 20px;
+  background: none;
+  border: 1px solid var(--ed-divider-strong);
+  color: var(--ed-text);
   font-family: var(--font-ui);
   font-size: 0.95rem;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-decoration: none;
-  transform: skewX(-12deg);
-  transition: 
-    color 180ms ease,
-    background 180ms ease,
-    border-color 180ms ease,
-    transform 180ms ease;
-  white-space: normal;
-  text-align: center;
-}
-
-.p3r-inspector-doc-btn > * {
-  transform: skewX(12deg);
+  transition: border-color 180ms ease, background 180ms ease;
 }
 
 .p3r-inspector-doc-btn:hover {
-  background: var(--abyss-pink);
-  border-color: #ff6b9d;
-  transform: skewX(-12deg) scale(1.03);
+  background: rgba(103, 188, 204, 0.08);
+  border-color: var(--ed-cyan);
+  transform: none;
 }
 
 /* ================================================================
-   RESPONSIVE DESIGN & DELIBERATE BREAKPOINTS
+   RESPONSIVE DESIGN
    ================================================================ */
 
 /* Large Desktop (1440px and above) */
@@ -588,7 +491,7 @@
       minmax(195px, 0.8fr)
       minmax(0, 2.2fr)
       minmax(360px, 1.35fr);
-    gap: 18px;
+    gap: 40px;
   }
 }
 
@@ -600,7 +503,7 @@
     grid-template-areas:
       "cats cats"
       "list inspector";
-    gap: 14px;
+    gap: 20px;
     height: 100%;
     min-height: 0;
   }
@@ -609,16 +512,18 @@
     grid-area: cats;
     flex-direction: row;
     align-items: center;
-    padding: 10px 14px;
+    padding: 0 0 12px;
     gap: 14px;
     height: auto;
     max-height: none;
     overflow-y: visible;
+    border-right: none;
+    border-bottom: 1px solid var(--ed-divider);
   }
 
   .p3r-cat-col-header {
     border-bottom: none;
-    border-right: 1px solid rgba(55, 217, 242, 0.2);
+    border-right: 1px solid var(--ed-divider);
     padding-bottom: 0;
     padding-right: 12px;
     flex-direction: column;
@@ -630,12 +535,12 @@
   .p3r-cat-btn-list {
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 4px 18px;
     flex: 1;
   }
 
   .p3r-cat-tab-row {
-    padding: 8px 10px;
+    padding: 4px 0;
     font-size: 0.85rem;
   }
 
@@ -668,7 +573,7 @@
   .p3r-skill-tri-layout {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 20px;
     height: auto;
     min-height: auto;
     flex: none;
@@ -679,25 +584,26 @@
     min-height: auto;
     max-height: none;
     flex-shrink: 0;
-    padding: 12px 14px;
+    padding: 0 0 12px;
     gap: 10px;
     overflow-y: visible;
+    border-right: none;
+    border-bottom: 1px solid var(--ed-divider);
   }
 
   .p3r-cat-col-header {
-    border-bottom: 1px solid rgba(55, 217, 242, 0.2);
-    padding-bottom: 6px;
+    padding-bottom: 8px;
   }
 
   .p3r-cat-btn-list {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 4px 16px;
   }
 
   .p3r-cat-tab-row {
-    padding: 6px 10px;
+    padding: 4px 0;
     font-size: 0.82rem;
     flex-shrink: 0;
   }
@@ -707,7 +613,7 @@
     min-height: auto;
     max-height: 380px;
     flex-shrink: 0;
-    padding: 14px 16px;
+    padding: 0;
   }
 
   .p3r-skill-rows-container {
@@ -731,18 +637,8 @@
 
 /* Small Mobile Screens (below 768px) */
 @media (max-width: 767px) {
-  .p3r-skill-cat-column {
-    padding: 10px 12px;
-  }
-
-  .p3r-cat-tab-row {
-    padding: 6px 8px;
-    font-size: 0.78rem;
-  }
-
   .p3r-skill-list-column {
     max-height: 340px;
-    padding: 12px 14px;
   }
 
   .p3r-skill-rows-container {
@@ -755,11 +651,11 @@
   }
 
   .p3r-skill-row-name {
-    font-size: 1.05rem;
+    font-size: 0.92rem;
   }
 
   .p3r-skill-row-desc {
-    font-size: 0.74rem;
+    font-size: 0.72rem;
   }
 
   .p3r-inspector-plate {
@@ -773,6 +669,5 @@
 
   .p3r-inspector-hero-icon {
     font-size: 0.75rem;
-    padding: 4px 8px;
   }
 }

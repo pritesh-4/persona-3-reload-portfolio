@@ -1,14 +1,16 @@
 /* ================================================================
-   PERSONA 3 RELOAD — SYSTEM SCREEN (CONFIGURATION CONSOLE)
+   MIDNIGHT EDITORIAL ARCHIVE — PAGE 008 · SYSTEM
+   Minimal configuration console. Clear rows, grouped settings,
+   functional-first presentation.
    ================================================================ */
 
 .p3r-system-screen {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 1360px;
+  max-width: 1160px;
   margin: 0 auto;
-  animation: p3r-system-enter 350ms var(--ease-out-expo);
+  animation: p3r-system-enter 400ms var(--ease-out-expo);
 }
 
 @keyframes p3r-system-enter {
@@ -27,52 +29,50 @@
    ================================================================ */
 .p3r-system-console-grid {
   display: grid;
-  grid-template-columns: 1fr 400px;
-  gap: 24px;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 48px;
   align-items: start;
 }
 
 /* ----------------------------------------------------------------
-   LEFT: FLAT CONFIGURATION ROWS
+   LEFT: flat configuration rows
    ---------------------------------------------------------------- */
 .p3r-config-column {
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 34px;
 }
 
 .p3r-config-group {
-  background: linear-gradient(
-    180deg,
-    rgba(3, 11, 25, 0.94) 0%,
-    rgba(9, 38, 75, 0.9) 100%
-  );
-  border: 1px solid rgba(55, 217, 242, 0.25);
-  border-top: 4px solid var(--abyss-reload);
-  clip-path: var(--p3r-cut-plate);
-  padding: 22px 26px;
+  background: none;
+  border: none;
+  border-top: 1px solid var(--ed-divider);
+  clip-path: none;
+  padding: 18px 0 6px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  box-shadow: none;
 }
 
 .p3r-config-group-title {
-  font-family: var(--font-ui);
-  font-size: 1.15rem;
-  letter-spacing: 0.14em;
-  color: var(--abyss-white);
-  border-bottom: 1px solid rgba(55, 217, 242, 0.25);
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--ed-text);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--ed-divider);
   padding-bottom: 10px;
-  margin: 0 0 8px 0;
+  margin: 0 0 4px 0;
 }
 
 .p3r-config-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 0;
-  border-bottom: 1px solid rgba(55, 217, 242, 0.14);
-  gap: 16px;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(222, 232, 242, 0.08);
+  gap: 20px;
 }
 
 .p3r-config-row:last-child {
@@ -82,21 +82,24 @@
 .p3r-config-meta {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
   flex: 1;
+  min-width: 0;
 }
 
 .p3r-config-name {
-  font-family: var(--font-ui);
-  font-size: 0.98rem;
-  letter-spacing: 0.1em;
-  color: var(--abyss-white);
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--ed-text);
 }
 
 .p3r-config-desc {
   font-family: var(--font-body);
-  font-size: 0.8rem;
-  color: var(--abyss-mist);
+  font-size: 0.76rem;
+  line-height: 1.5;
+  color: var(--ed-text-2);
 }
 
 .p3r-config-control {
@@ -105,66 +108,70 @@
   flex-shrink: 0;
 }
 
-/* Audio Status Pill */
+/* Audio provenance pill — semantic, restrained */
 .p3r-audio-status-pill {
-  font-family: var(--font-ui);
-  font-size: 0.74rem;
-  letter-spacing: 0.12em;
-  padding: 4px 10px;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  padding: 3px 10px;
   border-radius: 2px;
+  text-transform: uppercase;
 }
 
 .p3r-audio-status-pill.verified {
-  background: rgba(5, 150, 105, 0.25);
-  border: 1px solid #10b981;
-  color: #34d399;
+  background: rgba(143, 205, 168, 0.1);
+  border: 1px solid rgba(143, 205, 168, 0.4);
+  color: #8FCDA8;
 }
 
 .p3r-audio-status-pill.fallback {
-  background: rgba(217, 119, 6, 0.25);
-  border: 1px solid #f59e0b;
-  color: #fbbf24;
+  background: rgba(217, 190, 138, 0.1);
+  border: 1px solid rgba(217, 190, 138, 0.4);
+  color: #D9BE8A;
 }
 
-/* Flat Switch Button */
+/* Flat switch */
 .p3r-switch-btn {
-  padding: 6px 18px;
-  font-family: var(--font-ui);
-  font-size: 0.9rem;
-  letter-spacing: 0.14em;
+  padding: 6px 20px;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
   cursor: pointer;
-  transition: 
+  transition:
     background-color 160ms ease,
     border-color 160ms ease,
-    color 160ms ease,
-    box-shadow 160ms ease;
-  transform: skewX(-10deg);
-  border: 1px solid transparent;
+    color 160ms ease;
+  transform: none;
+  border: 1px solid var(--ed-divider-strong);
+  background: none;
+  color: var(--ed-text-2);
 }
 
 .p3r-switch-btn > * {
-  transform: skewX(10deg);
+  transform: none;
 }
 
 .p3r-switch-btn.on {
-  background: var(--abyss-reload);
-  border-color: var(--abyss-cyan);
-  color: var(--abyss-white);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  background: rgba(103, 188, 204, 0.1);
+  border-color: var(--ed-cyan);
+  color: var(--ed-cyan);
+  box-shadow: none;
 }
 
 .p3r-switch-btn.off {
-  background: rgba(9, 38, 75, 0.7);
-  border-color: rgba(55, 217, 242, 0.3);
-  color: var(--abyss-mist);
+  background: none;
+  border-color: var(--ed-divider-strong);
+  color: var(--ed-text-2);
 }
 
 .p3r-switch-btn:hover {
-  border-color: var(--abyss-cyan);
-  color: #fff;
+  border-color: var(--ed-cyan);
+  color: var(--ed-text);
 }
 
-/* Range Slider Control */
+/* Range slider */
 .p3r-slider-box {
   display: flex;
   align-items: center;
@@ -175,9 +182,9 @@
   -webkit-appearance: none;
   appearance: none;
   width: 140px;
-  height: 6px;
-  background: rgba(9, 38, 75, 0.8);
-  border: 1px solid rgba(55, 217, 242, 0.3);
+  height: 3px;
+  background: rgba(222, 232, 242, 0.14);
+  border: none;
   outline: none;
   cursor: pointer;
 }
@@ -185,171 +192,193 @@
 .p3r-flat-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 16px;
-  height: 16px;
-  background: var(--abyss-cyan);
-  border: 2px solid var(--abyss-midnight);
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--ed-cyan);
+  border: none;
   cursor: pointer;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  box-shadow: none;
 }
 
 .p3r-flat-slider::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
-  background: var(--abyss-cyan);
-  border: 2px solid var(--abyss-midnight);
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--ed-cyan);
+  border: none;
   cursor: pointer;
 }
 
+.p3r-flat-slider:focus-visible {
+  outline: 2px solid var(--ed-cyan);
+  outline-offset: 3px;
+}
+
 .p3r-slider-percent {
-  font-family: var(--font-ui);
-  font-size: 0.9rem;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
-  letter-spacing: 0.08em;
-  color: var(--abyss-cyan);
+  letter-spacing: 0.06em;
+  color: var(--ed-text);
   min-width: 44px;
   text-align: right;
 }
 
-/* Reset Button */
+/* Reset — deliberate danger action, no skew */
 .p3r-reset-action-box {
   padding-top: 4px;
 }
 
 .p3r-reset-button {
   padding: 10px 22px;
-  background: rgba(9, 38, 75, 0.7);
-  border: 1px solid var(--abyss-pink);
-  color: var(--abyss-white);
-  font-family: var(--font-ui);
-  font-size: 0.95rem;
+  background: none;
+  border: 1px solid rgba(228, 71, 99, 0.5);
+  color: var(--ed-red);
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  font-weight: 700;
   letter-spacing: 0.12em;
-  transform: skewX(-12deg);
+  transform: none;
   cursor: pointer;
-  transition: 
+  transition:
     background-color 180ms ease,
     border-color 180ms ease,
     color 180ms ease,
     transform 180ms ease;
+  text-transform: uppercase;
 }
 
 .p3r-reset-button > * {
-  transform: skewX(12deg);
+  transform: none;
 }
 
 .p3r-reset-button:hover {
-  background: var(--abyss-pink);
-  border-color: #ff6b9d;
+  background: rgba(228, 71, 99, 0.1);
+  border-color: var(--ed-red);
   color: #fff;
-  transform: skewX(-12deg) scale(1.02);
+  transform: none;
 }
 
 .p3r-reset-button.confirming-danger {
-  background: var(--abyss-pink);
-  border-color: #ff6b9d;
+  background: var(--ed-red);
+  border-color: var(--ed-red);
   color: #ffffff;
-  transform: skewX(-12deg) scale(1.02);
+  transform: none;
 }
 
 /* ----------------------------------------------------------------
-   RIGHT: REFERENCE & ARCHITECTURE NOTES
+   RIGHT: reference & architecture notes
    ---------------------------------------------------------------- */
 .p3r-system-reference-column {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 28px;
 }
 
 .p3r-ref-card {
-  background: linear-gradient(
-    180deg,
-    rgba(3, 11, 25, 0.94) 0%,
-    rgba(9, 38, 75, 0.9) 100%
-  );
-  border: 1px solid rgba(55, 217, 242, 0.22);
-  border-top: 4px solid var(--abyss-cyan);
-  padding: 20px 24px;
+  background: rgba(17, 26, 38, 0.5);
+  border: 1px solid var(--ed-divider);
+  border-top: 1px solid var(--ed-divider);
+  padding: 18px 22px 20px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  gap: 14px;
+  box-shadow: none;
 }
 
 .p3r-ref-card-title {
-  font-family: var(--font-ui);
-  font-size: 1.05rem;
-  letter-spacing: 0.14em;
-  color: var(--abyss-white);
+  font-family: var(--font-body);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--ed-text-2);
   margin: 0;
-  border-bottom: 1px solid rgba(55, 217, 242, 0.2);
-  padding-bottom: 8px;
+  border-bottom: 1px solid var(--ed-divider);
+  padding-bottom: 10px;
+  text-transform: uppercase;
 }
 
 .p3r-shortcuts-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0;
 }
 
 .p3r-shortcut-row {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 12px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(222, 232, 242, 0.07);
+}
+
+.p3r-shortcut-row:last-child {
+  border-bottom: none;
 }
 
 .p3r-key-badge {
-  background: var(--abyss-deep);
-  border: 1px solid rgba(55, 217, 242, 0.4);
-  color: var(--abyss-cyan);
-  font-family: var(--font-ui);
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  padding: 4px 8px;
+  background: rgba(222, 232, 242, 0.06);
+  border: 1px solid var(--ed-divider);
+  color: var(--ed-text);
+  font-family: var(--font-body);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 3px 8px;
   border-radius: 2px;
   min-width: 58px;
   text-align: center;
+  flex-shrink: 0;
 }
 
 .p3r-key-desc {
   font-family: var(--font-body);
-  font-size: 0.8rem;
-  color: var(--abyss-ice);
+  font-size: 0.76rem;
+  line-height: 1.5;
+  color: var(--ed-text-2);
 }
 
 .p3r-arch-specs-list {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .p3r-spec-item {
   display: flex;
   justify-content: space-between;
+  gap: 12px;
   font-family: var(--font-body);
-  font-size: 0.82rem;
-  border-bottom: 1px solid rgba(55, 217, 242, 0.1);
-  padding-bottom: 4px;
+  font-size: 0.76rem;
+  border-bottom: 1px solid rgba(222, 232, 242, 0.07);
+  padding-bottom: 6px;
 }
 
 .p3r-spec-name {
-  color: var(--abyss-cyan);
-  font-family: var(--font-ui);
+  color: var(--ed-text-2);
+  font-weight: 600;
   letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.62rem;
+  padding-top: 2px;
 }
 
 .p3r-spec-val {
-  color: var(--abyss-white);
+  color: var(--ed-text);
   font-weight: 600;
+  text-align: right;
 }
 
 .p3r-legal-statement {
   font-family: var(--font-body);
-  font-size: 0.74rem;
-  line-height: 1.5;
-  color: var(--abyss-mist);
+  font-size: 0.7rem;
+  line-height: 1.6;
+  color: var(--ed-text-2);
   margin: 4px 0 0 0;
-  padding-top: 8px;
-  border-top: 1px solid rgba(55, 217, 242, 0.15);
+  padding-top: 10px;
+  border-top: 1px solid var(--ed-divider);
 }
 
 /* ================================================================
@@ -358,5 +387,18 @@
 @media (max-width: 960px) {
   .p3r-system-console-grid {
     grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .p3r-config-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .p3r-config-control {
+    width: 100%;
+    justify-content: flex-start;
   }
 }

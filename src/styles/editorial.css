@@ -1,0 +1,164 @@
+/* ================================================================
+   MIDNIGHT EDITORIAL ARCHIVE — SCOPED INTERNAL-PAGE DESIGN SYSTEM
+   ----------------------------------------------------------------
+   Loaded only alongside InternalPageLayout. All tokens are declared
+   ON .p3r-internal-page so boot / title / menu screens keep the
+   original saturated Persona palette untouched.
+   ================================================================ */
+
+.p3r-internal-page {
+  /* ---- Editorial tokens (strict contrast and matte surfaces) ---- */
+  --ed-bg: #080D15;
+  --ed-surface: #101923;
+  --ed-elevated: #162230;
+  --ed-text: #EEF1F5;
+  --ed-text-body: #BAC5D1;
+  --ed-text-2: #8997A7;
+  --ed-blue-muted: #547FA5;
+  --ed-cyan: #67BCCC;
+  --ed-red: #E44763;
+  --ed-divider: rgba(222, 232, 242, 0.10);
+  --ed-divider-strong: rgba(222, 232, 242, 0.18);
+  --ed-max: 1240px;
+
+  /* ---- Calm re-mapping of inherited P3R tokens (internal pages only) ---- */
+  --abyss-midnight: #080D15;
+  --abyss-navy: #101923;
+  --abyss-deep: #162230;
+  --abyss-reload: #1E3A5F;
+  --abyss-cyan: #67BCCC;
+  --abyss-ice: #EEF1F5;
+  --abyss-mist: #8997A7;
+  --abyss-pink: #E44763;
+  --abyss-white: #EEF1F5;
+
+  --p3r-ink: #080D15;
+  --p3r-deep: #0B1220;
+  --p3r-navy: #101923;
+  --p3r-slate: #162230;
+  --p3r-blue: #1E3A5F;
+  --p3r-royal: #1E3A5F;
+  --p3r-cyan: #67BCCC;
+  --p3r-ice: #EEF1F5;
+  --p3r-mist: #8997A7;
+  --p3r-white: #EEF1F5;
+  --p3r-red: #E44763;
+
+  --p3r-panel: #101923;
+  --p3r-panel-light: #162230;
+  --p3r-panel-border: rgba(222, 232, 242, 0.10);
+  --p3r-glass: rgba(222, 232, 242, 0.02);
+
+  background-color: var(--ed-bg);
+  color: var(--ed-text);
+}
+
+/* ----------------------------------------------------------------
+   SCOPED BACKDROP CONTROL: Quiet, non-competing atmosphere
+   ---------------------------------------------------------------- */
+.p3r-internal-page .p3r-character-backdrop {
+  background-color: var(--ed-bg);
+  z-index: 0;
+}
+
+/* Wallpaper opacity reduced to 0.08–0.10 for subtle atmospheric whisper */
+.p3r-internal-page .p3r-backdrop-wallpaper {
+  opacity: 0.08 !important;
+  filter: brightness(0.4) contrast(1.1) grayscale(0.2) !important;
+}
+
+/* Eliminate distracting cyan microgrid lines across internal reading surfaces */
+.p3r-internal-page .p3r-backdrop-grid-overlay {
+  display: none !important;
+}
+
+.p3r-internal-page .p3r-backdrop-tint-overlay {
+  background: #080D15;
+  opacity: 0.85;
+}
+
+.p3r-internal-page .p3r-backdrop-gradient {
+  background: linear-gradient(
+    90deg,
+    #080D15 0%,
+    #080D15 50%,
+    rgba(8, 13, 21, 0.9) 75%,
+    rgba(8, 13, 21, 0.75) 100%
+  ) !important;
+}
+
+/* On internal pages, hide the fixed background watermark
+   so it NEVER floats behind scrolling text or overlaps content.
+   Characters are composed intentionally within the page layout or dedicated visual columns! */
+.p3r-internal-page .p3r-backdrop-char-stage {
+  display: none !important;
+}
+
+/* ----------------------------------------------------------------
+   SHARED EDITORIAL PRIMITIVES
+   ---------------------------------------------------------------- */
+
+/* De-skew every decorative internal plate / pill / button; skew stays
+   on the arc menu and title screen only. */
+.p3r-internal-page .p3r-back-btn,
+.p3r-internal-page .p3r-nav-pill,
+.p3r-internal-page .p3r-hero-status-pill,
+.p3r-internal-page .p3r-resume-dispatch-btn,
+.p3r-internal-page .p3r-exp-portal-btn,
+.p3r-internal-page .p3r-disclosure-btn,
+.p3r-internal-page .p3r-quest-action-btn,
+.p3r-internal-page .p3r-quest-tab-btn,
+.p3r-internal-page .p3r-send-email-cta-btn,
+.p3r-internal-page .p3r-dossier-action-btn,
+.p3r-internal-page .p3r-inspector-doc-btn,
+.p3r-internal-page .p3r-explore-project-btn,
+.p3r-internal-page .p3r-tile-action-pill,
+.p3r-internal-page .p3r-edu-status-badge,
+.p3r-internal-page .p3r-stats-tab-btn,
+.p3r-internal-page .p3r-reset-button {
+  transform: none !important;
+}
+
+.p3r-internal-page .p3r-back-btn > *,
+.p3r-internal-page .p3r-nav-pill > *,
+.p3r-internal-page .p3r-resume-dispatch-btn > *,
+.p3r-internal-page .p3r-exp-portal-btn > *,
+.p3r-internal-page .p3r-quest-action-btn > *,
+.p3r-internal-page .p3r-quest-tab-btn > *,
+.p3r-internal-page .p3r-send-email-cta-btn > *,
+.p3r-internal-page .p3r-dossier-action-btn > *,
+.p3r-internal-page .p3r-inspector-doc-btn > *,
+.p3r-internal-page .p3r-explore-project-btn > *,
+.p3r-internal-page .p3r-tile-action-pill > *,
+.p3r-internal-page .p3r-stats-tab-btn > * {
+  transform: none !important;
+}
+
+/* Editorial section numbers (01, 02, etc.) */
+.p3r-sec-num,
+.p3r-journey-sec-num,
+.p3r-chap-num {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--ed-red);
+}
+
+/* Subtle editorial scrollbar */
+.p3r-internal-stage::-webkit-scrollbar {
+  width: 6px;
+}
+
+.p3r-internal-stage::-webkit-scrollbar-track {
+  background: var(--ed-bg);
+}
+
+.p3r-internal-stage::-webkit-scrollbar-thumb {
+  background: var(--ed-elevated);
+  border: 1px solid var(--ed-divider);
+}
+
+.p3r-internal-stage::-webkit-scrollbar-thumb:hover {
+  background: var(--ed-blue-muted);
+}

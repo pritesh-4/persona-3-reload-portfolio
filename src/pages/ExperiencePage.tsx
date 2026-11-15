@@ -111,37 +111,54 @@ export const ExperiencePage: FC<ExperiencePageProps> = ({
             1. COMPACT EDITORIAL OPENING HERO
             ================================================================ */}
         <header className="p3r-exp-hero-compact">
-          <div className="p3r-exp-hero-top">
-            <span className="p3r-exp-hero-tag">FIELD RECORD / 004</span>
-            <div className="p3r-exp-hero-rule" />
+          <div className="p3r-exp-hero-main-col">
+            <div className="p3r-exp-hero-top">
+              <span className="p3r-exp-hero-tag">FIELD RECORD / 004</span>
+              <div className="p3r-exp-hero-rule" />
+            </div>
+
+            <div className="p3r-exp-hero-title-row">
+              <h1 className="p3r-exp-hero-title">EXPERIENCE</h1>
+              <span className="p3r-exp-hero-sub">
+                WORK • COMMUNITY • RESEARCH • ACHIEVEMENTS
+              </span>
+            </div>
+
+            <p className="p3r-exp-hero-summary">
+              A record of the roles, communities and pursuits shaping my journey beyond the code.
+            </p>
+
+            {/* Section Jump Index (Non-destructive smooth anchor navigation) */}
+            <nav className="p3r-exp-section-index" aria-label="Experience Archive Navigation">
+              {SECTION_NAV.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  className={`p3r-exp-nav-anchor ${activeSection === item.id ? 'active' : ''}`}
+                  onClick={() => handleSectionJump(item.id)}
+                  onMouseEnter={() => playSfx('hover')}
+                >
+                  <span className="p3r-exp-nav-num">{item.code}</span>
+                  <span className="p3r-exp-nav-label">{item.label}</span>
+                </button>
+              ))}
+            </nav>
           </div>
 
-          <div className="p3r-exp-hero-title-row">
-            <h1 className="p3r-exp-hero-title">EXPERIENCE</h1>
-            <span className="p3r-exp-hero-sub">
-              WORK • COMMUNITY • RESEARCH • ACHIEVEMENTS
-            </span>
+          {/* Dedicated Right Character Card */}
+          <div className="p3r-exp-portrait-card" aria-label="Field Operations Personnel Card">
+            <div className="p3r-exp-portrait-art-wrap">
+              <img
+                src="/assets/persona3/characters/mitsuru-kirijo.webp"
+                alt="Mitsuru Kirijo — Field Operations"
+                className="p3r-exp-portrait-img"
+              />
+            </div>
+            <div className="p3r-exp-portrait-footer">
+              <span className="p3r-exp-portrait-tag">FIELD OPS // ARCHIVE</span>
+              <span className="p3r-exp-portrait-arcana">EMPRESS [003]</span>
+            </div>
           </div>
-
-          <p className="p3r-exp-hero-summary">
-            A record of the roles, communities and pursuits shaping my journey beyond the code.
-          </p>
-
-          {/* Section Jump Index (Non-destructive smooth anchor navigation) */}
-          <nav className="p3r-exp-section-index" aria-label="Experience Archive Navigation">
-            {SECTION_NAV.map((item) => (
-              <button
-                key={item.id}
-                type="button"
-                className={`p3r-exp-nav-anchor ${activeSection === item.id ? 'active' : ''}`}
-                onClick={() => handleSectionJump(item.id)}
-                onMouseEnter={() => playSfx('hover')}
-              >
-                <span className="p3r-exp-nav-num">{item.code}</span>
-                <span className="p3r-exp-nav-label">{item.label}</span>
-              </button>
-            ))}
-          </nav>
         </header>
 
         {/* ================================================================

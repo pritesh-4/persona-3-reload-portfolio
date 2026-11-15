@@ -12,7 +12,7 @@ interface SocialLinkPageProps {
 // Clean, lightweight inline SVG brand marks with correct proportions
 const PlatformLogos = {
   github: (
-    <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -21,17 +21,17 @@ const PlatformLogos = {
     </svg>
   ),
   linkedin: (
-    <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
       <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 0 0 1.64-1.64 1.64 1.64 0 1 0-1.64 1.64m1.39 9.74v-8.37H5.07v8.37h2.78z" />
     </svg>
   ),
   x: (
-    <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
     </svg>
   ),
   email: (
-    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <rect width="20" height="16" x="2" y="4" rx="2" />
       <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
     </svg>
@@ -40,6 +40,9 @@ const PlatformLogos = {
 
 const CONTACT_EMAIL = PRIMARY_CONTACT.email;
 const MAILTO_URL = PRIMARY_CONTACT.mailtoUrl;
+
+// External profiles (excluding direct email to prevent repetitive cards)
+const EXTERNAL_PROFILES = VERIFIED_CHANNELS.filter((c) => c.id !== 'email');
 
 export const SocialLinkPage: FC<SocialLinkPageProps> = ({ onNavigate, onBackToMenu }) => {
   const { playSfx } = useAudioContext();
@@ -50,7 +53,7 @@ export const SocialLinkPage: FC<SocialLinkPageProps> = ({ onNavigate, onBackToMe
     navigator.clipboard
       .writeText(CONTACT_EMAIL)
       .then(() => {
-        setCopyFeedback(`COPIED TO CLIPBOARD: ${CONTACT_EMAIL}`);
+        setCopyFeedback(`COPIED: ${CONTACT_EMAIL}`);
         setTimeout(() => setCopyFeedback(null), 3500);
       })
       .catch(() => {
@@ -68,136 +71,129 @@ export const SocialLinkPage: FC<SocialLinkPageProps> = ({ onNavigate, onBackToMe
       currentRoute="/contact"
       onNavigate={onNavigate}
       onBackToMenu={onBackToMenu}
-      customHint="CONNECT VIA GITHUB, LINKEDIN, X OR DIRECT EMAIL"
+      customHint="DIRECT EMAIL OR VERIFIED PROFILES // YUKARI TAKEBA ARCHIVE"
     >
       <div className="p3r-social-screen">
-        {/* ================================================================
-            1. EDITORIAL HERO SECTION
-            ================================================================ */}
-        <header className="p3r-social-hero-plate">
-          <div className="p3r-social-hero-content">
+        <div className="p3r-social-main-column">
+          {/* ================================================================
+              1. EDITORIAL HERO SECTION
+              ================================================================ */}
+          <header className="p3r-social-hero-plate">
             <div className="p3r-social-hero-meta">
+              <span className="p3r-sec-num">007</span>
               <span className="p3r-social-hero-tag">COMMUNICATION TERMINAL // ACTIVE</span>
-              <span className="p3r-social-verified-badge">VERIFIED CHANNELS</span>
             </div>
 
             <h1 className="p3r-social-hero-heading">LET&apos;S CONNECT.</h1>
 
             <p className="p3r-social-hero-statement">
-              Have an interesting idea, a project or an opportunity? Find me through these channels.
+              Have an interesting idea, a project, or an engineering opportunity? Reach out directly via email or explore my verified profiles.
             </p>
-          </div>
+          </header>
 
-          <div className="p3r-social-hero-badge-col" aria-hidden="true">
-            <div className="p3r-hero-badge-box">
-              <span className="p3r-badge-sub">DIRECT FREQUENCY</span>
-              <span className="p3r-badge-bold">OPEN CHANNELS</span>
+          {/* ================================================================
+              2. DOMINANT EMAIL ACTION (Single Primary Channel)
+              ================================================================ */}
+          <section className="p3r-email-dominant-card" aria-labelledby="email-dominant-heading">
+            <div className="p3r-email-card-header">
+              <span className="p3r-email-card-tag" id="email-dominant-heading">
+                PRIMARY DIRECT CHANNEL // 1-ON-1
+              </span>
+              <span className="p3r-email-card-status">
+                <span className="p3r-status-dot active" aria-hidden="true" />
+                <span>ACTIVE TRANSMISSION</span>
+              </span>
             </div>
-          </div>
-        </header>
 
-        {/* ================================================================
-            2. FOUR VERIFIED SOCIAL CHANNEL TILES (2-Column Grid on Desktop)
-            ================================================================ */}
-        <section className="p3r-social-channels-grid" aria-label="Verified Communication Channels">
-          {VERIFIED_CHANNELS.map((channel) => {
-            const isExternal = channel.id !== 'email';
-            const isFeatured = channel.id === 'github';
+            <div className="p3r-email-address-row">
+              <span className="p3r-email-address-icon" aria-hidden="true">
+                {PlatformLogos.email}
+              </span>
+              <span className="p3r-email-address-text">{CONTACT_EMAIL}</span>
+            </div>
 
-            return (
+            <div className="p3r-email-actions-bar">
               <a
-                key={channel.id}
-                href={channel.url}
-                target={isExternal ? '_blank' : undefined}
-                rel={isExternal ? 'noopener noreferrer' : undefined}
-                className={`p3r-channel-tile ${isFeatured ? 'featured' : ''} tile-${channel.id}`}
+                href={MAILTO_URL}
+                className="p3r-email-send-button"
                 onMouseEnter={() => playSfx('hover')}
                 onClick={() => playSfx('confirm')}
-                aria-label={`${channel.name}: ${channel.handle}`}
               >
-                {/* Tile Header: Logo + Badge */}
-                <div className="p3r-tile-head">
-                  <div className="p3r-tile-logo-box" style={{ color: channel.brandColor }}>
-                    {PlatformLogos[channel.id]}
-                  </div>
-                  <span className="p3r-tile-badge">{channel.badge}</span>
-                </div>
-
-                {/* Tile Body: Name & Handle */}
-                <div className="p3r-tile-body">
-                  <div className="p3r-tile-title-row">
-                    <h2 className="p3r-tile-name">{channel.name}</h2>
-                    <span className="p3r-tile-arrow">↗</span>
-                  </div>
-
-                  <span className="p3r-tile-handle">{channel.handle}</span>
-                  <p className="p3r-tile-purpose">{channel.purpose}</p>
-                </div>
-
-                {/* Tile Footer Action Button */}
-                <div className="p3r-tile-foot">
-                  <span className="p3r-tile-action-pill">
-                    <span>{channel.actionLabel}</span>
-                    <span className="p3r-pill-arrow">▸</span>
-                  </span>
-                </div>
+                <span>SEND DIRECT EMAIL</span>
+                <span className="p3r-button-arrow">↗</span>
               </a>
-            );
-          })}
-        </section>
 
-        {/* ================================================================
-            3. PROMINENT DEDICATED EMAIL CONTACT SECTION
-            ================================================================ */}
-        <section className="p3r-email-contact-plate" aria-labelledby="email-contact-heading">
-          <div className="p3r-email-text-col">
-            <div className="p3r-email-tag-row">
-              <span className="p3r-email-tag">DIRECT TRANSMISSION // 1-ON-1</span>
-              <span className="p3r-email-status-pill">AVAILABLE FOR INQUIRIES</span>
+              <button
+                type="button"
+                className="p3r-email-copy-button"
+                onClick={handleCopyEmail}
+                onMouseEnter={() => playSfx('hover')}
+                aria-label="Copy email address to clipboard"
+              >
+                <span>COPY EMAIL</span>
+                <span className="p3r-button-arrow">⎘</span>
+              </button>
             </div>
-
-            <h2 id="email-contact-heading" className="p3r-email-heading">
-              HAVE SOMETHING IN MIND?
-            </h2>
-
-            <p className="p3r-email-subcopy">
-              Open to interesting projects, collaborations and conversations.
-            </p>
-
-            <div className="p3r-email-address-plate">
-              <span className="p3r-email-plate-icon">{PlatformLogos.email}</span>
-              <span className="p3r-email-plate-addr">{CONTACT_EMAIL}</span>
-            </div>
-          </div>
-
-          <div className="p3r-email-actions-col">
-            <a
-              href={MAILTO_URL}
-              className="p3r-send-email-cta-btn"
-              onMouseEnter={() => playSfx('hover')}
-              onClick={() => playSfx('confirm')}
-            >
-              <span className="p3r-cta-icon">{PlatformLogos.email}</span>
-              <span>SEND ME AN EMAIL</span>
-              <span className="p3r-cta-arrow">✉</span>
-            </a>
-
-            <button
-              type="button"
-              className="p3r-copy-email-sub-btn"
-              onClick={handleCopyEmail}
-              onMouseEnter={() => playSfx('hover')}
-            >
-              <span>COPY EMAIL ADDRESS</span>
-            </button>
 
             {copyFeedback && (
-              <div className="p3r-copy-toast" role="status">
+              <div className="p3r-social-copy-toast" role="status" aria-live="polite">
                 <span>◈ {copyFeedback}</span>
               </div>
             )}
+          </section>
+
+          {/* ================================================================
+              3. MINIMAL SECONDARY PROFILES (GitHub, LinkedIn, X)
+              ================================================================ */}
+          <section className="p3r-social-minimal-channels" aria-label="Verified Profiles">
+            <div className="p3r-channels-header">
+              <span className="p3r-channels-section-label">VERIFIED PROFILES &amp; ARCHIVES</span>
+            </div>
+
+            <div className="p3r-minimal-links-list">
+              {EXTERNAL_PROFILES.map((channel) => (
+                <a
+                  key={channel.id}
+                  href={channel.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`p3r-minimal-channel-link channel-${channel.id}`}
+                  onMouseEnter={() => playSfx('hover')}
+                  onClick={() => playSfx('confirm')}
+                  aria-label={`${channel.name}: ${channel.handle}`}
+                >
+                  <div className="p3r-channel-link-left">
+                    <span className="p3r-channel-link-icon">{PlatformLogos[channel.id]}</span>
+                    <div className="p3r-channel-link-title-block">
+                      <div className="p3r-channel-link-name-row">
+                        <span className="p3r-channel-link-name">{channel.name}</span>
+                        <span className="p3r-channel-link-handle">{channel.handle}</span>
+                      </div>
+                      <span className="p3r-channel-link-purpose">{channel.purpose}</span>
+                    </div>
+                  </div>
+
+                  <span className="p3r-channel-link-arrow">↗</span>
+                </a>
+              ))}
+            </div>
+          </section>
+        </div>
+
+        {/* Dedicated Right Character Card */}
+        <div className="p3r-social-portrait-card" aria-label="Communication Officer Card">
+          <div className="p3r-social-portrait-art-wrap">
+            <img
+              src="/assets/persona3/characters/yukari-takeba.webp"
+              alt="Yukari Takeba — Communication Link"
+              className="p3r-social-portrait-img"
+            />
           </div>
-        </section>
+          <div className="p3r-social-portrait-footer">
+            <span className="p3r-social-portrait-tag">COMMUNICATION // LINK</span>
+            <span className="p3r-social-portrait-arcana">LOVERS [006]</span>
+          </div>
+        </div>
       </div>
     </InternalPageLayout>
   );
