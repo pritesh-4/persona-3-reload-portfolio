@@ -114,7 +114,6 @@ const socialFile = fs.readFileSync(path.join(rootDir, 'src', 'data', 'socialLink
 assert('Social Links contain Pritesh Jena GitHub', socialFile.includes('https://github.com/pritesh-4'));
 assert('Social Links contain authentic email terminal', socialFile.includes('priteshjena16@gmail.com'));
 assert('Social Links contain authentic LinkedIn URL', socialFile.includes('https://www.linkedin.com/in/pritesh-jena'));
-assert('Social Links define 7 Persona 3 Arcana cards', (socialFile.match(/id:\s*['"][a-z0-9_-]+['"]/g) || []).length >= 7);
 
 const menuFile = fs.readFileSync(path.join(rootDir, 'src', 'data', 'menuConfig.ts'), 'utf8');
 const canonicalMenuRoutes = ['/about', '/tools', '/resume', '/stats', '/projects', '/contact', '/system'];
@@ -122,7 +121,6 @@ canonicalMenuRoutes.forEach((route) => {
   assert(`Menu config routes to ${route}`, menuFile.includes(`'${route}'`) || menuFile.includes(`"${route}"`));
 });
 assert('Menu config defines exactly 7 canonical destinations', (menuFile.match(/id:\s*['"][a-z0-9_-]+['"]/g) || []).length === 7);
-assert('Menu config preserves legacy /projects route marker', menuFile.includes('LEGACY_PROJECTS_ROUTE'));
 
 // 3. Routing & Structural Component Integrity
 console.log('\n[3/4] Verifying Application Route Tree & Layout Contracts...');

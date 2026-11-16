@@ -19,7 +19,7 @@ export const ArcNavigation: FC<ArcNavigationProps> = ({
   onHover,
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [dimensions, setDimensions] = useState({ width: 1000, height: 240 });
+  const [dimensions, setDimensions] = useState({ width: 420, height: 700 });
   const [windowWidth, setWindowWidth] = useState(() =>
     typeof window !== 'undefined' ? window.innerWidth : 1024
   );
@@ -41,17 +41,16 @@ export const ArcNavigation: FC<ArcNavigationProps> = ({
 
     const observer = new ResizeObserver((entries) => {
       for (const entry of entries) {
-        const width = Math.round(entry.contentRect.width) || el.clientWidth || window.innerWidth || 1000;
-        const height = Math.round(entry.contentRect.height) || el.clientHeight || 240;
+        const width = Math.round(entry.contentRect.width) || el.clientWidth || 420;
+        const height = Math.round(entry.contentRect.height) || el.clientHeight || 700;
         setDimensions({ width, height });
       }
     });
 
     observer.observe(el);
 
-    // Initial measurement
-    const initialWidth = el.clientWidth || window.innerWidth || 1000;
-    const initialHeight = el.clientHeight || 240;
+    const initialWidth = el.clientWidth || 420;
+    const initialHeight = el.clientHeight || 700;
     setDimensions({ width: initialWidth, height: initialHeight });
 
     return () => observer.disconnect();
@@ -59,33 +58,31 @@ export const ArcNavigation: FC<ArcNavigationProps> = ({
 
   const total = items.length;
 
-  // Normalized responsive threshold: viewport >= 1024px is desktop full-arc; below is partial-arc
-  const isDesktop = windowWidth >= 1024;
+  // Normalized responsive threshold: viewport >= 900px is desktop full vertical arc; below is partial-arc
+  const isDesktop = windowWidth >= 900;
 
-  // Touch gesture handlers for mobile & tablet arc sweeping
+  // Touch gesture handlers for mobile & tablet vertical arc sweeping
   const handleTouchStart = (e: TouchEvent) => {
     touchStartXRef.current = e.touches[0].clientX;
     touchStartYRef.current = e.touches[0].clientY;
   };
 
   const handleTouchEnd = (e: TouchEvent) => {
-    if (touchStartXRef.current === null) return;
-    const touchEndX = e.changedTouches[0].clientX;
+    if (touchStartYRef.current === null) return;
     const touchEndY = e.changedTouches[0].clientY;
-    const deltaX = touchEndX - touchStartXRef.current;
-    const deltaY = touchEndY - (touchStartYRef.current ?? touchEndY);
+    const deltaY = touchEndY - touchStartYRef.current;
     touchStartXRef.current = null;
     touchStartYRef.current = null;
 
-    // Trigger only if horizontal swipe dominates and exceeds threshold
-    if (Math.abs(deltaX) > 28 && Math.abs(deltaX) > Math.abs(deltaY) * 1.2) {
-      if (deltaX < 0) {
-        // Swipe left -> advance to next item
+    // Trigger on vertical swipe
+    if (Math.abs(deltaY) > 28) {
+      if (deltaY < 0) {
+        // Swipe up -> advance to next item
         const next = (activeIndex + 1) % total;
         onSelectIndex(next);
         onHover();
       } else {
-        // Swipe right -> return to previous item
+        // Swipe down -> return to previous item
         const prev = (activeIndex - 1 + total) % total;
         onSelectIndex(prev);
         onHover();
@@ -94,32 +91,27 @@ export const ArcNavigation: FC<ArcNavigationProps> = ({
   };
 
   /**
-   * Quadratic Bézier curve math:
-   * Control points in 1000 x 240 coordinate space:
-   * P0 = (65, 190) — Left anchor
-   * P1 = (500, 28) — Apex control point
-   * P2 = (935, 190) — Right anchor
+   * Vertical Quadratic Bézier curve math:
+   * Control points in 420 x 700 coordinate space:
+   * P0 = (110, 40) — Upper-left anchor (PERSONA)
+   * P1 = (330, 350) — Right apex control point (gently bows rightward toward center)
+   * P2 = (110, 660) — Lower-left anchor (SYSTEM)
    */
   const computeBezierPoint = (t: number) => {
     const clampedT = Math.max(0, Math.min(1, t));
     const inv = 1 - clampedT;
 
     // Position on curve
-    const vx = inv * inv * 65 + 2 * inv * clampedT * 500 + clampedT * clampedT * 935;
-    const vy = inv * inv * 190 + 2 * inv * clampedT * 28 + clampedT * clampedT * 190;
+    const vx = inv * inv * 110 + 2 * inv * clampedT * 330 + clampedT * clampedT * 110;
+    const vy = inv * inv * 40 + 2 * inv * clampedT * 350 + clampedT * clampedT * 660;
 
-    // Tangent derivative for subtle authentic game tilt
-    const dx = 870;
-    const dy = 324 * (2 * clampedT - 1);
-    const rawAngle = (Math.atan2(dy, dx) * 180) / Math.PI;
-    const angle = Math.max(-8, Math.min(8, rawAngle * 0.42));
-
-    return { vx, vy, angle };
+    // All plates remain strictly horizontal (angle = 0)
+    return { vx, vy, angle: 0 };
   };
 
   const positions = useMemo(() => {
-    const scaleX = dimensions.width / 1000;
-    const scaleY = dimensions.height / 240;
+    const scaleX = dimensions.width / 420;
+    const scaleY = dimensions.height / 700;
 
     return items.map((_, i) => {
       let t: number;
@@ -132,8 +124,7 @@ export const ArcNavigation: FC<ArcNavigationProps> = ({
         let offset = (i - activeIndex + total) % total;
         if (offset > total / 2) offset -= total;
 
-        // Viewports < 900px (including 687x950 and phones): exactly 3 clear plates
-        const isNarrow = windowWidth < 900;
+        const isNarrow = windowWidth < 600;
         const maxOffset = isNarrow ? 1 : 2;
 
         if (Math.abs(offset) > maxOffset) {
@@ -144,26 +135,25 @@ export const ArcNavigation: FC<ArcNavigationProps> = ({
         } else if (offset === 0) {
           // Active item at the apex
           t = 0.5;
-          scale = windowWidth < 420 ? 1.08 : 1.12;
+          scale = 1.12;
           opacity = 1;
         } else if (Math.abs(offset) === 1) {
-          // Immediate left / right flank plates
-          // On small phones (< 420px), pull outward (t=0.12) to ensure clean separation
-          const flankT = windowWidth < 420 ? 0.12 : 0.16;
+          // Immediate flank plates
+          const flankT = 0.22;
           t = offset < 0 ? flankT : 1 - flankT;
-          scale = windowWidth < 420 ? 0.82 : 0.86;
-          opacity = 0.8;
+          scale = 0.88;
+          opacity = 0.85;
         } else {
-          // For wider tablets (>= 900px): secondary flank plates
-          t = offset < 0 ? 0.06 : 0.94;
-          scale = 0.72;
-          opacity = 0.45;
+          // Secondary flank plates
+          t = offset < 0 ? 0.08 : 0.92;
+          scale = 0.75;
+          opacity = 0.5;
         }
       } else {
-        // Desktop: full distribution across the arc for all 7 items
+        // Desktop: full distribution across the vertical curve for all 7 items
         t = total > 1 ? i / (total - 1) : 0.5;
         const isActive = i === activeIndex;
-        scale = isActive ? (windowWidth < 1280 ? 1.08 : 1.12) : 1;
+        scale = isActive ? 1.12 : 1;
         opacity = 1;
       }
 
@@ -182,33 +172,33 @@ export const ArcNavigation: FC<ArcNavigationProps> = ({
     });
   }, [items, activeIndex, total, isDesktop, windowWidth, dimensions.width, dimensions.height]);
 
-  // Active marker position on the SVG curve follows the active plate's position along the path
-  const markerVx = positions[activeIndex]?.rawVx ?? 500;
-  const markerVy = positions[activeIndex]?.rawVy ?? 109;
+  // Active marker position on the SVG curve follows the active plate
+  const markerVx = positions[activeIndex]?.rawVx ?? 110;
+  const markerVy = positions[activeIndex]?.rawVy ?? 40;
 
   return (
     <nav
       className="p3r-arc-nav-stage"
       ref={containerRef}
       role="navigation"
-      aria-label="Main Portfolio Arc Navigation"
+      aria-label="Main Portfolio Vertical Arc Navigation"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
       {/* SVG Arc Guide Track - Signature P3R dashed cyan track with glowing underlay */}
       <svg
         className="p3r-arc-svg-guide"
-        viewBox="0 0 1000 240"
+        viewBox="0 0 420 700"
         preserveAspectRatio="none"
         aria-hidden="true"
       >
         <path
           className="p3r-arc-track-glow"
-          d="M 65 190 Q 500 28 935 190"
+          d="M 110 40 Q 330 350 110 660"
         />
         <path
           className="p3r-arc-track"
-          d="M 65 190 Q 500 28 935 190"
+          d="M 110 40 Q 330 350 110 660"
         />
         {/* Travelling red active marker on the curve */}
         <circle
@@ -220,7 +210,7 @@ export const ArcNavigation: FC<ArcNavigationProps> = ({
       </svg>
 
       {/* Interactive Placed Items Layer */}
-      <div className="p3r-arc-items-layer" role="menubar">
+      <div className="p3r-arc-items-layer" role="menubar" aria-orientation="vertical">
         {items.map((item, index) => {
           const pos = positions[index];
           return (

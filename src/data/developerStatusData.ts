@@ -13,7 +13,6 @@ export interface DeveloperStatus {
     project: string;
     description: string;
     missionId: string;
-    repoUrl: string;
   };
   technicalFocus: string[];
   availability: {
@@ -36,8 +35,7 @@ export const DEVELOPER_STATUS: DeveloperStatus = {
   currentlyBuilding: {
     project: 'SALVUS (SIH 2026)',
     description: 'AI-assisted disaster intelligence & emergency responder coordination platform with 3-tier triage and authority safety gates.',
-    missionId: 'quest-01',
-    repoUrl: 'https://github.com/pritesh-4/SIH-2026---SALVUS'
+    missionId: 'quest-01'
   },
   technicalFocus: [
     'FastAPI & Asynchronous Python Services',

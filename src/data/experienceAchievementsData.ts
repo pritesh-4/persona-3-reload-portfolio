@@ -21,20 +21,15 @@ export interface PipelineStage {
 export interface ExperienceLink {
   label: string;
   url: string;
-  isExternal?: boolean;
-  type?: 'website' | 'linkedin' | 'github' | 'reference' | 'internal';
 }
 
 export interface ExperienceItem {
   id: string;
   category: 'INDUSTRY EXPERIENCE' | 'OPEN SOURCE' | 'LEADERSHIP & EVENTS' | 'SPONSORSHIP & PARTNERSHIPS' | 'SCIENTIFIC RESEARCH' | 'CITIZEN SCIENCE' | 'BEYOND ENGINEERING';
-  categoryCode: string;
   role: string;
   organization: string;
   subOrganization?: string;
   location?: string;
-  period?: string;
-  statusBadge: string;
   headline: string;
   summary: string;
   responsibilities: string[];
@@ -43,20 +38,16 @@ export interface ExperienceItem {
   privacySafeguards?: string[];
   skillsAndPractices?: string[];
   links: ExperienceLink[];
-  ratingBadge?: string;
   supportingQuote?: string;
 }
 
 export const HOARDSPACE_EXPERIENCE: ExperienceItem = {
   id: 'exp-hoardspace',
   category: 'INDUSTRY EXPERIENCE',
-  categoryCode: 'FIELD-01 // PRODUCTION AI',
   role: 'AI ENGINEER',
   organization: 'HoardSpace Bookings Pvt. Ltd.',
   subOrganization: 'OOH / DOOH Advertising Technology Marketplace',
   location: 'Rourkela, Odisha, India',
-  period: 'ACTIVE ENGAGEMENT',
-  statusBadge: 'USER-CONFIRMED ROLE',
   headline: 'CCTV-Based Computer Vision & Audience Footfall Analytics',
   summary:
     'Developing a computer-vision-based audience analytics system that transforms CCTV observations into structured footfall insights for outdoor advertising. The system analyses pedestrian movement, captures time-based traffic patterns and generates audience reports to help hoarding buyers better understand location performance and potential campaign exposure.',
@@ -122,14 +113,10 @@ export const HOARDSPACE_EXPERIENCE: ExperienceItem = {
     {
       label: 'VISIT HOARDSPACE.IN',
       url: 'https://www.hoardspace.in/',
-      isExternal: true,
-      type: 'website',
     },
     {
       label: 'COMPANY LINKEDIN',
       url: 'https://www.linkedin.com/company/hoardspace-bookings-private-limited/',
-      isExternal: true,
-      type: 'linkedin',
     },
   ],
 };
@@ -137,11 +124,9 @@ export const HOARDSPACE_EXPERIENCE: ExperienceItem = {
 export const GSSOC_EXPERIENCE: ExperienceItem = {
   id: 'exp-gssoc',
   category: 'OPEN SOURCE',
-  categoryCode: 'FIELD-02 // OPEN SOURCE ECOSYSTEM',
   role: 'OPEN-SOURCE CONTRIBUTOR',
   organization: 'GirlScript Summer of Code (GSSoC)',
   subOrganization: 'National Open-Source Development Programme',
-  statusBadge: 'OPEN SOURCE PARTICIPATION',
   headline: 'Collaborative Open-Source Development & Repository Contributions',
   summary:
     'Participated in GirlScript Summer of Code (GSSoC), engaging with public repositories, collaborative developer workflows, issue investigation, feature enhancement and structured code reviews within an open-source ecosystem.',
@@ -163,14 +148,10 @@ export const GSSOC_EXPERIENCE: ExperienceItem = {
     {
       label: 'GSSOC OFFICIAL WEBSITE',
       url: 'https://gssoc.girlscript.org/',
-      isExternal: true,
-      type: 'website',
     },
     {
       label: 'VIEW GITHUB PROFILE',
       url: 'https://github.com/pritesh-4',
-      isExternal: true,
-      type: 'github',
     },
   ],
 };
@@ -178,11 +159,9 @@ export const GSSOC_EXPERIENCE: ExperienceItem = {
 export const HACKNITR_EXPERIENCE: ExperienceItem = {
   id: 'exp-hacknitr',
   category: 'LEADERSHIP & EVENTS',
-  categoryCode: 'FIELD-03 // FLAGSHIP STUDENT HACKATHON',
   role: 'ORGANISING MEMBER',
   organization: 'HackNITR — National Institute of Technology, Rourkela',
   subOrganization: 'OpenCode NIT Rourkela • Developer Student Club (GDSC)',
-  statusBadge: 'EVENT ORGANISING TEAM',
   headline: 'Hackathon Operations, Community Coordination & Sponsorship Outreach',
   summary:
     'Core organising team member for HackNITR, Eastern India’s flagship student-run hackathon hosted at NIT Rourkela. Contributed to event coordination, industry communication, sponsorship outreach and cross-team execution for a massive multi-track developer gathering.',
@@ -207,8 +186,6 @@ export const HACKNITR_EXPERIENCE: ExperienceItem = {
     {
       label: 'HACKNITR OFFICIAL WEBSITE',
       url: 'https://hacknitr.com/',
-      isExternal: true,
-      type: 'website',
     },
   ],
 };
@@ -216,11 +193,9 @@ export const HACKNITR_EXPERIENCE: ExperienceItem = {
 export const SPONSORSHIP_EXPERIENCE: ExperienceItem = {
   id: 'exp-sponsorship',
   category: 'SPONSORSHIP & PARTNERSHIPS',
-  categoryCode: 'FIELD-04 // CORPORATE OUTREACH & ALLIANCES',
   role: 'SPONSORSHIP COORDINATION & OUTREACH',
   organization: 'Campus Technical Societies & Student Initiatives',
   subOrganization: 'National Institute of Technology, Rourkela',
-  statusBadge: 'CAMPUS OUTREACH EXPOSURE',
   headline: 'Industry Engagement, Value Propositions & In-Kind Resource Mobilization',
   summary:
     'Participated in sponsorship outreach and partnership coordination across multiple college events, engaging with companies and potential partners to support student-led technical and campus initiatives.',
@@ -244,11 +219,9 @@ export const SPONSORSHIP_EXPERIENCE: ExperienceItem = {
 export const ASTROPHYSICS_RESEARCH: ExperienceItem = {
   id: 'exp-astrophysics',
   category: 'SCIENTIFIC RESEARCH',
-  categoryCode: 'FIELD-05 // COMPUTATIONAL ASTROPHYSICS',
   role: 'INDEPENDENT STUDENT RESEARCHER — ASTROPHYSICS',
   organization: 'Independent Scientific Exploration',
   subOrganization: 'Computational Radio Astronomy & Signal Processing',
-  statusBadge: 'INDEPENDENT RESEARCH',
   headline: 'Time-Frequency Analysis, Radio Signal Processing & Anomaly Detection',
   summary:
     'Pursuing independent computational research and mathematical signal processing focused on astronomical radio signals, time-frequency spectrogram analysis, and signal anomaly detection algorithms for observational astrophysics.',
@@ -269,24 +242,15 @@ export const ASTROPHYSICS_RESEARCH: ExperienceItem = {
     'Scientific Computing (NumPy / SciPy)',
     'Spectral Anomaly Detection',
   ],
-  links: [
-    {
-      label: 'EXPLORE PROJECT AETHON IN EQUIP ↗',
-      url: '/resume',
-      isExternal: false,
-      type: 'internal',
-    },
-  ],
+  links: [],
 };
 
 export const IASC_EXPERIENCE: ExperienceItem = {
   id: 'exp-iasc',
   category: 'CITIZEN SCIENCE',
-  categoryCode: 'FIELD-06 // OBSERVATIONAL ASTRONOMY',
   role: 'ASTEROID SEARCH CAMPAIGN PARTICIPANT',
   organization: 'International Astronomical Search Collaboration (IASC)',
   subOrganization: 'Citizen Science Initiative Featured by NASA Science',
-  statusBadge: 'CITIZEN SCIENCE PARTICIPANT',
   headline: 'Observational Image Analysis & Asteroid Motion Candidate Detection',
   summary:
     'Participant in the International Astronomical Search Collaboration (IASC), an international citizen-science initiative featured by NASA Science. Conducted observational analysis of astronomical survey images to detect moving celestial objects such as Near-Earth Objects (NEOs) and Main Belt asteroids.',
@@ -312,14 +276,10 @@ export const IASC_EXPERIENCE: ExperienceItem = {
     {
       label: 'NASA SCIENCE CITIZEN SCIENCE IASC',
       url: 'https://science.nasa.gov/citizen-science/international-astronomical-search-collaboration/',
-      isExternal: true,
-      type: 'reference',
     },
     {
       label: 'IASC OFFICIAL PROJECT',
       url: 'https://iasc.cosmosearch.org/',
-      isExternal: true,
-      type: 'website',
     },
   ],
 };
@@ -327,13 +287,10 @@ export const IASC_EXPERIENCE: ExperienceItem = {
 export const CHESS_EXPERIENCE: ExperienceItem = {
   id: 'exp-chess',
   category: 'BEYOND ENGINEERING',
-  categoryCode: 'FIELD-07 // COGNITIVE STRATEGY & PURSUITS',
   role: 'CHESS ENTHUSIAST',
   organization: 'Chess.com Platform',
   subOrganization: 'Rapid & Tactical Decision-Making',
-  statusBadge: 'PERSONAL PURSUIT',
   headline: 'Strategic Thinking, Pattern Recognition & Clock Decision-Making',
-  ratingBadge: 'CHESS.COM RATING — ~1350',
   supportingQuote: 'An ongoing pursuit of strategic thinking, calculation and decision-making.',
   summary:
     'An ongoing pursuit of strategic thinking, tactical pattern recognition and resilient decision-making under strict clock constraints. Chess serves as a mental gym for calculation discipline, risk management, and adaptability.',

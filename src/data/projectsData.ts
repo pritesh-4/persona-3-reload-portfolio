@@ -37,8 +37,8 @@ export interface ProjectMission {
   codename: string;
   role: string;
   category: ProjectCategory;
-  status: 'COMPLETED' | 'ACTIVE' | 'ARCHIVED';
-  implementationStatus: 'VERIFIED IMPLEMENTED' | 'RESEARCH PROTOTYPE' | 'EXPERIMENTAL CONCEPT' | 'EARLY EXPERIMENT';
+  status?: 'COMPLETED' | 'ACTIVE' | 'ARCHIVED';
+  implementationStatus: 'VERIFIED IMPLEMENTED' | 'RESEARCH PROTOTYPE' | 'EXPERIMENTAL CONCEPT';
   difficulty: 'RANK S' | 'RANK A' | 'RANK B';
   summary: string;
   problem: string;
@@ -60,13 +60,11 @@ export interface ProjectMission {
 export function getImplementationBadge(status: ProjectMission['implementationStatus']) {
   switch (status) {
     case 'VERIFIED IMPLEMENTED':
-      return { key: 'implemented', label: 'VERIFIED IMPLEMENTED', questClass: 'p3r-mstatus-implemented', recruiterClass: 'badge-implemented', modalClass: 'verified' };
+      return { label: 'VERIFIED IMPLEMENTED', questClass: 'p3r-mstatus-implemented', recruiterClass: 'badge-implemented' };
     case 'RESEARCH PROTOTYPE':
-      return { key: 'prototype', label: 'RESEARCH PROTOTYPE', questClass: 'p3r-mstatus-prototype', recruiterClass: 'badge-prototype', modalClass: 'prototype' };
-    case 'EXPERIMENTAL CONCEPT':
-      return { key: 'concept', label: 'EXPERIMENTAL CONCEPT', questClass: 'p3r-mstatus-concept', recruiterClass: 'badge-concept', modalClass: 'experimental' };
+      return { label: 'RESEARCH PROTOTYPE', questClass: 'p3r-mstatus-prototype', recruiterClass: 'badge-prototype' };
     default:
-      return { key: 'early', label: status, questClass: 'p3r-mstatus-early', recruiterClass: 'badge-early', modalClass: 'experimental' };
+      return { label: status, questClass: 'p3r-mstatus-concept', recruiterClass: 'badge-concept' };
   }
 }
 
@@ -363,7 +361,6 @@ export const PROJECTS_DATA: ProjectMission[] = [
     codename: 'PERIMETER SPATIAL HEURISTIC',
     role: 'Computer Vision & ML Systems Developer',
     category: 'AI / ML',
-    status: 'COMPLETED',
     implementationStatus: 'RESEARCH PROTOTYPE',
     difficulty: 'RANK A',
     summary: 'A computer vision and spatial risk research prototype designed to detect wild elephants, track herd movements, and evaluate simulated geofenced safety perimeters to mitigate human-wildlife conflict.',

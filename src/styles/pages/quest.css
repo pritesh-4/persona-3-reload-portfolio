@@ -9,7 +9,7 @@
   flex-direction: column;
   gap: 22px;
   width: 100%;
-  max-width: 1400px;
+  max-width: var(--ed-max, 1240px);
   margin: 0 auto;
   animation: p3r-quest-enter 400ms var(--ease-out-expo);
 }

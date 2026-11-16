@@ -12,7 +12,6 @@ export interface PersonaCharacter {
   role: string;
   arcana: string;
   path: string;
-  thumbnailPath: string;
   width: number;
   height: number;
   objectPosition: string;
@@ -45,7 +44,6 @@ export const PERSONA_CHARACTERS: Record<string, PersonaCharacter> = {
     role: 'Protagonist / S.E.E.S. Leader',
     arcana: 'Fool / Death',
     path: '/assets/persona3/characters/makoto-yuki.webp',
-    thumbnailPath: '/assets/persona3/characters/thumbnails/makoto-yuki-thumb.webp',
     width: 570,
     height: 760,
     objectPosition: 'center top',
@@ -58,7 +56,6 @@ export const PERSONA_CHARACTERS: Record<string, PersonaCharacter> = {
     role: 'S.E.E.S. Member / Archer',
     arcana: 'Lovers',
     path: '/assets/persona3/characters/yukari-takeba.webp',
-    thumbnailPath: '/assets/persona3/characters/thumbnails/yukari-takeba-thumb.webp',
     width: 570,
     height: 760,
     objectPosition: 'center top',
@@ -71,7 +68,6 @@ export const PERSONA_CHARACTERS: Record<string, PersonaCharacter> = {
     role: 'S.E.E.S. Member / Two-Handed Sword',
     arcana: 'Magician',
     path: '/assets/persona3/characters/junpei-iori.webp',
-    thumbnailPath: '/assets/persona3/characters/thumbnails/junpei-iori-thumb.webp',
     width: 630,
     height: 840,
     objectPosition: 'center top',
@@ -84,7 +80,6 @@ export const PERSONA_CHARACTERS: Record<string, PersonaCharacter> = {
     role: 'S.E.E.S. Senior / Boxer',
     arcana: 'Emperor',
     path: '/assets/persona3/characters/akihiko-sanada.webp',
-    thumbnailPath: '/assets/persona3/characters/thumbnails/akihiko-sanada-thumb.webp',
     width: 630,
     height: 840,
     objectPosition: 'center top',
@@ -97,7 +92,6 @@ export const PERSONA_CHARACTERS: Record<string, PersonaCharacter> = {
     role: 'S.E.E.S. Founder / Fencer',
     arcana: 'Empress',
     path: '/assets/persona3/characters/mitsuru-kirijo.webp',
-    thumbnailPath: '/assets/persona3/characters/thumbnails/mitsuru-kirijo-thumb.webp',
     width: 630,
     height: 840,
     objectPosition: 'center top',
@@ -110,7 +104,6 @@ export const PERSONA_CHARACTERS: Record<string, PersonaCharacter> = {
     role: 'S.E.E.S. Navigator / Support',
     arcana: 'Priestess',
     path: '/assets/persona3/characters/fuuka-yamagishi.webp',
-    thumbnailPath: '/assets/persona3/characters/thumbnails/fuuka-yamagishi-thumb.webp',
     width: 630,
     height: 840,
     objectPosition: 'center top',
@@ -123,7 +116,6 @@ export const PERSONA_CHARACTERS: Record<string, PersonaCharacter> = {
     role: 'S.E.E.S. Canine Member / Dagger',
     arcana: 'Strength',
     path: '/assets/persona3/characters/koromaru.webp',
-    thumbnailPath: '/assets/persona3/characters/thumbnails/koromaru-thumb.webp',
     width: 630,
     height: 840,
     objectPosition: 'center top',
@@ -136,20 +128,6 @@ export const PERSONA_CHARACTERS: Record<string, PersonaCharacter> = {
     role: 'Anti-Shadow Weapon',
     arcana: 'Chariot / Aeon',
     path: '/assets/persona3/characters/aigis.webp',
-    thumbnailPath: '/assets/persona3/characters/thumbnails/aigis-thumb.webp',
-    width: 630,
-    height: 840,
-    objectPosition: 'center top',
-    rightsStatus: 'reference-only',
-    source: 'https://asia.sega.com/p3r/en/'
-  },
-  ken: {
-    id: 'ken',
-    name: 'Ken Amada',
-    role: 'S.E.E.S. Member / Spear',
-    arcana: 'Justice',
-    path: '/assets/persona3/characters/ken-amada.webp',
-    thumbnailPath: '/assets/persona3/characters/thumbnails/ken-amada-thumb.webp',
     width: 630,
     height: 840,
     objectPosition: 'center top',
@@ -162,7 +140,6 @@ export const PERSONA_CHARACTERS: Record<string, PersonaCharacter> = {
     role: 'Former S.E.E.S. Member / Heavy Axe',
     arcana: 'Hierophant',
     path: '/assets/persona3/characters/shinjiro-aragaki.webp',
-    thumbnailPath: '/assets/persona3/characters/thumbnails/shinjiro-aragaki-thumb.webp',
     width: 630,
     height: 840,
     objectPosition: 'center top',
@@ -198,24 +175,6 @@ export const PERSONA_BACKGROUNDS: Record<string, PersonaBackground> = {
     height: 720,
     role: 'Cast Overview Backdrop',
     rightsStatus: 'reference-only'
-  },
-  titleScreen: {
-    id: 'titleScreen',
-    name: 'Title Screen Moonlit Window Composition',
-    path: '/assets/persona3/backgrounds/title/title-screen-composition.jpg',
-    width: 1280,
-    height: 720,
-    role: 'Title UI Layout Reference',
-    rightsStatus: 'reference-only'
-  },
-  menuHierarchy: {
-    id: 'menuHierarchy',
-    name: 'Title Menu Hierarchy Reference',
-    path: '/assets/persona3/backgrounds/menu-references/title-menu-hierarchy.jpeg',
-    width: 2000,
-    height: 1125,
-    role: 'Typographic Layout Reference',
-    rightsStatus: 'reference-only'
   }
 };
 
@@ -245,18 +204,6 @@ export const PERSONA_AUDIO = {
       loop: true,
       rightsStatus: 'local-asset-required',
       note: 'Primary startup soundtrack. Requires locally hosted authorized MP3 at public/assets/persona3/audio/bgm/colour-your-night.mp3'
-    } as PersonaBgmTrack,
-    testBed: {
-      id: 'ambient-bed',
-      name: 'Ambient Bed Test Loop (Original Synthesized)',
-      artist: 'Synthesized Procedural Audio',
-      album: 'Persona Portfolio Test Bed',
-      path: '/assets/persona3/audio/bgm/bgm-ambient-test.wav',
-      fallbackPath: '',
-      durationSeconds: 24.0,
-      loop: true,
-      rightsStatus: 'approved-for-website-use',
-      note: 'Procedural fallback loop approved for local automated testing'
     } as PersonaBgmTrack
   },
   sfx: {
@@ -293,13 +240,4 @@ export const PERSONA_AUDIO = {
   }
 };
 
-export const PERSONA_REFERENCES = {
-  curvedMenu: {
-    name: 'Curved Arc Menu Navigation Blueprint',
-    path: '/assets/persona3/references/curved-menu-reference.png',
-    width: 1095,
-    height: 862,
-    rightsStatus: 'user-provided'
-  }
-};
 

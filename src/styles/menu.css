@@ -14,14 +14,16 @@
   justify-content: flex-start;
 }
 
-/* Arc Navigation Stage — Elevated Upper-Middle Region */
+/* Arc Navigation Stage — Left-Hand Vertical Curved Arc Navigation */
 .p3r-arc-nav-stage {
-  position: relative;
-  width: calc(100% - 96px);
-  max-width: 1520px;
-  /* Elevated upper band: 8-11vh upward adjustment on large desktop to keep negative space above character portrait */
-  margin: var(--p3r-arc-stage-margin, clamp(-16px, calc(9vh - 100px), 8px)) auto 0;
-  height: 260px;
+  position: absolute;
+  left: clamp(32px, 5vw, 80px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(340px, 24vw, 420px);
+  height: clamp(560px, 78vh, 700px);
+  max-height: calc(100vh - 120px);
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -204,18 +206,19 @@
    RESPONSIVE COMPOSITION & NORMALIZED BREAKPOINTS
    ================================================================ */
 
-/* Compact Desktop (1024px to 1279px): Calibrated spacing so all 7 plates fit comfortably */
-@media (min-width: 1024px) and (max-width: 1279px) {
+/* Compact Desktop (900px to 1279px): Calibrated spacing so all 7 plates fit comfortably */
+@media (min-width: 900px) and (max-width: 1279px) {
   .p3r-arc-nav-stage {
-    width: calc(100% - 64px);
-    height: 240px;
-    margin: clamp(4px, calc(8vh - 46px), 22px) auto 0;
+    left: clamp(20px, 3.5vw, 48px);
+    width: clamp(300px, 26vw, 380px);
+    height: clamp(520px, 76vh, 660px);
+    max-height: calc(100vh - 110px);
   }
 
   .p3r-menu-plate {
     gap: 8px;
-    padding: 8px 12px;
-    min-height: 40px;
+    padding: 7px 14px;
+    min-height: 38px;
   }
 
   .p3r-menu-plate-content {
@@ -223,7 +226,7 @@
   }
 
   .p3r-item-label {
-    font-size: 17px;
+    font-size: 19px;
   }
 
   .p3r-item-icon {
@@ -239,15 +242,18 @@
   }
 }
 
-/* Tablet & Mobile Partial-Arc Stage (< 1024px) */
-@media (max-width: 1023px) {
+/* Tablet & Mobile Partial-Arc Stage (< 900px) */
+@media (max-width: 899px) {
   .p3r-arc-nav-stage {
-    width: 100%;
-    max-width: 100%;
-    height: 220px;
-    padding: 0 16px;
-    /* 5-8vh upward adjustment on tablet & mobile portrait to clear character portrait */
-    margin: clamp(16px, calc(11vh - 55px), 52px) auto 0;
+    position: absolute;
+    left: clamp(12px, 3vw, 24px);
+    top: 50%;
+    transform: translateY(-50%);
+    width: clamp(260px, 68vw, 340px);
+    height: clamp(440px, 65vh, 560px);
+    max-height: calc(100vh - 100px);
+    margin: 0;
+    padding: 0;
   }
 
   .p3r-arc-svg-guide {
@@ -289,19 +295,20 @@
 /* Small Phone Screens (< 480px) */
 @media (max-width: 480px) {
   .p3r-arc-nav-stage {
-    height: 200px;
-    padding: 0 10px;
-    margin: clamp(16px, calc(9vh - 36px), 42px) auto 0;
+    left: 8px;
+    width: min(280px, calc(100vw - 16px));
+    height: clamp(380px, 62vh, 480px);
+    max-height: calc(100vh - 90px);
   }
 
   .p3r-menu-plate {
-    padding: 4px 12px;
-    min-height: 40px;
-    gap: 8px;
+    padding: 6px 12px;
+    min-height: 38px;
+    gap: 6px;
   }
 
   .p3r-menu-plate-content {
-    gap: 8px;
+    gap: 6px;
   }
 
   .p3r-item-label {
@@ -317,7 +324,7 @@
   }
 
   .p3r-menu-item-btn.active .p3r-menu-plate {
-    transform: skewX(-12deg) scale(1.1);
+    transform: skewX(-12deg) scale(1.08);
     box-shadow: 
       -4px 4px 0px var(--p3r-red),
       0 6px 18px rgba(0, 0, 0, 0.65);
@@ -327,14 +334,15 @@
 /* Compact Narrow Phone Screens (< 400px, e.g. 360px & 375px) */
 @media (max-width: 400px) {
   .p3r-arc-nav-stage {
-    height: 190px;
-    padding: 0 6px;
-    margin: clamp(12px, calc(8vh - 30px), 36px) auto 0;
+    left: 4px;
+    width: min(260px, calc(100vw - 8px));
+    height: clamp(360px, 60vh, 440px);
+    max-height: calc(100vh - 80px);
   }
 
   .p3r-menu-plate {
-    padding: 4px 8px;
-    min-height: 36px;
+    padding: 5px 8px;
+    min-height: 34px;
     gap: 4px;
   }
 
@@ -355,7 +363,7 @@
   }
 
   .p3r-menu-item-btn.active .p3r-menu-plate {
-    transform: skewX(-12deg) scale(1.06);
+    transform: skewX(-12deg) scale(1.05);
     box-shadow: 
       -3px 3px 0px var(--p3r-red),
       0 4px 14px rgba(0, 0, 0, 0.65);

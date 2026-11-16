@@ -2,7 +2,7 @@ export interface EquipmentSlot {
   slotType: 'WEAPON' | 'ARMOR' | 'ACCESSORY' | 'FOOTWEAR' | 'SPECIAL';
   slotName: string;
   itemName: string;
-  rarity: 'LEGENDARY' | 'EPIC' | 'RARE' | 'COMMON';
+  rarity?: 'LEGENDARY' | 'EPIC' | 'RARE' | 'COMMON';
   powerStat: string;
   defenseStat: string;
   description: string;
