@@ -6,12 +6,24 @@ interface CharacterBackdropProps {
   characterId?: string;
   backgroundPath?: string;
   screenId?: string;
+  selectionId?: string;
+  bgPositionDesktop?: string;
+  bgPositionMobile?: string;
+  bgFilter?: string;
+  bgScale?: number;
+  gradientOverlay?: string;
 }
 
 export const CharacterBackdrop: FC<CharacterBackdropProps> = ({
   characterId,
   backgroundPath,
   screenId,
+  selectionId,
+  bgPositionDesktop,
+  bgPositionMobile,
+  bgFilter,
+  bgScale,
+  gradientOverlay,
 }) => {
   const config: ScreenArtConfig | undefined = screenId ? SCREEN_ART_CONFIG[screenId] : undefined;
 
@@ -40,13 +52,17 @@ export const CharacterBackdrop: FC<CharacterBackdropProps> = ({
             />
           )}
           <img
+            key={selectionId || effectiveBgPath}
             src={effectiveBgPath}
             alt=""
             className="p3r-backdrop-wallpaper"
             loading="eager"
             style={{
-              '--p3r-bg-pos-desktop': config?.bgPositionDesktop ?? 'center',
-              '--p3r-bg-pos-mobile': config?.bgPositionMobile ?? 'center',
+              '--p3r-bg-pos-desktop': bgPositionDesktop ?? config?.bgPositionDesktop ?? 'center',
+              '--p3r-bg-pos-mobile': bgPositionMobile ?? config?.bgPositionMobile ?? 'center',
+              filter: bgFilter,
+              transformOrigin: bgPositionDesktop ?? config?.bgPositionDesktop ?? 'center',
+              transform: bgScale ? `scale(${bgScale})` : undefined,
             } as React.CSSProperties}
           />
         </picture>
@@ -55,7 +71,9 @@ export const CharacterBackdrop: FC<CharacterBackdropProps> = ({
       {/* 2. Atmospheric Gradient Overlay (per-screen lighting direction) */}
       <div
         className="p3r-backdrop-gradient"
-        style={config?.gradientOverlay ? { background: config.gradientOverlay } : undefined}
+        style={{
+          background: gradientOverlay ?? config?.gradientOverlay,
+        }}
       />
 
       {/* 3. Dark Tint Overlay (Deep P3R atmospheric tone) */}

@@ -6,6 +6,21 @@ const SESSION_MENU_KEY = 'p3r_active_menu_index';
 function getInitialMenuIndex(): number {
   if (typeof window === 'undefined') return 0;
   try {
+    const params = new URLSearchParams(window.location.search);
+    const paramIdx = params.get('index') || params.get('tab');
+    if (paramIdx !== null) {
+      const parsed = parseInt(paramIdx, 10);
+      if (!isNaN(parsed) && parsed >= 0 && parsed < MENU_ITEMS.length) {
+        return parsed;
+      }
+      const found = MENU_ITEMS.findIndex(
+        (m) =>
+          m.id.toLowerCase() === paramIdx.toLowerCase() ||
+          m.label.toLowerCase() === paramIdx.toLowerCase()
+      );
+      if (found !== -1) return found;
+    }
+
     const stored = sessionStorage.getItem(SESSION_MENU_KEY);
     const parsed = stored ? parseInt(stored, 10) : 0;
     return !isNaN(parsed) && parsed >= 0 && parsed < MENU_ITEMS.length ? parsed : 0;

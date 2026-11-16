@@ -407,7 +407,17 @@
   opacity: var(--p3r-artwork-intensity, 0.85);
   filter: brightness(calc(0.4 + 0.35 * var(--p3r-artwork-intensity, 0.85))) contrast(1.08) saturate(1.1);
   transform: scale(1.02);
-  transition: opacity 250ms ease, filter 250ms ease;
+  transition: opacity 300ms ease, filter 300ms ease, transform 400ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+  animation: p3rWallpaperCrossfade 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes p3rWallpaperCrossfade {
+  from {
+    opacity: 0.35;
+  }
+  to {
+    opacity: var(--p3r-artwork-intensity, 0.85);
+  }
 }
 
 /* Character stage positioned intentionally on right/center right as subtle atmospheric watermark */
@@ -499,5 +509,369 @@
   }
   .p3r-backdrop-char-img {
     opacity: var(--p3r-char-opacity, 0.45);
+  }
+}
+
+/* ================================================================
+   PERSONA 3 RELOAD — MINIMAL EDITORIAL SECTION INDICATOR
+   Typography-only section indicator with crisp editorial hierarchy
+   No filled cards, borders, drop shadows, or CTA buttons
+   ================================================================ */
+
+.p3r-section-indicator {
+  position: absolute;
+  top: clamp(38px, 5.5vh, 60px);
+  left: clamp(420px, 26vw, 490px);
+  z-index: 20;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  animation: p3rIndicatorFadeIn 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes p3rIndicatorFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.p3r-indicator-meta {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--p3r-ice);
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+}
+
+.p3r-indicator-index {
+  font-weight: 900;
+  font-size: 13px;
+  color: var(--indicator-accent, var(--p3r-cyan));
+  font-variant-numeric: tabular-nums;
+}
+
+.p3r-indicator-slash {
+  opacity: 0.4;
+  font-size: 11px;
+}
+
+.p3r-indicator-total {
+  opacity: 0.6;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.p3r-indicator-divider {
+  color: var(--p3r-red);
+  opacity: 0.85;
+  font-weight: 800;
+  margin: 0 2px;
+}
+
+.p3r-indicator-tag {
+  color: var(--p3r-slate);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.p3r-indicator-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 2.6vw, 36px);
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: #FFFFFF;
+  margin: 0;
+  line-height: 1.1;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+}
+
+.p3r-indicator-rule {
+  width: 44px;
+  height: 2px;
+  background: var(--indicator-accent, var(--p3r-cyan));
+  margin: 6px 0 6px 0;
+  box-shadow: 0 0 8px var(--indicator-accent, rgba(0, 212, 255, 0.5));
+  transition: background-color 250ms ease, box-shadow 250ms ease;
+}
+
+.p3r-indicator-sublabel {
+  font-family: var(--font-ui);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--indicator-accent, var(--p3r-cyan));
+  opacity: 0.92;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+  line-height: 1.2;
+}
+
+/* ================================================================
+   PERSONA 3 RELOAD — ARCHIVE STATUS HUD & MOON EASTER EGG
+   Upper-right tactical telemetry & clickable crescent moon
+   ================================================================ */
+
+.p3r-menu-status-hud {
+  position: absolute;
+  top: clamp(16px, 3vh, 32px);
+  right: clamp(24px, 4vw, 56px);
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+}
+
+.p3r-hud-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(4, 12, 28, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 212, 255, 0.22);
+  border-radius: 2px;
+  padding: 5px 12px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+}
+
+.p3r-hud-cell {
+  display: flex;
+  align-items: center;
+}
+
+.p3r-hud-cell--status {
+  gap: 7px;
+}
+
+.p3r-hud-indicator-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 6px #10B981;
+  animation: p3rPulseDot 2.2s infinite ease-in-out;
+}
+
+@keyframes p3rPulseDot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.85);
+  }
+}
+
+.p3r-hud-status-label {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--p3r-ice);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.p3r-hud-divider {
+  width: 1px;
+  height: 16px;
+  background: rgba(0, 212, 255, 0.2);
+}
+
+.p3r-hud-cell--records {
+  gap: 4px;
+}
+
+.p3r-hud-records-count {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--p3r-cyan);
+}
+
+.p3r-hud-records-label {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--p3r-slate);
+  text-transform: uppercase;
+}
+
+.p3r-hud-cell--clock {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.p3r-hud-time {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
+  color: var(--p3r-snow);
+}
+
+.p3r-hud-date {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--p3r-slate);
+}
+
+/* Clickable Crescent Moon Insignia */
+.p3r-hud-moon-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.35);
+  border-radius: 2px;
+  padding: 3px 8px;
+  color: var(--p3r-cyan);
+  cursor: pointer;
+  transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.p3r-hud-moon-btn:hover {
+  background: rgba(0, 212, 255, 0.22);
+  color: #FFFFFF;
+  border-color: var(--p3r-cyan);
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.5);
+  transform: scale(1.05);
+}
+
+.p3r-hud-moon-btn:focus-visible {
+  outline: 2px solid var(--p3r-cyan);
+  outline-offset: 2px;
+}
+
+.p3r-hud-moon-btn.is-active {
+  background: rgba(16, 185, 129, 0.25);
+  border-color: #34D399;
+  color: #34D399;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.6);
+  animation: p3rMoonGlow 2.5s infinite alternate ease-in-out;
+}
+
+@keyframes p3rMoonGlow {
+  from {
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+  }
+  to {
+    box-shadow: 0 0 16px rgba(52, 211, 153, 0.8);
+  }
+}
+
+.p3r-hud-moon-icon {
+  width: 13px;
+  height: 13px;
+  transition: transform 300ms ease;
+}
+
+.p3r-hud-moon-btn:hover .p3r-hud-moon-icon {
+  transform: rotate(15deg);
+}
+
+.p3r-hud-moon-label {
+  font-family: var(--font-ui);
+  font-size: 9.5px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ================================================================
+   PERSONA 3 RELOAD — DARK HOUR THEME PROTOCOL
+   Eerie supernatural Tartarus green/gold moonlight stasis
+   ================================================================ */
+
+.p3r-main-menu-container.p3r-dark-hour-active .p3r-backdrop-vignette {
+  background: radial-gradient(ellipse at center, transparent 35%, rgba(4, 20, 14, 0.85) 100%);
+}
+
+.p3r-main-menu-container.p3r-dark-hour-active .p3r-arc-track {
+  stroke: rgba(52, 211, 153, 0.35);
+}
+
+.p3r-main-menu-container.p3r-dark-hour-active .p3r-arc-track-glow {
+  stroke: rgba(16, 185, 129, 0.2);
+}
+
+.p3r-main-menu-container.p3r-dark-hour-active .p3r-hud-indicator-dot {
+  background: #34D399;
+  box-shadow: 0 0 10px #34D399;
+}
+
+/* Responsive adjustments for indicator & status HUD */
+@media (max-width: 1279px) {
+  .p3r-section-indicator {
+    left: clamp(370px, 26vw, 440px);
+  }
+
+  .p3r-indicator-title {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 899px) {
+  .p3r-section-indicator {
+    left: 20px;
+    top: clamp(68px, 10vh, 88px);
+    z-index: 20;
+  }
+
+  .p3r-indicator-title {
+    font-size: 24px;
+  }
+
+  .p3r-hud-cell--records,
+  .p3r-hud-divider:nth-child(4) {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .p3r-menu-status-hud {
+    right: 12px;
+    top: 14px;
+  }
+
+  .p3r-hud-container {
+    padding: 3px 8px;
+    gap: 8px;
+    background: rgba(4, 12, 28, 0.9);
+  }
+
+  .p3r-hud-status-label,
+  .p3r-hud-date,
+  .p3r-hud-cell--records,
+  .p3r-hud-divider {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .p3r-hud-cell--clock {
+    display: none;
+  }
+
+  .p3r-hud-container {
+    padding: 3px 6px;
+    gap: 6px;
   }
 }
